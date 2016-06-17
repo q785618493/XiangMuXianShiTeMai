@@ -12,8 +12,10 @@
 #import <UIButton+WebCache.h>
 
 #import "UIImageView+WY_SDWedImage.h"
-
+#import "NSString+Helper.h"
 #import "WYHttpRequest.h"
+#import "WYCustomButton.h"
+#import "MBProgressHUD+XMG.h"
 
 /** 返回请求数据 */
 typedef void(^SuccessBlock)(id JSON);

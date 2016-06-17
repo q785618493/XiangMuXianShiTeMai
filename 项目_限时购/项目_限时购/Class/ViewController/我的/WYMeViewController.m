@@ -83,12 +83,14 @@
     [self.view addSubview:self.meTableView];
     weakSelf.topLoginView.blockLogin = ^() {
         WYLoginViewController *loginVC = [[WYLoginViewController alloc] init];
+        loginVC.title = [NSString stringWithFormat:@"登 录"];
         [loginVC setHidesBottomBarWhenPushed:YES];
         [weakSelf.navigationController pushViewController:loginVC animated:YES];
     };
     
     weakSelf.topLoginView.blockRegister = ^() {
         WYRegisterViewController *registerVC = [[WYRegisterViewController alloc] init];
+        registerVC.title = [NSString stringWithFormat:@"注 册"];
         [registerVC setHidesBottomBarWhenPushed:YES];
         [self.navigationController pushViewController:registerVC animated:YES];
     };

@@ -21,6 +21,7 @@
         [self setDelegate:self];
         [self setDataSource:self];
         [self setTableFooterView:[[UIView alloc] init]];
+        [self setBackgroundColor:RGB(245, 245, 245)];
         
     }
     return self;
@@ -40,7 +41,7 @@
     }
     
     WYMeModel *model = self.infoArray[indexPath.row];
-    
+    [cell setBackgroundColor:RGB(245, 245, 245)];
     [cell.textLabel setText:model.title];
     [cell.detailTextLabel setText:model.detailText];
     [cell.imageView setImage:[UIImage imageNamed:model.image]];

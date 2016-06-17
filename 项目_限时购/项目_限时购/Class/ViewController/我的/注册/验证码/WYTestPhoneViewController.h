@@ -13,4 +13,7 @@
 /** 保存用户手机号 */
 @property (copy, nonatomic) NSString *userPhone;
 
+/** 保存用户密码 */
+@property (copy, nonatomic) NSString *codePhone;
+
 @end

@@ -39,7 +39,6 @@
     self = [super init];
     if (self) {
         
-        [self setBackgroundColor:RGB(240, 240, 240)];
         [self addSubview:self.backgroundView];
         [self.backgroundView addSubview:self.userField];
         [self.backgroundView addSubview:self.lineLabel];
@@ -115,8 +114,6 @@
     if (!_registerBtn) {
         _registerBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [_registerBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
-//        [_registerBtn setTitle:[NSString stringWithFormat:@"免费注册"] forState:(UIControlStateNormal)];
-//        [_registerBtn setTitleColor:RGB(0, 147, 190) forState:(UIControlStateNormal)];
         [_registerBtn addTarget:self action:@selector(btnTouchActionRegister) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _registerBtn;
@@ -132,7 +129,6 @@
 - (UIButton *)loginBtn {
     if (!_loginBtn) {
         _loginBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-//        [_loginBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"登录界面登录按钮"]] forState:(UIControlStateNormal)];
         [_loginBtn addTarget:self action:@selector(btnTouchActionLogin) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _loginBtn;
@@ -171,7 +167,7 @@
         _userField = [[UITextField alloc] init];
         [_userField setDelegate:self];
         [_userField setBorderStyle:(UITextBorderStyleNone)];
-        [_userField setKeyboardType:(UIKeyboardTypeNumberPad)];
+        [_userField setKeyboardType:(UIKeyboardTypeNumbersAndPunctuation)];
         [_userField setPlaceholder:[NSString stringWithFormat:@"请输入手机号"]];
         [_userField setClearButtonMode:(UITextFieldViewModeWhileEditing)];
     }

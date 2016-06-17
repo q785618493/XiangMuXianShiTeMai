@@ -7,6 +7,7 @@
 //
 
 #import "WYRegisterViewController.h"
+#import "WYTestPhoneViewController.h"
 #import "WYTextFieldView.h"
 #import "WYThirdPartyView.h"
 
@@ -42,19 +43,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
+    [self controlAddMasonry];
 }
 
 /** 添加控件和约束 */
 - (void)controlAddMasonry {
-    
-    [self.view setBackgroundColor:RGB(240, 240, 240)];
+
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height;
     
     UILabel *promptLabel = [[UILabel alloc] init];
     [promptLabel setText:[NSString stringWithFormat:@"请输入手机号码注册新用户"]];
-    [promptLabel setFont:[UIFont systemFontOfSize:15]];
+    [promptLabel setFont:[UIFont systemFontOfSize:14]];
     [promptLabel setTextColor:RGB(85, 85, 85)];
     
     [self.view addSubview:promptLabel];
@@ -64,21 +64,39 @@
     
     WS(weakSelf);
     [promptLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakSelf.view.top).offset(64);
+        make.top.mas_equalTo(weakSelf.view.top).offset(74);
         make.left.mas_equalTo(weakSelf.view.left).offset(15);
+        make.right.mas_equalTo(weakSelf.view.right).offset(-15);
+        make.height.mas_equalTo(15);
     }];
     
     [_textFieldView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakSelf.view.mas_top).offset(80);
+        make.top.mas_equalTo(weakSelf.view.mas_top).offset(99);
         make.left.mas_equalTo(weakSelf.view.mas_left);
         make.size.mas_equalTo(CGSizeMake(width, 176));
     }];
+    
+    weakSelf.textFieldView.loginBlock = ^(NSString *userPhone, NSString *codePhone) {
+        WYTestPhoneViewController *testVC = [[WYTestPhoneViewController alloc] init];
+        testVC.userPhone = userPhone;
+        testVC.codePhone = codePhone;
+        [testVC setHidesBottomBarWhenPushed:YES];
+        [weakSelf.navigationController pushViewController:testVC animated:YES];
+    };
+    
+    weakSelf.textFieldView.registerBlock = ^() {
+        
+    };
     
     [_threeLoginView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weakSelf.textFieldView.mas_bottom).offset(16);
         make.left.mas_equalTo(weakSelf.view.mas_left);
         make.size.mas_equalTo(CGSizeMake(width, 83));
     }];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {

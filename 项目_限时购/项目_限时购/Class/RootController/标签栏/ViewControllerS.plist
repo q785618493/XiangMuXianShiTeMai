@@ -16,7 +16,7 @@
 		<key>ViewController</key>
 		<string>WYClassifyViewController</string>
 		<key>title</key>
-		<string>分类</string>
+		<string></string>
 		<key>image</key>
 		<string>菜单栏分类按钮未选中状态</string>
 		<key>seleImage</key>
@@ -36,7 +36,7 @@
 		<key>ViewController</key>
 		<string>WYMeViewController</string>
 		<key>title</key>
-		<string>我的</string>
+		<string>我 的</string>
 		<key>image</key>
 		<string>菜单栏我的按钮未选中状态</string>
 		<key>seleImage</key>

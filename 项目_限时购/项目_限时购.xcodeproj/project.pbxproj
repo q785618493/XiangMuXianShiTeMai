@@ -13,6 +13,9 @@
 		046E074E1D12896E00645E96 /* WYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E074D1D12896E00645E96 /* WYLoginViewController.m */; };
 		046E07511D12898700645E96 /* WYRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E07501D12898700645E96 /* WYRegisterViewController.m */; };
 		046E07541D1289C600645E96 /* WYTestPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E07531D1289C600645E96 /* WYTestPhoneViewController.m */; };
+		0471235B1D142C3200D42B74 /* MBProgressHUD+XMG.m in Sources */ = {isa = PBXBuildFile; fileRef = 047123571D142C3200D42B74 /* MBProgressHUD+XMG.m */; };
+		0471235C1D142C3200D42B74 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 047123581D142C3200D42B74 /* MBProgressHUD.bundle */; };
+		0471235D1D142C3200D42B74 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0471235A1D142C3200D42B74 /* MBProgressHUD.m */; };
 		047F08F21D1242A2004E7EE7 /* WYBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F08F11D1242A2004E7EE7 /* WYBaseView.m */; };
 		047F08F51D1242BA004E7EE7 /* WYTwoBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F08F41D1242BA004E7EE7 /* WYTwoBtnView.m */; };
 		047F092C1D124E68004E7EE7 /* WYFlashSaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F092B1D124E68004E7EE7 /* WYFlashSaleViewController.m */; };
@@ -80,6 +83,11 @@
 		046E07501D12898700645E96 /* WYRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYRegisterViewController.m; sourceTree = "<group>"; };
 		046E07521D1289C600645E96 /* WYTestPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYTestPhoneViewController.h; sourceTree = "<group>"; };
 		046E07531D1289C600645E96 /* WYTestPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYTestPhoneViewController.m; sourceTree = "<group>"; };
+		047123561D142C3200D42B74 /* MBProgressHUD+XMG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+XMG.h"; sourceTree = "<group>"; };
+		047123571D142C3200D42B74 /* MBProgressHUD+XMG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+XMG.m"; sourceTree = "<group>"; };
+		047123581D142C3200D42B74 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
+		047123591D142C3200D42B74 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		0471235A1D142C3200D42B74 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		047F08F01D1242A2004E7EE7 /* WYBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYBaseView.h; sourceTree = "<group>"; };
 		047F08F11D1242A2004E7EE7 /* WYBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYBaseView.m; sourceTree = "<group>"; };
 		047F08F31D1242BA004E7EE7 /* WYTwoBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYTwoBtnView.h; sourceTree = "<group>"; };
@@ -196,6 +204,18 @@
 				046E07491D12882000645E96 /* WYThirdPartyView.m */,
 			);
 			path = ThirdPartyView;
+			sourceTree = "<group>";
+		};
+		047123551D142C3200D42B74 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				047123561D142C3200D42B74 /* MBProgressHUD+XMG.h */,
+				047123571D142C3200D42B74 /* MBProgressHUD+XMG.m */,
+				047123581D142C3200D42B74 /* MBProgressHUD.bundle */,
+				047123591D142C3200D42B74 /* MBProgressHUD.h */,
+				0471235A1D142C3200D42B74 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		047F08EB1D12425F004E7EE7 /* BrandTableView */ = {
@@ -642,6 +662,7 @@
 		0496C8C71D10F0FD00E3809F /* 开源库 */ = {
 			isa = PBXGroup;
 			children = (
+				047123551D142C3200D42B74 /* MBProgressHUD */,
 			);
 			path = "开源库";
 			sourceTree = "<group>";
@@ -890,6 +911,7 @@
 			files = (
 				0496C87D1D10EE2E00E3809F /* LaunchScreen.storyboard in Resources */,
 				0496C8EB1D1103A400E3809F /* ViewControllerS.plist in Resources */,
+				0471235C1D142C3200D42B74 /* MBProgressHUD.bundle in Resources */,
 				04A7DB4B1D13EB640039F50D /* MeModel.plist in Resources */,
 				0496C87A1D10EE2E00E3809F /* Assets.xcassets in Resources */,
 			);
@@ -1043,12 +1065,14 @@
 				047F09561D125367004E7EE7 /* WYCustomButton.m in Sources */,
 				04A7DB441D13E3A70039F50D /* WYMeHeaderView.m in Sources */,
 				0496C8F71D11065900E3809F /* WYMeViewController.m in Sources */,
+				0471235D1D142C3200D42B74 /* MBProgressHUD.m in Sources */,
 				046E074B1D12882000645E96 /* WYThirdPartyView.m in Sources */,
 				046E07381D127B3A00645E96 /* WYHttpRequest.m in Sources */,
 				047F094B1D125367004E7EE7 /* JPRefreshView.m in Sources */,
 				046E07541D1289C600645E96 /* WYTestPhoneViewController.m in Sources */,
 				0496C86F1D10EE2E00E3809F /* main.m in Sources */,
 				047F08F21D1242A2004E7EE7 /* WYBaseView.m in Sources */,
+				0471235B1D142C3200D42B74 /* MBProgressHUD+XMG.m in Sources */,
 				0496C8CD1D11012400E3809F /* WYTabBarController.m in Sources */,
 				04A7DB3E1D13E02A0039F50D /* UIImageView+WY_SDWedImage.m in Sources */,
 				0496C8E71D1102B900E3809F /* WYBaseCollectionCell.m in Sources */,

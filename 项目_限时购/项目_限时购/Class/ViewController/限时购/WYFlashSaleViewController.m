@@ -91,7 +91,6 @@
 - (void)controlScrollViewMasonry {
     
     [self.view addSubview:self.rollScrollView];
-    [_rollScrollView setBackgroundColor:[UIColor yellowColor]];
     
     WS(weakSelf);
     [_rollScrollView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -48,8 +48,7 @@
 
 /** 添加控件和约束 */
 - (void)controlAddMasonry {
-    
-    [self.view setBackgroundColor:RGB(240, 240, 240)];
+
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height;
     [self.view addSubview:self.textFieldView];

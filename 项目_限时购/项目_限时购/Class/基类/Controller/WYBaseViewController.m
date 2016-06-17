@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view.
     
     
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.view setBackgroundColor:RGB(245, 245, 245)];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
     
