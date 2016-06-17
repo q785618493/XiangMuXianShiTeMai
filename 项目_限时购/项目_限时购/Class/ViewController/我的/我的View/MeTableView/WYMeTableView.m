@@ -45,6 +45,7 @@
     [cell.textLabel setText:model.title];
     [cell.detailTextLabel setText:model.detailText];
     [cell.imageView setImage:[UIImage imageNamed:model.image]];
+    [cell setAccessoryType:(UITableViewCellAccessoryDisclosureIndicator)];
     
     return cell;
 }

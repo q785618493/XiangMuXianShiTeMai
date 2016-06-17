@@ -23,7 +23,7 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    [self.window setBackgroundColor:[UIColor redColor]];
+    [self.window setBackgroundColor:[UIColor whiteColor]];
     
     [self.window setRootViewController:[[WYTabBarController alloc] init]];
     

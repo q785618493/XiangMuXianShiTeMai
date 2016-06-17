@@ -16,7 +16,7 @@
 		<key>ViewController</key>
 		<string>WYClassifyViewController</string>
 		<key>title</key>
-		<string></string>
+		<string>分 类</string>
 		<key>image</key>
 		<string>菜单栏分类按钮未选中状态</string>
 		<key>seleImage</key>

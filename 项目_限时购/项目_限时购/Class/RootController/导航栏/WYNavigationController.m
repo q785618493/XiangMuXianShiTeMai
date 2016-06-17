@@ -19,7 +19,7 @@
     /** [UINavigationBar appearanceWhenContainedIn:self, nil] 只能在类方法中使用 */
     UINavigationBar *tabBar = [UINavigationBar appearanceWhenContainedIn:self, nil];
     
-    [tabBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor redColor]}];
+    [tabBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
     
     
 }
