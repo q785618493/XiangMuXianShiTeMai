@@ -39,6 +39,11 @@
 		0496C8F11D11062300E3809F /* WYClassifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0496C8F01D11062300E3809F /* WYClassifyViewController.m */; };
 		0496C8F41D11064300E3809F /* WYShoppingCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0496C8F31D11064300E3809F /* WYShoppingCartViewController.m */; };
 		0496C8F71D11065900E3809F /* WYMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0496C8F61D11065900E3809F /* WYMeViewController.m */; };
+		04A7DB3E1D13E02A0039F50D /* UIImageView+WY_SDWedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A7DB3D1D13E02A0039F50D /* UIImageView+WY_SDWedImage.m */; };
+		04A7DB441D13E3A70039F50D /* WYMeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A7DB431D13E3A70039F50D /* WYMeHeaderView.m */; };
+		04A7DB471D13E56F0039F50D /* WYMeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A7DB461D13E56F0039F50D /* WYMeTableView.m */; };
+		04A7DB4B1D13EB640039F50D /* MeModel.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04A7DB481D13EB640039F50D /* MeModel.plist */; };
+		04A7DB4C1D13EB640039F50D /* WYMeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A7DB4A1D13EB640039F50D /* WYMeModel.m */; };
 		0D25594A835B70607687C567 /* libPods-项目_限时购.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF25CB955D4AE0ACF623025A /* libPods-项目_限时购.a */; };
 		228AE8C2BB4304902C619573 /* libPods-项目_限时购Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85477694D3785356C2CC7CBD /* libPods-项目_限时购Tests.a */; };
 		3DE383FEBBD637B4F88F8500 /* libPods-项目_限时购UITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 619F05BCE42CE15052956E05 /* libPods-项目_限时购UITests.a */; };
@@ -128,6 +133,15 @@
 		0496C8F51D11065900E3809F /* WYMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYMeViewController.h; sourceTree = "<group>"; };
 		0496C8F61D11065900E3809F /* WYMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYMeViewController.m; sourceTree = "<group>"; };
 		0496C8F81D11083300E3809F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		04A7DB3C1D13E02A0039F50D /* UIImageView+WY_SDWedImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+WY_SDWedImage.h"; sourceTree = "<group>"; };
+		04A7DB3D1D13E02A0039F50D /* UIImageView+WY_SDWedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WY_SDWedImage.m"; sourceTree = "<group>"; };
+		04A7DB421D13E3A70039F50D /* WYMeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYMeHeaderView.h; sourceTree = "<group>"; };
+		04A7DB431D13E3A70039F50D /* WYMeHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYMeHeaderView.m; sourceTree = "<group>"; };
+		04A7DB451D13E56F0039F50D /* WYMeTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYMeTableView.h; sourceTree = "<group>"; };
+		04A7DB461D13E56F0039F50D /* WYMeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYMeTableView.m; sourceTree = "<group>"; };
+		04A7DB481D13EB640039F50D /* MeModel.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MeModel.plist; sourceTree = "<group>"; };
+		04A7DB491D13EB640039F50D /* WYMeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYMeModel.h; sourceTree = "<group>"; };
+		04A7DB4A1D13EB640039F50D /* WYMeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYMeModel.m; sourceTree = "<group>"; };
 		23A66AE6F6CDF11227D3077C /* Pods-项目_限时购.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-项目_限时购.release.xcconfig"; path = "Pods/Target Support Files/Pods-项目_限时购/Pods-项目_限时购.release.xcconfig"; sourceTree = "<group>"; };
 		334080227F654E006CBB71FE /* Pods-项目_限时购.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-项目_限时购.debug.xcconfig"; path = "Pods/Target Support Files/Pods-项目_限时购/Pods-项目_限时购.debug.xcconfig"; sourceTree = "<group>"; };
 		619F05BCE42CE15052956E05 /* libPods-项目_限时购UITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-项目_限时购UITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -240,6 +254,8 @@
 				047F09471D125367004E7EE7 /* WYCustomButton.m */,
 				046E07361D127B3A00645E96 /* WYHttpRequest.h */,
 				046E07371D127B3A00645E96 /* WYHttpRequest.m */,
+				04A7DB3C1D13E02A0039F50D /* UIImageView+WY_SDWedImage.h */,
+				04A7DB3D1D13E02A0039F50D /* UIImageView+WY_SDWedImage.m */,
 			);
 			path = "工具类";
 			sourceTree = "<group>";
@@ -444,6 +460,9 @@
 		0496C8B11D10F0FD00E3809F /* 我的Model */ = {
 			isa = PBXGroup;
 			children = (
+				04A7DB481D13EB640039F50D /* MeModel.plist */,
+				04A7DB491D13EB640039F50D /* WYMeModel.h */,
+				04A7DB4A1D13EB640039F50D /* WYMeModel.m */,
 			);
 			path = "我的Model";
 			sourceTree = "<group>";
@@ -451,6 +470,8 @@
 		0496C8B21D10F0FD00E3809F /* 我的View */ = {
 			isa = PBXGroup;
 			children = (
+				04A7DB3F1D13E2F10039F50D /* MeHeaderView */,
+				04A7DB401D13E2F10039F50D /* MeTableView */,
 			);
 			path = "我的View";
 			sourceTree = "<group>";
@@ -711,6 +732,24 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		04A7DB3F1D13E2F10039F50D /* MeHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				04A7DB421D13E3A70039F50D /* WYMeHeaderView.h */,
+				04A7DB431D13E3A70039F50D /* WYMeHeaderView.m */,
+			);
+			path = MeHeaderView;
+			sourceTree = "<group>";
+		};
+		04A7DB401D13E2F10039F50D /* MeTableView */ = {
+			isa = PBXGroup;
+			children = (
+				04A7DB451D13E56F0039F50D /* WYMeTableView.h */,
+				04A7DB461D13E56F0039F50D /* WYMeTableView.m */,
+			);
+			path = MeTableView;
+			sourceTree = "<group>";
+		};
 		21E138D222E3BBC03DE7A683 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -851,6 +890,7 @@
 			files = (
 				0496C87D1D10EE2E00E3809F /* LaunchScreen.storyboard in Resources */,
 				0496C8EB1D1103A400E3809F /* ViewControllerS.plist in Resources */,
+				04A7DB4B1D13EB640039F50D /* MeModel.plist in Resources */,
 				0496C87A1D10EE2E00E3809F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1001,6 +1041,7 @@
 			files = (
 				0496C8C81D10F0FD00E3809F /* AppDelegate.m in Sources */,
 				047F09561D125367004E7EE7 /* WYCustomButton.m in Sources */,
+				04A7DB441D13E3A70039F50D /* WYMeHeaderView.m in Sources */,
 				0496C8F71D11065900E3809F /* WYMeViewController.m in Sources */,
 				046E074B1D12882000645E96 /* WYThirdPartyView.m in Sources */,
 				046E07381D127B3A00645E96 /* WYHttpRequest.m in Sources */,
@@ -1009,11 +1050,13 @@
 				0496C86F1D10EE2E00E3809F /* main.m in Sources */,
 				047F08F21D1242A2004E7EE7 /* WYBaseView.m in Sources */,
 				0496C8CD1D11012400E3809F /* WYTabBarController.m in Sources */,
+				04A7DB3E1D13E02A0039F50D /* UIImageView+WY_SDWedImage.m in Sources */,
 				0496C8E71D1102B900E3809F /* WYBaseCollectionCell.m in Sources */,
 				047F094E1D125367004E7EE7 /* TopRollView.m in Sources */,
 				0496C8E41D1102A000E3809F /* WYBaseCollectionView.m in Sources */,
 				047F092C1D124E68004E7EE7 /* WYFlashSaleViewController.m in Sources */,
 				0496C8F41D11064300E3809F /* WYShoppingCartViewController.m in Sources */,
+				04A7DB471D13E56F0039F50D /* WYMeTableView.m in Sources */,
 				0496C8E11D11027300E3809F /* WYBaseTableCell.m in Sources */,
 				0496C8F11D11062300E3809F /* WYClassifyViewController.m in Sources */,
 				046E074E1D12896E00645E96 /* WYLoginViewController.m in Sources */,
@@ -1025,6 +1068,7 @@
 				047F08F51D1242BA004E7EE7 /* WYTwoBtnView.m in Sources */,
 				0496C8DE1D11025700E3809F /* WYBaesTableView.m in Sources */,
 				047F094D1D125367004E7EE7 /* NSString+Helper.m in Sources */,
+				04A7DB4C1D13EB640039F50D /* WYMeModel.m in Sources */,
 				0496C8D01D11014500E3809F /* WYNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

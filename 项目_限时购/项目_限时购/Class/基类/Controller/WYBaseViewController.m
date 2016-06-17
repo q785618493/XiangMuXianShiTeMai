@@ -25,6 +25,47 @@
     
 }
 
+/** 实现 GET */
+- (void)GETHttpUrlString:(NSString *)urlString
+             progressDic:(NSDictionary *)progressDic
+                 success:(SuccessBlock)success
+                 failure:(ErrorBlock)failure {
+    
+    [WYHttpRequest GETHttpRequestPathUrl:urlString bodyDic:progressDic successBlock:^(id JSON) {
+        
+        if (success) {
+            success(JSON);
+        }
+        
+    } errorBlock:^(NSError *error) {
+        
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
+/** 实现 POST */
+- (void)POSTHttpUrlString:(NSString *)urlString
+              progressDic:(NSDictionary *)progressDic
+                  success:(SuccessBlock)success
+                  failure:(ErrorBlock)failure {
+    
+    [WYHttpRequest POSTHttpRequestPatUrl:urlString bodyDic:progressDic successBlock:^(id JSON) {
+        
+        if (success) {
+            success(JSON);
+        }
+        
+    } errorBlock:^(NSError *error) {
+        
+        if (failure) {
+            failure(error);
+        }
+    }];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

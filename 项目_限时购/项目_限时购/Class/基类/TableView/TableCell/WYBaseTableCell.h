@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+#import <Masonry.h>
+#import <UIButton+WebCache.h>
+
+#import "UIImageView+WY_SDWedImage.h"
+
+/** 选中 cell上按钮回调的block */
+typedef void(^BtnActionBlock)(NSInteger btnRow);
+
 @interface WYBaseTableCell : UITableViewCell
 
 @end

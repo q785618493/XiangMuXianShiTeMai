@@ -10,4 +10,6 @@
 
 @interface WYRegisterViewController : WYBaseViewController
 
+
+
 @end

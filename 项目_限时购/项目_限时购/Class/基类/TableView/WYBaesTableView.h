@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/** 选中 cell行回调的block */
+typedef void(^TableCellBlock)(NSInteger cellRow);
+
 @interface WYBaesTableView : UITableView
 
 @end

@@ -101,14 +101,22 @@
     
 }
 
+/** 重写 set方法给控件赋值 */
+- (void)setDataDic:(NSDictionary *)dataDic {
+    _dataDic = dataDic;
+    
+    [self.registerBtn setTitle:dataDic[@"btnTitle"] forState:(UIControlStateNormal)];
+    [self.registerBtn setTitleColor:dataDic[@"btnColor"] forState:(UIControlStateNormal)];
+    [self.loginBtn setImage:[UIImage imageNamed:dataDic[@"image"]] forState:(UIControlStateNormal)];
+}
 
 /** 重写 get方法懒加载控件 */
 - (UIButton *)registerBtn {
     if (!_registerBtn) {
         _registerBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [_registerBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
-        [_registerBtn setTitle:[NSString stringWithFormat:@"免费注册"] forState:(UIControlStateNormal)];
-        [_registerBtn setTitleColor:RGB(0, 147, 190) forState:(UIControlStateNormal)];
+//        [_registerBtn setTitle:[NSString stringWithFormat:@"免费注册"] forState:(UIControlStateNormal)];
+//        [_registerBtn setTitleColor:RGB(0, 147, 190) forState:(UIControlStateNormal)];
         [_registerBtn addTarget:self action:@selector(btnTouchActionRegister) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _registerBtn;
@@ -124,7 +132,7 @@
 - (UIButton *)loginBtn {
     if (!_loginBtn) {
         _loginBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        [_loginBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"登录界面登录按钮"]] forState:(UIControlStateNormal)];
+//        [_loginBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"登录界面登录按钮"]] forState:(UIControlStateNormal)];
         [_loginBtn addTarget:self action:@selector(btnTouchActionLogin) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _loginBtn;
@@ -133,7 +141,7 @@
 - (void)btnTouchActionLogin {
     
     if (_loginBlock) {
-        _loginBlock();
+        _loginBlock(self.userField.text, self.codeField.text);
     }
 }
 

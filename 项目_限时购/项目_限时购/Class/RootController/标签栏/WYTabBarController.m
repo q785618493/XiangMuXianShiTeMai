@@ -57,7 +57,7 @@
     }];
     
     self.viewControllers = muArray;
-    self.selectedIndex = muArray.count - 1;
+    self.selectedIndex = 0;
     
     /** 在对象方法中设置 TabBar 的 文字颜色 和 大小 */
 //    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor grayColor],NSFontAttributeName:[UIFont systemFontOfSize:10]} forState:(UIControlStateNormal)];

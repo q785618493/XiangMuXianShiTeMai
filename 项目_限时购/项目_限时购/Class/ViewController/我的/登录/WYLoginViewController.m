@@ -27,6 +27,7 @@
 - (WYTextFieldView *)textFieldView {
     if (!_textFieldView) {
         _textFieldView = [[WYTextFieldView alloc] init];
+        _textFieldView.dataDic = [NSDictionary dictionaryWithObjectsAndKeys:@"免费注册",@"btnTitle",RGB(0, 147, 190),@"btnColor",@"登录界面登录按钮",@"image", nil];
     }
     return _textFieldView;
 }
@@ -53,6 +54,7 @@
     CGFloat height = self.view.frame.size.height;
     [self.view addSubview:self.textFieldView];
     [self.view addSubview:self.threeLoginView];
+    
     
     WS(weakSelf);
     [_textFieldView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -10,4 +10,7 @@
 
 @interface WYTestPhoneViewController : WYBaseViewController
 
+/** 保存用户手机号 */
+@property (copy, nonatomic) NSString *userPhone;
+
 @end

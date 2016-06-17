@@ -12,6 +12,7 @@
 
 @implementation WYHttpRequest
 
+/** 实现 GET */
 + (void)GETHttpRequestPathUrl:(NSString *)pathUrl
                       bodyDic:(NSDictionary *)bodyDic
                  successBlock:(RequestSuccessBlock)successBlock
@@ -37,6 +38,7 @@
     
 }
 
+/** 实现 POST */
 + (void)POSTHttpRequestPatUrl:(NSString *)pathUrl
                       bodyDic:(NSDictionary *)bodyDic
                  successBlock:(RequestSuccessBlock)successBlock

@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import <Masonry.h>
+#import <UIButton+WebCache.h>
+#import "UIImageView+WY_SDWedImage.h"
 
+//* 视图上按钮事件回调的block 
+//typedef void(^BtnActionBlock)();
+typedef void(^returnBlock)();
 @interface WYBaseView : UIView
 
 @end
