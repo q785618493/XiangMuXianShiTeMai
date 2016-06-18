@@ -55,8 +55,18 @@
 /** 注册按钮点击事件 */
 - (void)btnTouchActionLogin {
     
-   
-    [self.view endEditing:YES];
+    if ([self.verifyTextField.text isEmptyString]) {
+        
+        [self registerHttpPostRequest];
+        [self.view endEditing:YES];
+    }
+    else {
+        [MBProgressHUD showMessage:[NSString stringWithFormat:@"验证码不能为空"]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
+            
+        });
+    }
 }
 
 - (WYCustomButton *)testBtn {
@@ -202,25 +212,31 @@
 /** 获取验证码的网络请求 */
 - (void)testCodeHttpPostRequest {
     
+    WS(weakSelf);
     NSDictionary *requestDic = [NSDictionary dictionaryWithObjectsAndKeys:_userPhone,@"MemberId", nil];
     
     [self POSTHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appMember/createCode.do"] progressDic:requestDic success:^(id JSON) {
         
         NSDictionary *dataDic = (NSDictionary *)JSON;
         
-        if ([[NSString stringWithFormat:@"success"] isEqual:dataDic[@"result"]]) {
-            [GCDCountdownTime GCDTimeMethod:self.testBtn];
+        if ([dataDic[@"result"] isEqual:[NSString stringWithFormat:@"success"]]) {
+            [GCDCountdownTime GCDTimeMethod:weakSelf.testBtn];
             
         } else {
             
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"请检查您额网络"]];
+            [MBProgressHUD showMessage:[NSString stringWithFormat:@"无法获得验证码"]];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
         }
         
     } failure:^(NSError *error) {
-        NSLog(@"\n%s \n%@ \n%d",__func__,error,__LINE__);
+        
+        ZDY_LOG(@"%@",error);
+        [MBProgressHUD showMessage:[NSString stringWithFormat:@"请检查您的网络"]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
+        });
     }];
 }
 
@@ -248,7 +264,12 @@
         }
         
     } failure:^(NSError *error) {
-        NSLog(@"\n%s \n%@ \n%d",__func__,error,__LINE__);
+        
+        ZDY_LOG(@"%@",error);
+        [MBProgressHUD showMessage:[NSString stringWithFormat:@"验证码输入有误"]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
+        });
     }];
 }
 

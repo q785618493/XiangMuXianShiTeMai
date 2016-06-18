@@ -12,7 +12,4 @@
 @interface WYFlashSaleViewController : WYBaseViewController
 
 
-
-
-
 @end

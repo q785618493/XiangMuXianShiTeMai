@@ -73,8 +73,9 @@
 /** 重写 get方法赋值 */
 - (void)setMeDic:(NSDictionary *)meDic {
     _meDic = meDic;
-    self.nameLabel = meDic[@"name"];
-    self.memberLabel = meDic[@"member"];
+    
+    self.nameLabel.text = meDic[@"name"];
+    self.memberLabel.text = meDic[@"member"];
 }
 
 #pragma make- 
@@ -84,7 +85,7 @@
     if (!_topImageView) {
         _topImageView = [[UIImageView alloc] initWithFrame:(CGRectMake(0, 0, VIEW_WIDTH, 125))];
         [_topImageView setUserInteractionEnabled:YES];
-        [_topImageView setBackgroundColor:RGB(103, 207, 234)];
+        [_topImageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"我的背景"]]];
         
     }
     return _topImageView;
@@ -135,7 +136,7 @@
         [_userBtn setFrame:(CGRectMake(25, 12, 100, 100))];
         [_userBtn.layer setMasksToBounds:YES];
         [_userBtn.layer setCornerRadius:50];
-        [_userBtn setImage:[UIImage imageNamed:@"图标"] forState:(UIControlStateNormal)];
+        [_userBtn setImage:[UIImage imageNamed:@"headLogo"] forState:(UIControlStateNormal)];
         [_userBtn addTarget:self action:@selector(btnTouchActionUser:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _userBtn;

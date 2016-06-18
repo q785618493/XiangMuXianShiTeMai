@@ -19,7 +19,6 @@
 /** 副标题 */
 @property (copy, nonatomic) NSString *detailText;
 
-@property (assign, nonatomic, getter = isStatus) BOOL isStatus;
 
 - (instancetype)initWithDic:(NSDictionary *)dic;
 

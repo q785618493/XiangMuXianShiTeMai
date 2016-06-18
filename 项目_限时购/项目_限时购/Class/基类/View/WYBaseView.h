@@ -11,9 +11,9 @@
 #import <UIButton+WebCache.h>
 #import "UIImageView+WY_SDWedImage.h"
 
-//* 视图上按钮事件回调的block 
-//typedef void(^BtnActionBlock)();
+//* 视图上按钮事件回调的block
 typedef void(^returnBlock)();
+
 @interface WYBaseView : UIView
 
 @end

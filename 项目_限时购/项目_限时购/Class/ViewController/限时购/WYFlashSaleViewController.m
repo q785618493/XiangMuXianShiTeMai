@@ -10,6 +10,11 @@
 
 #import "TopRollView.h"
 #import "WYTwoBtnView.h"
+#import "WYGoodsTableView.h"
+#import "WYBrandTableView.h"
+
+#import "WYNewsModel.h"
+#import "WYSaleModel.h"
 
 #define WIDTH  self.view.frame.size.width
 #define HEIGHT self.view.frame.size.height
@@ -27,6 +32,18 @@
 
 /** 顶部轮播视图的 比例高度 */
 @property (assign, nonatomic) CGFloat scale;
+
+/** 新品团购的 TableView */
+@property (strong, nonatomic) WYGoodsTableView *goodsTable;
+
+/** 品牌团购的 TableView */
+@property (strong, nonatomic) WYBrandTableView *brandTable;
+
+/** 保存新品团购视图数据信息 */
+@property (strong, nonatomic) NSMutableArray *newsMuArray;
+
+/** 保存品牌团购视图数据信息 */
+@property (strong, nonatomic) NSMutableArray *brandMuArray;
 
 @end
 
@@ -76,6 +93,34 @@
     return _adView;
 }
 
+- (NSMutableArray *)newsMuArray {
+    if (!_newsMuArray) {
+        _newsMuArray = [NSMutableArray array];
+    }
+    return _newsMuArray;
+}
+
+- (NSMutableArray *)brandMuArray {
+    if (!_brandMuArray) {
+        _brandMuArray = [NSMutableArray array];
+    }
+    return _brandMuArray;
+}
+
+- (WYGoodsTableView *)goodsTable {
+    if (!_goodsTable) {
+        _goodsTable = [[WYGoodsTableView alloc] initWithFrame:(CGRectMake(0, _scale + 50, self.view.frame.size.width, self.view.frame.size.height - _scale -  50)) style:(UITableViewStylePlain)];
+    }
+    return _goodsTable;
+}
+
+- (WYBrandTableView *)brandTable {
+    if (!_brandTable) {
+        _brandTable = [[WYBrandTableView alloc] initWithFrame:(CGRectMake(self.view.frame.size.width, _scale + 50, self.view.frame.size.width, self.view.frame.size.height - _scale - 50)) style:(UITableViewStylePlain)];
+    }
+    return _brandTable;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -84,14 +129,16 @@
     /** 添加控件和约束 */
     [self controlScrollViewMasonry];
     
-    
+    [self httpGetAdvertisingRequest];
+    [self httpGetNewGoodsRequest];
 }
 
 /** 添加控件和约束 */
 - (void)controlScrollViewMasonry {
     
     [self.view addSubview:self.rollScrollView];
-    
+    CGFloat width = self.view.frame.size.width;
+    CGFloat height = self.rollScrollView.contentSize.height - _scale - 50;
     WS(weakSelf);
     [_rollScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(64, 0, 49, 0));
@@ -105,7 +152,135 @@
     }];
     
     [self.rollScrollView addSubview:self.adView];
+    [self.rollScrollView addSubview:self.goodsTable];
+    [self.rollScrollView addSubview:self.brandTable];
     
+    [_goodsTable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.twoBtnView.bottom);
+        make.left.equalTo(weakSelf.rollScrollView.left);
+        make.right.equalTo(weakSelf.rollScrollView.right);
+        make.height.equalTo(height);
+    }];
+    
+    [_goodsTable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.twoBtnView.bottom);
+        make.left.equalTo(weakSelf.goodsTable.right);
+        make.size.equalTo(CGSizeMake(width, height));
+    }];
+    
+}
+
+/** 顶部广告轮播视图的网络请求 */
+- (void)httpGetAdvertisingRequest {
+    WS(weakSelf);
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appHome/appHome.do"] progressDic:nil success:^(id JSON) {
+        
+        NSArray *array = (NSArray *)JSON;
+        
+        if (array.count > 1) {
+            
+            NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
+            for (NSDictionary *dict in array) {
+                [muArray addObject:dict[@"ImgView"]];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.adView.arrayImages = muArray;
+            });
+        }
+        else {
+            [MBProgressHUD showMessage:[NSString stringWithFormat:@"加载数据失败,请您检查网络"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUD];
+            });
+        }
+        
+    } failure:^(NSError *error) {
+        
+        ZDY_LOG(@"失败==%@",error.localizedDescription);
+        [MBProgressHUD showMessage:[NSString stringWithFormat:@"请您检查网络"]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
+        });
+    }];
+}
+
+/** 新品团购的网络请求 */
+- (void)httpGetNewGoodsRequest {
+    WS(weakSelf);
+    
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appActivity/appActivityList.do"] progressDic:nil success:^(id JSON) {
+        
+        NSArray *array = (NSArray *)JSON;
+        
+        if (array.count > 1) {
+            
+            NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
+            for (NSDictionary *dict in array) {
+                WYNewsModel *model = [[WYNewsModel alloc] initWithDictionary:dict];
+                [muArray addObject:model];
+            }
+            [weakSelf.newsMuArray addObjectsFromArray:muArray];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.goodsTable.infoGoodsArray = weakSelf.newsMuArray;
+                [weakSelf.goodsTable reloadData];
+            });
+            
+        }
+        else {
+            [MBProgressHUD showMessage:[NSString stringWithFormat:@"加载数据失败,请您检查网络"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUD];
+            });
+        }
+        
+        
+    } failure:^(NSError *error) {
+        
+        ZDY_LOG(@"失败==%@",error.localizedDescription);
+        [MBProgressHUD showMessage:[NSString stringWithFormat:@"请您检查网络"]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
+        });
+    }];
+}
+
+/** 品牌团购的网络请求 */
+- (void)httpGetBrandRequest {
+    WS(weakSelf);
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appActivity/appHomeGoodsList.do"] progressDic:nil success:^(id JSON) {
+        
+        NSArray *array = (NSArray *)JSON;
+        
+        if (array.count > 1) {
+            
+            NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
+            for (NSDictionary *dict in array) {
+                WYSaleModel *model = [[WYSaleModel alloc] initWithDictionary:dict];
+                [muArray addObject:model];
+            }
+            [weakSelf.brandMuArray addObjectsFromArray:muArray];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.brandTable.infoBrandArray = weakSelf.brandMuArray;
+                [weakSelf.brandTable reloadData];
+            });
+            
+        }
+        else {
+            [MBProgressHUD showMessage:[NSString stringWithFormat:@"加载数据失败,请您检查网络"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUD];
+            });
+        }
+        
+        
+    } failure:^(NSError *error) {
+        
+        ZDY_LOG(@"失败==%@",error.localizedDescription);
+        [MBProgressHUD showMessage:[NSString stringWithFormat:@"请您检查网络"]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
+        });
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

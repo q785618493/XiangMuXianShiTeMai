@@ -14,8 +14,6 @@ static NSString *keyImage = @"image";
 
 static NSString *keyDetailText = @"detailText";
 
-static NSString *keyStatus = @"isStatus";
-
 @implementation WYMeModel
 
 - (instancetype)initWithDic:(NSDictionary *)dic {
@@ -32,8 +30,6 @@ static NSString *keyStatus = @"isStatus";
 #pragma make- 
 #pragma make- NSCoding 归档
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    
-    [aCoder encodeBool:_isStatus forKey:keyStatus];
     [aCoder encodeObject:_title forKey:keyTitle];
     [aCoder encodeObject:_image forKey:keyImage];
     [aCoder encodeObject:_detailText forKey:keyDetailText];
@@ -42,7 +38,6 @@ static NSString *keyStatus = @"isStatus";
 #pragma make- NSCoding 解档
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     
-    _isStatus = [aDecoder decodeBoolForKey:keyStatus];
     _title = [aDecoder decodeObjectForKey:keyTitle];
     _image = [aDecoder decodeObjectForKey:keyImage];
     _detailText = [aDecoder decodeObjectForKey:keyDetailText];

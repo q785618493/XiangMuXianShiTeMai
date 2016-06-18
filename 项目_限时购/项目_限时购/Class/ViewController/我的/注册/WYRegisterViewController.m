@@ -77,14 +77,39 @@
     }];
     
     weakSelf.textFieldView.loginBlock = ^(NSString *userPhone, NSString *codePhone) {
-        WYTestPhoneViewController *testVC = [[WYTestPhoneViewController alloc] init];
-        testVC.userPhone = userPhone;
-        testVC.codePhone = codePhone;
-        [testVC setHidesBottomBarWhenPushed:YES];
-        [weakSelf.navigationController pushViewController:testVC animated:YES];
+        
+        if ([userPhone isEmptyString]) {
+            
+            [MBProgressHUD showMessage:[NSString stringWithFormat:@"账号不能为空"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUD];
+            });
+        }
+        else if ([codePhone isEmptyString]) {
+            [MBProgressHUD showMessage:[NSString stringWithFormat:@"密码不能为空"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUD];
+            });
+        }
+        else if ([userPhone checkTel] && codePhone.length > 6) {
+            WYTestPhoneViewController *testVC = [[WYTestPhoneViewController alloc] init];
+            testVC.title = [NSString stringWithFormat:@"验证手机号"];
+            testVC.userPhone = userPhone;
+            testVC.codePhone = codePhone;
+            [testVC setHidesBottomBarWhenPushed:YES];
+            [weakSelf.navigationController pushViewController:testVC animated:YES];
+        }
+        else {
+            
+            [MBProgressHUD showMessage:[NSString stringWithFormat:@"手机号或者密码错误"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUD];
+            });
+        }
     };
     
     weakSelf.textFieldView.registerBlock = ^() {
+        
         
     };
     

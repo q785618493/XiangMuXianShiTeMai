@@ -13,6 +13,12 @@
 		046E074E1D12896E00645E96 /* WYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E074D1D12896E00645E96 /* WYLoginViewController.m */; };
 		046E07511D12898700645E96 /* WYRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E07501D12898700645E96 /* WYRegisterViewController.m */; };
 		046E07541D1289C600645E96 /* WYTestPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E07531D1289C600645E96 /* WYTestPhoneViewController.m */; };
+		046E87B71D15447C00D48AB0 /* WYBrandTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E87B61D15447C00D48AB0 /* WYBrandTableView.m */; };
+		046E87BA1D1544AA00D48AB0 /* WYBrandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E87B91D1544AA00D48AB0 /* WYBrandCell.m */; };
+		046E87BD1D1544C400D48AB0 /* WYNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E87BC1D1544C400D48AB0 /* WYNewCell.m */; };
+		046E87C91D15457D00D48AB0 /* WYGoodsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E87C81D15457D00D48AB0 /* WYGoodsTableView.m */; };
+		046E87D01D154C7400D48AB0 /* WYSaleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E87CC1D154C7400D48AB0 /* WYSaleModel.m */; };
+		046E87D11D154C7400D48AB0 /* WYNewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E87CF1D154C7400D48AB0 /* WYNewsModel.m */; };
 		0471235B1D142C3200D42B74 /* MBProgressHUD+XMG.m in Sources */ = {isa = PBXBuildFile; fileRef = 047123571D142C3200D42B74 /* MBProgressHUD+XMG.m */; };
 		0471235C1D142C3200D42B74 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 047123581D142C3200D42B74 /* MBProgressHUD.bundle */; };
 		0471235D1D142C3200D42B74 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0471235A1D142C3200D42B74 /* MBProgressHUD.m */; };
@@ -83,6 +89,18 @@
 		046E07501D12898700645E96 /* WYRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYRegisterViewController.m; sourceTree = "<group>"; };
 		046E07521D1289C600645E96 /* WYTestPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYTestPhoneViewController.h; sourceTree = "<group>"; };
 		046E07531D1289C600645E96 /* WYTestPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYTestPhoneViewController.m; sourceTree = "<group>"; };
+		046E87B51D15447C00D48AB0 /* WYBrandTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYBrandTableView.h; sourceTree = "<group>"; };
+		046E87B61D15447C00D48AB0 /* WYBrandTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYBrandTableView.m; sourceTree = "<group>"; };
+		046E87B81D1544AA00D48AB0 /* WYBrandCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYBrandCell.h; sourceTree = "<group>"; };
+		046E87B91D1544AA00D48AB0 /* WYBrandCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYBrandCell.m; sourceTree = "<group>"; };
+		046E87BB1D1544C400D48AB0 /* WYNewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYNewCell.h; sourceTree = "<group>"; };
+		046E87BC1D1544C400D48AB0 /* WYNewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYNewCell.m; sourceTree = "<group>"; };
+		046E87C71D15457D00D48AB0 /* WYGoodsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYGoodsTableView.h; sourceTree = "<group>"; };
+		046E87C81D15457D00D48AB0 /* WYGoodsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYGoodsTableView.m; sourceTree = "<group>"; };
+		046E87CB1D154C7400D48AB0 /* WYSaleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYSaleModel.h; sourceTree = "<group>"; };
+		046E87CC1D154C7400D48AB0 /* WYSaleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYSaleModel.m; sourceTree = "<group>"; };
+		046E87CE1D154C7400D48AB0 /* WYNewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYNewsModel.h; sourceTree = "<group>"; };
+		046E87CF1D154C7400D48AB0 /* WYNewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYNewsModel.m; sourceTree = "<group>"; };
 		047123561D142C3200D42B74 /* MBProgressHUD+XMG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+XMG.h"; sourceTree = "<group>"; };
 		047123571D142C3200D42B74 /* MBProgressHUD+XMG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+XMG.m"; sourceTree = "<group>"; };
 		047123581D142C3200D42B74 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
@@ -206,6 +224,24 @@
 			path = ThirdPartyView;
 			sourceTree = "<group>";
 		};
+		046E87CA1D154C7400D48AB0 /* 首页品牌团购 */ = {
+			isa = PBXGroup;
+			children = (
+				046E87CB1D154C7400D48AB0 /* WYSaleModel.h */,
+				046E87CC1D154C7400D48AB0 /* WYSaleModel.m */,
+			);
+			path = "首页品牌团购";
+			sourceTree = "<group>";
+		};
+		046E87CD1D154C7400D48AB0 /* 首页新品购 */ = {
+			isa = PBXGroup;
+			children = (
+				046E87CE1D154C7400D48AB0 /* WYNewsModel.h */,
+				046E87CF1D154C7400D48AB0 /* WYNewsModel.m */,
+			);
+			path = "首页新品购";
+			sourceTree = "<group>";
+		};
 		047123551D142C3200D42B74 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +257,8 @@
 		047F08EB1D12425F004E7EE7 /* BrandTableView */ = {
 			isa = PBXGroup;
 			children = (
+				046E87B51D15447C00D48AB0 /* WYBrandTableView.h */,
+				046E87B61D15447C00D48AB0 /* WYBrandTableView.m */,
 				047F08EC1D12425F004E7EE7 /* BrabdCell */,
 			);
 			path = BrandTableView;
@@ -229,6 +267,8 @@
 		047F08EC1D12425F004E7EE7 /* BrabdCell */ = {
 			isa = PBXGroup;
 			children = (
+				046E87B81D1544AA00D48AB0 /* WYBrandCell.h */,
+				046E87B91D1544AA00D48AB0 /* WYBrandCell.m */,
 			);
 			path = BrabdCell;
 			sourceTree = "<group>";
@@ -236,6 +276,8 @@
 		047F08ED1D12425F004E7EE7 /* NewTableView */ = {
 			isa = PBXGroup;
 			children = (
+				046E87C71D15457D00D48AB0 /* WYGoodsTableView.h */,
+				046E87C81D15457D00D48AB0 /* WYGoodsTableView.m */,
 				047F08EE1D12425F004E7EE7 /* NewCell */,
 			);
 			path = NewTableView;
@@ -244,6 +286,8 @@
 		047F08EE1D12425F004E7EE7 /* NewCell */ = {
 			isa = PBXGroup;
 			children = (
+				046E87BB1D1544C400D48AB0 /* WYNewCell.h */,
+				046E87BC1D1544C400D48AB0 /* WYNewCell.m */,
 			);
 			path = NewCell;
 			sourceTree = "<group>";
@@ -645,6 +689,8 @@
 		0496C8C41D10F0FD00E3809F /* 限时购Model */ = {
 			isa = PBXGroup;
 			children = (
+				046E87CA1D154C7400D48AB0 /* 首页品牌团购 */,
+				046E87CD1D154C7400D48AB0 /* 首页新品购 */,
 			);
 			path = "限时购Model";
 			sourceTree = "<group>";
@@ -1073,17 +1119,22 @@
 				0496C86F1D10EE2E00E3809F /* main.m in Sources */,
 				047F08F21D1242A2004E7EE7 /* WYBaseView.m in Sources */,
 				0471235B1D142C3200D42B74 /* MBProgressHUD+XMG.m in Sources */,
+				046E87C91D15457D00D48AB0 /* WYGoodsTableView.m in Sources */,
 				0496C8CD1D11012400E3809F /* WYTabBarController.m in Sources */,
 				04A7DB3E1D13E02A0039F50D /* UIImageView+WY_SDWedImage.m in Sources */,
+				046E87BA1D1544AA00D48AB0 /* WYBrandCell.m in Sources */,
 				0496C8E71D1102B900E3809F /* WYBaseCollectionCell.m in Sources */,
 				047F094E1D125367004E7EE7 /* TopRollView.m in Sources */,
 				0496C8E41D1102A000E3809F /* WYBaseCollectionView.m in Sources */,
 				047F092C1D124E68004E7EE7 /* WYFlashSaleViewController.m in Sources */,
 				0496C8F41D11064300E3809F /* WYShoppingCartViewController.m in Sources */,
+				046E87B71D15447C00D48AB0 /* WYBrandTableView.m in Sources */,
 				04A7DB471D13E56F0039F50D /* WYMeTableView.m in Sources */,
 				0496C8E11D11027300E3809F /* WYBaseTableCell.m in Sources */,
+				046E87D01D154C7400D48AB0 /* WYSaleModel.m in Sources */,
 				0496C8F11D11062300E3809F /* WYClassifyViewController.m in Sources */,
 				046E074E1D12896E00645E96 /* WYLoginViewController.m in Sources */,
+				046E87D11D154C7400D48AB0 /* WYNewsModel.m in Sources */,
 				046E07511D12898700645E96 /* WYRegisterViewController.m in Sources */,
 				047F094A1D125367004E7EE7 /* GCDCountdownTime.m in Sources */,
 				046E074A1D12882000645E96 /* WYTextFieldView.m in Sources */,
@@ -1091,6 +1142,7 @@
 				0496C8DB1D11023E00E3809F /* WYBaseViewController.m in Sources */,
 				047F08F51D1242BA004E7EE7 /* WYTwoBtnView.m in Sources */,
 				0496C8DE1D11025700E3809F /* WYBaesTableView.m in Sources */,
+				046E87BD1D1544C400D48AB0 /* WYNewCell.m in Sources */,
 				047F094D1D125367004E7EE7 /* NSString+Helper.m in Sources */,
 				04A7DB4C1D13EB640039F50D /* WYMeModel.m in Sources */,
 				0496C8D01D11014500E3809F /* WYNavigationController.m in Sources */,

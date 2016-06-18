@@ -20,7 +20,6 @@
         
         [self setDelegate:self];
         [self setDataSource:self];
-        [self setTableFooterView:[[UIView alloc] init]];
         [self setBackgroundColor:RGB(245, 245, 245)];
         
     }

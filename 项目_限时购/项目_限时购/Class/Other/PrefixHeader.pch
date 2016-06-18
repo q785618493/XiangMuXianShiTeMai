@@ -80,7 +80,7 @@
 //
 //#import "UIColor+Extension.h"
 //
-#import "NSString+Helper.h"
+//#import "NSString+Helper.h"
 //
 //#import "UIImage+ImageSetting.h"
 
@@ -118,11 +118,11 @@
 
 #ifdef DEBUG //调试阶段
 
-#define ZDYLOG(...)  NSLog(__VA_ARGS__)
+#define ZDY_LOG(FORMAT, ...) fprintf(stderr, "   %s     %d \n%s \n",[[[NSString stringWithUTF8String:__FILE__]lastPathComponent]UTF8String],__LINE__,[[NSString stringWithFormat:FORMAT,##__VA_ARGS__]UTF8String]);
 
 #else //发布阶段
 
-#define ZDYLOG(...)
+#define ZDY_LOG(...)
 
 #endif
 
