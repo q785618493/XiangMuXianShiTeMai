@@ -155,14 +155,17 @@
     [self.rollScrollView addSubview:self.goodsTable];
     [self.rollScrollView addSubview:self.brandTable];
     
+    [_goodsTable setBackgroundColor:[UIColor redColor]];
+    [_brandTable setBackgroundColor:[UIColor yellowColor]];
+    
     [_goodsTable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.twoBtnView.bottom);
-        make.left.equalTo(weakSelf.rollScrollView.left);
-        make.right.equalTo(weakSelf.rollScrollView.right);
+        make.left.equalTo(weakSelf.view.left);
+        make.right.equalTo(weakSelf.view.right);
         make.height.equalTo(height);
     }];
     
-    [_goodsTable mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_brandTable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.twoBtnView.bottom);
         make.left.equalTo(weakSelf.goodsTable.right);
         make.size.equalTo(CGSizeMake(width, height));
@@ -237,10 +240,10 @@
     } failure:^(NSError *error) {
         
         ZDY_LOG(@"失败==%@",error.localizedDescription);
-        [MBProgressHUD showMessage:[NSString stringWithFormat:@"请您检查网络"]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUD];
-        });
+//        [MBProgressHUD showMessage:[NSString stringWithFormat:@"请您检查网络"]];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [MBProgressHUD hideHUD];
+//        });
     }];
 }
 

@@ -41,7 +41,7 @@
     WS(weakSelf);
     
     [_commodityImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(weakSelf).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
+        make.edges.mas_equalTo(weakSelf).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
     
     [_centerImage mas_makeConstraints:^(MASConstraintMaker *make) {
