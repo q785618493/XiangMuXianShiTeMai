@@ -45,6 +45,8 @@
 /** 保存品牌团购视图数据信息 */
 @property (strong, nonatomic) NSMutableArray *brandMuArray;
 
+@property (assign, nonatomic) CGFloat height;
+
 @end
 
 @implementation WYFlashSaleViewController
@@ -65,6 +67,7 @@
 - (WYTwoBtnView *)twoBtnView {
     if (!_twoBtnView) {
         _twoBtnView = [[WYTwoBtnView alloc] init];
+        
         [_twoBtnView.NewBtn addTarget:self action:@selector(btnTouchActionNew:) forControlEvents:(UIControlEventTouchUpInside)];
         [_twoBtnView.BrandBtn addTarget:self action:@selector(btnTouchActionBrand:) forControlEvents:(UIControlEventTouchUpInside)];
         
@@ -75,15 +78,37 @@
 /** 新品按钮点击事件 */
 - (void)btnTouchActionNew:(UIButton *)newBtn {
     
+    __weak typeof(self) weakSelf = self;
     [newBtn setSelected:YES];
     [self.twoBtnView.BrandBtn setSelected:NO];
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        CGRect brandRect = weakSelf.brandTable.frame;
+        brandRect.origin.x = WIDTH;
+        weakSelf.brandTable.frame = brandRect;
+        
+        CGRect goodsRect = weakSelf.goodsTable.frame;
+        goodsRect.origin.x = 0;
+        weakSelf.goodsTable.frame = goodsRect;
+    }];
 }
 
 /** 品牌团购点击事件 */
 - (void)btnTouchActionBrand:(UIButton *)brandBtn {
-    
+    WS(weakSelf);
     [brandBtn setSelected:YES];
     [self.twoBtnView.NewBtn setSelected:NO];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        CGRect goodsRect = weakSelf.goodsTable.frame;
+        goodsRect.origin.x = WIDTH - WIDTH * 2;
+        weakSelf.goodsTable.frame = goodsRect;
+        
+        CGRect brandRect = weakSelf.brandTable.frame;
+        brandRect.origin.x = 0;
+        weakSelf.brandTable.frame = brandRect;
+    }];
 }
 
 - (TopRollView *)adView {
@@ -129,8 +154,8 @@
     /** 添加控件和约束 */
     [self controlScrollViewMasonry];
     
-    [self httpGetAdvertisingRequest];
-    [self httpGetNewGoodsRequest];
+//    [self httpGetAdvertisingRequest];
+//    [self httpGetNewGoodsRequest];
 }
 
 /** 添加控件和约束 */
@@ -138,7 +163,7 @@
     
     [self.view addSubview:self.rollScrollView];
     CGFloat width = self.view.frame.size.width;
-    CGFloat height = self.rollScrollView.contentSize.height - _scale - 50;
+    _height = self.rollScrollView.contentSize.height - _scale - 50;
     WS(weakSelf);
     [_rollScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(64, 0, 49, 0));
@@ -162,13 +187,13 @@
         make.top.equalTo(weakSelf.twoBtnView.bottom);
         make.left.equalTo(weakSelf.view.left);
         make.right.equalTo(weakSelf.view.right);
-        make.height.equalTo(height);
+        make.height.equalTo(_height);
     }];
     
     [_brandTable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.twoBtnView.bottom);
-        make.left.equalTo(weakSelf.goodsTable.right);
-        make.size.equalTo(CGSizeMake(width, height));
+        make.left.equalTo(weakSelf.view.right);
+        make.size.equalTo(CGSizeMake(width, _height));
     }];
     
 }
