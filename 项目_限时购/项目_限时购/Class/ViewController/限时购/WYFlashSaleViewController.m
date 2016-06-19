@@ -56,7 +56,7 @@
     if (!_rollScrollView) {
         _rollScrollView = [[UIScrollView alloc] init];
         [_rollScrollView setDelegate:self];
-        [_rollScrollView setBounces:NO];
+//        [_rollScrollView setBounces:NO];
         [_rollScrollView setShowsVerticalScrollIndicator:NO];
         [_rollScrollView setShowsHorizontalScrollIndicator:NO];
         [_rollScrollView setContentSize:(CGSizeMake(WIDTH, HEIGHT - 64 - 49 + _scale))];
@@ -180,9 +180,6 @@
     [self.rollScrollView addSubview:self.goodsTable];
     [self.rollScrollView addSubview:self.brandTable];
     
-    [_goodsTable setBackgroundColor:[UIColor redColor]];
-    [_brandTable setBackgroundColor:[UIColor yellowColor]];
-    
     [_goodsTable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.twoBtnView.bottom);
         make.left.equalTo(weakSelf.view.left);
@@ -236,11 +233,9 @@
 - (void)httpGetNewGoodsRequest {
     WS(weakSelf);
     
-    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appActivity/appActivityList.do"] progressDic:nil success:^(id JSON) {
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appActivity/appHomeGoodsList.do"] progressDic:nil success:^(id JSON) {
         
         NSArray *array = (NSArray *)JSON;
-        
-//        NSLog(@"%@",JSON);
         
         if (array.count > 1) {
             
@@ -250,7 +245,7 @@
                 [muArray addObject:model];
             }
             [weakSelf.newsMuArray addObjectsFromArray:muArray];
-            weakSelf.goodsTable.infoGoodsArray = weakSelf.newsMuArray;
+            weakSelf.goodsTable.infoGoodsArray = muArray;
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [weakSelf.goodsTable reloadData];
@@ -278,7 +273,7 @@
 /** 品牌团购的网络请求 */
 - (void)httpGetBrandRequest {
     WS(weakSelf);
-    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appActivity/appHomeGoodsList.do"] progressDic:nil success:^(id JSON) {
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appActivity/appActivityList.do"] progressDic:nil success:^(id JSON) {
         
         NSArray *array = (NSArray *)JSON;
         

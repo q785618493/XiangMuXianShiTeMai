@@ -121,9 +121,14 @@
 - (void)setModel:(WYNewsModel *)model {
     _model = model;
     
+    WS(weakSelf);
 //    [self.commodityImage downloadImage:model.imgView];
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:model.imgView]];
-    [self.commodityImage setImage:[UIImage imageWithData:data]];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:model.imgView]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.commodityImage setImage:[UIImage imageWithData:data]];
+        });
+    });
     [self.titleLabel setText:model.abbreviation];
     [self.infoLabel setText:model.goodsIntro];
     [self.ciscountLabel setText:model.price];

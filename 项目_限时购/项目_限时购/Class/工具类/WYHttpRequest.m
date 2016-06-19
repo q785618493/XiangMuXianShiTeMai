@@ -34,7 +34,6 @@
             errorBlock(error);
         }
     }];
-    
 }
 
 /** 实现 POST */
@@ -60,7 +59,6 @@
             errorBlock(error);
         }
     }];
-    
 }
 
 

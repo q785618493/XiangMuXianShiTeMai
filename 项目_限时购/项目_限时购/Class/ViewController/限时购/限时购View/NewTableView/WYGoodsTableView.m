@@ -23,6 +23,8 @@
         
         [self setDelegate:self];
         [self setDataSource:self];
+        [self setShowsHorizontalScrollIndicator:NO];
+        [self setShowsVerticalScrollIndicator:NO];
         [self setSeparatorStyle:(UITableViewCellSeparatorStyleNone)];
     }
     return self;

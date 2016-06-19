@@ -11,9 +11,18 @@
 
 @implementation UIImageView (WY_SDWedImage)
 
+#pragma mark SDWebImage缓存图片
 - (void)downloadImage:(NSString *)url {
     
     [self sd_setImageWithURL:[NSURL URLWithString:url]];
 }
+
+#pragma mark SDWebImage缓存图片
+- (void)downloadImage:(NSString *)url
+                place:(UIImage *)place {
+    [self sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:place options:SDWebImageLowPriority | SDWebImageRetryFailed];
+}
+
+
 
 @end

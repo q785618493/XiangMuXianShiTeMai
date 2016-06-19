@@ -65,8 +65,12 @@
         //            [forBtn setImage:[UIImage imageNamed:self.sevenArray[i]] forState:(UIControlStateNormal)];
 //        [forBtn sd_setImageWithURL:[NSURL URLWithString:self.sevenArray[i]] forState:(UIControlStateNormal)];
         
-        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.sevenArray[i]]];
-        [forBtn setImage:[UIImage imageWithData:data] forState:(UIControlStateNormal)];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.sevenArray[i]]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [forBtn setImage:[UIImage imageWithData:data] forState:(UIControlStateNormal)];
+            });
+        });
         [forBtn addTarget:self action:@selector(btnTouchActionFor:) forControlEvents:(UIControlEventTouchUpInside)];
         [self.rollScroll addSubview:forBtn];
     }
