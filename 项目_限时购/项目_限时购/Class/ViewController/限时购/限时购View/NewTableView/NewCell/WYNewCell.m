@@ -43,7 +43,6 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         [self setSelectionStyle:(UITableViewCellSelectionStyleNone)];
-        [self setSelectionStyle:(UITableViewCellSelectionStyleNone)];
         [self addSubview:self.wireLabel];
         [self addSubview:self.commodityImage];
         [self addSubview:self.titleLabel];
@@ -122,11 +121,13 @@
 - (void)setModel:(WYNewsModel *)model {
     _model = model;
     
-    [_commodityImage downloadImage:model.imgView];
-    [_titleLabel setText:model.abbreviation];
-    [_infoLabel setText:model.goodsIntro];
-    [_ciscountLabel setText:model.price];
-    [_priceLabel setText:[NSString stringWithFormat:@"￥%@",model.domesticPrice]];
+//    [self.commodityImage downloadImage:model.imgView];
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:model.imgView]];
+    [self.commodityImage setImage:[UIImage imageWithData:data]];
+    [self.titleLabel setText:model.abbreviation];
+    [self.infoLabel setText:model.goodsIntro];
+    [self.ciscountLabel setText:model.price];
+    [self.priceLabel setText:[NSString stringWithFormat:@"￥%@",model.domesticPrice]];
 }
 
 /** 重写get方法懒加载控件 */

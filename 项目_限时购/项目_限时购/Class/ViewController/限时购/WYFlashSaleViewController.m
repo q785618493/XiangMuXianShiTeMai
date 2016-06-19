@@ -154,8 +154,8 @@
     /** 添加控件和约束 */
     [self controlScrollViewMasonry];
     
-//    [self httpGetAdvertisingRequest];
-//    [self httpGetNewGoodsRequest];
+    [self httpGetAdvertisingRequest];
+    [self httpGetNewGoodsRequest];
 }
 
 /** 添加控件和约束 */
@@ -208,12 +208,12 @@
         if (array.count > 1) {
             
             NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
+            
+            
             for (NSDictionary *dict in array) {
                 [muArray addObject:dict[@"ImgView"]];
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                weakSelf.adView.arrayImages = muArray;
-            });
+            weakSelf.adView.arrayImages = muArray;
         }
         else {
             [MBProgressHUD showMessage:[NSString stringWithFormat:@"加载数据失败,请您检查网络"]];
@@ -224,7 +224,7 @@
         
     } failure:^(NSError *error) {
         
-        ZDY_LOG(@"失败==%@",error.localizedDescription);
+        ZDY_LOG(@"失败==%@",error);
         [MBProgressHUD showMessage:[NSString stringWithFormat:@"请您检查网络"]];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUD];
@@ -240,6 +240,8 @@
         
         NSArray *array = (NSArray *)JSON;
         
+//        NSLog(@"%@",JSON);
+        
         if (array.count > 1) {
             
             NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
@@ -248,11 +250,12 @@
                 [muArray addObject:model];
             }
             [weakSelf.newsMuArray addObjectsFromArray:muArray];
+            weakSelf.goodsTable.infoGoodsArray = weakSelf.newsMuArray;
             dispatch_async(dispatch_get_main_queue(), ^{
-                weakSelf.goodsTable.infoGoodsArray = weakSelf.newsMuArray;
+                
                 [weakSelf.goodsTable reloadData];
             });
-            
+        
         }
         else {
             [MBProgressHUD showMessage:[NSString stringWithFormat:@"加载数据失败,请您检查网络"]];

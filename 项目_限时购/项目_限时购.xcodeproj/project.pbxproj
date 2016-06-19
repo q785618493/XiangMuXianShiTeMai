@@ -31,6 +31,10 @@
 		047F094D1D125367004E7EE7 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F09351D125367004E7EE7 /* NSString+Helper.m */; };
 		047F094E1D125367004E7EE7 /* TopRollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F09371D125367004E7EE7 /* TopRollView.m */; };
 		047F09561D125367004E7EE7 /* WYCustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F09471D125367004E7EE7 /* WYCustomButton.m */; };
+		048400301D1575AE0096AB05 /* WYSortModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0484002C1D1575AE0096AB05 /* WYSortModel.m */; };
+		048400311D1575AE0096AB05 /* WYFaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0484002F1D1575AE0096AB05 /* WYFaceModel.m */; };
+		048400381D1576750096AB05 /* WYFaceCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 048400371D1576750096AB05 /* WYFaceCollection.m */; };
+		0484003E1D1576A20096AB05 /* WYFaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0484003D1D1576A20096AB05 /* WYFaceCell.m */; };
 		0496C86F1D10EE2E00E3809F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0496C86E1D10EE2E00E3809F /* main.m */; };
 		0496C87A1D10EE2E00E3809F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0496C8791D10EE2E00E3809F /* Assets.xcassets */; };
 		0496C87D1D10EE2E00E3809F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0496C87B1D10EE2E00E3809F /* LaunchScreen.storyboard */; };
@@ -123,6 +127,14 @@
 		047F09371D125367004E7EE7 /* TopRollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopRollView.m; sourceTree = "<group>"; };
 		047F09461D125367004E7EE7 /* WYCustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYCustomButton.h; sourceTree = "<group>"; };
 		047F09471D125367004E7EE7 /* WYCustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYCustomButton.m; sourceTree = "<group>"; };
+		0484002B1D1575AE0096AB05 /* WYSortModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYSortModel.h; sourceTree = "<group>"; };
+		0484002C1D1575AE0096AB05 /* WYSortModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYSortModel.m; sourceTree = "<group>"; };
+		0484002E1D1575AE0096AB05 /* WYFaceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYFaceModel.h; sourceTree = "<group>"; };
+		0484002F1D1575AE0096AB05 /* WYFaceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYFaceModel.m; sourceTree = "<group>"; };
+		048400361D1576750096AB05 /* WYFaceCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYFaceCollection.h; sourceTree = "<group>"; };
+		048400371D1576750096AB05 /* WYFaceCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYFaceCollection.m; sourceTree = "<group>"; };
+		0484003C1D1576A20096AB05 /* WYFaceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYFaceCell.h; sourceTree = "<group>"; };
+		0484003D1D1576A20096AB05 /* WYFaceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYFaceCell.m; sourceTree = "<group>"; };
 		0496C86A1D10EE2E00E3809F /* 项目_限时购.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "项目_限时购.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0496C86E1D10EE2E00E3809F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0496C8791D10EE2E00E3809F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -324,6 +336,43 @@
 			path = "工具类";
 			sourceTree = "<group>";
 		};
+		0484002A1D1575AE0096AB05 /* 分类区接口 */ = {
+			isa = PBXGroup;
+			children = (
+				0484002B1D1575AE0096AB05 /* WYSortModel.h */,
+				0484002C1D1575AE0096AB05 /* WYSortModel.m */,
+			);
+			path = "分类区接口";
+			sourceTree = "<group>";
+		};
+		0484002D1D1575AE0096AB05 /* 面部接口区 */ = {
+			isa = PBXGroup;
+			children = (
+				0484002E1D1575AE0096AB05 /* WYFaceModel.h */,
+				0484002F1D1575AE0096AB05 /* WYFaceModel.m */,
+			);
+			path = "面部接口区";
+			sourceTree = "<group>";
+		};
+		048400321D1576260096AB05 /* FaceCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				048400361D1576750096AB05 /* WYFaceCollection.h */,
+				048400371D1576750096AB05 /* WYFaceCollection.m */,
+				048400331D1576260096AB05 /* FaceCell */,
+			);
+			path = FaceCollectionView;
+			sourceTree = "<group>";
+		};
+		048400331D1576260096AB05 /* FaceCell */ = {
+			isa = PBXGroup;
+			children = (
+				0484003C1D1576A20096AB05 /* WYFaceCell.h */,
+				0484003D1D1576A20096AB05 /* WYFaceCell.m */,
+			);
+			path = FaceCell;
+			sourceTree = "<group>";
+		};
 		0496C8611D10EE2E00E3809F = {
 			isa = PBXGroup;
 			children = (
@@ -451,6 +500,8 @@
 		0496C8A81D10F0FD00E3809F /* 分类Model */ = {
 			isa = PBXGroup;
 			children = (
+				0484002A1D1575AE0096AB05 /* 分类区接口 */,
+				0484002D1D1575AE0096AB05 /* 面部接口区 */,
 			);
 			path = "分类Model";
 			sourceTree = "<group>";
@@ -458,6 +509,7 @@
 		0496C8A91D10F0FD00E3809F /* 分类View */ = {
 			isa = PBXGroup;
 			children = (
+				048400321D1576260096AB05 /* FaceCollectionView */,
 			);
 			path = "分类View";
 			sourceTree = "<group>";
@@ -1108,6 +1160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0496C8C81D10F0FD00E3809F /* AppDelegate.m in Sources */,
+				048400301D1575AE0096AB05 /* WYSortModel.m in Sources */,
 				047F09561D125367004E7EE7 /* WYCustomButton.m in Sources */,
 				04A7DB441D13E3A70039F50D /* WYMeHeaderView.m in Sources */,
 				0496C8F71D11065900E3809F /* WYMeViewController.m in Sources */,
@@ -1116,6 +1169,7 @@
 				046E07381D127B3A00645E96 /* WYHttpRequest.m in Sources */,
 				047F094B1D125367004E7EE7 /* JPRefreshView.m in Sources */,
 				046E07541D1289C600645E96 /* WYTestPhoneViewController.m in Sources */,
+				048400311D1575AE0096AB05 /* WYFaceModel.m in Sources */,
 				0496C86F1D10EE2E00E3809F /* main.m in Sources */,
 				047F08F21D1242A2004E7EE7 /* WYBaseView.m in Sources */,
 				0471235B1D142C3200D42B74 /* MBProgressHUD+XMG.m in Sources */,
@@ -1129,10 +1183,12 @@
 				047F092C1D124E68004E7EE7 /* WYFlashSaleViewController.m in Sources */,
 				0496C8F41D11064300E3809F /* WYShoppingCartViewController.m in Sources */,
 				046E87B71D15447C00D48AB0 /* WYBrandTableView.m in Sources */,
+				048400381D1576750096AB05 /* WYFaceCollection.m in Sources */,
 				04A7DB471D13E56F0039F50D /* WYMeTableView.m in Sources */,
 				0496C8E11D11027300E3809F /* WYBaseTableCell.m in Sources */,
 				046E87D01D154C7400D48AB0 /* WYSaleModel.m in Sources */,
 				0496C8F11D11062300E3809F /* WYClassifyViewController.m in Sources */,
+				0484003E1D1576A20096AB05 /* WYFaceCell.m in Sources */,
 				046E074E1D12896E00645E96 /* WYLoginViewController.m in Sources */,
 				046E87D11D154C7400D48AB0 /* WYNewsModel.m in Sources */,
 				046E07511D12898700645E96 /* WYRegisterViewController.m in Sources */,

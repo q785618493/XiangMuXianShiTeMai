@@ -19,7 +19,6 @@
                    errorBlock:(RequestErrorBlock)errorBlock {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
     [manager GET:pathUrl parameters:bodyDic progress:^(NSProgress * _Nonnull downloadProgress) {
         
         

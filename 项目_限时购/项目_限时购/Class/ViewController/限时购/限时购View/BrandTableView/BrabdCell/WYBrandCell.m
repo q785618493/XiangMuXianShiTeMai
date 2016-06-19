@@ -26,7 +26,7 @@
         
         [self setSelectionStyle:(UITableViewCellSelectionStyleNone)];
         [self addSubview:self.commodityImage];
-        [_commodityImage addSubview:self.centerImage];
+        [self.commodityImage addSubview:self.centerImage];
     }
     return self;
 }
@@ -53,8 +53,8 @@
 - (void)setModel:(WYSaleModel *)model {
     _model = model;
     
-    [_commodityImage downloadImage:model.imgView];
-    [_centerImage downloadImage:model.logoImg];
+    [self.commodityImage downloadImage:model.imgView];
+    [self.centerImage downloadImage:model.logoImg];
 }
 
 /** 重写get方法懒加载控件 */

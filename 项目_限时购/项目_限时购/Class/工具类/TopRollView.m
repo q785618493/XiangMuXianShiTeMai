@@ -63,7 +63,10 @@
         forBtn.tag = BTN_TAG + i;
         [forBtn setFrame:CGRectMake(i * WIDTH, 0, WIDTH, HEIGHT)];
         //            [forBtn setImage:[UIImage imageNamed:self.sevenArray[i]] forState:(UIControlStateNormal)];
-        [forBtn sd_setImageWithURL:[NSURL URLWithString:self.sevenArray[i]] forState:(UIControlStateNormal)];
+//        [forBtn sd_setImageWithURL:[NSURL URLWithString:self.sevenArray[i]] forState:(UIControlStateNormal)];
+        
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.sevenArray[i]]];
+        [forBtn setImage:[UIImage imageWithData:data] forState:(UIControlStateNormal)];
         [forBtn addTarget:self action:@selector(btnTouchActionFor:) forControlEvents:(UIControlEventTouchUpInside)];
         [self.rollScroll addSubview:forBtn];
     }
