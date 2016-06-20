@@ -7,7 +7,7 @@
 //
 
 #import "TopRollView.h"
-#import <UIButton+WebCache.h>
+#import "UIButton+WebCache.h"
 #import "WYCustomButton.h"
 
 #define WIDTH  self.frame.size.width
@@ -19,7 +19,6 @@
 
 ///滚动视图 UIScrollView
 @property (strong, nonatomic) UIScrollView *rollScroll;
-
 ///计时器用于控制图片自动滚动
 @property (strong, nonatomic) NSTimer *timer;
 
@@ -59,11 +58,12 @@
     /** 循环创建轮播视图上的按钮*/
     for (NSInteger i = 0; i < self.sevenArray.count; i ++) {
         
-        UIButton *forBtn = [WYCustomButton buttonWithType:(UIButtonTypeCustom)];
+        WYCustomButton *forBtn = [WYCustomButton buttonWithType:(UIButtonTypeCustom)];
         forBtn.tag = BTN_TAG + i;
         [forBtn setFrame:CGRectMake(i * WIDTH, 0, WIDTH, HEIGHT)];
         //            [forBtn setImage:[UIImage imageNamed:self.sevenArray[i]] forState:(UIControlStateNormal)];
 //        [forBtn sd_setImageWithURL:[NSURL URLWithString:self.sevenArray[i]] forState:(UIControlStateNormal)];
+        [forBtn sd_setBtnImageUrlString:self.sevenArray[i] forState:(UIControlStateNormal)];
         
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.sevenArray[i]]];

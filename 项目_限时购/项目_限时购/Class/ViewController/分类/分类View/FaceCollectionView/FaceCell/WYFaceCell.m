@@ -62,8 +62,7 @@
         WYFaceModel *model = (WYFaceModel *)dataModel;
         
         if (model.imgView.length == 0) {
-            model.imgView = [NSString stringWithFormat:@"headLogo"];
-            [_showImage setImage:[UIImage imageNamed:model.imgView]];
+            [_showImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"headLogo"]]];
         }
         else {
             [_showImage downloadImage:model.imgView];
@@ -88,7 +87,7 @@
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         [_titleLabel setTextAlignment:(NSTextAlignmentCenter)];
-        [_titleLabel setFont:[UIFont systemFontOfSize:13]];
+        [_titleLabel setFont:[UIFont systemFontOfSize:12]];
     }
     return _titleLabel;
 }

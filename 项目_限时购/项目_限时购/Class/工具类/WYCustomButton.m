@@ -7,11 +7,16 @@
 //
 
 #import "WYCustomButton.h"
+#import "UIButton+WebCache.h"
 
 @implementation WYCustomButton
 
 - (void)setHighlighted:(BOOL)highlighted {
     
+}
+
+- (void)sd_setBtnImageUrlString:(NSString *)urlString forState:(UIControlState)forState {
+    [self sd_setImageWithURL:[NSURL URLWithString:urlString] forState:forState];
 }
 
 /*

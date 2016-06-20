@@ -45,7 +45,9 @@
 /** 保存品牌团购视图数据信息 */
 @property (strong, nonatomic) NSMutableArray *brandMuArray;
 
+/** 保存TableView 的高度 */
 @property (assign, nonatomic) CGFloat height;
+
 
 @end
 
@@ -98,6 +100,12 @@
     WS(weakSelf);
     [brandBtn setSelected:YES];
     [self.twoBtnView.NewBtn setSelected:NO];
+    
+    
+    
+    if (self.brandMuArray.count <= 0) {
+        [self httpGetBrandRequest];
+    }
     
     [UIView animateWithDuration:0.5 animations:^{
         
@@ -202,7 +210,7 @@
         
         NSArray *array = (NSArray *)JSON;
         
-        if (array.count > 1) {
+        if (array.count >= 1) {
             
             NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
             
@@ -211,6 +219,7 @@
                 [muArray addObject:dict[@"ImgView"]];
             }
             weakSelf.adView.arrayImages = muArray;
+            
         }
         else {
             [MBProgressHUD showMessage:[NSString stringWithFormat:@"加载数据失败,请您检查网络"]];
@@ -237,7 +246,7 @@
         
         NSArray *array = (NSArray *)JSON;
         
-        if (array.count > 1) {
+        if (array.count >= 1) {
             
             NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
             for (NSDictionary *dict in array) {
@@ -245,7 +254,7 @@
                 [muArray addObject:model];
             }
             [weakSelf.newsMuArray addObjectsFromArray:muArray];
-            weakSelf.goodsTable.infoGoodsArray = muArray;
+            weakSelf.goodsTable.infoGoodsArray = weakSelf.newsMuArray;
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [weakSelf.goodsTable reloadData];
@@ -277,7 +286,7 @@
         
         NSArray *array = (NSArray *)JSON;
         
-        if (array.count > 1) {
+        if (array.count >= 1) {
             
             NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
             for (NSDictionary *dict in array) {
@@ -285,8 +294,8 @@
                 [muArray addObject:model];
             }
             [weakSelf.brandMuArray addObjectsFromArray:muArray];
+            weakSelf.brandTable.infoBrandArray = weakSelf.brandMuArray;
             dispatch_async(dispatch_get_main_queue(), ^{
-                weakSelf.brandTable.infoBrandArray = weakSelf.brandMuArray;
                 [weakSelf.brandTable reloadData];
             });
             

@@ -10,4 +10,10 @@
 
 @interface WYFaceCollection : WYBaseCollectionView
 
+/** 接收数据信息 */
+@property (strong, nonatomic) NSMutableArray *collArray;
+
+/** 选中哪一个cell 回调的方法 */
+@property (copy, nonatomic) CollectionCellBlock collCellRow;
+
 @end

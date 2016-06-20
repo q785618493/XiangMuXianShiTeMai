@@ -28,4 +28,6 @@ typedef enum {
  */
 @property (assign, nonatomic) TestBtnTitleType btnTitleType;
 
+- (void)sd_setBtnImageUrlString:(NSString *)urlString forState:(UIControlState)forState;
+
 @end

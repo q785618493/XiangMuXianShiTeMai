@@ -20,8 +20,10 @@
         
         [self setDelegate:self];
         [self setDataSource:self];
+        [self setBounces:NO];
         [self setBackgroundColor:RGB(245, 245, 245)];
-        
+        [self setShowsHorizontalScrollIndicator:NO];
+        [self setShowsVerticalScrollIndicator:NO];
     }
     return self;
 }
@@ -38,9 +40,8 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleValue1) reuseIdentifier:IDCell];
     }
-    
-    WYMeModel *model = self.infoArray[indexPath.row];
     [cell setBackgroundColor:RGB(245, 245, 245)];
+    WYMeModel *model = self.infoArray[indexPath.row];
     [cell.textLabel setText:model.title];
     [cell.detailTextLabel setText:model.detailText];
     [cell.imageView setImage:[UIImage imageNamed:model.image]];
@@ -58,6 +59,18 @@
         _meCellRow(indexPath.row);
     }
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 30;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UIView *bgView = [[UIView alloc] initWithFrame:(CGRectMake(0, 0, self.frame.size.width, 30))];
+    [bgView setBackgroundColor:[UIColor whiteColor]];
+    return bgView;
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

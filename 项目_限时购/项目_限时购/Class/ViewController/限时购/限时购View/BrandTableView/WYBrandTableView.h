@@ -11,7 +11,7 @@
 @interface WYBrandTableView : WYBaesTableView
 
 /** 品牌团购接收数据的 */
-@property (strong, nonatomic) NSArray *infoBrandArray;
+@property (strong, nonatomic) NSMutableArray *infoBrandArray;
 
 /** 品牌团购选中哪一行cell回调的 block */
 @property (copy, nonatomic) TableCellBlock brandCellRow;
