@@ -7,6 +7,8 @@
 //
 
 #import "WYFlashSaleViewController.h"
+#import "WYSearchViewController.h"
+#import "WYProductViewController.h"
 
 #import "TopRollView.h"
 #import "WYTwoBtnView.h"
@@ -18,6 +20,9 @@
 
 #define WIDTH  self.view.frame.size.width
 #define HEIGHT self.view.frame.size.height
+
+/** 判断是否第一次应用软件的Key */
+static NSString *versionKey = @"CFBundleShortVersionString";
 
 @interface WYFlashSaleViewController () <UIScrollViewDelegate>
 
@@ -47,7 +52,6 @@
 
 /** 保存TableView 的高度 */
 @property (assign, nonatomic) CGFloat height;
-
 
 @end
 
@@ -163,6 +167,9 @@
     /** 添加控件和约束 */
     [self controlScrollViewMasonry];
     
+    /** 添加导航右上角的搜索按钮 */
+    [self rightNavAddBtnItem];
+    
     [self httpGetAdvertisingRequest];
     [self httpGetNewGoodsRequest];
 }
@@ -202,6 +209,38 @@
         make.size.equalTo(CGSizeMake(width, _height));
     }];
     
+    weakSelf.goodsTable.goodsCellRow = ^(NSInteger cellRow) {
+        
+        WYProductViewController *productVC = [[WYProductViewController alloc] init];
+        productVC.title = [NSString stringWithFormat:@"商品详情"];
+        
+        WYNewsModel *model = weakSelf.newsMuArray[cellRow];
+        productVC.goodsID = model.goodsId;
+        productVC.countryImageUrl = model.countryImg;
+        
+        [productVC setHidesBottomBarWhenPushed:YES];
+        [weakSelf.navigationController pushViewController:productVC animated:YES];
+    };
+    
+}
+
+/** 添加导航右上角的搜索按钮 */
+- (void)rightNavAddBtnItem {
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageWithModeImageName:[NSString stringWithFormat:@"限时特卖界面搜索按钮"]] style:(UIBarButtonItemStylePlain) target:self action:@selector(barBtnItemActionRight:)];
+    
+    [self.navigationItem setRightBarButtonItem:rightItem];
+}
+
+/** 导航右上搜索按钮的点击事件 */
+- (void)barBtnItemActionRight:(UIBarButtonItem *)rightItem {
+    
+    WYSearchViewController *searchVC = [[WYSearchViewController alloc] init];
+    searchVC.title = [NSString stringWithFormat:@"搜索商品"];
+    [searchVC setHidesBottomBarWhenPushed:YES];
+    
+    [self.navigationController pushViewController:searchVC animated:YES];
+    
 }
 
 /** 顶部广告轮播视图的网络请求 */
@@ -232,10 +271,6 @@
     } failure:^(NSError *error) {
         
         ZDY_LOG(@"失败==%@",error);
-        [MBProgressHUD showMessage:[NSString stringWithFormat:@"请您检查网络"]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUD];
-        });
     }];
 }
 
@@ -274,10 +309,10 @@
     } failure:^(NSError *error) {
         
         ZDY_LOG(@"失败==%@",error.localizedDescription);
-//        [MBProgressHUD showMessage:[NSString stringWithFormat:@"请您检查网络"]];
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [MBProgressHUD hideHUD];
-//        });
+        [MBProgressHUD showMessage:[NSString stringWithFormat:@"请您检查网络"]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
+        });
     }];
 }
 

@@ -138,13 +138,13 @@
                 
                 break;
             case 2: {
-                [UMSocialData defaultData].extConfig.title = @"分享的title";
+                [UMSocialData defaultData].extConfig.title = @"来自特卖商城，限时特卖韩国化妆品";
                 [UMSocialData defaultData].extConfig.qqData.url = @"http://baidu.com";
                 [UMSocialSnsService presentSnsIconSheetView:self
-                                                     appKey:@"507fcab25270157b37000010"
-                                                  shareText:@"友盟社会化分享让您快速实现分享等社会化功能，http://umeng.com/social"
-                                                 shareImage:[UIImage imageNamed:@"icon"]
-                                            shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToSina,UMShareToQQ,UMShareToTencent,UMShareToQzone,UMShareToRenren,UMShareToDouban,UMShareToEmail,UMShareToSms,UMShareToWechatFavorite,UMShareToAlipaySession,UMShareToFacebook,UMShareToTwitter,UMShareToYXSession,UMShareToYXTimeline,UMShareToLWSession,UMShareToLWTimeline,UMShareToInstagram,UMShareToWhatsapp,UMShareToLine,UMShareToTumblr,UMShareToPinterest,UMShareToKakaoTalk,UMShareToFlickr,]
+                                                     appKey:@"57678e2367e58e3f85001389"
+                                                  shareText:@"输入现在分享的心情"
+                                                 shareImage:[UIImage imageNamed:@"限时特卖"]
+                                            shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToSina,UMShareToQQ,UMShareToTencent,UMShareToQzone,UMShareToRenren,UMShareToDouban,UMShareToEmail,UMShareToSms,UMShareToWechatFavorite,UMShareToAlipaySession,UMShareToYXSession,UMShareToYXTimeline,UMShareToLWSession,UMShareToLWTimeline,UMShareToInstagram,UMShareToWhatsapp,UMShareToLine,UMShareToTumblr,UMShareToPinterest,UMShareToKakaoTalk,UMShareToFlickr,]
                                                    delegate:self];
 
             }

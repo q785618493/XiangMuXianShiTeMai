@@ -11,6 +11,7 @@
 #import <Masonry.h>
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
+#import "UIImage+ImageSetting.h"
 
 #import "UIImageView+WY_SDWedImage.h"
 #import "NSString+Helper.h"

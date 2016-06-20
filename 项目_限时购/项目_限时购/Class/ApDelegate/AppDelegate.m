@@ -25,7 +25,7 @@
     // Override point for customization after application launch.
     
     /** 设置友盟分享的开发 key*/
-    [UMSocialData setAppKey:@"569347c6e0f55a89da002917"];
+    [UMSocialData setAppKey:@"57678e2367e58e3f85001389"];
     
     //设置手机QQ 的AppId，Appkey，和分享URL，需要#import "UMSocialQQHandler.h"
     [UMSocialQQHandler setQQWithAppId:@"100424468" appKey:@"c7394704798a158208a74ab60104f0ba" url:@"http://www.umeng.com/social"];
