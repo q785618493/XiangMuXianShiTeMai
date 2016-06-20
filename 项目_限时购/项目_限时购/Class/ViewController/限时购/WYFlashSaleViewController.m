@@ -62,6 +62,7 @@
         [_rollScrollView setShowsVerticalScrollIndicator:NO];
         [_rollScrollView setShowsHorizontalScrollIndicator:NO];
         [_rollScrollView setContentSize:(CGSizeMake(WIDTH, HEIGHT - 64 - 49 + _scale))];
+        [_rollScrollView setHidden:YES];
     }
     return _rollScrollView;
 }
@@ -258,6 +259,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [weakSelf.goodsTable reloadData];
+                [weakSelf.rollScrollView setHidden:NO];
             });
         
         }
