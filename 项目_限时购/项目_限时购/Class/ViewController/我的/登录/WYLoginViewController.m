@@ -15,7 +15,7 @@
 
 #import <UMSocial.h>
 
-@interface WYLoginViewController ()
+@interface WYLoginViewController () <UMSocialUIDelegate>
 
 /** WYTextFieldView登录视图 */
 @property (strong, nonatomic) WYTextFieldView *textFieldView;
@@ -115,17 +115,38 @@
         
         switch (btnTag) {
             case 0: {
-                NSLog(@"00000000000");
+                UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
+                
+                snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+                    
+                    //          获取微博用户名、uid、token等
+                    
+                    if (response.responseCode == UMSResponseCodeSuccess) {
+                        
+                        NSDictionary *dict = [UMSocialAccountManager socialAccountDictionary];
+                        UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:snsPlatform.platformName];
+                        NSLog(@"\nusername = %@,\n usid = %@,\n token = %@ iconUrl = %@,\n unionId = %@,\n thirdPlatformUserProfile = %@,\n thirdPlatformResponse = %@ \n, message = %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL, snsAccount.unionId, response.thirdPlatformUserProfile, response.thirdPlatformResponse, response.message);
+                        
+                    }});
             }
                 
                 break;
             case 1: {
-                NSLog(@"1111111111");
+                
+                
             }
                 
                 break;
             case 2: {
-                NSLog(@"222222222222");
+                [UMSocialData defaultData].extConfig.title = @"分享的title";
+                [UMSocialData defaultData].extConfig.qqData.url = @"http://baidu.com";
+                [UMSocialSnsService presentSnsIconSheetView:self
+                                                     appKey:@"507fcab25270157b37000010"
+                                                  shareText:@"友盟社会化分享让您快速实现分享等社会化功能，http://umeng.com/social"
+                                                 shareImage:[UIImage imageNamed:@"icon"]
+                                            shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToSina,UMShareToQQ,UMShareToTencent,UMShareToQzone,UMShareToRenren,UMShareToDouban,UMShareToEmail,UMShareToSms,UMShareToWechatFavorite,UMShareToAlipaySession,UMShareToFacebook,UMShareToTwitter,UMShareToYXSession,UMShareToYXTimeline,UMShareToLWSession,UMShareToLWTimeline,UMShareToInstagram,UMShareToWhatsapp,UMShareToLine,UMShareToTumblr,UMShareToPinterest,UMShareToKakaoTalk,UMShareToFlickr,]
+                                                   delegate:self];
+
             }
                 
             default:
