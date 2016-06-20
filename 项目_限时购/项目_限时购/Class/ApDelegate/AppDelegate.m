@@ -7,7 +7,10 @@
 //
 
 #import "AppDelegate.h"
+
 #import "WYTabBarController.h"
+
+#import <UMSocial.h>
 
 @interface AppDelegate ()
 
@@ -21,6 +24,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    /** 设置友盟分享的开发 key*/
+    [UMSocialData setAppKey:@"569347c6e0f55a89da002917"];
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     [self.window setBackgroundColor:[UIColor whiteColor]];
@@ -31,6 +37,16 @@
     
     
     return YES;
+}
+
+/** 自定义友盟分享的回调*/
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [UMSocialSnsService handleOpenURL:url];
+    if (result == FALSE) {
+        //调用其他SDK，例如支付宝SDK等
+    }
+    return result;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

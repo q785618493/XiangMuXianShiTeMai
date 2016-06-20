@@ -8,6 +8,8 @@
 
 #import "WYThirdPartyView.h"
 
+#define THREE_BTN_TAG 41000
+
 @interface WYThirdPartyView ()
 
 /** 标题 */
@@ -95,6 +97,8 @@
     if (!_weiBoBtn) {
         _weiBoBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [_weiBoBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"登陆界面微博登录"]] forState:(UIControlStateNormal)];
+        [_weiBoBtn setTag:THREE_BTN_TAG + 2];
+        [_weiBoBtn addTarget:self action:@selector(btnTouchActionThird:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _weiBoBtn;
 }
@@ -103,6 +107,8 @@
     if (!_weChatBtn) {
         _weChatBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [_weChatBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"登录界面微信登录"]] forState:(UIControlStateNormal)];
+        [_weChatBtn setTag:THREE_BTN_TAG + 1];
+        [_weChatBtn addTarget:self action:@selector(btnTouchActionThird:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _weChatBtn;
 }
@@ -111,8 +117,16 @@
     if (!_qqBtn) {
         _qqBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [_qqBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"登录界面qq登陆"]] forState:(UIControlStateNormal)];
+        [_qqBtn setTag:THREE_BTN_TAG];
+        [_qqBtn addTarget:self action:@selector(btnTouchActionThird:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _qqBtn;
+}
+
+- (void)btnTouchActionThird:(UIButton *)thirdBtn {
+    if (_thirdPartyBlock) {
+        _thirdPartyBlock(thirdBtn.tag - THREE_BTN_TAG);
+    }
 }
 
 - (UILabel *)titleLabel {

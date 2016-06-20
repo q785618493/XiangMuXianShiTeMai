@@ -25,4 +25,6 @@ typedef void(^UserAndCodeBlock)(NSString *userText, NSString *codeText);
 /** 注册按钮点击回调的 Block */
 @property (copy, nonatomic) TextFieldBtnBlock registerBlock;
 
+
+
 @end

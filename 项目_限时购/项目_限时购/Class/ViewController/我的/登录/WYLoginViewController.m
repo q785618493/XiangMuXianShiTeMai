@@ -13,6 +13,8 @@
 
 #import "WYMeModel.h"
 
+#import <UMSocial.h>
+
 @interface WYLoginViewController ()
 
 /** WYTextFieldView登录视图 */
@@ -88,11 +90,11 @@
         }
         else if ([userPhone checkTel] && codePhone.length > 6) {
             
-//            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:userPhone,@"LoginName",codePhone,@"Lpassword", nil];
-//            [weakSelf loginHttpPostRequestDic:dic];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:userPhone,@"LoginName",codePhone,@"Lpassword", nil];
+            [weakSelf loginHttpPostRequestDic:dic];
             
-            NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:@"MemberName",@"name",@"MemberLvl",@"member", nil];
-            [weakSelf loginSuccessCallbackDataDic:dataDic];
+//            NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:@"MemberName",@"name",@"MemberLvl",@"member", nil];
+//            [weakSelf loginSuccessCallbackDataDic:dataDic];
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
         else {
@@ -108,6 +110,29 @@
         
         
     };
+    
+    weakSelf.threeLoginView.thirdPartyBlock = ^(NSInteger btnTag) {
+        
+        switch (btnTag) {
+            case 0: {
+                NSLog(@"00000000000");
+            }
+                
+                break;
+            case 1: {
+                NSLog(@"1111111111");
+            }
+                
+                break;
+            case 2: {
+                NSLog(@"222222222222");
+            }
+                
+            default:
+                break;
+        }
+    };
+    
 }
 
 /** 登录的网络请求 */

@@ -11,6 +11,8 @@
 #import "WYTextFieldView.h"
 #import "WYThirdPartyView.h"
 
+#import <UMSocial.h>
+
 @interface WYRegisterViewController ()
 
 /** WYTextFieldView注册视图 */

@@ -13,6 +13,7 @@
 #import "WYMeHeaderView.h"
 #import "WYMeModel.h"
 
+
 #define INFO_PATH [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"infoArray.data"]
 
 #define XSG_USER_DEFAULTS [NSUserDefaults standardUserDefaults]
