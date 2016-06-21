@@ -55,7 +55,6 @@
 - (void)controlAddMasonry {
 
     CGFloat width = self.view.frame.size.width;
-    CGFloat height = self.view.frame.size.height;
     [self.view addSubview:self.textFieldView];
     [self.view addSubview:self.threeLoginView];
     
@@ -77,19 +76,19 @@
         
         if ([userPhone isEmptyString]) {
             
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"账号不能为空"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD showError:[NSString stringWithFormat:@"账号不能为空"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
         }
         else if ([codePhone isEmptyString]) {
             
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"密码不能为空"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD showError:[NSString stringWithFormat:@"密码不能为空"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
         }
-        else if ([userPhone checkTel] && codePhone.length > 6) {
+        else if ([userPhone checkTel] && codePhone.length > 6 && userPhone.length == 11) {
             
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:userPhone,@"LoginName",codePhone,@"Lpassword", nil];
             [weakSelf loginHttpPostRequestDic:dic];
@@ -99,8 +98,8 @@
             
         }
         else {
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"账号或密码错误"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD showError:[NSString stringWithFormat:@"账号或密码错误"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
         }
@@ -171,7 +170,7 @@
         if (stringName.length >= 4) {
             
             [MBProgressHUD showSuccess:[NSString stringWithFormat:@"登录成功ing..."]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
                 
                 NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:userDic[@"MemberName"],@"name",userDic[@"MemberLvl"],@"member", nil];
@@ -184,8 +183,8 @@
         }
         else {
             
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"密码错误"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD showError:[NSString stringWithFormat:@"密码错误"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
         }
@@ -194,7 +193,7 @@
         
         ZDY_LOG(@"%@",error.localizedDescription);
         [MBProgressHUD showError:[NSString stringWithFormat:@"请检查网络"]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUD];
         });
     }];

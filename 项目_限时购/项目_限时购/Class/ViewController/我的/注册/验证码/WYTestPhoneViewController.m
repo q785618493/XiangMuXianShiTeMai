@@ -55,16 +55,22 @@
 /** 注册按钮点击事件 */
 - (void)btnTouchActionLogin {
     
-    if (![self.verifyTextField.text isEmptyString]) {
+    if (![self.verifyTextField.text isEmptyString] && self.verifyTextField.text.length == 6) {
         
         [self registerHttpPostRequest];
         [self.view endEditing:YES];
     }
-    else {
-        [MBProgressHUD showMessage:[NSString stringWithFormat:@"验证码不能为空"]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    else if ([self.verifyTextField.text isEmptyString]) {
+        [MBProgressHUD showError:[NSString stringWithFormat:@"验证码不能为空"]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUD];
             
+        });
+    }
+    else {
+        [MBProgressHUD showError:[NSString stringWithFormat:@"验证码输入错误"]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
         });
     }
 }
@@ -224,8 +230,8 @@
             
         } else {
             
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"无法获得验证码"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD showMessage:[NSString stringWithFormat:@"无法获得验证码,请检查您的网络"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
         }
@@ -233,8 +239,8 @@
     } failure:^(NSError *error) {
         
         ZDY_LOG(@"%@",error);
-        [MBProgressHUD showMessage:[NSString stringWithFormat:@"请检查您的网络"]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [MBProgressHUD showError:[NSString stringWithFormat:@"请检查您的网络"]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUD];
         });
     }];
@@ -252,13 +258,13 @@
         if ([[NSString stringWithFormat:@"success"] isEqual:dataDic[@"result"]]) {
             
             [MBProgressHUD showSuccess:[NSString stringWithFormat:@"注册成功,快去登录"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
         }
         else {
             [MBProgressHUD showMessage:[NSString stringWithFormat:@"验证码错误"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
         }
@@ -267,7 +273,7 @@
         
         ZDY_LOG(@"%@",error);
         [MBProgressHUD showMessage:[NSString stringWithFormat:@"验证码输入有误"]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUD];
         });
     }];
