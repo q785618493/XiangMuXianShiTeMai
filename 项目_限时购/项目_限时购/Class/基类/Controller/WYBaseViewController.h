@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import <Masonry.h>
+#import <UMSocial.h>
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
 #import "UIImage+ImageSetting.h"
@@ -18,6 +19,7 @@
 #import "WYHttpRequest.h"
 #import "WYCustomButton.h"
 #import "MBProgressHUD+XMG.h"
+#import "WYTheThirdParty.h"
 
 /** 返回请求数据 */
 typedef void(^SuccessBlock)(id JSON);

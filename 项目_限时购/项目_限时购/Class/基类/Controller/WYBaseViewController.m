@@ -8,7 +8,7 @@
 
 #import "WYBaseViewController.h"
 
-@interface WYBaseViewController ()
+@interface WYBaseViewController () 
 
 @end
 

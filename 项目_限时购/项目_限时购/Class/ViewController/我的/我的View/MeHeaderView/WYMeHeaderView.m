@@ -28,6 +28,9 @@
 /** 用户按钮*/
 @property (strong, nonatomic) UIButton *userBtn;
 
+/** 保存用户头像 */
+@property (strong, nonatomic) UIImage *imageUser;
+
 @end
 
 @implementation WYMeHeaderView
@@ -76,6 +79,11 @@
     
     self.nameLabel.text = meDic[@"name"];
     self.memberLabel.text = meDic[@"member"];
+}
+
+- (void)setImageUser:(UIImage *)imageUser {
+    _imageUser = imageUser;
+    [self.userBtn setImage:imageUser forState:(UIControlStateNormal)];
 }
 
 #pragma make- 

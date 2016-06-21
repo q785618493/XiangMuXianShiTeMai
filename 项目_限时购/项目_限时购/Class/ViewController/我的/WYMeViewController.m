@@ -18,11 +18,15 @@
 
 #define XSG_USER_DEFAULTS [NSUserDefaults standardUserDefaults]
 
+#define USER_HEADER_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"headerImage"]
+
 static NSString *userInfo = @"userInfo";
 
 static NSString *status = @"status";
 
-@interface WYMeViewController ()
+static NSString *keyHeader = @"imageUser";
+
+@interface WYMeViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 /** 保存数据信息的 数组 */
 @property (strong, nonatomic) NSMutableArray *dataMuArray;
@@ -57,19 +61,21 @@ static NSString *status = @"status";
         _dataMuArray = [NSKeyedUnarchiver unarchiveObjectWithFile:INFO_PATH];
         
         if (!_dataMuArray) {
-            NSArray *oneArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MeModel.plist" ofType:nil]];
-            NSMutableArray *muArray = [NSMutableArray array];
-            
-            [oneArray enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL * _Nonnull stop) {
-                
-                WYMeModel *model = [WYMeModel meModelDic:dict];
-                [muArray addObject:model];
-            }];
-            
-            _dataMuArray = muArray;
+            _dataMuArray = [self returnModelArray];
         }
     }
     return _dataMuArray;
+}
+
+/** 获得默认未登录状态的数据 */
+- (NSMutableArray *)returnModelArray {
+    NSArray *dataArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MeModel.plist" ofType:nil]];
+    NSMutableArray *muArray = [NSMutableArray array];
+    for (NSDictionary *dict in dataArray) {
+        WYMeModel *model = [[WYMeModel alloc] initWithDic:dict];
+        [muArray addObject:model];
+    }
+    return muArray;
 }
 
 - (WYMeTableView *)meTableView {
@@ -132,21 +138,17 @@ static NSString *status = @"status";
             [MBProgressHUD hideHUD];
             
             //删除保存的用户数据
-            [[NSFileManager defaultManager] removeItemAtPath:INFO_PATH error:nil];
-            [XSG_USER_DEFAULTS removeObjectForKey:status];
+            BOOL removeData = [[NSFileManager defaultManager] removeItemAtPath:INFO_PATH error:nil];
             
-            NSArray *dataArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MeModel.plist" ofType:nil]];
-            NSMutableArray *muArray = [NSMutableArray array];
-            for (NSDictionary *dict in dataArray) {
-                WYMeModel *model = [[WYMeModel alloc] initWithDic:dict];
-                [muArray addObject:model];
+            if (removeData) {
+                [XSG_USER_DEFAULTS removeObjectForKey:status];
+                weakSelf.meTableView.infoArray = [self returnModelArray];
+                [weakSelf.topUserView hiddenDeleteView];
+                [weakSelf.quitView removeFromSuperview];
+                [weakSelf.meTableView setTableHeaderView:weakSelf.topLoginView];
+                [weakSelf.meTableView setTableFooterView:weakSelf.lineView];
+                [weakSelf.meTableView reloadData];
             }
-            weakSelf.meTableView.infoArray = muArray;
-            [weakSelf.topUserView hiddenDeleteView];
-            [weakSelf.quitView removeFromSuperview];
-            [weakSelf.meTableView setTableHeaderView:weakSelf.topLoginView];
-            [weakSelf.meTableView setTableFooterView:weakSelf.lineView];
-            [weakSelf.meTableView reloadData];
         });
     }];
     
@@ -173,10 +175,21 @@ static NSString *status = @"status";
     
     NSDictionary *dict = [XSG_USER_DEFAULTS dictionaryForKey:userInfo];
     
+    /** 判断登录状态 */
     if (isStatu) {
         WS(weakSelf);
         [self.meTableView setTableHeaderView:self.topUserView];
         self.topUserView.meDic = dict;
+        [self replaceUserHeaderImage];
+        
+        NSData *data = [NSData dataWithContentsOfFile:USER_HEADER_PATH];
+        UIImage *image = [UIImage imageWithData:data];
+        
+        if (image) {
+            [self.topUserView setValue:image forKey:keyHeader];
+            [self replaceUserHeaderImage];
+        }
+        
         [self.meTableView setTableFooterView:self.quitView];
         [self.quitView addSubview:self.exitBtn];
         [_exitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -206,12 +219,16 @@ static NSString *status = @"status";
             
             [weakSelf.meTableView setTableHeaderView:weakSelf.topUserView];
             weakSelf.topUserView.meDic = userDic;
+            [weakSelf replaceUserHeaderImage];
+            
             [weakSelf.meTableView setTableFooterView:weakSelf.quitView];
             [weakSelf.quitView addSubview:weakSelf.exitBtn];
             
             [_exitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.mas_equalTo(weakSelf.quitView).with.insets(UIEdgeInsetsMake(5, 16, 5, 16));
             }];
+            
+            weakSelf.dataMuArray = [weakSelf returnModelArray];
             
             [weakSelf.dataMuArray addObjectsFromArray:meTableArray];
             weakSelf.meTableView.infoArray = weakSelf.dataMuArray;
@@ -226,6 +243,7 @@ static NSString *status = @"status";
         };
     };
     
+    
     weakSelf.topLoginView.blockRegister = ^() {
         WYRegisterViewController *registerVC = [[WYRegisterViewController alloc] init];
         registerVC.title = [NSString stringWithFormat:@"注 册"];
@@ -238,6 +256,55 @@ static NSString *status = @"status";
     }];
 }
 
+/** 用户按钮点击事件,替换用户头像 */
+- (void)replaceUserHeaderImage {
+    WS(weakSelf);
+    weakSelf.topUserView.blockUser = ^() {
+        
+        UIAlertController *alertC = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"替换头像"] message:[NSString stringWithFormat:@"相机拍照,即时拍摄分享上传!相册选择,找到喜欢照片上传!取消不替换头像"] preferredStyle:(UIAlertControllerStyleActionSheet)];
+        
+        UIAlertAction *camera = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"相机拍照"] style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            UIImagePickerController *pickerCamera = [[UIImagePickerController alloc] init];
+            [pickerCamera setSourceType:(UIImagePickerControllerSourceTypeCamera)];
+            [pickerCamera setDelegate:self];
+            [pickerCamera setAllowsEditing:YES];
+            [weakSelf presentViewController:pickerCamera animated:YES completion:nil];
+        }];
+        
+        UIAlertAction *photo = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"相册选择"] style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            UIImagePickerController *pickerPhoto = [[UIImagePickerController alloc] init];
+            [pickerPhoto setAllowsEditing:YES];
+            [pickerPhoto setDelegate:self];
+            [weakSelf presentViewController:pickerPhoto animated:YES completion:nil];
+        }];
+        
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"⭐️取消⭐️"] style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alertC addAction:camera];
+        [alertC addAction:photo];
+        [alertC addAction:cancel];
+        [weakSelf presentViewController:alertC animated:YES completion:nil];
+    };
+}
+
+#pragma make-
+#pragma make- UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    
+    [self.topUserView setValue:image forKey:keyHeader];
+    
+//    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"headerImage"];
+    
+    [UIImagePNGRepresentation(image) writeToFile:USER_HEADER_PATH atomically:YES];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 - (void)didReceiveMemoryWarning {

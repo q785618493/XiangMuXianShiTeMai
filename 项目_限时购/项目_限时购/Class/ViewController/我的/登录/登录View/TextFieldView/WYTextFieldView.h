@@ -19,10 +19,10 @@ typedef void(^UserAndCodeBlock)(NSString *userText, NSString *codeText);
 /** 保存数据信息的 Dictionary*/
 @property (strong, nonatomic) NSDictionary *dataDic;
 
-/** 登录按钮点击回调的 Block */
+/** 登录 或者 下一步 按钮点击回调的 Block */
 @property (copy, nonatomic) UserAndCodeBlock loginBlock;
 
-/** 注册按钮点击回调的 Block */
+/** 免费注册 或者 去登录 按钮点击回调的 Block */
 @property (copy, nonatomic) TextFieldBtnBlock registerBlock;
 
 

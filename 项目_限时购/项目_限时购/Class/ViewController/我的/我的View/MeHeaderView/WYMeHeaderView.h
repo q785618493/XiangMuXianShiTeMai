@@ -8,17 +8,15 @@
 
 #import "WYBaseView.h"
 
-
-
 @interface WYMeHeaderView : WYBaseView
 
 /** 接收用户信息的字典 */
 @property (strong, nonatomic) NSDictionary *meDic;
 
-/** 登录按钮事件回调的block */
+/** 登录 按钮事件回调的block */
 @property (copy, nonatomic) returnBlock blockLogin;
 
-/** 注册按钮事件回调的block */
+/** 注册 按钮事件回调的block */
 @property (copy, nonatomic) returnBlock blockRegister;
 
 /** 用户按钮事件回调的block */

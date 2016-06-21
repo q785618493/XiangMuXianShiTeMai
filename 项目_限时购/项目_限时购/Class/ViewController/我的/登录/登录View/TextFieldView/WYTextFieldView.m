@@ -24,10 +24,10 @@
 /** 中间的分隔线 */
 @property (strong, nonatomic) UILabel *lineLabel;
 
-/** 登录按钮 */
+/** 登录 或者 下一步 按钮 */
 @property (strong, nonatomic) UIButton *loginBtn;
 
-/** 注册按钮 */
+/** 免费注册 或者去登录按钮 */
 @property (strong, nonatomic) UIButton *registerBtn;
 
 @end

@@ -12,7 +12,6 @@
 #import "WYTextFieldView.h"
 #import "WYThirdPartyView.h"
 
-#import <UMSocial.h>
 
 @interface WYRegisterViewController ()
 

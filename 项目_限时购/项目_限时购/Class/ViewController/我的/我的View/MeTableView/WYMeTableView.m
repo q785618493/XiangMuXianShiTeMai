@@ -59,16 +59,16 @@
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 30;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    UIView *bgView = [[UIView alloc] initWithFrame:(CGRectMake(0, 0, self.frame.size.width, 30))];
-    [bgView setBackgroundColor:[UIColor whiteColor]];
-    return bgView;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    return 30;
+//}
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    
+//    UIView *bgView = [[UIView alloc] initWithFrame:(CGRectMake(0, 0, self.frame.size.width, 30))];
+//    [bgView setBackgroundColor:[UIColor whiteColor]];
+//    return bgView;
+//}
 
 
 /*

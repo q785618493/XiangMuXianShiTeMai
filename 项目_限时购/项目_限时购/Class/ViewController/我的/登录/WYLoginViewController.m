@@ -14,8 +14,6 @@
 
 #import "WYMeModel.h"
 
-#import <UMSocial.h>
-
 @interface WYLoginViewController () <UMSocialUIDelegate>
 
 /** WYTextFieldView登录视图 */
@@ -93,9 +91,6 @@
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:userPhone,@"LoginName",codePhone,@"Lpassword", nil];
             [weakSelf loginHttpPostRequestDic:dic];
             
-//            NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:@"MemberName",@"name",@"MemberLvl",@"member", nil];
-//            [weakSelf loginSuccessCallbackDataDic:dataDic];
-            
         }
         else {
             [MBProgressHUD showError:[NSString stringWithFormat:@"账号或密码错误"]];
@@ -116,38 +111,26 @@
         
         switch (btnTag) {
             case 0: {
-                UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
+                [WYTheThirdParty QQLoginCurrentVC:self successLogin:^(NSDictionary *dict) {
                 
-                snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+                    NSLog(@" QQUserInfo === %@",dict);
                     
-                    //          获取微博用户名、uid、token等
+                } errorLogin:^{
                     
-                    if (response.responseCode == UMSResponseCodeSuccess) {
-                        
-                        NSDictionary *dict = [UMSocialAccountManager socialAccountDictionary];
-                        UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:snsPlatform.platformName];
-                        NSLog(@"\nusername = %@,\n usid = %@,\n token = %@ iconUrl = %@,\n unionId = %@,\n thirdPlatformUserProfile = %@,\n thirdPlatformResponse = %@ \n, message = %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL, snsAccount.unionId, response.thirdPlatformUserProfile, response.thirdPlatformResponse, response.message);
-                        
-                    }});
+                    [MBProgressHUD showError:[NSString stringWithFormat:@"登录失败"]];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [MBProgressHUD hideHUD];
+                    });
+                }];
             }
-                
                 break;
             case 1: {
                 
-                
             }
-                
                 break;
             case 2: {
-                [UMSocialData defaultData].extConfig.title = @"来自特卖商城，限时特卖韩国化妆品";
-                [UMSocialData defaultData].extConfig.qqData.url = @"http://baidu.com";
-                [UMSocialSnsService presentSnsIconSheetView:self
-                                                     appKey:@"57678e2367e58e3f85001389"
-                                                  shareText:@"输入现在分享的心情"
-                                                 shareImage:[UIImage imageNamed:@"限时特卖"]
-                                            shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToSina,UMShareToQQ,UMShareToTencent,UMShareToQzone,UMShareToRenren,UMShareToDouban,UMShareToEmail,UMShareToSms,UMShareToWechatFavorite,UMShareToAlipaySession,UMShareToYXSession,UMShareToYXTimeline,UMShareToLWSession,UMShareToLWTimeline,UMShareToInstagram,UMShareToWhatsapp,UMShareToLine,UMShareToTumblr,UMShareToPinterest,UMShareToKakaoTalk,UMShareToFlickr,]
-                                                   delegate:self];
-
+                
+                [WYTheThirdParty sinaWeiBoCurrentVC:self];
             }
                 
             default:

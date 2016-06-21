@@ -8,8 +8,6 @@
 
 #import "WYProductViewController.h"
 
-#import <UMSocial.h>
-
 @interface WYProductViewController () <UMSocialUIDelegate>
 
 @end
@@ -55,15 +53,7 @@
 
 /** 右边转发按钮点击事件 */
 - (void)barItemRelay {
-    
-    [UMSocialData defaultData].extConfig.title = @"来自特卖商城，限时特卖韩国化妆品";
-    [UMSocialData defaultData].extConfig.qqData.url = @"http://baidu.com";
-    [UMSocialSnsService presentSnsIconSheetView:self
-                                         appKey:@"57678e2367e58e3f85001389"
-                                      shareText:@"问一下搞机大队的，各位基佬们会给女朋友买这种化妆品吗?"
-                                     shareImage:[UIImage imageNamed:@"商品详情2"]
-                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToSina,UMShareToQQ,UMShareToTencent,UMShareToQzone,UMShareToRenren,UMShareToDouban,UMShareToEmail,UMShareToSms,UMShareToWechatFavorite,UMShareToAlipaySession,UMShareToYXSession,UMShareToYXTimeline,UMShareToLWSession,UMShareToLWTimeline,UMShareToInstagram,UMShareToWhatsapp,UMShareToLine,UMShareToTumblr,UMShareToPinterest,UMShareToKakaoTalk,UMShareToFlickr,]
-                                       delegate:self];
+    [WYTheThirdParty sinaWeiBoCurrentVC:self];
 }
 
 

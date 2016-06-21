@@ -50,9 +50,6 @@
     /** 添加UI控件 和 约束 */
     [self controlAddMasonry];
     
-    /** 用GCD线程 将网络请求按自定义顺序返回*/
-//    [self GCD_Dispatch_sync];
-    
    /** 用NSBlockOperation 将网络请求按自定义顺序返回 (失败)*/
     [self blockTaskOperationRequestData];
     
@@ -67,13 +64,6 @@
     [_faceCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(64, 0, 49, 0));
     }];
-}
-
-/** 用GCD线程 将网络请求按自定义顺序返回*/
-- (void)GCD_Dispatch_sync {
-    
-    
-    
 }
 
 /** 用NSBlockOperation 将网络请求按自定义顺序返回 */

@@ -63,6 +63,7 @@
 		047F094D1D125367004E7EE7 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F09351D125367004E7EE7 /* NSString+Helper.m */; };
 		047F094E1D125367004E7EE7 /* TopRollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F09371D125367004E7EE7 /* TopRollView.m */; };
 		047F09561D125367004E7EE7 /* WYCustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F09471D125367004E7EE7 /* WYCustomButton.m */; };
+		048042181D19367900241161 /* WYTheThirdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 048042171D19367900241161 /* WYTheThirdParty.m */; };
 		048400301D1575AE0096AB05 /* WYSortModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0484002C1D1575AE0096AB05 /* WYSortModel.m */; };
 		048400311D1575AE0096AB05 /* WYFaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0484002F1D1575AE0096AB05 /* WYFaceModel.m */; };
 		048400381D1576750096AB05 /* WYFaceCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 048400371D1576750096AB05 /* WYFaceCollection.m */; };
@@ -211,6 +212,8 @@
 		047F09371D125367004E7EE7 /* TopRollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopRollView.m; sourceTree = "<group>"; };
 		047F09461D125367004E7EE7 /* WYCustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYCustomButton.h; sourceTree = "<group>"; };
 		047F09471D125367004E7EE7 /* WYCustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYCustomButton.m; sourceTree = "<group>"; };
+		048042161D19367900241161 /* WYTheThirdParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYTheThirdParty.h; sourceTree = "<group>"; };
+		048042171D19367900241161 /* WYTheThirdParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYTheThirdParty.m; sourceTree = "<group>"; };
 		0484002B1D1575AE0096AB05 /* WYSortModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYSortModel.h; sourceTree = "<group>"; };
 		0484002C1D1575AE0096AB05 /* WYSortModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYSortModel.m; sourceTree = "<group>"; };
 		0484002E1D1575AE0096AB05 /* WYFaceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYFaceModel.h; sourceTree = "<group>"; };
@@ -478,6 +481,8 @@
 				046E07371D127B3A00645E96 /* WYHttpRequest.m */,
 				04A7DB3C1D13E02A0039F50D /* UIImageView+WY_SDWedImage.h */,
 				04A7DB3D1D13E02A0039F50D /* UIImageView+WY_SDWedImage.m */,
+				048042161D19367900241161 /* WYTheThirdParty.h */,
+				048042171D19367900241161 /* WYTheThirdParty.m */,
 			);
 			path = "工具类";
 			sourceTree = "<group>";
@@ -1356,6 +1361,7 @@
 				047F08F51D1242BA004E7EE7 /* WYTwoBtnView.m in Sources */,
 				0496C8DE1D11025700E3809F /* WYBaesTableView.m in Sources */,
 				047A3AF01D1784C800A85947 /* NSData+ImageContentType.m in Sources */,
+				048042181D19367900241161 /* WYTheThirdParty.m in Sources */,
 				046E87BD1D1544C400D48AB0 /* WYNewCell.m in Sources */,
 				047F094D1D125367004E7EE7 /* NSString+Helper.m in Sources */,
 				047A3AF51D1784C800A85947 /* SDWebImageDownloaderOperation.m in Sources */,
