@@ -10,4 +10,11 @@
 
 @implementation WYBaseCollectionCell
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self.contentView setBackgroundColor:[UIColor whiteColor]];
+    }
+    return self;
+}
+
 @end

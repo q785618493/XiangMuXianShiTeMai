@@ -7,6 +7,7 @@
 //
 
 #import "WYLoginViewController.h"
+#import "WYRegisterViewController.h"
 
 #import "WYTextFieldView.h"
 #import "WYThirdPartyView.h"
@@ -95,7 +96,7 @@
             
 //            NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:@"MemberName",@"name",@"MemberLvl",@"member", nil];
 //            [weakSelf loginSuccessCallbackDataDic:dataDic];
-            [weakSelf.navigationController popViewControllerAnimated:YES];
+            
         }
         else {
             [MBProgressHUD showMessage:[NSString stringWithFormat:@"账号或密码错误"]];
@@ -107,8 +108,9 @@
     };
     
     weakSelf.textFieldView.registerBlock = ^() {
-        
-        
+        WYRegisterViewController *registerVC = [[WYRegisterViewController alloc] init];
+        registerVC.title = [NSString stringWithFormat:@"注 册"];
+        [weakSelf.navigationController pushViewController:registerVC animated:YES];
     };
     
     weakSelf.threeLoginView.thirdPartyBlock = ^(NSInteger btnTag) {
@@ -160,24 +162,28 @@
 - (void)loginHttpPostRequestDic:(NSDictionary *)requestDic {
     WS(weakSelf);
     
-    NSLog(@"=======%@",requestDic);
-    
     [self POSTHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appMember/appLogin.do"] progressDic:requestDic success:^(id JSON) {
         
         NSDictionary *userDic = (NSDictionary *)JSON;
         
-        if (0 == [userDic[@"result"] integerValue]) {
+        NSString *stringName = userDic[@"MemberName"];
+        
+        if (stringName.length >= 4) {
             
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"登录成功ing..."]];
+            [MBProgressHUD showSuccess:[NSString stringWithFormat:@"登录成功ing..."]];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
                 
                 NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:userDic[@"MemberName"],@"name",userDic[@"MemberLvl"],@"member", nil];
                 [weakSelf loginSuccessCallbackDataDic:dataDic];
+            });
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [weakSelf.navigationController popViewControllerAnimated:YES];
             });
         }
         else {
+            
             [MBProgressHUD showMessage:[NSString stringWithFormat:@"密码错误"]];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
@@ -208,7 +214,6 @@
     NSArray *meTableArray = [NSArray arrayWithObjects:couponModel,moneyModel, nil];
     
     if (_passBackMe) {
-        
         _passBackMe(meTableArray, dataDic, YES);
     }
 }

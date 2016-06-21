@@ -55,7 +55,7 @@
 /** 注册按钮点击事件 */
 - (void)btnTouchActionLogin {
     
-    if ([self.verifyTextField.text isEmptyString]) {
+    if (![self.verifyTextField.text isEmptyString]) {
         
         [self registerHttpPostRequest];
         [self.view endEditing:YES];
@@ -251,13 +251,13 @@
         
         if ([[NSString stringWithFormat:@"success"] isEqual:dataDic[@"result"]]) {
             
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"注册成功"]];
+            [MBProgressHUD showSuccess:[NSString stringWithFormat:@"注册成功,快去登录"]];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
         }
         else {
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"请检查您额网络"]];
+            [MBProgressHUD showMessage:[NSString stringWithFormat:@"验证码错误"]];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });

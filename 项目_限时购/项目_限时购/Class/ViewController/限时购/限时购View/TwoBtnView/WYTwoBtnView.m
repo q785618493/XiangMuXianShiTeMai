@@ -15,7 +15,6 @@
     
     if (self = [super init]) {
         
-        [self setBackgroundColor:[UIColor whiteColor]];
         [self addSubview:self.NewBtn];
         [self addSubview:self.BrandBtn];
     }

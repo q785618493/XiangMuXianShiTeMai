@@ -10,6 +10,12 @@
 
 @implementation WYBaesTableView
 
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
+    if (self = [super initWithFrame:frame style:style]) {
+        [self setBackgroundColor:RGB(245, 245, 245)];
+    }
+    return self;
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

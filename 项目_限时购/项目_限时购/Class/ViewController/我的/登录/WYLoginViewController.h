@@ -8,11 +8,13 @@
 
 #import "WYBaseViewController.h"
 
-/** 登录成功后回调的 block*/
+/** 登录成功后回调的 block 传输数据*/
 typedef void(^LoginSuccessBlock)(NSArray *meModel, NSDictionary *userData, BOOL isStatu);
 
 @interface WYLoginViewController : WYBaseViewController
 
+/** 登录成功后回调的 block 传输数据*/
 @property (copy, nonatomic) LoginSuccessBlock passBackMe;
+
 
 @end

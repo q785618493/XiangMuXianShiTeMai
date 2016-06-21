@@ -21,7 +21,6 @@
         [self setDelegate:self];
         [self setDataSource:self];
         [self setBounces:NO];
-        [self setBackgroundColor:RGB(245, 245, 245)];
         [self setShowsHorizontalScrollIndicator:NO];
         [self setShowsVerticalScrollIndicator:NO];
     }

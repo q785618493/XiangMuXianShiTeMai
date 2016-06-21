@@ -743,25 +743,9 @@
 			children = (
 				046E074F1D12898700645E96 /* WYRegisterViewController.h */,
 				046E07501D12898700645E96 /* WYRegisterViewController.m */,
-				0496C8B41D10F0FD00E3809F /* 注册Model */,
-				0496C8B51D10F0FD00E3809F /* 注册View */,
 				0496C8B61D10F0FD00E3809F /* 验证码 */,
 			);
 			path = "注册";
-			sourceTree = "<group>";
-		};
-		0496C8B41D10F0FD00E3809F /* 注册Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "注册Model";
-			sourceTree = "<group>";
-		};
-		0496C8B51D10F0FD00E3809F /* 注册View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "注册View";
 			sourceTree = "<group>";
 		};
 		0496C8B61D10F0FD00E3809F /* 验证码 */ = {
@@ -778,17 +762,9 @@
 			children = (
 				046E074C1D12896E00645E96 /* WYLoginViewController.h */,
 				046E074D1D12896E00645E96 /* WYLoginViewController.m */,
-				0496C8B81D10F0FD00E3809F /* 登录Model */,
 				0496C8B91D10F0FD00E3809F /* 登录View */,
 			);
 			path = "登录";
-			sourceTree = "<group>";
-		};
-		0496C8B81D10F0FD00E3809F /* 登录Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "登录Model";
 			sourceTree = "<group>";
 		};
 		0496C8B91D10F0FD00E3809F /* 登录View */ = {

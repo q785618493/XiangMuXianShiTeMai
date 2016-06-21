@@ -127,22 +127,27 @@ static NSString *status = @"status";
     
     UIAlertAction *determineAction = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"确 定"] style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
         
-        //删除保存的用户数据
-        [[NSFileManager defaultManager] removeItemAtPath:INFO_PATH error:nil];
-        [XSG_USER_DEFAULTS removeObjectForKey:status];
-        
-        NSArray *dataArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MeModel.plist" ofType:nil]];
-        NSMutableArray *muArray = [NSMutableArray array];
-        for (NSDictionary *dict in dataArray) {
-            WYMeModel *model = [[WYMeModel alloc] initWithDic:dict];
-            [muArray addObject:model];
-        }
-        weakSelf.meTableView.infoArray = muArray;
-        [weakSelf.topUserView hiddenDeleteView];
-        [weakSelf.quitView removeFromSuperview];
-        [weakSelf.meTableView setTableHeaderView:weakSelf.topLoginView];
-        [weakSelf.meTableView setTableFooterView:weakSelf.lineView];
-        [weakSelf.meTableView reloadData];
+        [MBProgressHUD showSuccess:[NSString stringWithFormat:@"退出成功"]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
+            
+            //删除保存的用户数据
+            [[NSFileManager defaultManager] removeItemAtPath:INFO_PATH error:nil];
+            [XSG_USER_DEFAULTS removeObjectForKey:status];
+            
+            NSArray *dataArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MeModel.plist" ofType:nil]];
+            NSMutableArray *muArray = [NSMutableArray array];
+            for (NSDictionary *dict in dataArray) {
+                WYMeModel *model = [[WYMeModel alloc] initWithDic:dict];
+                [muArray addObject:model];
+            }
+            weakSelf.meTableView.infoArray = muArray;
+            [weakSelf.topUserView hiddenDeleteView];
+            [weakSelf.quitView removeFromSuperview];
+            [weakSelf.meTableView setTableHeaderView:weakSelf.topLoginView];
+            [weakSelf.meTableView setTableFooterView:weakSelf.lineView];
+            [weakSelf.meTableView reloadData];
+        });
     }];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"取 消"] style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
@@ -198,7 +203,9 @@ static NSString *status = @"status";
             
             [weakSelf.topLoginView hiddenDeleteView];
             [weakSelf.lineView removeFromSuperview];
+            
             [weakSelf.meTableView setTableHeaderView:weakSelf.topUserView];
+            weakSelf.topUserView.meDic = userDic;
             [weakSelf.meTableView setTableFooterView:weakSelf.quitView];
             [weakSelf.quitView addSubview:weakSelf.exitBtn];
             
@@ -207,6 +214,7 @@ static NSString *status = @"status";
             }];
             
             [weakSelf.dataMuArray addObjectsFromArray:meTableArray];
+            weakSelf.meTableView.infoArray = weakSelf.dataMuArray;
             [weakSelf.meTableView reloadData];
             
             //偏好设置存储
@@ -225,12 +233,9 @@ static NSString *status = @"status";
         [weakSelf.navigationController pushViewController:registerVC animated:YES];
     };
     
-    
     [_meTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(64, 0, 49, 0));
     }];
-    
-    
 }
 
 

@@ -34,8 +34,7 @@
 
 @implementation WYTextFieldView
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         
@@ -55,8 +54,6 @@
     [self controlAddMasonry];
     [self.userField becomeFirstResponder];
 }
-
-
 
 /** 添加控件和约束 */
 - (void)controlAddMasonry {
@@ -167,7 +164,7 @@
         _userField = [[UITextField alloc] init];
         [_userField setDelegate:self];
         [_userField setBorderStyle:(UITextBorderStyleNone)];
-        [_userField setKeyboardType:(UIKeyboardTypeNumbersAndPunctuation)];
+        [_userField setKeyboardType:(UIKeyboardTypePhonePad)];
         [_userField setPlaceholder:[NSString stringWithFormat:@"请输入手机号"]];
         [_userField setClearButtonMode:(UITextFieldViewModeWhileEditing)];
     }

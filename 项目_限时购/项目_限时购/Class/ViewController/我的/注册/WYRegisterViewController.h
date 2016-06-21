@@ -11,5 +11,4 @@
 @interface WYRegisterViewController : WYBaseViewController
 
 
-
 @end

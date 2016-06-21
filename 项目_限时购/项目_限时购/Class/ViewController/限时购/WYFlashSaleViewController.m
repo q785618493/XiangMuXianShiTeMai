@@ -63,6 +63,7 @@ static NSString *versionKey = @"CFBundleShortVersionString";
         _rollScrollView = [[UIScrollView alloc] init];
         [_rollScrollView setDelegate:self];
 //        [_rollScrollView setBounces:NO];
+        [_rollScrollView setBackgroundColor:RGB(245, 245, 245)];
         [_rollScrollView setShowsVerticalScrollIndicator:NO];
         [_rollScrollView setShowsHorizontalScrollIndicator:NO];
         [_rollScrollView setContentSize:(CGSizeMake(WIDTH, HEIGHT - 64 - 49 + _scale))];
@@ -106,8 +107,6 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     [brandBtn setSelected:YES];
     [self.twoBtnView.NewBtn setSelected:NO];
     
-    
-    
     if (self.brandMuArray.count <= 0) {
         [self httpGetBrandRequest];
     }
@@ -127,6 +126,7 @@ static NSString *versionKey = @"CFBundleShortVersionString";
 - (TopRollView *)adView {
     if (!_adView) {
         _adView = [[TopRollView alloc] initWithFrame:(CGRectMake(0, 0, WIDTH, _scale))];
+        [_adView setBackgroundColor:RGB(245, 245, 245)];
     }
     return _adView;
 }

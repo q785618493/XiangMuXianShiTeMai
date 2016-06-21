@@ -8,6 +8,7 @@
 
 #import "WYRegisterViewController.h"
 #import "WYTestPhoneViewController.h"
+#import "WYLoginViewController.h"
 #import "WYTextFieldView.h"
 #import "WYThirdPartyView.h"
 
@@ -52,7 +53,6 @@
 - (void)controlAddMasonry {
 
     CGFloat width = self.view.frame.size.width;
-    CGFloat height = self.view.frame.size.height;
     
     UILabel *promptLabel = [[UILabel alloc] init];
     [promptLabel setText:[NSString stringWithFormat:@"请输入手机号码注册新用户"]];
@@ -103,7 +103,7 @@
         }
         else {
             
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"手机号或者密码错误"]];
+            [MBProgressHUD showMessage:[NSString stringWithFormat:@"手机号错误"]];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
@@ -111,8 +111,8 @@
     };
     
     weakSelf.textFieldView.registerBlock = ^() {
-        
-        
+    
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     };
     
     [_threeLoginView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -133,7 +133,7 @@
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         [_titleLabel setFont:[UIFont systemFontOfSize:15]];
-        [_titleLabel setBackgroundColor:RGB(240, 240, 240)];
+        [_titleLabel setBackgroundColor:RGB(245, 245, 245)];
         [_titleLabel setTextColor:RGB(208, 208, 208)];
         [_titleLabel setTextAlignment:(NSTextAlignmentCenter)];
         [_titleLabel setText:[NSString stringWithFormat:@"一键登录"]];
