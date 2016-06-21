@@ -56,7 +56,6 @@
 - (void)controlAddMasonry {
     
     CGFloat width = self.frame.size.width;
-    CGFloat height = self.frame.size.height;
     CGFloat interval = (width - 46 * 3) * 0.25;
     
     WS(weakSelf);
