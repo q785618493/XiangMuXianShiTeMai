@@ -35,7 +35,7 @@
         [_verifyTextField setBorderStyle:(UITextBorderStyleNone)];
         [_verifyTextField setDelegate:self];
         [_verifyTextField setPlaceholder:[NSString stringWithFormat:@"请输入验证码"]];
-        [_verifyTextField setKeyboardType:(UIKeyboardTypeNumbersAndPunctuation)];
+        [_verifyTextField setKeyboardType:(UIKeyboardTypePhonePad)];
         [_verifyTextField setClearButtonMode:(UITextFieldViewModeWhileEditing)];
     }
     return _verifyTextField;
@@ -230,8 +230,8 @@
             
         } else {
             
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"无法获得验证码,请检查您的网络"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD showMessage:[NSString stringWithFormat:@"无法获得验证码"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
         }
@@ -239,10 +239,6 @@
     } failure:^(NSError *error) {
         
         ZDY_LOG(@"%@",error);
-        [MBProgressHUD showError:[NSString stringWithFormat:@"请检查您的网络"]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUD];
-        });
     }];
 }
 
@@ -272,10 +268,6 @@
     } failure:^(NSError *error) {
         
         ZDY_LOG(@"%@",error);
-        [MBProgressHUD showMessage:[NSString stringWithFormat:@"验证码输入有误"]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUD];
-        });
     }];
 }
 

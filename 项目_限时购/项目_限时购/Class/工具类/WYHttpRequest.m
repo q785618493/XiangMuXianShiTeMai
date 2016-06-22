@@ -10,6 +10,8 @@
 
 #import <AFNetworking.h>
 
+#import "MBProgressHUD+XMG.h"
+
 @implementation WYHttpRequest
 
 /** 实现 GET */
@@ -19,6 +21,12 @@
                    errorBlock:(RequestErrorBlock)errorBlock {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    /** 设置解析为 JSON */
+//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    /** 设置 ContentTypes(添加需要的参数) */
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plian", nil];
+    
     [manager GET:pathUrl parameters:bodyDic progress:^(NSProgress * _Nonnull downloadProgress) {
         
         
@@ -59,6 +67,46 @@
             errorBlock(error);
         }
     }];
+}
+
++ (NSInteger)returnCurrentNetworkStasus {
+    
+    __block NSInteger index = 3;
+    
+    /** 获取当前网络状态 */
+    AFNetworkReachabilityManager *judgeNetWork = [AFNetworkReachabilityManager sharedManager];
+    [judgeNetWork setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        
+        /**  判断当前网络状态*/
+        switch (status) {
+            case AFNetworkReachabilityStatusNotReachable: {
+                index = AFNetworkReachabilityStatusNotReachable;
+            }
+                break;
+            case AFNetworkReachabilityStatusUnknown: {
+                index = AFNetworkReachabilityStatusUnknown;
+            }
+                break;
+            case AFNetworkReachabilityStatusReachableViaWiFi: {
+                index = AFNetworkReachabilityStatusReachableViaWiFi;
+            }
+                break;
+            case AFNetworkReachabilityStatusReachableViaWWAN: {
+                index = AFNetworkReachabilityStatusReachableViaWWAN;
+            }
+                
+            default:
+                break;
+        }
+        
+    }];
+    /** 开启检查 */
+    [judgeNetWork startMonitoring];
+    
+    if (3 == index) {
+        return index;
+    }
+    return index;
 }
 
 

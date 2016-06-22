@@ -7,6 +7,8 @@
 //
 
 #import "WYClassifyViewController.h"
+#import "WYDetailsClassfyViewController.h"
+
 #import "WYFaceCollection.h"
 
 #import "WYSortModel.h"
@@ -64,6 +66,29 @@
     [_faceCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(64, 0, 49, 0));
     }];
+    weakSelf.faceCollectionView.collCellRow = ^(NSIndexPath *collIndex) {
+      
+        WYDetailsClassfyViewController *detailsVC = [[WYDetailsClassfyViewController alloc] init];
+        
+        if (0 == collIndex.section) {
+            WYSortModel *model = weakSelf.muFaceArray[collIndex.section][collIndex.row];
+            detailsVC.start = NO;
+            detailsVC.typeID = model.goodsType;
+            detailsVC.vcName = model.goodsTypeName;
+        }
+        else {
+            
+            WYFaceModel *model = weakSelf.muFaceArray[collIndex.section][collIndex.row];
+            detailsVC.start = YES;
+            detailsVC.typeID = model.shopId;
+            detailsVC.vcName = model.commodityText;
+        }
+        
+        [detailsVC setHidesBottomBarWhenPushed:YES];
+        [weakSelf.navigationController pushViewController:detailsVC animated:YES];
+    };
+    
+    
 }
 
 /** 用NSBlockOperation 将网络请求按自定义顺序返回 */

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0424CE411D1AADAD00E162BB /* WYDetailsClassfyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0424CE401D1AADAD00E162BB /* WYDetailsClassfyViewController.m */; };
+		0424CE451D1AAE3B00E162BB /* WYQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0424CE441D1AAE3B00E162BB /* WYQueryModel.m */; };
 		046E07381D127B3A00645E96 /* WYHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E07371D127B3A00645E96 /* WYHttpRequest.m */; };
 		046E074A1D12882000645E96 /* WYTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E07461D12882000645E96 /* WYTextFieldView.m */; };
 		046E074B1D12882000645E96 /* WYThirdPartyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E07491D12882000645E96 /* WYThirdPartyView.m */; };
@@ -114,6 +116,10 @@
 
 /* Begin PBXFileReference section */
 		022494CBC7266594F2C2EFD9 /* Pods-项目_限时购Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-项目_限时购Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-项目_限时购Tests/Pods-项目_限时购Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		0424CE3F1D1AADAD00E162BB /* WYDetailsClassfyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYDetailsClassfyViewController.h; sourceTree = "<group>"; };
+		0424CE401D1AADAD00E162BB /* WYDetailsClassfyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYDetailsClassfyViewController.m; sourceTree = "<group>"; };
+		0424CE431D1AAE3B00E162BB /* WYQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYQueryModel.h; sourceTree = "<group>"; };
+		0424CE441D1AAE3B00E162BB /* WYQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYQueryModel.m; sourceTree = "<group>"; };
 		046E07361D127B3A00645E96 /* WYHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYHttpRequest.h; sourceTree = "<group>"; };
 		046E07371D127B3A00645E96 /* WYHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYHttpRequest.m; sourceTree = "<group>"; };
 		046E07451D12882000645E96 /* WYTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYTextFieldView.h; sourceTree = "<group>"; };
@@ -305,6 +311,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0424CE421D1AAE3B00E162BB /* QueryModel */ = {
+			isa = PBXGroup;
+			children = (
+				0424CE431D1AAE3B00E162BB /* WYQueryModel.h */,
+				0424CE441D1AAE3B00E162BB /* WYQueryModel.m */,
+			);
+			path = QueryModel;
+			sourceTree = "<group>";
+		};
 		046E07441D12882000645E96 /* TextFieldView */ = {
 			isa = PBXGroup;
 			children = (
@@ -691,6 +706,8 @@
 		0496C8AD1D10F0FD00E3809F /* 分类详情 */ = {
 			isa = PBXGroup;
 			children = (
+				0424CE3F1D1AADAD00E162BB /* WYDetailsClassfyViewController.h */,
+				0424CE401D1AADAD00E162BB /* WYDetailsClassfyViewController.m */,
 				0496C8AE1D10F0FD00E3809F /* 分类详情Model */,
 				0496C8AF1D10F0FD00E3809F /* 分类详情View */,
 			);
@@ -700,6 +717,7 @@
 		0496C8AE1D10F0FD00E3809F /* 分类详情Model */ = {
 			isa = PBXGroup;
 			children = (
+				0424CE421D1AAE3B00E162BB /* QueryModel */,
 			);
 			path = "分类详情Model";
 			sourceTree = "<group>";
@@ -1310,11 +1328,13 @@
 				047A3AEF1D1784C800A85947 /* MKAnnotationView+WebCache.m in Sources */,
 				048400301D1575AE0096AB05 /* WYSortModel.m in Sources */,
 				047A3AF61D1784C800A85947 /* SDWebImageManager.m in Sources */,
+				0424CE451D1AAE3B00E162BB /* WYQueryModel.m in Sources */,
 				047F09561D125367004E7EE7 /* WYCustomButton.m in Sources */,
 				04A7DB441D13E3A70039F50D /* WYMeHeaderView.m in Sources */,
 				0496C8F71D11065900E3809F /* WYMeViewController.m in Sources */,
 				0471235D1D142C3200D42B74 /* MBProgressHUD.m in Sources */,
 				046E074B1D12882000645E96 /* WYThirdPartyView.m in Sources */,
+				0424CE411D1AADAD00E162BB /* WYDetailsClassfyViewController.m in Sources */,
 				046E07381D127B3A00645E96 /* WYHttpRequest.m in Sources */,
 				047A3AFB1D1784C800A85947 /* UIImage+WebP.m in Sources */,
 				047F094B1D125367004E7EE7 /* JPRefreshView.m in Sources */,

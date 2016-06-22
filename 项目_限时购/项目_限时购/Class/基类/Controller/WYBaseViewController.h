@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import <AFNetworking.h>
 #import <Masonry.h>
 #import <UMSocial.h>
 #import "UIButton+WebCache.h"
@@ -26,6 +27,9 @@ typedef void(^SuccessBlock)(id JSON);
 
 /** 返回失败原因 */
 typedef void(^ErrorBlock)(NSError *error);
+
+/** 回调网络状态的 Block */
+typedef void(^NetworkStatusBlock)();
 
 @interface WYBaseViewController : UIViewController
 

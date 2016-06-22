@@ -171,6 +171,7 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     [self rightNavAddBtnItem];
     
     [self httpGetAdvertisingRequest];
+    
     [self httpGetNewGoodsRequest];
 }
 
@@ -246,6 +247,7 @@ static NSString *versionKey = @"CFBundleShortVersionString";
 /** 顶部广告轮播视图的网络请求 */
 - (void)httpGetAdvertisingRequest {
     WS(weakSelf);
+    
     [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appHome/appHome.do"] progressDic:nil success:^(id JSON) {
         
         NSArray *array = (NSArray *)JSON;
@@ -295,6 +297,7 @@ static NSString *versionKey = @"CFBundleShortVersionString";
                 
                 [weakSelf.goodsTable reloadData];
                 [weakSelf.rollScrollView setHidden:NO];
+                [MBProgressHUD hideHUD];
             });
         
         }
@@ -309,10 +312,6 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     } failure:^(NSError *error) {
         
         ZDY_LOG(@"失败==%@",error.localizedDescription);
-        [MBProgressHUD showMessage:[NSString stringWithFormat:@"请您检查网络"]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUD];
-        });
     }];
 }
 

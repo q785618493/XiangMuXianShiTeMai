@@ -14,6 +14,9 @@
 /** 商品图片 */
 @property (strong, nonatomic) UIImageView *commodityImage;
 
+/** 国旗图片 */
+@property (strong, nonatomic) UIImageView *countriesImage;
+
 /** cell 底部分割线 */
 @property (strong, nonatomic) UILabel *wireLabel;
 
@@ -45,6 +48,7 @@
         [self setSelectionStyle:(UITableViewCellSelectionStyleNone)];
         [self addSubview:self.wireLabel];
         [self addSubview:self.commodityImage];
+        [self.commodityImage addSubview:self.countriesImage];
         [self addSubview:self.titleLabel];
         [self addSubview:self.infoLabel];
         [self addSubview:self.ciscountLabel];
@@ -76,6 +80,12 @@
         make.top.mas_equalTo(weakSelf.mas_top).offset(15);
         make.left.mas_equalTo(weakSelf.mas_left).offset(5);
         make.size.mas_equalTo(CGSizeMake(145, 145));
+    }];
+    
+    [_countriesImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.commodityImage.top).offset(5);
+        make.left.equalTo(weakSelf.commodityImage.left).offset(5);
+        make.size.mas_equalTo(CGSizeMake(25, 25));
     }];
     
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -122,6 +132,7 @@
     _model = model;
     
     [self.commodityImage downloadImage:model.imgView];
+    [self.countriesImage downloadImage:model.countryImg];
     [self.titleLabel setText:model.abbreviation];
     [self.infoLabel setText:model.goodsIntro];
     [self.ciscountLabel setText:model.price];
@@ -129,6 +140,15 @@
 }
 
 /** 重写get方法懒加载控件 */
+- (UIImageView *)countriesImage {
+    if (!_countriesImage) {
+        _countriesImage = [[UIImageView alloc] init];
+        [_countriesImage.layer setMasksToBounds:YES];
+        [_countriesImage.layer setCornerRadius:12.5];
+    }
+    return _countriesImage;
+}
+
 - (UIButton *)shoppingBtn {
     if (!_shoppingBtn) {
         _shoppingBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];

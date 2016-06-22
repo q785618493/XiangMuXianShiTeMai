@@ -144,19 +144,17 @@
 - (void)loginHttpPostRequestDic:(NSDictionary *)requestDic {
     WS(weakSelf);
     
-    [self POSTHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appMember/appLogin.do"] progressDic:requestDic success:^(id JSON) {
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appMember/appLogin.do"] progressDic:requestDic success:^(id JSON) {
         
         NSDictionary *userDic = (NSDictionary *)JSON;
         
-        NSString *stringName = userDic[@"MemberName"];
-        
-        if (stringName.length >= 4) {
+        if ([userDic[@"ErrorMessage"] isEqualToString:[NSString stringWithFormat:@"登陆成功"]]) {
             
             [MBProgressHUD showSuccess:[NSString stringWithFormat:@"登录成功ing..."]];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
                 
-                NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:userDic[@"MemberName"],@"name",userDic[@"MemberLvl"],@"member", nil];
+                NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:userDic[@"MemberName"],@"name",userDic[@"MemberLvl"],@"member",userDic[@"MemberId"],@"userID",userDic[@"result"],@"goodsQuantity", nil];
                 [weakSelf loginSuccessCallbackDataDic:dataDic];
             });
             
@@ -166,7 +164,7 @@
         }
         else {
             
-            [MBProgressHUD showError:[NSString stringWithFormat:@"密码错误"]];
+            [MBProgressHUD showError:[NSString stringWithFormat:@"登录失败,检查账号密码是否正确"]];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
@@ -175,10 +173,7 @@
     } failure:^(NSError *error) {
         
         ZDY_LOG(@"%@",error.localizedDescription);
-        [MBProgressHUD showError:[NSString stringWithFormat:@"请检查网络"]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUD];
-        });
+      
     }];
 }
 

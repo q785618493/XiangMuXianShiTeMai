@@ -7,23 +7,27 @@
 //
 
 #import "WYMeViewController.h"
+
 #import "WYLoginViewController.h"
 #import "WYRegisterViewController.h"
+
 #import "WYMeTableView.h"
 #import "WYMeHeaderView.h"
 #import "WYMeModel.h"
 
-
+/** 保存用户登录成功后的数据路径 */
 #define INFO_PATH [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"infoArray.data"]
-
+/** 偏好设置保存用户信息 */
 #define XSG_USER_DEFAULTS [NSUserDefaults standardUserDefaults]
 
+/** 保存用户头像的路径 */
 #define USER_HEADER_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"headerImage"]
 
+/** 用户信息的 key */
 static NSString *userInfo = @"userInfo";
-
+/** 判断登录状态 */
 static NSString *status = @"status";
-
+/** 用户头像 */
 static NSString *keyHeader = @"imageUser";
 
 @interface WYMeViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -60,6 +64,7 @@ static NSString *keyHeader = @"imageUser";
         //解档数组
         _dataMuArray = [NSKeyedUnarchiver unarchiveObjectWithFile:INFO_PATH];
         
+        //解档没有获得数据,获取用户未登录状态的数据
         if (!_dataMuArray) {
             _dataMuArray = [self returnModelArray];
         }
@@ -141,6 +146,9 @@ static NSString *keyHeader = @"imageUser";
             BOOL removeData = [[NSFileManager defaultManager] removeItemAtPath:INFO_PATH error:nil];
             
             if (removeData) {
+                /** 删除用户信息 */
+                [XSG_USER_DEFAULTS removeObjectForKey:userInfo];
+                /** 删除登录状态 */
                 [XSG_USER_DEFAULTS removeObjectForKey:status];
                 weakSelf.meTableView.infoArray = [self returnModelArray];
                 [weakSelf.topUserView hiddenDeleteView];
@@ -171,14 +179,14 @@ static NSString *keyHeader = @"imageUser";
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    /** 获取登录状态 */
     BOOL isStatu = [XSG_USER_DEFAULTS boolForKey:status];
-    
-    NSDictionary *dict = [XSG_USER_DEFAULTS dictionaryForKey:userInfo];
     
     /** 判断登录状态 */
     if (isStatu) {
         WS(weakSelf);
-        [self.meTableView setTableHeaderView:self.topUserView];
+        /** 获取本地保存的用户数据信息 */
+        NSDictionary *dict = [XSG_USER_DEFAULTS dictionaryForKey:userInfo];
         self.topUserView.meDic = dict;
         [self replaceUserHeaderImage];
         
@@ -189,7 +197,7 @@ static NSString *keyHeader = @"imageUser";
             [self.topUserView setValue:image forKey:keyHeader];
             [self replaceUserHeaderImage];
         }
-        
+        [self.meTableView setTableHeaderView:self.topUserView];
         [self.meTableView setTableFooterView:self.quitView];
         [self.quitView addSubview:self.exitBtn];
         [_exitBtn mas_makeConstraints:^(MASConstraintMaker *make) {

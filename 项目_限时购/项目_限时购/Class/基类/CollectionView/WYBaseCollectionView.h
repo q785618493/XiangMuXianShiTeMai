@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /** 选中单元格回调的 block */
-typedef void(^CollectionCellBlock)(NSInteger cellRow);
+typedef void(^CollectionCellBlock)(NSIndexPath *cellIndex);
 
 @interface WYBaseCollectionView : UICollectionView
 

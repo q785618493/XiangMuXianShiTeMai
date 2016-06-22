@@ -47,4 +47,7 @@ typedef void(^RequestErrorBlock)(NSError *error);
              successBlock:(RequestSuccessBlock)successBlock
                errorBlock:(RequestErrorBlock)errorBlock;
 
+/** 封装AFNetworking 判断当前网络状态 */
++ (NSInteger)returnCurrentNetworkStasus;
+
 @end

@@ -118,7 +118,7 @@ static NSString *IDHead = @"headerID";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     if (_collCellRow) {
-        _collCellRow(indexPath.row);
+        _collCellRow(indexPath);
     }
 }
 
