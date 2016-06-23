@@ -121,8 +121,6 @@
             btn.selected = NO;
         }
     }
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -12,6 +12,7 @@
 
 @interface WYGoodsTableView () <UITableViewDataSource,UITableViewDelegate>
 
+
 @end
 
 @implementation WYGoodsTableView
@@ -23,12 +24,14 @@
         
         [self setDelegate:self];
         [self setDataSource:self];
+        [self setBounces:NO];
         [self setShowsHorizontalScrollIndicator:NO];
         [self setShowsVerticalScrollIndicator:NO];
         [self setSeparatorStyle:(UITableViewCellSeparatorStyleNone)];
     }
     return self;
 }
+
 
 #pragma make-
 #pragma make- UITableViewDataSource
@@ -60,6 +63,7 @@
         _goodsCellRow(indexPath.row);
     }
 }
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

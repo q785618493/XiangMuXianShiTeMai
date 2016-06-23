@@ -56,6 +56,7 @@
         [_NewBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"新品团未选中"]] forState:(UIControlStateNormal)];
         [_NewBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"新品团选中"]] forState:(UIControlStateSelected)];
         [_NewBtn setTitle:[NSString stringWithFormat:@"新品团购"] forState:(UIControlStateNormal)];
+        [_NewBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -20, 0, 0))];
         [_NewBtn setTitleColor:RGB(51, 197, 248) forState:(UIControlStateNormal)];
         [_NewBtn setTitleColor:RGB(239, 101, 48) forState:(UIControlStateSelected)];
         [_NewBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
@@ -69,6 +70,7 @@
         _BrandBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [_BrandBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"品牌团未选中"]] forState:(UIControlStateNormal)];
         [_BrandBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"品牌团选中"]] forState:(UIControlStateSelected)];
+        [_BrandBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -20, 0, 0))];
         [_BrandBtn setTitleColor:RGB(51, 197, 248) forState:(UIControlStateNormal)];
         [_BrandBtn setTitleColor:RGB(239, 101, 48) forState:(UIControlStateSelected)];
         [_BrandBtn setTitle:[NSString stringWithFormat:@"品牌团购"] forState:(UIControlStateNormal)];

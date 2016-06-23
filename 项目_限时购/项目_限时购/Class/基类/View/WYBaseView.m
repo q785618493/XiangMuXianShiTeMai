@@ -12,7 +12,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self setBackgroundColor:RGB(245, 245, 245)];
+        [self setBackgroundColor:[UIColor whiteColor]];
     }
     return self;
 }
@@ -21,7 +21,7 @@
 {
     self = [super init];
     if (self) {
-        [self setBackgroundColor:RGB(245, 245, 245)];
+        [self setBackgroundColor:[UIColor whiteColor]];
     }
     return self;
 }

@@ -62,11 +62,12 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     if (!_rollScrollView) {
         _rollScrollView = [[UIScrollView alloc] init];
         [_rollScrollView setDelegate:self];
-//        [_rollScrollView setBounces:NO];
+        [_rollScrollView setBounces:NO];
         [_rollScrollView setBackgroundColor:RGB(245, 245, 245)];
         [_rollScrollView setShowsVerticalScrollIndicator:NO];
         [_rollScrollView setShowsHorizontalScrollIndicator:NO];
-        [_rollScrollView setContentSize:(CGSizeMake(WIDTH, HEIGHT - 64 - 49 + _scale))];
+        [_rollScrollView setContentOffset:(CGPointZero)];
+        [_rollScrollView setContentSize:(CGSizeMake(WIDTH, _scale + 50 + 175 * 11))];
         [_rollScrollView setHidden:YES];
     }
     return _rollScrollView;
@@ -147,14 +148,15 @@ static NSString *versionKey = @"CFBundleShortVersionString";
 
 - (WYGoodsTableView *)goodsTable {
     if (!_goodsTable) {
-        _goodsTable = [[WYGoodsTableView alloc] initWithFrame:(CGRectMake(0, _scale + 50, self.view.frame.size.width, self.view.frame.size.height - _scale -  50)) style:(UITableViewStylePlain)];
+        _goodsTable = [[WYGoodsTableView alloc] initWithFrame:(CGRectMake(0, _scale + 50, self.view.frame.size.width, 1750)) style:(UITableViewStylePlain)];
     }
     return _goodsTable;
 }
 
 - (WYBrandTableView *)brandTable {
     if (!_brandTable) {
-        _brandTable = [[WYBrandTableView alloc] initWithFrame:(CGRectMake(self.view.frame.size.width, _scale + 50, self.view.frame.size.width, self.view.frame.size.height - _scale - 50)) style:(UITableViewStylePlain)];
+        _brandTable = [[WYBrandTableView alloc] initWithFrame:(CGRectMake(self.view.frame.size.width, _scale + 50, self.view.frame.size.width, 1750)) style:(UITableViewStylePlain)];
+        [_brandTable setUserInteractionEnabled:NO];
     }
     return _brandTable;
 }
@@ -179,36 +181,16 @@ static NSString *versionKey = @"CFBundleShortVersionString";
 - (void)controlScrollViewMasonry {
     
     [self.view addSubview:self.rollScrollView];
-    CGFloat width = self.view.frame.size.width;
-    _height = self.rollScrollView.contentSize.height - _scale - 50;
     WS(weakSelf);
     [_rollScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(64, 0, 49, 0));
     }];
     
-    [self.rollScrollView addSubview:self.twoBtnView];
-    [_twoBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakSelf.rollScrollView).offset(_scale);
-        make.left.mas_equalTo(weakSelf.rollScrollView);
-        make.size.mas_equalTo(CGSizeMake(WIDTH, 50));
-    }];
-    
     [self.rollScrollView addSubview:self.adView];
     [self.rollScrollView addSubview:self.goodsTable];
     [self.rollScrollView addSubview:self.brandTable];
-    
-    [_goodsTable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.twoBtnView.bottom);
-        make.left.equalTo(weakSelf.view.left);
-        make.right.equalTo(weakSelf.view.right);
-        make.height.equalTo(_height);
-    }];
-    
-    [_brandTable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.twoBtnView.bottom);
-        make.left.equalTo(weakSelf.view.right);
-        make.size.equalTo(CGSizeMake(width, _height));
-    }];
+    [self.rollScrollView addSubview:self.twoBtnView];
+    [self.twoBtnView setFrame:(CGRectMake(0, _scale, WIDTH, 50))];
     
     weakSelf.goodsTable.goodsCellRow = ^(NSInteger cellRow) {
         
@@ -222,7 +204,6 @@ static NSString *versionKey = @"CFBundleShortVersionString";
         [productVC setHidesBottomBarWhenPushed:YES];
         [weakSelf.navigationController pushViewController:productVC animated:YES];
     };
-    
 }
 
 /** 添加导航右上角的搜索按钮 */
@@ -293,8 +274,10 @@ static NSString *versionKey = @"CFBundleShortVersionString";
             }
             [weakSelf.newsMuArray addObjectsFromArray:muArray];
             weakSelf.goodsTable.infoGoodsArray = weakSelf.newsMuArray;
+            
+            [weakSelf.rollScrollView setContentSize:(CGSizeMake(WIDTH, _scale + 50 + 175 * muArray.count))];
+            
             dispatch_async(dispatch_get_main_queue(), ^{
-                
                 [weakSelf.goodsTable reloadData];
                 [weakSelf.rollScrollView setHidden:NO];
                 [MBProgressHUD hideHUD];
@@ -357,6 +340,24 @@ static NSString *versionKey = @"CFBundleShortVersionString";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma make-
+#pragma make- UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    if (scrollView == _rollScrollView) {
+        
+        CGFloat offsetY = scrollView.contentOffset.y;
+        if (offsetY > _scale) {
+            CGRect twoRect = _twoBtnView.frame;
+            twoRect.origin.y = scrollView.contentOffset.y;
+            _twoBtnView.frame = twoRect;
+        }
+        else {
+            _twoBtnView.frame = CGRectMake(0, _scale, WIDTH, 50);
+        }
+    }
 }
 
 
