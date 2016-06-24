@@ -26,6 +26,14 @@
 		0471235D1D142C3200D42B74 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0471235A1D142C3200D42B74 /* MBProgressHUD.m */; };
 		0472608D1D1D10B8004C8B0A /* WYDetailsCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0472608C1D1D10B8004C8B0A /* WYDetailsCollectionView.m */; };
 		047260901D1D10DD004C8B0A /* WYDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0472608F1D1D10DD004C8B0A /* WYDetailsCell.m */; };
+		0472609D1D1D576D004C8B0A /* WYScoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 047260931D1D576D004C8B0A /* WYScoreModel.m */; };
+		0472609E1D1D576D004C8B0A /* WYAllGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 047260961D1D576D004C8B0A /* WYAllGoodsModel.m */; };
+		0472609F1D1D576D004C8B0A /* WYAllDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 047260991D1D576D004C8B0A /* WYAllDetailsModel.m */; };
+		047260A01D1D576D004C8B0A /* WYGoodsDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0472609C1D1D576D004C8B0A /* WYGoodsDetailsModel.m */; };
+		047260AD1D1D5A53004C8B0A /* WYCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047260A31D1D5A53004C8B0A /* WYCenterView.m */; };
+		047260AE1D1D5A53004C8B0A /* WYGoodsScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047260A61D1D5A53004C8B0A /* WYGoodsScoreView.m */; };
+		047260AF1D1D5A53004C8B0A /* WYImageDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047260A91D1D5A53004C8B0A /* WYImageDetailsView.m */; };
+		047260B01D1D5A53004C8B0A /* WYProductTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047260AC1D1D5A53004C8B0A /* WYProductTableView.m */; };
 		047A3AEF1D1784C800A85947 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 047A3ACF1D1784C800A85947 /* MKAnnotationView+WebCache.m */; };
 		047A3AF01D1784C800A85947 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 047A3AD11D1784C800A85947 /* NSData+ImageContentType.m */; };
 		047A3AF11D1784C800A85947 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 047A3AD31D1784C800A85947 /* SDImageCache.m */; };
@@ -155,6 +163,22 @@
 		0472608C1D1D10B8004C8B0A /* WYDetailsCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYDetailsCollectionView.m; sourceTree = "<group>"; };
 		0472608E1D1D10DD004C8B0A /* WYDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYDetailsCell.h; sourceTree = "<group>"; };
 		0472608F1D1D10DD004C8B0A /* WYDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYDetailsCell.m; sourceTree = "<group>"; };
+		047260921D1D576D004C8B0A /* WYScoreModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYScoreModel.h; sourceTree = "<group>"; };
+		047260931D1D576D004C8B0A /* WYScoreModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYScoreModel.m; sourceTree = "<group>"; };
+		047260951D1D576D004C8B0A /* WYAllGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYAllGoodsModel.h; sourceTree = "<group>"; };
+		047260961D1D576D004C8B0A /* WYAllGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYAllGoodsModel.m; sourceTree = "<group>"; };
+		047260981D1D576D004C8B0A /* WYAllDetailsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYAllDetailsModel.h; sourceTree = "<group>"; };
+		047260991D1D576D004C8B0A /* WYAllDetailsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYAllDetailsModel.m; sourceTree = "<group>"; };
+		0472609B1D1D576D004C8B0A /* WYGoodsDetailsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYGoodsDetailsModel.h; sourceTree = "<group>"; };
+		0472609C1D1D576D004C8B0A /* WYGoodsDetailsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYGoodsDetailsModel.m; sourceTree = "<group>"; };
+		047260A21D1D5A53004C8B0A /* WYCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYCenterView.h; sourceTree = "<group>"; };
+		047260A31D1D5A53004C8B0A /* WYCenterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYCenterView.m; sourceTree = "<group>"; };
+		047260A51D1D5A53004C8B0A /* WYGoodsScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYGoodsScoreView.h; sourceTree = "<group>"; };
+		047260A61D1D5A53004C8B0A /* WYGoodsScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYGoodsScoreView.m; sourceTree = "<group>"; };
+		047260A81D1D5A53004C8B0A /* WYImageDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYImageDetailsView.h; sourceTree = "<group>"; };
+		047260A91D1D5A53004C8B0A /* WYImageDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYImageDetailsView.m; sourceTree = "<group>"; };
+		047260AB1D1D5A53004C8B0A /* WYProductTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYProductTableView.h; sourceTree = "<group>"; };
+		047260AC1D1D5A53004C8B0A /* WYProductTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYProductTableView.m; sourceTree = "<group>"; };
 		047A3ACE1D1784C800A85947 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		047A3ACF1D1784C800A85947 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		047A3AD01D1784C800A85947 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -391,6 +415,78 @@
 				0472608F1D1D10DD004C8B0A /* WYDetailsCell.m */,
 			);
 			path = DetailsCell;
+			sourceTree = "<group>";
+		};
+		047260911D1D576D004C8B0A /* 商品评分部分 */ = {
+			isa = PBXGroup;
+			children = (
+				047260921D1D576D004C8B0A /* WYScoreModel.h */,
+				047260931D1D576D004C8B0A /* WYScoreModel.m */,
+			);
+			path = "商品评分部分";
+			sourceTree = "<group>";
+		};
+		047260941D1D576D004C8B0A /* 商品所有图片列表 */ = {
+			isa = PBXGroup;
+			children = (
+				047260951D1D576D004C8B0A /* WYAllGoodsModel.h */,
+				047260961D1D576D004C8B0A /* WYAllGoodsModel.m */,
+			);
+			path = "商品所有图片列表";
+			sourceTree = "<group>";
+		};
+		047260971D1D576D004C8B0A /* 商品详情部分（包含价格，评分等） */ = {
+			isa = PBXGroup;
+			children = (
+				047260981D1D576D004C8B0A /* WYAllDetailsModel.h */,
+				047260991D1D576D004C8B0A /* WYAllDetailsModel.m */,
+			);
+			path = "商品详情部分（包含价格，评分等）";
+			sourceTree = "<group>";
+		};
+		0472609A1D1D576D004C8B0A /* 商品详情列表 */ = {
+			isa = PBXGroup;
+			children = (
+				0472609B1D1D576D004C8B0A /* WYGoodsDetailsModel.h */,
+				0472609C1D1D576D004C8B0A /* WYGoodsDetailsModel.m */,
+			);
+			path = "商品详情列表";
+			sourceTree = "<group>";
+		};
+		047260A11D1D5A53004C8B0A /* CenterView */ = {
+			isa = PBXGroup;
+			children = (
+				047260A21D1D5A53004C8B0A /* WYCenterView.h */,
+				047260A31D1D5A53004C8B0A /* WYCenterView.m */,
+			);
+			path = CenterView;
+			sourceTree = "<group>";
+		};
+		047260A41D1D5A53004C8B0A /* GoodsScoreView */ = {
+			isa = PBXGroup;
+			children = (
+				047260A51D1D5A53004C8B0A /* WYGoodsScoreView.h */,
+				047260A61D1D5A53004C8B0A /* WYGoodsScoreView.m */,
+			);
+			path = GoodsScoreView;
+			sourceTree = "<group>";
+		};
+		047260A71D1D5A53004C8B0A /* ImageDetailsView */ = {
+			isa = PBXGroup;
+			children = (
+				047260A81D1D5A53004C8B0A /* WYImageDetailsView.h */,
+				047260A91D1D5A53004C8B0A /* WYImageDetailsView.m */,
+			);
+			path = ImageDetailsView;
+			sourceTree = "<group>";
+		};
+		047260AA1D1D5A53004C8B0A /* ProductTableView */ = {
+			isa = PBXGroup;
+			children = (
+				047260AB1D1D5A53004C8B0A /* WYProductTableView.h */,
+				047260AC1D1D5A53004C8B0A /* WYProductTableView.m */,
+			);
+			path = ProductTableView;
 			sourceTree = "<group>";
 		};
 		047A3ACD1D1784C800A85947 /* SDWebImage */ = {
@@ -878,6 +974,10 @@
 		0496C8BF1D10F0FD00E3809F /* 商品详情Model */ = {
 			isa = PBXGroup;
 			children = (
+				047260911D1D576D004C8B0A /* 商品评分部分 */,
+				047260941D1D576D004C8B0A /* 商品所有图片列表 */,
+				047260971D1D576D004C8B0A /* 商品详情部分（包含价格，评分等） */,
+				0472609A1D1D576D004C8B0A /* 商品详情列表 */,
 			);
 			path = "商品详情Model";
 			sourceTree = "<group>";
@@ -885,6 +985,10 @@
 		0496C8C01D10F0FD00E3809F /* 商品详情View */ = {
 			isa = PBXGroup;
 			children = (
+				047260A11D1D5A53004C8B0A /* CenterView */,
+				047260A41D1D5A53004C8B0A /* GoodsScoreView */,
+				047260A71D1D5A53004C8B0A /* ImageDetailsView */,
+				047260AA1D1D5A53004C8B0A /* ProductTableView */,
 			);
 			path = "商品详情View";
 			sourceTree = "<group>";
@@ -1351,8 +1455,10 @@
 			files = (
 				047A3AF91D1784C800A85947 /* UIImage+GIF.m in Sources */,
 				0496C8C81D10F0FD00E3809F /* AppDelegate.m in Sources */,
+				047260A01D1D576D004C8B0A /* WYGoodsDetailsModel.m in Sources */,
 				047A3AEF1D1784C800A85947 /* MKAnnotationView+WebCache.m in Sources */,
 				048400301D1575AE0096AB05 /* WYSortModel.m in Sources */,
+				0472609F1D1D576D004C8B0A /* WYAllDetailsModel.m in Sources */,
 				047A3AF61D1784C800A85947 /* SDWebImageManager.m in Sources */,
 				0424CE451D1AAE3B00E162BB /* WYQueryModel.m in Sources */,
 				047F09561D125367004E7EE7 /* WYCustomButton.m in Sources */,
@@ -1362,6 +1468,7 @@
 				046E074B1D12882000645E96 /* WYThirdPartyView.m in Sources */,
 				0424CE411D1AADAD00E162BB /* WYDetailsClassfyViewController.m in Sources */,
 				046E07381D127B3A00645E96 /* WYHttpRequest.m in Sources */,
+				047260AF1D1D5A53004C8B0A /* WYImageDetailsView.m in Sources */,
 				047A3AFB1D1784C800A85947 /* UIImage+WebP.m in Sources */,
 				047F094B1D125367004E7EE7 /* JPRefreshView.m in Sources */,
 				046E07541D1289C600645E96 /* WYTestPhoneViewController.m in Sources */,
@@ -1375,6 +1482,7 @@
 				04A7DB3E1D13E02A0039F50D /* UIImageView+WY_SDWedImage.m in Sources */,
 				046E87BA1D1544AA00D48AB0 /* WYBrandCell.m in Sources */,
 				0496C8E71D1102B900E3809F /* WYBaseCollectionCell.m in Sources */,
+				047260AE1D1D5A53004C8B0A /* WYGoodsScoreView.m in Sources */,
 				047A3B071D17F37700A85947 /* UIImage+ImageSetting.m in Sources */,
 				047F094E1D125367004E7EE7 /* TopRollView.m in Sources */,
 				0496C8E41D1102A000E3809F /* WYBaseCollectionView.m in Sources */,
@@ -1395,6 +1503,7 @@
 				046E87D01D154C7400D48AB0 /* WYSaleModel.m in Sources */,
 				0496C8F11D11062300E3809F /* WYClassifyViewController.m in Sources */,
 				047A3B011D17F2B700A85947 /* WYProductViewController.m in Sources */,
+				047260B01D1D5A53004C8B0A /* WYProductTableView.m in Sources */,
 				047A3AFC1D1784C800A85947 /* UIImageView+HighlightedWebCache.m in Sources */,
 				0484003E1D1576A20096AB05 /* WYFaceCell.m in Sources */,
 				046E074E1D12896E00645E96 /* WYLoginViewController.m in Sources */,
@@ -1408,13 +1517,16 @@
 				047F08F51D1242BA004E7EE7 /* WYTwoBtnView.m in Sources */,
 				0496C8DE1D11025700E3809F /* WYBaesTableView.m in Sources */,
 				047A3AF01D1784C800A85947 /* NSData+ImageContentType.m in Sources */,
+				047260AD1D1D5A53004C8B0A /* WYCenterView.m in Sources */,
 				048042181D19367900241161 /* WYTheThirdParty.m in Sources */,
 				046E87BD1D1544C400D48AB0 /* WYNewCell.m in Sources */,
 				047F094D1D125367004E7EE7 /* NSString+Helper.m in Sources */,
 				047A3AF51D1784C800A85947 /* SDWebImageDownloaderOperation.m in Sources */,
 				04A7DB4C1D13EB640039F50D /* WYMeModel.m in Sources */,
+				0472609E1D1D576D004C8B0A /* WYAllGoodsModel.m in Sources */,
 				0472608D1D1D10B8004C8B0A /* WYDetailsCollectionView.m in Sources */,
 				047A3AF41D1784C800A85947 /* SDWebImageDownloader.m in Sources */,
+				0472609D1D1D576D004C8B0A /* WYScoreModel.m in Sources */,
 				0496C8D01D11014500E3809F /* WYNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

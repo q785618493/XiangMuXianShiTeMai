@@ -119,7 +119,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     
     if (self = [super initWithFrame:frame]) {
-        
+        [self setBackgroundColor:[UIColor whiteColor]];
         /** 创建 UIScrollView*/
         self.rollScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT)];
         [self.rollScroll setDelegate:self];

@@ -60,12 +60,15 @@ static NSString *IDColl = @"collID";
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(VIEW_WIDTH * 0.5 - 3, 236);
+    return CGSizeMake(VIEW_WIDTH * 0.5 - 3, VIEW_WIDTH * 0.5 - 3 + 70);
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
+    if (_collRow) {
+        _collRow(indexPath);
+    }
 }
 
 

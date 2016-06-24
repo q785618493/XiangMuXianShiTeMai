@@ -9,6 +9,7 @@
 #import "WYFlashSaleViewController.h"
 #import "WYSearchViewController.h"
 #import "WYProductViewController.h"
+#import "WYDetailsClassfyViewController.h"
 
 #import "TopRollView.h"
 #import "WYTwoBtnView.h"
@@ -209,7 +210,6 @@ static NSString *versionKey = @"CFBundleShortVersionString";
         productVC.goodsID = model.goodsId;
         productVC.countryImageUrl = model.countryImg;
         
-        [productVC setHidesBottomBarWhenPushed:YES];
         [weakSelf.navigationController pushViewController:productVC animated:YES];
     };
     
@@ -221,7 +221,13 @@ static NSString *versionKey = @"CFBundleShortVersionString";
      *  @return
      */
     weakSelf.brandTable.brandCellRow = ^(NSInteger cellRow) {
-        
+        WYSaleModel *model = weakSelf.brandMuArray[cellRow];
+        WYDetailsClassfyViewController *detailsVC = [[WYDetailsClassfyViewController alloc] init];
+        detailsVC.start = YES;
+        detailsVC.title = model.shopTitle;
+        detailsVC.typeID = model.activityId;
+        detailsVC.judgeRequest = 3;
+        [weakSelf.navigationController pushViewController:detailsVC animated:YES];
     };
 }
 
@@ -237,9 +243,6 @@ static NSString *versionKey = @"CFBundleShortVersionString";
 - (void)barBtnItemActionRight:(UIBarButtonItem *)rightItem {
     
     WYSearchViewController *searchVC = [[WYSearchViewController alloc] init];
-    searchVC.title = [NSString stringWithFormat:@"搜索商品"];
-    [searchVC setHidesBottomBarWhenPushed:YES];
-    
     [self.navigationController pushViewController:searchVC animated:YES];
     
 }

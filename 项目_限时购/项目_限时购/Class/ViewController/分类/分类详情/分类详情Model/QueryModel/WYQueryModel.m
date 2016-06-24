@@ -23,4 +23,7 @@
     return [[self alloc] initWithDic:dic];
 }
 
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
+}
+
 @end

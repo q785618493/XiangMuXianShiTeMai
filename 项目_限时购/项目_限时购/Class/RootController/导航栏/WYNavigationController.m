@@ -7,6 +7,7 @@
 //
 
 #import "WYNavigationController.h"
+#import "UIImage+ImageSetting.h"
 
 @interface WYNavigationController ()
 
@@ -22,6 +23,20 @@
     [tabBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
     
     
+}
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if (self.viewControllers.count) {
+        
+        [viewController setHidesBottomBarWhenPushed:YES];
+        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageWithModeImageName:[NSString stringWithFormat:@"详情界面返回按钮"]] style:(UIBarButtonItemStylePlain) target:self action:@selector(barButtonItemActionLeft)];
+    }
+    
+    [super pushViewController:viewController animated:animated];
+}
+
+- (void)barButtonItemActionLeft {
+    [self popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad {

@@ -51,7 +51,7 @@
     CGFloat height = self.frame.size.height;
     WS(weakSelf);
     [_goodsImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(weakSelf.contentView).with.insets(UIEdgeInsetsMake(0, 0, 50, 0));
+        make.edges.mas_equalTo(weakSelf.contentView).with.insets(UIEdgeInsetsMake(0, 0, 70, 0));
     }];
     
     [_countryImage mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -80,7 +80,8 @@
     
     NSAttributedString *priceAttribute = [[NSAttributedString alloc] initWithString:model.Price attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17],NSForegroundColorAttributeName : RGB(255, 67, 0)}];
     
-    NSAttributedString *domesticAttribute = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" ￥%@",model.DomesticPrice] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13],NSForegroundColorAttributeName : RGB(169, 169, 169)}];
+    NSAttributedString *domesticAttribute = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" ￥%@",model.DomesticPrice] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13],NSForegroundColorAttributeName : RGB(169, 169, 169),NSStrikethroughStyleAttributeName:@(1)}];
+    
     
     NSMutableAttributedString *muAttString = [[NSMutableAttributedString alloc] init];
     [muAttString insertAttributedString:priceAttribute atIndex:0];
@@ -103,7 +104,7 @@
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         [_titleLabel setBackgroundColor:[UIColor whiteColor]];
-        [_titleLabel setFont:[UIFont systemFontOfSize:15]];
+        [_titleLabel setFont:[UIFont systemFontOfSize:14]];
         [_titleLabel setLineBreakMode:(NSLineBreakByWordWrapping)];
         [_titleLabel setNumberOfLines:0];
     }

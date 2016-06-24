@@ -7,7 +7,7 @@
 //
 
 #import "WYDetailsClassfyViewController.h"
-
+#import "WYDetailsCollectionView.h"
 #import "WYQueryModel.h"
 
 #define BTN_RANK_TAG 22000
@@ -25,6 +25,9 @@
 
 /** 保存请求数据 */
 @property (strong, nonatomic) NSArray *dataArray;
+
+/** 展示商品信息的 WYDetailsCollectionView */
+@property (strong, nonatomic) WYDetailsCollectionView *detailsCollView;
 
 @end
 
@@ -47,6 +50,15 @@
     return _wireLabel;
 }
 
+- (WYDetailsCollectionView *)detailsCollView {
+    if (!_detailsCollView) {
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        [flowLayout setScrollDirection:(UICollectionViewScrollDirectionVertical)];
+        _detailsCollView = [[WYDetailsCollectionView alloc] initWithFrame:(CGRectMake(0, 104, VIEW_WIDTH, VIEW_HEIGHT - 104)) collectionViewLayout:flowLayout];
+    }
+    return _detailsCollView;
+}
+
 - (NSArray *)dataArray {
     if (!_dataArray) {
         _dataArray = [NSArray array];
@@ -58,16 +70,39 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = _vcName;
     [self topAddFourBtnView];
+    [self controlAddMasonry];
+    [self judgeDataRequest];
+    
+    
+}
+
+/** 判断网络请求的数据类型 */
+- (void)judgeDataRequest {
     
     if (_start) {
-        [self httpPostBrandListOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+        switch (_judgeRequest) {
+            case 1: {
+                [self httpPostBrandListOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+            }
+                break;
+            case 2: {
+                [self httpPostSearchRequestOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+            }
+                break;
+            case 3: {
+                [self httpPostSaleBrandOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+            }
+                break;
+            case 4: {
+                [self httpPostBrandListOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+            }
+                break;
+                
+            default:
+                break;
+        }
     }
-    else {
-        
-    }
-    
 }
 
 /** 添加排序的4个按钮 */
@@ -117,11 +152,11 @@
 - (void)btnTouchActionRank:(UIButton *)rankBtn {
     
     rankBtn.selected = YES;
-    CGFloat btnTag = rankBtn.tag - BTN_RANK_TAG;
+    NSInteger rankTag = rankBtn.tag - BTN_RANK_TAG;
     
     [UIView animateWithDuration:0.3 animations:^{
         CGRect wireFrame = _wireLabel.frame;
-        wireFrame.origin.x = btnTag * _wire_Width;
+        wireFrame.origin.x = rankTag * _wire_Width;
         _wireLabel.frame = wireFrame;
     }];
     
@@ -131,13 +166,130 @@
             btn.selected = NO;
         }
     }
+    
+    switch (rankTag) {
+        case 0: {
+            
+            switch (_judgeRequest) {
+                case 1: {
+                    [self httpPostBrandListOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                }
+                    break;
+                case 2: {
+                    [self httpPostSearchRequestOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                }
+                    break;
+                case 3: {
+                    [self httpPostSaleBrandOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                }
+                    break;
+                case 4: {
+                    
+                }
+                default:
+                    break;
+            }
+            
+        }
+            
+            break;
+        case 1: {
+            
+            switch (_judgeRequest) {
+                case 1: {
+                    [self httpPostBrandListOrderName:[NSString stringWithFormat:@"price"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                }
+                    break;
+                case 2: {
+                    [self httpPostSearchRequestOrderName:[NSString stringWithFormat:@"price"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                }
+                    break;
+                case 3: {
+                    [self httpPostSaleBrandOrderName:[NSString stringWithFormat:@"price"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                }
+                    break;
+                case 4: {
+                    
+                }
+                default:
+                    break;
+            }
+            
+        }
+            
+            break;
+        case 2: {
+            
+            switch (_judgeRequest) {
+                case 1: {
+                    [self httpPostBrandListOrderName:[NSString stringWithFormat:@"score"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                }
+                    break;
+                case 2: {
+                    [self httpPostSearchRequestOrderName:[NSString stringWithFormat:@"score"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                }
+                    break;
+                case 3: {
+                    [self httpPostSaleBrandOrderName:[NSString stringWithFormat:@"score"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                }
+                    break;
+                case 4: {
+                    
+                }
+                default:
+                    break;
+            }
+            
+        }
+            
+            break;
+        case 3: {
+            
+            switch (_judgeRequest) {
+                case 1: {
+                    [self httpPostBrandListOrderName:[NSString stringWithFormat:@"time"] OrderType:[NSString stringWithFormat:@"ASC"]];
+                }
+                    break;
+                case 2: {
+                    [self httpPostSearchRequestOrderName:[NSString stringWithFormat:@"time"] OrderType:[NSString stringWithFormat:@"ASC"]];
+                }
+                    break;
+                case 3: {
+                    [self httpPostSaleBrandOrderName:[NSString stringWithFormat:@"time"] OrderType:[NSString stringWithFormat:@"ASC"]];
+                }
+                    break;
+                case 4: {
+                    
+                }
+                default:
+                    break;
+            }
+            
+        }
+            
+        default:
+            break;
+    }
+    
+    
+}
+
+/** 添加控件 和 约束 */
+- (void)controlAddMasonry {
+    
+    [self.view addSubview:self.detailsCollView];
+    
+    WS(weakSelf);
+    [_detailsCollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(104, 0, 0, 0));
+    }];
 }
 
 /**
- *  根据品牌跳转至商品列表的 网络请求
+ * 分类:根据品牌跳转至商品列表的 网络请求
  *
- *  @param OrderName 商品的排序方式
- *  @param OrderType 顺序还是倒序
+ *  @param OrderName 商品的排序方式   NSString
+ *  @param OrderType 顺序还是倒序     NSString
  */
 - (void)httpPostBrandListOrderName:(NSString *)OrderName OrderType:(NSString *)OrderType {
     
@@ -157,13 +309,21 @@
                 [muArray addObject:model];
             }
             weakSelf.dataArray = muArray;
+            weakSelf.detailsCollView.infoArray = weakSelf.dataArray;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.detailsCollView reloadData];
+            });
             
         }
         else {
-            [MBProgressHUD showError:[NSString stringWithFormat:@"请求数据失败"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUD];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD showError:[NSString stringWithFormat:@"请求数据失败"]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUD];
+                });
             });
+            
         }
         
     } failure:^(NSError *error) {
@@ -171,6 +331,140 @@
     }];
     
     
+}
+
+/**
+ *  搜索:根据商品名称跳转至商品列表的 搜索的网络请求
+ *
+ *  @param OrderName 商品的排序方式  NSString
+ *  @param OrderType 顺序还是倒序    NSString
+ */
+- (void)httpPostSearchRequestOrderName:(NSString *)OrderName OrderType:(NSString *)OrderType {
+    
+    NSDictionary *requestDic = @{@"search":self.title,
+                                 @"OrderName":OrderName,
+                                 @"OrderType":OrderType};
+    
+    WS(weakSelf);
+    [self POSTHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appSearch/searchList.do"] progressDic:requestDic success:^(id JSON) {
+        
+        NSArray *array = (NSArray *)JSON;
+        
+        if (array.count > 0) {
+            
+            NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
+            
+            for (NSDictionary *dict in array) {
+                WYQueryModel *model = [[WYQueryModel alloc] initWithDic:dict];
+                [muArray addObject:model];
+            }
+            
+            weakSelf.dataArray = muArray;
+            weakSelf.detailsCollView.infoArray = muArray;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.detailsCollView reloadData];
+            });
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD showError:[NSString stringWithFormat:@"没有此类商品,请重新搜索"]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUD];
+                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                    
+                });
+            });
+        }
+        
+    } failure:^(NSError *error) {
+        ZDY_LOG(@"   NSError===%@",error);
+    }];
+    
+}
+
+/**
+ *  首页品牌团购:根据品牌活动跳转至商品列表的网络请求
+ *
+ *  @param OrderName 商品的排序方式  NSString
+ *  @param OrderType 顺序还是倒序    NSString
+ */
+- (void)httpPostSaleBrandOrderName:(NSString *)OrderName OrderType:(NSString *)OrderType {
+    
+    NSDictionary *requestDic = @{@"GrouponId":_typeID,
+                                 @"OrderName":OrderName,
+                                 @"OrderType":OrderType};
+    
+    WS(weakSelf);
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appGgroupon/appGrounpGoodsList.do"] progressDic:requestDic success:^(id JSON) {
+        
+        NSArray *array = (NSArray *)JSON;
+        
+        if (array.count > 0) {
+            
+            NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
+            
+            for (NSDictionary *dict in array) {
+                WYQueryModel *model = [[WYQueryModel alloc] initWithDic:dict];
+                [muArray addObject:model];
+            }
+            weakSelf.dataArray = muArray;
+            weakSelf.detailsCollView.infoArray = weakSelf.dataArray;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.detailsCollView reloadData];
+            });
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD showError:[NSString stringWithFormat:@"没有商品信息"]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUD];
+                });
+            });
+            
+        }
+        
+    } failure:^(NSError *error) {
+        
+        ZDY_LOG(@"====%@",error);
+    }];
+}
+
+/**
+ *  商品详情:
+ *
+ *  @param OrderName 商品的排序方式  NSString
+ *  @param OrderType 顺序还是倒序    NSString
+ */
+- (void)httpGetGoodsDetailsOrderName:(NSString *)OrderName OrderType:(NSString *)OrderType {
+    
+    WS(weakSelf);
+    
+    NSDictionary *requestDic = @{};
+    
+    [self GETHttpUrlString:[NSString stringWithFormat:@""] progressDic:requestDic success:^(id JSON) {
+        
+        NSArray *array = (NSArray *)JSON;
+        
+        ZDY_LOG(@"===%@",[[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:nil] encoding:NSUTF8StringEncoding])
+        
+        if (array.count > 0) {
+            NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
+            
+            for (NSDictionary *dict in array) {
+                WYQueryModel *model = [[WYQueryModel alloc] initWithDic:dict];
+                [muArray addObject:model];
+            }
+            weakSelf.dataArray = muArray;
+            weakSelf.detailsCollView.infoArray = weakSelf.dataArray;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.detailsCollView reloadData];
+            });
+        }
+        
+    } failure:^(NSError *error) {
+        ZDY_LOG(@"-------%@",error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

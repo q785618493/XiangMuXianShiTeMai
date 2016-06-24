@@ -74,19 +74,21 @@
             WYSortModel *model = weakSelf.muFaceArray[collIndex.section][collIndex.row];
             detailsVC.start = NO;
             detailsVC.typeID = model.goodsType;
-            detailsVC.vcName = model.goodsTypeName;
+            detailsVC.title = model.goodsTypeName;
         }
         else {
             
             WYFaceModel *model = weakSelf.muFaceArray[collIndex.section][collIndex.row];
             detailsVC.start = YES;
             detailsVC.typeID = model.shopId;
-            detailsVC.vcName = model.commodityText;
+            detailsVC.judgeRequest = 1;
+            detailsVC.title = model.commodityText;
         }
         
-        [detailsVC setHidesBottomBarWhenPushed:YES];
         [weakSelf.navigationController pushViewController:detailsVC animated:YES];
     };
+    
+    
     
     
 }
