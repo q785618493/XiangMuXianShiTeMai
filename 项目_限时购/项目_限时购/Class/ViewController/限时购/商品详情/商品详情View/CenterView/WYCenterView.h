@@ -13,16 +13,13 @@ typedef void(^BtnPushBlock)();
 
 @interface WYCenterView : WYBaseView
 
-/**
- 按钮点击事件回调的 block
- */
+/** 按钮点击事件回调的 block */
 @property (copy, nonatomic) BtnPushBlock btnAction;
 
-/**
- 国旗图片的网络路径
- */
+/** 国旗图片的网络路径 */
 @property (copy, nonatomic) NSString *countryUrl;
 
-- (instancetype)initWithFrame:(CGRect)frame model:(WYAllDetailsModel *)model;
+/** 接收数据的模型 */
+@property (strong, nonatomic) WYAllDetailsModel *model;
 
 @end

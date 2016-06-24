@@ -9,11 +9,18 @@
 #import "WYProductViewController.h"
 
 #import "TopRollView.h"
+#import "WYCenterView.h"
+#import "WYGoodsScoreView.h"
+#import "WYImageDetailsView.h"
+#import "WYProductTableView.h"
 
 #import "WYAllGoodsModel.h"
 #import "WYScoreModel.h"
 #import "WYGoodsDetailsModel.h"
 #import "WYAllDetailsModel.h"
+
+#define WIDTH  self.view.frame.size.width
+#define HEIGHT self.view.frame.size.height
 
 @interface WYProductViewController () <UMSocialUIDelegate>
 
@@ -23,6 +30,9 @@
 /** 顶部轮播广告视图 */
 @property (strong, nonatomic) TopRollView *adView;
 
+/** 广告视图下面的商品信息价格视图 */
+@property (strong, nonatomic) WYCenterView *thePriceView;
+
 @end
 
 @implementation WYProductViewController
@@ -30,22 +40,29 @@
 /** 懒加载 */
 - (UIScrollView *)bgScrollView {
     if (!_bgScrollView) {
-        _bgScrollView = [[UIScrollView alloc] initWithFrame:(CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64))];
+        _bgScrollView = [[UIScrollView alloc] initWithFrame:(CGRectMake(0, 64, WIDTH, HEIGHT - 108))];
         [_bgScrollView setShowsHorizontalScrollIndicator:NO];
         [_bgScrollView setShowsVerticalScrollIndicator:NO];
         [_bgScrollView setBounces:NO];
         [_bgScrollView setBackgroundColor:[UIColor whiteColor]];
         [_bgScrollView setContentOffset:(CGPointZero)];
-        [_bgScrollView setContentSize:(CGSizeMake(self.view.frame.size.width, 2000))];
+        [_bgScrollView setContentSize:(CGSizeMake(WIDTH, 2000))];
     }
     return _bgScrollView;
 }
 
 - (TopRollView *)adView {
     if (!_adView) {
-        _adView = [[TopRollView alloc] initWithFrame:(CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width))];
+        _adView = [[TopRollView alloc] initWithFrame:(CGRectMake(0, 0, WIDTH, 320))];
     }
     return _adView;
+}
+
+- (WYCenterView *)thePriceView {
+    if (!_thePriceView) {
+        _thePriceView = [[WYCenterView alloc] initWithFrame:(CGRectMake(0, CGRectGetMaxY(self.adView.frame), WIDTH, 251))];
+    }
+    return _thePriceView;
 }
 
 - (void)viewDidLoad {
@@ -59,6 +76,9 @@
     
     /** 商品所有图片列表网络请求 */
     [self httpGetGoodsImagesRequest];
+    /** 商品详情部分（包含价格，评分等）网络请求*/
+    [self httpGetAllGoodsDetailsRequest];
+    
 }
 
 /** 添加控件 */
@@ -120,7 +140,7 @@
         }
         else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD showError:[NSString stringWithFormat:@"没有该商品详情"]];
+                [MBProgressHUD showError:[NSString stringWithFormat:@"没有该商品图片"]];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUD];
                 });
@@ -133,6 +153,63 @@
     }];
 }
 
+/** 商品详情部分（包含价格，评分等）网络请求*/
+- (void)httpGetAllGoodsDetailsRequest {
+    
+    WS(weakSelf);
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appGoods/findGoodsDetail.do"] progressDic:@{@"GoodsId":self.goodsID} success:^(id JSON) {
+        
+        NSDictionary *infoDict = (NSDictionary *)JSON;
+        
+        if (infoDict) {
+            
+            WYAllGoodsModel *model = [[WYAllGoodsModel alloc] initWithDictionary:infoDict];
+            weakSelf.thePriceView.model = model;
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD showError:[NSString stringWithFormat:@"没有该商品详情"]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUD];
+                });
+            });
+        }
+        
+    } failure:^(NSError *error) {
+        ZDY_LOG(@"+++++%@",error);
+    }];
+    
+}
+
+/** 商品详情列表网络请求 */
+- (void)httpGetGoodsDetailsRequest {
+    
+    WS(weakSelf);
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appGoods/findGoodsDetailList.do"] progressDic:@{@"GoodsId":self.goodsID} success:^(id JSON) {
+        NSArray *dataArray = JSON;
+        
+        if (dataArray.count > 0) {
+            
+            NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:dataArray.count];
+            for (NSDictionary *dic in dataArray) {
+                WYGoodsDetailsModel *model = [[WYGoodsDetailsModel alloc] initWithDictionary:dic];
+                [muArray addObject:model];
+            }
+        }
+        else {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD showError:[NSString stringWithFormat:@"没有该商品列表"]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUD];
+                });
+            });
+        }
+        
+    } failure:^(NSError *error) {
+        ZDY_LOG(@"======%@",error);
+    }];
+}
 
 /** 添加导航条上的2个按钮 */
 - (void)navigationAddThreeBarBtnItem {
