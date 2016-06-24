@@ -27,9 +27,10 @@
 
 @implementation JPRefreshView
 
+//显示到一个视图上，在y轴上偏移
 + (void)showJPRefreshFromView:(UIView *)superView offSetY:(CGFloat)offSetY {
     
-    JPRefreshView *jpRefreshView = [JPRefreshView new];
+    JPRefreshView *jpRefreshView = [[JPRefreshView alloc] init];
     //设置刷新视图的坐标在父视图的中心
 //    dvRefreshView.frame = CGRectMake(superView.frame.size.width / 2 - Refrsh_WIDTH / 2,
 //                                     (superView.frame.size.height) / 2 - Refrsh_HEIGHT / 2 + offSetY,
@@ -52,11 +53,13 @@
 
 }
 
+//调用这个方法显示到一个视图上
 + (void)showJPRefreshFromView:(UIView *)superView {
     
     [self showJPRefreshFromView:superView offSetY:0];
 }
 
+//调用这个方法从一个视图上移除
 + (void)removeJPRefreshFromView:(UIView *)superView {
     
     //从父视图中移除
@@ -80,7 +83,7 @@
 }
 - (UIView *)refreshview{
     if (!_refreshview) {
-        _refreshview = [[UIView alloc]initWithFrame:CGRectMake(VIEW_WIDTH/2 - Refrsh_WIDTH/2, VIEW_HEIGHT/2 - 64, Refrsh_WIDTH, Refrsh_HEIGHT)];
+        _refreshview = [[UIView alloc]initWithFrame:CGRectMake(VIEW_WIDTH * 0.5 - Refrsh_WIDTH * 0.5, VIEW_HEIGHT * 0.5 - 64, Refrsh_WIDTH, Refrsh_HEIGHT)];
         _refreshview.backgroundColor = [UIColor clearColor];
         _refreshview.layer.masksToBounds = YES;
         _refreshview.layer.cornerRadius = 10;
@@ -91,7 +94,7 @@
 - (UIImageView *)imageView {
     if (!_imageView) {
         _imageView = [UIImageView new];
-        _imageView.frame = CGRectMake(Refrsh_WIDTH / 2 - IMAGEVIEW_WIDTH / 2,
+        _imageView.frame = CGRectMake(Refrsh_WIDTH * 0.5 - IMAGEVIEW_WIDTH * 0.5,
                                       0,
                                       IMAGEVIEW_WIDTH,
                                       IMAGEVIEW_HEIGHT);
@@ -111,7 +114,7 @@
         _label.text = @"等待加载";
         _label.textAlignment = NSTextAlignmentCenter;
         _label.textColor = [UIColor grayColor];
-        _label.frame = CGRectMake(Refrsh_WIDTH / 2 - IMAGEVIEW_WIDTH / 2 - 10, IMAGEVIEW_HEIGHT, Refrsh_WIDTH, MARK_WORD_HEIGHT);
+        _label.frame = CGRectMake(Refrsh_WIDTH * 0.5 - IMAGEVIEW_WIDTH * 0.5 - 10, IMAGEVIEW_HEIGHT, Refrsh_WIDTH, MARK_WORD_HEIGHT);
     }
     return _label;
 }

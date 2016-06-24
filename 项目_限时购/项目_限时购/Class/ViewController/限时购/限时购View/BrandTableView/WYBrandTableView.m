@@ -42,7 +42,6 @@
     if (!cell) {
         cell = [[WYBrandCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:IDCell];
     }
-    
     WYSaleModel *model = self.infoBrandArray[indexPath.row];
     cell.model = model;
     
@@ -52,10 +51,12 @@
 #pragma make- 
 #pragma make- UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 175;
+    return 180;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (_brandCellRow) {
         _brandCellRow(indexPath.row);
     }

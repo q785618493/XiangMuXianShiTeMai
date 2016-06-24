@@ -48,7 +48,7 @@
         WYSortModel *model = (WYSortModel *)dataModel;
         
         if (model.imgView.length == 0) {
-            [_showImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"headLogo"]]];
+            [_showImage setImage:[UIImage imageNamed:@"headLogo"]];
         }
         else {
             [_showImage downloadImage:model.imgView];
@@ -62,7 +62,7 @@
         WYFaceModel *model = (WYFaceModel *)dataModel;
         
         if (model.imgView.length == 0) {
-            [_showImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"headLogo"]]];
+            [_showImage setImage:[UIImage imageNamed:@"headLogo"]];
         }
         else {
             [_showImage downloadImage:model.imgView];

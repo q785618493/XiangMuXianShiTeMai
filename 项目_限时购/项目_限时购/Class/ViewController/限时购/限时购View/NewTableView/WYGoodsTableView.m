@@ -59,6 +59,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (_goodsCellRow) {
         _goodsCellRow(indexPath.row);
     }

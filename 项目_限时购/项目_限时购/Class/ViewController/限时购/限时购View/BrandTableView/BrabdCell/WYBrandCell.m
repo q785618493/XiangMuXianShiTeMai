@@ -24,7 +24,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        [self setSelectionStyle:(UITableViewCellSelectionStyleNone)];
+//        [self setSelectionStyle:(UITableViewCellSelectionStyleNone)];
         [self addSubview:self.commodityImage];
         [self.commodityImage addSubview:self.centerImage];
     }

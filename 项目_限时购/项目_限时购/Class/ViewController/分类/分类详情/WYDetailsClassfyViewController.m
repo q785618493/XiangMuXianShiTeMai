@@ -23,11 +23,14 @@
 /** 底部展示线 的偏移量 */
 @property (assign, nonatomic) CGFloat wire_Width;
 
+/** 保存请求数据 */
+@property (strong, nonatomic) NSArray *dataArray;
+
 @end
 
 @implementation WYDetailsClassfyViewController
 
-/** 重写get方法懒加载 */
+/** 重写get方法 懒加载 */
 - (UIView *)fourBtnView {
     if (!_fourBtnView) {
         _fourBtnView = [[UIView alloc] init];
@@ -44,6 +47,13 @@
     return _wireLabel;
 }
 
+- (NSArray *)dataArray {
+    if (!_dataArray) {
+        _dataArray = [NSArray array];
+    }
+    return _dataArray;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -52,10 +62,10 @@
     [self topAddFourBtnView];
     
     if (_start) {
-        ZDY_LOG(@"%@",_typeID);
+        [self httpPostBrandListOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
     }
     else {
-        ZDY_LOG(@"%@",_typeID);
+        
     }
     
 }
@@ -121,6 +131,46 @@
             btn.selected = NO;
         }
     }
+}
+
+/**
+ *  根据品牌跳转至商品列表的 网络请求
+ *
+ *  @param OrderName 商品的排序方式
+ *  @param OrderType 顺序还是倒序
+ */
+- (void)httpPostBrandListOrderName:(NSString *)OrderName OrderType:(NSString *)OrderType {
+    
+    WS(weakSelf);
+    NSDictionary *requestDic = [NSDictionary dictionaryWithObjectsAndKeys:self.typeID,@"ShopId",OrderName,@"OrderName",OrderType,@"OrderType", nil];
+    [self POSTHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appShop/appShopGoodsList.do"] progressDic:requestDic success:^(id JSON) {
+        
+        NSArray *array = (NSArray *)JSON;
+        
+        if (array.count > 0) {
+            
+            NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
+            
+            for (NSDictionary *dict in array) {
+                
+                WYQueryModel *model = [[WYQueryModel alloc] initWithDic:dict];
+                [muArray addObject:model];
+            }
+            weakSelf.dataArray = muArray;
+            
+        }
+        else {
+            [MBProgressHUD showError:[NSString stringWithFormat:@"请求数据失败"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUD];
+            });
+        }
+        
+    } failure:^(NSError *error) {
+        ZDY_LOG(@" Error ==%@",error);
+    }];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

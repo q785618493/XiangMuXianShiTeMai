@@ -67,7 +67,7 @@ static NSString *versionKey = @"CFBundleShortVersionString";
         [_rollScrollView setShowsVerticalScrollIndicator:NO];
         [_rollScrollView setShowsHorizontalScrollIndicator:NO];
         [_rollScrollView setContentOffset:(CGPointZero)];
-        [_rollScrollView setContentSize:(CGSizeMake(WIDTH, _scale + 50 + 175 * 11))];
+        [_rollScrollView setContentSize:(CGSizeMake(WIDTH, self.scale + 50 + 1750))];
         [_rollScrollView setHidden:YES];
     }
     return _rollScrollView;
@@ -90,6 +90,8 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     __weak typeof(self) weakSelf = self;
     [newBtn setSelected:YES];
     [self.twoBtnView.BrandBtn setSelected:NO];
+    [self.rollScrollView setContentSize:(CGSizeMake(WIDTH, 175 * self.newsMuArray.count + _scale + 50))];
+    
     [UIView animateWithDuration:0.5 animations:^{
         
         CGRect brandRect = weakSelf.brandTable.frame;
@@ -108,9 +110,7 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     [brandBtn setSelected:YES];
     [self.twoBtnView.NewBtn setSelected:NO];
     
-    if (self.brandMuArray.count <= 0) {
-        [self httpGetBrandRequest];
-    }
+    [self.rollScrollView setContentSize:(CGSizeMake(WIDTH,180 * self.brandMuArray.count + _scale + 50))];
     
     [UIView animateWithDuration:0.5 animations:^{
         
@@ -148,15 +148,14 @@ static NSString *versionKey = @"CFBundleShortVersionString";
 
 - (WYGoodsTableView *)goodsTable {
     if (!_goodsTable) {
-        _goodsTable = [[WYGoodsTableView alloc] initWithFrame:(CGRectMake(0, _scale + 50, self.view.frame.size.width, 1750)) style:(UITableViewStylePlain)];
+        _goodsTable = [[WYGoodsTableView alloc] initWithFrame:(CGRectMake(0, _scale + 50, WIDTH, 1750)) style:(UITableViewStylePlain)];
     }
     return _goodsTable;
 }
 
 - (WYBrandTableView *)brandTable {
     if (!_brandTable) {
-        _brandTable = [[WYBrandTableView alloc] initWithFrame:(CGRectMake(self.view.frame.size.width, _scale + 50, self.view.frame.size.width, 1750)) style:(UITableViewStylePlain)];
-        [_brandTable setUserInteractionEnabled:NO];
+        _brandTable = [[WYBrandTableView alloc] initWithFrame:(CGRectMake(WIDTH, _scale + 50, WIDTH, 1800)) style:(UITableViewStylePlain)];
     }
     return _brandTable;
 }
@@ -175,6 +174,8 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     [self httpGetAdvertisingRequest];
     
     [self httpGetNewGoodsRequest];
+    
+    [self httpGetBrandRequest];
 }
 
 /** 添加控件和约束 */
@@ -192,6 +193,13 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     [self.rollScrollView addSubview:self.twoBtnView];
     [self.twoBtnView setFrame:(CGRectMake(0, _scale, WIDTH, 50))];
     
+    /**
+     *  新品团购cell选中回调实现的 block
+     *
+     *  @param cellRow 选中的行
+     *
+     *  @return 
+     */
     weakSelf.goodsTable.goodsCellRow = ^(NSInteger cellRow) {
         
         WYProductViewController *productVC = [[WYProductViewController alloc] init];
@@ -203,6 +211,17 @@ static NSString *versionKey = @"CFBundleShortVersionString";
         
         [productVC setHidesBottomBarWhenPushed:YES];
         [weakSelf.navigationController pushViewController:productVC animated:YES];
+    };
+    
+    /**
+     *  品牌团购cell选中回调实现的 block
+     *
+     *  @param cellRow 选中的行
+     *
+     *  @return
+     */
+    weakSelf.brandTable.brandCellRow = ^(NSInteger cellRow) {
+        
     };
 }
 
@@ -236,8 +255,7 @@ static NSString *versionKey = @"CFBundleShortVersionString";
         if (array.count >= 1) {
             
             NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
-            
-            
+
             for (NSDictionary *dict in array) {
                 [muArray addObject:dict[@"ImgView"]];
             }
@@ -250,7 +268,6 @@ static NSString *versionKey = @"CFBundleShortVersionString";
                 [MBProgressHUD hideHUD];
             });
         }
-        
     } failure:^(NSError *error) {
         
         ZDY_LOG(@"失败==%@",error);
@@ -273,9 +290,10 @@ static NSString *versionKey = @"CFBundleShortVersionString";
                 [muArray addObject:model];
             }
             [weakSelf.newsMuArray addObjectsFromArray:muArray];
+            CGRect goodsRect = weakSelf.goodsTable.frame;
+            goodsRect.size.height = weakSelf.newsMuArray.count * 175;
+            weakSelf.goodsTable.frame = goodsRect;
             weakSelf.goodsTable.infoGoodsArray = weakSelf.newsMuArray;
-            
-            [weakSelf.rollScrollView setContentSize:(CGSizeMake(WIDTH, _scale + 50 + 175 * muArray.count))];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf.goodsTable reloadData];
@@ -313,7 +331,13 @@ static NSString *versionKey = @"CFBundleShortVersionString";
                 [muArray addObject:model];
             }
             [weakSelf.brandMuArray addObjectsFromArray:muArray];
+            
+            CGRect brandRect = weakSelf.brandTable.frame;
+            brandRect.size.height = weakSelf.brandMuArray.count * 180;
+            weakSelf.brandTable.frame = brandRect;
+            
             weakSelf.brandTable.infoBrandArray = weakSelf.brandMuArray;
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf.brandTable reloadData];
             });

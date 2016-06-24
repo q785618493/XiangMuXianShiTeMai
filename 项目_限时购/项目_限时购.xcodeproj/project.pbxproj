@@ -24,6 +24,8 @@
 		0471235B1D142C3200D42B74 /* MBProgressHUD+XMG.m in Sources */ = {isa = PBXBuildFile; fileRef = 047123571D142C3200D42B74 /* MBProgressHUD+XMG.m */; };
 		0471235C1D142C3200D42B74 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 047123581D142C3200D42B74 /* MBProgressHUD.bundle */; };
 		0471235D1D142C3200D42B74 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0471235A1D142C3200D42B74 /* MBProgressHUD.m */; };
+		0472608D1D1D10B8004C8B0A /* WYDetailsCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0472608C1D1D10B8004C8B0A /* WYDetailsCollectionView.m */; };
+		047260901D1D10DD004C8B0A /* WYDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0472608F1D1D10DD004C8B0A /* WYDetailsCell.m */; };
 		047A3AEF1D1784C800A85947 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 047A3ACF1D1784C800A85947 /* MKAnnotationView+WebCache.m */; };
 		047A3AF01D1784C800A85947 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 047A3AD11D1784C800A85947 /* NSData+ImageContentType.m */; };
 		047A3AF11D1784C800A85947 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 047A3AD31D1784C800A85947 /* SDImageCache.m */; };
@@ -149,6 +151,10 @@
 		047123581D142C3200D42B74 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		047123591D142C3200D42B74 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		0471235A1D142C3200D42B74 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		0472608B1D1D10B8004C8B0A /* WYDetailsCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYDetailsCollectionView.h; sourceTree = "<group>"; };
+		0472608C1D1D10B8004C8B0A /* WYDetailsCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYDetailsCollectionView.m; sourceTree = "<group>"; };
+		0472608E1D1D10DD004C8B0A /* WYDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYDetailsCell.h; sourceTree = "<group>"; };
+		0472608F1D1D10DD004C8B0A /* WYDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYDetailsCell.m; sourceTree = "<group>"; };
 		047A3ACE1D1784C800A85947 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		047A3ACF1D1784C800A85947 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		047A3AD01D1784C800A85947 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -366,6 +372,25 @@
 				0471235A1D142C3200D42B74 /* MBProgressHUD.m */,
 			);
 			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		047260891D1D106E004C8B0A /* DetailsCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				0472608B1D1D10B8004C8B0A /* WYDetailsCollectionView.h */,
+				0472608C1D1D10B8004C8B0A /* WYDetailsCollectionView.m */,
+				0472608A1D1D106E004C8B0A /* DetailsCell */,
+			);
+			path = DetailsCollectionView;
+			sourceTree = "<group>";
+		};
+		0472608A1D1D106E004C8B0A /* DetailsCell */ = {
+			isa = PBXGroup;
+			children = (
+				0472608E1D1D10DD004C8B0A /* WYDetailsCell.h */,
+				0472608F1D1D10DD004C8B0A /* WYDetailsCell.m */,
+			);
+			path = DetailsCell;
 			sourceTree = "<group>";
 		};
 		047A3ACD1D1784C800A85947 /* SDWebImage */ = {
@@ -725,6 +750,7 @@
 		0496C8AF1D10F0FD00E3809F /* 分类详情View */ = {
 			isa = PBXGroup;
 			children = (
+				047260891D1D106E004C8B0A /* DetailsCollectionView */,
 			);
 			path = "分类详情View";
 			sourceTree = "<group>";
@@ -1356,6 +1382,7 @@
 				047A3AFD1D1784C800A85947 /* UIImageView+WebCache.m in Sources */,
 				047A3AF81D1784C800A85947 /* UIButton+WebCache.m in Sources */,
 				0496C8F41D11064300E3809F /* WYShoppingCartViewController.m in Sources */,
+				047260901D1D10DD004C8B0A /* WYDetailsCell.m in Sources */,
 				046E87B71D15447C00D48AB0 /* WYBrandTableView.m in Sources */,
 				047A3AF11D1784C800A85947 /* SDImageCache.m in Sources */,
 				047A3AF21D1784C800A85947 /* SDWebImageCompat.m in Sources */,
@@ -1386,6 +1413,7 @@
 				047F094D1D125367004E7EE7 /* NSString+Helper.m in Sources */,
 				047A3AF51D1784C800A85947 /* SDWebImageDownloaderOperation.m in Sources */,
 				04A7DB4C1D13EB640039F50D /* WYMeModel.m in Sources */,
+				0472608D1D1D10B8004C8B0A /* WYDetailsCollectionView.m in Sources */,
 				047A3AF41D1784C800A85947 /* SDWebImageDownloader.m in Sources */,
 				0496C8D01D11014500E3809F /* WYNavigationController.m in Sources */,
 			);

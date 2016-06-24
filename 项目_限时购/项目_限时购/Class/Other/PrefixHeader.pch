@@ -6,7 +6,7 @@
 //  Copyright © 2016年 WY. All rights reserved.
 //
 
-//#ifdef __OBJC__
+#ifdef __OBJC__
 
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
@@ -110,11 +110,10 @@
 //
 //#import "MJChiBaoZiFooter2.h"
 
-
+///Users/mac/Desktop/~/Library/Application Support/Developer/Shared/Xcode/Plug-ins
 
 //宏里面的可变参数:   ZDYLOG(...)
 //函数里面的可变参数: NSLog(__VA_ARGS__)
-
 
 #ifdef DEBUG //调试阶段
 
@@ -130,4 +129,4 @@
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
-//#endif /* PrefixHeader_pch */
+#endif
