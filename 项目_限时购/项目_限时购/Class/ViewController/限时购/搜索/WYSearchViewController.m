@@ -37,6 +37,12 @@
     [self searchAddView];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.searchBar becomeFirstResponder];
+}
+
 /** 添加搜索框 */
 - (void)searchAddView {
     

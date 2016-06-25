@@ -36,6 +36,7 @@
 }
 
 - (void)barButtonItemActionLeft {
+    [self.view endEditing:YES];
     [self popViewControllerAnimated:YES];
 }
 

@@ -33,6 +33,14 @@
 /** 广告视图下面的商品信息价格视图 */
 @property (strong, nonatomic) WYCenterView *thePriceView;
 
+/** 文字详情展示视图 */
+@property (strong, nonatomic) WYProductTableView *productTbaleView;
+
+/** 图片展示视图 */
+@property (strong, nonatomic) WYImageDetailsView *imageDetailsView;
+
+/** 商品评分视图 */
+@property (strong, nonatomic) WYGoodsScoreView *goodsScoreView;
 @end
 
 @implementation WYProductViewController
@@ -61,15 +69,30 @@
 - (WYCenterView *)thePriceView {
     if (!_thePriceView) {
         _thePriceView = [[WYCenterView alloc] initWithFrame:(CGRectMake(0, CGRectGetMaxY(self.adView.frame), WIDTH, 251))];
+        _thePriceView.countryUrl = _countryImageUrl;
     }
     return _thePriceView;
+}
+
+- (WYProductTableView *)productTbaleView {
+    if (!_productTbaleView) {
+        _productTbaleView = [[WYProductTableView alloc] initWithFrame:(CGRectMake(0, -CGRectGetMaxY(self.thePriceView.frame), WIDTH, 358)) style:(UITableViewStyleGrouped)];
+    }
+    return _productTbaleView;
+}
+
+- (WYImageDetailsView *)imageDetailsView {
+    if (!_imageDetailsView) {
+        _imageDetailsView = [[WYImageDetailsView alloc] initWithFrame:(CGRectMake(0, CGRectGetMaxY(self.productTbaleView.frame), WIDTH, HEIGHT))];
+    }
+    return _imageDetailsView;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    /** 添加控件 */
+    /** 添加控件 和 约束 */
     [self controlAddView];
     /** 添加导航条上的三个按钮 */
     [self navigationAddThreeBarBtnItem];
@@ -81,10 +104,84 @@
     
 }
 
-/** 添加控件 */
+/** 添加控件 和 约束 */
 - (void)controlAddView {
     [self.view addSubview:self.bgScrollView];
     [self.bgScrollView addSubview:self.adView];
+    [self.bgScrollView addSubview:self.thePriceView];
+    
+    WS(weakSelf);
+    UIView *bottomView = [[UIView alloc] init];
+    [bottomView setBackgroundColor:RGB(245, 245, 245)];
+    [self.view addSubview:bottomView];
+    
+    UILabel *lineLabel = [[UILabel alloc] init];
+    [lineLabel setBackgroundColor:RGB(213, 213, 213)];
+    [bottomView addSubview:lineLabel];
+    
+    /**     购物车按钮     */
+    UIButton *shoppingBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    [shoppingBtn setImage:[UIImage imageNamed:@"详情界面购物车按钮"] forState:(UIControlStateNormal)];
+    [shoppingBtn addTarget:self action:@selector(btnTouchActionShopping) forControlEvents:(UIControlEventTouchUpInside)];
+    [bottomView addSubview:shoppingBtn];
+    
+    
+    /**     加入购物车按钮     */
+    UIButton *addCartBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    [addCartBtn setImage:[UIImage imageNamed:@"详情界面加入购物车按钮"] forState:(UIControlStateNormal)];
+    [addCartBtn addTarget:self action:@selector(btnTouchActionAddCart) forControlEvents:(UIControlEventTouchUpInside)];
+    [bottomView addSubview:addCartBtn];
+    
+    /**     立即购买按钮     */
+    UIButton *buyNowBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    [buyNowBtn setImage:[UIImage imageNamed:@"详情界面立即购买按钮"] forState:(UIControlStateNormal)];
+    [buyNowBtn addTarget:self action:@selector(btnTouchActionBuyNow) forControlEvents:(UIControlEventTouchUpInside)];
+    [bottomView addSubview:buyNowBtn];
+    
+    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(HEIGHT - 44, 0, 0, 0));
+    }];
+    
+    [lineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(bottomView).with.insets(UIEdgeInsetsMake(0, 0, 43, 0));
+    }];
+    
+    [shoppingBtn makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bottomView).offset(9);
+        make.left.equalTo(bottomView).offset(15);
+        make.size.equalTo(CGSizeMake(26, 26));
+    }];
+    
+    CGFloat width = (WIDTH - 105) * 0.5;
+    
+    [addCartBtn makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bottomView).offset(5);
+        make.bottom.equalTo(bottomView).offset(-5);
+        make.left.equalTo(shoppingBtn.right).offset(34);
+        make.width.equalTo(width);
+    }];
+    
+    [buyNowBtn makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bottomView).offset(5);
+        make.bottom.equalTo(bottomView).offset(-5);
+        make.right.equalTo(bottomView.right).offset(-15);
+        make.width.equalTo(width);
+    }];
+}
+
+/** 购物车按钮点击事件 */
+- (void)btnTouchActionShopping {
+    
+}
+
+/** 加入购物车按钮点击事件 */
+- (void)btnTouchActionAddCart {
+    
+}
+
+/** 立即购买按钮点击事件 */
+- (void)btnTouchActionBuyNow {
+    
 }
 
 /** 商品所有图片列表网络请求 */
@@ -163,7 +260,7 @@
         
         if (infoDict) {
             
-            WYAllGoodsModel *model = [[WYAllGoodsModel alloc] initWithDictionary:infoDict];
+            WYAllDetailsModel *model = [[WYAllDetailsModel alloc] initWithDictionary:infoDict];
             weakSelf.thePriceView.model = model;
         }
         else {
