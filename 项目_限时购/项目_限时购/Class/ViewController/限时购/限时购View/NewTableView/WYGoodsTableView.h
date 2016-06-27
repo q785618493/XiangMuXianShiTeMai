@@ -8,6 +8,8 @@
 
 #import "WYBaesTableView.h"
 
+/** 加入购物车按钮事件的回调 block */
+typedef void(^AddShoppingBlock)(NSInteger btnTag);
 
 @interface WYGoodsTableView : WYBaesTableView
 
@@ -17,5 +19,7 @@
 /** 新品团购选中哪一行cell回调的 block */
 @property (copy, nonatomic) TableCellBlock goodsCellRow;
 
+/** 加入购物车按钮事件的回调 block */
+@property (copy, nonatomic) AddShoppingBlock shoppingCar;
 
 @end

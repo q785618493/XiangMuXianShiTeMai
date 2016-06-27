@@ -168,47 +168,34 @@ static NSString *keyHeader = @"imageUser";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self controlAddMasonry];
+    [self judgeUserIsLogin];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+/** 判断用户是否登录 */
+- (void)judgeUserIsLogin {
     
     /** 获取登录状态 */
     BOOL isStatu = [XSG_USER_DEFAULTS boolForKey:status];
     
     /** 判断登录状态 */
     if (isStatu) {
-        WS(weakSelf);
-        /** 获取本地保存的用户数据信息 */
-        NSDictionary *dict = [XSG_USER_DEFAULTS dictionaryForKey:userInfo];
-        self.topUserView.meDic = dict;
-        [self replaceUserHeaderImage];
-        
-        NSData *data = [NSData dataWithContentsOfFile:USER_HEADER_PATH];
-        UIImage *image = [UIImage imageWithData:data];
-        
-        if (image) {
-            [self.topUserView setValue:image forKey:keyHeader];
-            [self replaceUserHeaderImage];
-        }
-        [self.meTableView setTableHeaderView:self.topUserView];
-        [self.meTableView setTableFooterView:self.quitView];
-        [self.quitView addSubview:self.exitBtn];
-        [_exitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(weakSelf.quitView).with.insets(UIEdgeInsetsMake(10, 16, 10, 16));
-        }];
+        [self controlAddMasonryLoginUser];
     }
     else {
-        [self.meTableView setTableFooterView:self.lineView];
-        [self.meTableView setTableHeaderView:self.topLoginView];
+        [self controlAddMasonryNotLogin];
     }
 }
 
-/** 添加视图和约束 */
-- (void)controlAddMasonry {
+/** 添加未登录状态的视图和约束 */
+- (void)controlAddMasonryNotLogin {
     WS(weakSelf);
     [self.view addSubview:self.meTableView];
+    [self.meTableView setTableHeaderView:self.topLoginView];
+    [self.meTableView setTableFooterView:self.lineView];
+    [_meTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(64, 0, 49, 0));
+    }];
+    
     weakSelf.topLoginView.blockLogin = ^() {
         WYLoginViewController *loginVC = [[WYLoginViewController alloc] init];
         loginVC.title = [NSString stringWithFormat:@"登 录"];
@@ -251,9 +238,34 @@ static NSString *keyHeader = @"imageUser";
         registerVC.title = [NSString stringWithFormat:@"注 册"];
         [weakSelf.navigationController pushViewController:registerVC animated:YES];
     };
+}
+
+/** 添加登录状态的视图和约束 */
+- (void)controlAddMasonryLoginUser {
+    WS(weakSelf);
+    /** 获取本地保存的用户数据信息 */
+    NSDictionary *dict = [XSG_USER_DEFAULTS dictionaryForKey:userInfo];
     
+    [self.view addSubview:self.meTableView];
     [_meTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(64, 0, 49, 0));
+    }];
+    
+    self.topUserView.meDic = dict;
+    [self replaceUserHeaderImage];
+    
+    NSData *data = [NSData dataWithContentsOfFile:USER_HEADER_PATH];
+    UIImage *image = [UIImage imageWithData:data];
+    
+    if (image) {
+        [self.topUserView setValue:image forKey:keyHeader];
+        [self replaceUserHeaderImage];
+    }
+    [self.meTableView setTableHeaderView:self.topUserView];
+    [self.meTableView setTableFooterView:self.quitView];
+    [self.quitView addSubview:self.exitBtn];
+    [_exitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(weakSelf.quitView).with.insets(UIEdgeInsetsMake(10, 16, 10, 16));
     }];
 }
 

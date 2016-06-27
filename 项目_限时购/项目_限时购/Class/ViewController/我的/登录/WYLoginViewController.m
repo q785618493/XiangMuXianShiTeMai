@@ -150,6 +150,8 @@
         
         if ([userDic[@"ErrorMessage"] isEqualToString:[NSString stringWithFormat:@"登陆成功"]]) {
             
+            [XSG_USER_DEFAULTS setObject:userDic forKey:LOGIN_USER];
+            
             [MBProgressHUD showSuccess:[NSString stringWithFormat:@"登录成功ing..."]];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];

@@ -137,6 +137,7 @@
     }];
     
     NSArray *titleArray = [[NSArray alloc] initWithObjects:@"热门",@"价格",@"好评",@"新品", nil];
+    
     for (NSInteger i = 0; i < titleArray.count; i ++) {
         
         UIButton *rankBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];

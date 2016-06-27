@@ -10,6 +10,11 @@
 		0424CE411D1AADAD00E162BB /* WYDetailsClassfyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0424CE401D1AADAD00E162BB /* WYDetailsClassfyViewController.m */; };
 		0424CE451D1AAE3B00E162BB /* WYQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0424CE441D1AAE3B00E162BB /* WYQueryModel.m */; };
 		04488F771D20D51B00ED6DAB /* WYHomeGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04488F761D20D51B00ED6DAB /* WYHomeGuideView.m */; };
+		044B2D9A1D210E7500988617 /* WYNotLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B2D991D210E7500988617 /* WYNotLoginView.m */; };
+		044B2DA61D21124100988617 /* WYLoginNoGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B2DA51D21124100988617 /* WYLoginNoGoodsView.m */; };
+		044B2DA91D2131AA00988617 /* WYLoginHaveGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B2DA81D2131AA00988617 /* WYLoginHaveGoodsView.m */; };
+		044B2DAD1D2147A200988617 /* WYHaveGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B2DAC1D2147A200988617 /* WYHaveGoodsCell.m */; };
+		044B2DB11D21492100988617 /* WYShoppingCarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B2DB01D21492100988617 /* WYShoppingCarModel.m */; };
 		046E07381D127B3A00645E96 /* WYHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E07371D127B3A00645E96 /* WYHttpRequest.m */; };
 		046E074A1D12882000645E96 /* WYTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E07461D12882000645E96 /* WYTextFieldView.m */; };
 		046E074B1D12882000645E96 /* WYThirdPartyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E07491D12882000645E96 /* WYThirdPartyView.m */; };
@@ -133,6 +138,16 @@
 		0424CE441D1AAE3B00E162BB /* WYQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYQueryModel.m; sourceTree = "<group>"; };
 		04488F751D20D51B00ED6DAB /* WYHomeGuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYHomeGuideView.h; sourceTree = "<group>"; };
 		04488F761D20D51B00ED6DAB /* WYHomeGuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYHomeGuideView.m; sourceTree = "<group>"; };
+		044B2D981D210E7500988617 /* WYNotLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYNotLoginView.h; sourceTree = "<group>"; };
+		044B2D991D210E7500988617 /* WYNotLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYNotLoginView.m; sourceTree = "<group>"; };
+		044B2DA41D21124100988617 /* WYLoginNoGoodsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLoginNoGoodsView.h; sourceTree = "<group>"; };
+		044B2DA51D21124100988617 /* WYLoginNoGoodsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLoginNoGoodsView.m; sourceTree = "<group>"; };
+		044B2DA71D2131AA00988617 /* WYLoginHaveGoodsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLoginHaveGoodsView.h; sourceTree = "<group>"; };
+		044B2DA81D2131AA00988617 /* WYLoginHaveGoodsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLoginHaveGoodsView.m; sourceTree = "<group>"; };
+		044B2DAB1D2147A200988617 /* WYHaveGoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYHaveGoodsCell.h; sourceTree = "<group>"; };
+		044B2DAC1D2147A200988617 /* WYHaveGoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYHaveGoodsCell.m; sourceTree = "<group>"; };
+		044B2DAF1D21492100988617 /* WYShoppingCarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYShoppingCarModel.h; sourceTree = "<group>"; };
+		044B2DB01D21492100988617 /* WYShoppingCarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYShoppingCarModel.m; sourceTree = "<group>"; };
 		046E07361D127B3A00645E96 /* WYHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYHttpRequest.h; sourceTree = "<group>"; };
 		046E07371D127B3A00645E96 /* WYHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYHttpRequest.m; sourceTree = "<group>"; };
 		046E07451D12882000645E96 /* WYTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYTextFieldView.h; sourceTree = "<group>"; };
@@ -360,6 +375,52 @@
 				04488F761D20D51B00ED6DAB /* WYHomeGuideView.m */,
 			);
 			path = GuideView;
+			sourceTree = "<group>";
+		};
+		044B2D951D210E3700988617 /* LoginHaveGoodsView */ = {
+			isa = PBXGroup;
+			children = (
+				044B2DA71D2131AA00988617 /* WYLoginHaveGoodsView.h */,
+				044B2DA81D2131AA00988617 /* WYLoginHaveGoodsView.m */,
+				044B2DAA1D21320300988617 /* HaveGoodsCell */,
+			);
+			path = LoginHaveGoodsView;
+			sourceTree = "<group>";
+		};
+		044B2D961D210E3700988617 /* LoginNoGoodsView */ = {
+			isa = PBXGroup;
+			children = (
+				044B2DA41D21124100988617 /* WYLoginNoGoodsView.h */,
+				044B2DA51D21124100988617 /* WYLoginNoGoodsView.m */,
+			);
+			path = LoginNoGoodsView;
+			sourceTree = "<group>";
+		};
+		044B2D971D210E3700988617 /* NotLoginView */ = {
+			isa = PBXGroup;
+			children = (
+				044B2D981D210E7500988617 /* WYNotLoginView.h */,
+				044B2D991D210E7500988617 /* WYNotLoginView.m */,
+			);
+			path = NotLoginView;
+			sourceTree = "<group>";
+		};
+		044B2DAA1D21320300988617 /* HaveGoodsCell */ = {
+			isa = PBXGroup;
+			children = (
+				044B2DAB1D2147A200988617 /* WYHaveGoodsCell.h */,
+				044B2DAC1D2147A200988617 /* WYHaveGoodsCell.m */,
+			);
+			path = HaveGoodsCell;
+			sourceTree = "<group>";
+		};
+		044B2DAE1D21492100988617 /* ShoppingCarModel */ = {
+			isa = PBXGroup;
+			children = (
+				044B2DAF1D21492100988617 /* WYShoppingCarModel.h */,
+				044B2DB01D21492100988617 /* WYShoppingCarModel.m */,
+			);
+			path = ShoppingCarModel;
 			sourceTree = "<group>";
 		};
 		046E07441D12882000645E96 /* TextFieldView */ = {
@@ -947,6 +1008,7 @@
 		0496C8BB1D10F0FD00E3809F /* 购物车Model */ = {
 			isa = PBXGroup;
 			children = (
+				044B2DAE1D21492100988617 /* ShoppingCarModel */,
 			);
 			path = "购物车Model";
 			sourceTree = "<group>";
@@ -954,6 +1016,9 @@
 		0496C8BC1D10F0FD00E3809F /* 购物车View */ = {
 			isa = PBXGroup;
 			children = (
+				044B2D971D210E3700988617 /* NotLoginView */,
+				044B2D961D210E3700988617 /* LoginNoGoodsView */,
+				044B2D951D210E3700988617 /* LoginHaveGoodsView */,
 			);
 			path = "购物车View";
 			sourceTree = "<group>";
@@ -1490,9 +1555,12 @@
 				047F08F21D1242A2004E7EE7 /* WYBaseView.m in Sources */,
 				047A3B041D17F2D100A85947 /* WYSearchViewController.m in Sources */,
 				0471235B1D142C3200D42B74 /* MBProgressHUD+XMG.m in Sources */,
+				044B2DA61D21124100988617 /* WYLoginNoGoodsView.m in Sources */,
 				046E87C91D15457D00D48AB0 /* WYGoodsTableView.m in Sources */,
 				0496C8CD1D11012400E3809F /* WYTabBarController.m in Sources */,
 				04A7DB3E1D13E02A0039F50D /* UIImageView+WY_SDWedImage.m in Sources */,
+				044B2DAD1D2147A200988617 /* WYHaveGoodsCell.m in Sources */,
+				044B2D9A1D210E7500988617 /* WYNotLoginView.m in Sources */,
 				046E87BA1D1544AA00D48AB0 /* WYBrandCell.m in Sources */,
 				0496C8E71D1102B900E3809F /* WYBaseCollectionCell.m in Sources */,
 				047260AE1D1D5A53004C8B0A /* WYGoodsScoreView.m in Sources */,
@@ -1512,7 +1580,9 @@
 				047A3AF71D1784C800A85947 /* SDWebImagePrefetcher.m in Sources */,
 				047A3AFA1D1784C800A85947 /* UIImage+MultiFormat.m in Sources */,
 				047A3AF31D1784C800A85947 /* SDWebImageDecoder.m in Sources */,
+				044B2DA91D2131AA00988617 /* WYLoginHaveGoodsView.m in Sources */,
 				04A7DB471D13E56F0039F50D /* WYMeTableView.m in Sources */,
+				044B2DB11D21492100988617 /* WYShoppingCarModel.m in Sources */,
 				0496C8E11D11027300E3809F /* WYBaseTableCell.m in Sources */,
 				046E87D01D154C7400D48AB0 /* WYSaleModel.m in Sources */,
 				0496C8F11D11062300E3809F /* WYClassifyViewController.m in Sources */,

@@ -1,60 +1,47 @@
 //
-//  WYGoodsTableView.m
+//  WYLoginHaveGoodsView.m
 //  项目_限时购
 //
-//  Created by ma c on 16/6/18.
+//  Created by ma c on 16/6/27.
 //  Copyright © 2016年 WY. All rights reserved.
 //
 
-#import "WYGoodsTableView.h"
-#import "WYNewsModel.h"
-#import "WYNewCell.h"
+#import "WYLoginHaveGoodsView.h"
+#import "WYHaveGoodsCell.h"
 
-@interface WYGoodsTableView () <UITableViewDataSource,UITableViewDelegate>
-
+@interface WYLoginHaveGoodsView () <UITableViewDataSource,UITableViewDelegate>
 
 @end
 
-@implementation WYGoodsTableView
-
+@implementation WYLoginHaveGoodsView
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
-    
     if (self = [super initWithFrame:frame style:style]) {
         
         [self setDelegate:self];
         [self setDataSource:self];
-        [self setBounces:NO];
-        [self setShowsHorizontalScrollIndicator:NO];
+        [self setTableFooterView:[[UIView alloc] init]];
         [self setShowsVerticalScrollIndicator:NO];
-        [self setSeparatorStyle:(UITableViewCellSeparatorStyleNone)];
+        [self setShowsHorizontalScrollIndicator:NO];
     }
     return self;
 }
 
-
 #pragma make-
 #pragma make- UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.infoGoodsArray.count;
+    return self.goodsMuArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *IDCell = @"cellID";
-    WYNewCell *cell = [tableView dequeueReusableCellWithIdentifier:IDCell];
+    WYHaveGoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:IDCell];
+    
     if (!cell) {
-        cell = [[WYNewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:IDCell];
+        cell = [[WYHaveGoodsCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:IDCell];
     }
-    
-    WYNewsModel *model = self.infoGoodsArray[indexPath.row];
-    cell.cellTag = indexPath.row;
-    cell.model = model;
-    
-    cell.btnTagBlock = ^(NSInteger btnTag) {
-        if (_shoppingCar) {
-            _shoppingCar(btnTag);
-        }
-    };
+    cell.model = self.goodsMuArray[indexPath.row];
     
     return cell;
 }
@@ -62,17 +49,14 @@
 #pragma make-
 #pragma make- UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 175;
+    return 100;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (_goodsCellRow) {
-        _goodsCellRow(indexPath.row);
+    if (_cellRow) {
+        _cellRow(indexPath.row);
     }
 }
-
 
 /*
 // Only override drawRect: if you perform custom drawing.

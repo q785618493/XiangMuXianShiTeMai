@@ -101,6 +101,9 @@
 /** 偏好设置保存用户信息 */
 #define XSG_USER_DEFAULTS [NSUserDefaults standardUserDefaults]
 
+/** 用户信息保存到本地的 key */
+#define LOGIN_USER @"loginDic"
+
 //#import "Masonry.h"
 //
 ///**   * SDWebImage 给 按钮后台加载图片的头文件   */

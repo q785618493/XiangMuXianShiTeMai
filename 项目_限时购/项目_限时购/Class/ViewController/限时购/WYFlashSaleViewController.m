@@ -248,6 +248,22 @@ static NSString *versionKey = @"CFBundleShortVersionString";
         [weakSelf.navigationController pushViewController:productVC animated:YES];
     };
     
+    /** 加入购物车按钮回调的block */
+    weakSelf.goodsTable.shoppingCar = ^(NSInteger btnTag) {
+        /** 获取登录保存的本地数据 */
+        NSDictionary *userDic = [XSG_USER_DEFAULTS objectForKey:LOGIN_USER];
+        if (userDic) {
+            WYNewsModel *model = self.newsMuArray[btnTag];
+            [weakSelf httpGetGoodsAddSgoppingCarRequestMemberId:userDic[@"MemberId"] GoodsId:model.goodsId];
+        }
+        else {
+            [MBProgressHUD showError:[NSString stringWithFormat:@"尊敬的用户您尚未登录"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUD];
+            });
+        }
+    };
+    
     /**
      *  品牌团购cell选中回调实现的 block
      *
@@ -292,6 +308,7 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     NSString *currentVersion = [NSBundle mainBundle].infoDictionary[versionKey];
     
     if ([lastVersion isEqualToString:currentVersion]) {
+        /** 请求网络数据 */
         [self requestNetworkData];
     }
     else {
@@ -459,6 +476,48 @@ static NSString *versionKey = @"CFBundleShortVersionString";
             [MBProgressHUD hideHUD];
         });
     }];
+}
+
+/** 商品加入购物车的网络请求 */
+- (void)httpGetGoodsAddSgoppingCarRequestMemberId:(NSString *)MemberId GoodsId:(NSString *)GoodsId {
+    WS(weakSelf);
+    
+    NSDictionary *requestDic = @{@"MemberId":MemberId,
+                                 @"GoodsId":GoodsId};
+    
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appShopCart/insert.do"] progressDic:requestDic success:^(id JSON) {
+        NSDictionary *statusDic = (NSDictionary *)JSON;
+        
+        NSString *dataJson = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:nil] encoding:NSUTF8StringEncoding];
+        ZDY_LOG(@"====%@",dataJson);
+        
+        if ([statusDic[@"result"] isEqualToString:[NSString stringWithFormat:@"success"]]) {
+            
+            UIAlertController *alertC = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"已将商品添加到购物车"] message:[NSString stringWithFormat:@"点击去付款到购物车结算，点击再逛逛查看其它商品"] preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            UIAlertAction *paymentAction = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"去付款"] style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
+                
+                weakSelf.tabBarController.selectedIndex = 2;
+                
+            }];
+            
+            UIAlertAction *goagoAction = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"再逛逛"] style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            
+            [alertC addAction:paymentAction];
+            [alertC addAction:goagoAction];
+            [weakSelf presentViewController:alertC animated:YES completion:nil];
+            
+        }
+        else {
+            ZDY_LOG(@"----- 加入购物车失败 -----");
+        }
+        
+    } failure:^(NSError *error) {
+        ZDY_LOG(@"error == %@",error);
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
