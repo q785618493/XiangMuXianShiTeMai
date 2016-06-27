@@ -10,9 +10,7 @@
 
 @interface WYGoodsScoreView : WYBaseView
 
-- (instancetype)initWithFrame:(CGRect)frame dataArray:(NSArray *)dataArray;
-
+/** 接收数据 */
 @property (strong, nonatomic) NSArray *dataArray;
-
 
 @end

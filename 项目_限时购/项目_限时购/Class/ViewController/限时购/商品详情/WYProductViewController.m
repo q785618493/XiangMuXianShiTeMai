@@ -41,6 +41,10 @@
 
 /** 商品评分视图 */
 @property (strong, nonatomic) WYGoodsScoreView *goodsScoreView;
+
+/** 添加轮播视图上的购买人数按钮 */
+@property (strong, nonatomic) UIButton *buyBtn;
+
 @end
 
 @implementation WYProductViewController
@@ -66,6 +70,18 @@
     return _adView;
 }
 
+- (UIButton *)buyBtn {
+    if (!_buyBtn) {
+        _buyBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+        [_buyBtn setFrame:(CGRectMake(WIDTH - 85, 320 - 50, 92, 22))];
+        [_buyBtn setBackgroundColor:RGB(255, 75, 34)];
+        [_buyBtn.layer setMasksToBounds:YES];
+        [_buyBtn.layer setCornerRadius:11];
+        [_buyBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
+    }
+    return _buyBtn;
+}
+
 - (WYCenterView *)thePriceView {
     if (!_thePriceView) {
         _thePriceView = [[WYCenterView alloc] initWithFrame:(CGRectMake(0, CGRectGetMaxY(self.adView.frame), WIDTH, 251))];
@@ -76,7 +92,7 @@
 
 - (WYProductTableView *)productTbaleView {
     if (!_productTbaleView) {
-        _productTbaleView = [[WYProductTableView alloc] initWithFrame:(CGRectMake(0, -CGRectGetMaxY(self.thePriceView.frame), WIDTH, 358)) style:(UITableViewStyleGrouped)];
+        _productTbaleView = [[WYProductTableView alloc] initWithFrame:(CGRectMake(0, CGRectGetMaxY(self.thePriceView.frame), WIDTH, 358)) style:(UITableViewStyleGrouped)];
     }
     return _productTbaleView;
 }
@@ -86,6 +102,13 @@
         _imageDetailsView = [[WYImageDetailsView alloc] initWithFrame:(CGRectMake(0, CGRectGetMaxY(self.productTbaleView.frame), WIDTH, HEIGHT))];
     }
     return _imageDetailsView;
+}
+
+- (WYGoodsScoreView *)goodsScoreView {
+    if (!_goodsScoreView) {
+        _goodsScoreView = [[WYGoodsScoreView alloc] initWithFrame:(CGRectMake(0, CGRectGetMaxY(self.imageDetailsView.frame), WIDTH, 130))];
+    }
+    return _goodsScoreView;
 }
 
 - (void)viewDidLoad {
@@ -101,6 +124,8 @@
     [self httpGetGoodsImagesRequest];
     /** 商品详情部分（包含价格，评分等）网络请求*/
     [self httpGetAllGoodsDetailsRequest];
+    /** 商品详情列表网络请求 */
+    [self httpGetGoodsDetailsRequest];
     
 }
 
@@ -108,7 +133,11 @@
 - (void)controlAddView {
     [self.view addSubview:self.bgScrollView];
     [self.bgScrollView addSubview:self.adView];
+    [self.adView addSubview:self.buyBtn];
     [self.bgScrollView addSubview:self.thePriceView];
+    [self.bgScrollView addSubview:self.productTbaleView];
+    [self.bgScrollView addSubview:self.imageDetailsView];
+    [self.bgScrollView addSubview:self.goodsScoreView];
     
     WS(weakSelf);
     UIView *bottomView = [[UIView alloc] init];
@@ -167,6 +196,12 @@
         make.right.equalTo(bottomView.right).offset(-15);
         make.width.equalTo(width);
     }];
+    
+    weakSelf.imageDetailsView.viewHeight = ^(CGFloat viewHeight) {
+        CGRect imageRect = weakSelf.imageDetailsView.frame;
+        imageRect.size.height = viewHeight;
+        weakSelf.imageDetailsView.frame = imageRect;
+    };
 }
 
 /** 购物车按钮点击事件 */
@@ -232,8 +267,13 @@
                 }
             }
             
-            weakSelf.adView.arrayImages = imageArray;
-            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.adView.arrayImages = imageArray;
+                CGFloat height = [detailsHeightArray[0] floatValue];
+                CGFloat scale = height / 667.0 < 667 / height ? height / 667.0 : 667 / height;
+                weakSelf.imageDetailsView.scale = scale;
+                weakSelf.imageDetailsView.photoArray = detailsImageArray;
+            });
         }
         else {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -261,7 +301,11 @@
         if (infoDict) {
             
             WYAllDetailsModel *model = [[WYAllDetailsModel alloc] initWithDictionary:infoDict];
-            weakSelf.thePriceView.model = model;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.thePriceView.model = model;
+                [weakSelf.buyBtn setTitle:model.buyCount forState:(UIControlStateNormal)];
+            });
+            
         }
         else {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -292,6 +336,11 @@
                 WYGoodsDetailsModel *model = [[WYGoodsDetailsModel alloc] initWithDictionary:dic];
                 [muArray addObject:model];
             }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.productTbaleView.dataArray = muArray;
+                [weakSelf.productTbaleView reloadData];
+            });
         }
         else {
             
@@ -305,7 +354,44 @@
         
     } failure:^(NSError *error) {
         ZDY_LOG(@"======%@",error);
+        
     }];
+}
+
+/** 商品评分部分网络请求 */
+- (void)httpGetGoodsScoreRequest {
+    WS(weakSelf);
+    
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appGoods/findGoodsScore.do"] progressDic:@{@"GoodsId":self.goodsID} success:^(id JSON) {
+        
+        NSArray *array = (NSArray *)JSON;
+        
+        if (array) {
+            NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
+            
+            for (NSDictionary *dict in array) {
+                WYScoreModel *model = [[WYScoreModel alloc] initWithDictionary:dict];
+                [muArray addObject:model];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.goodsScoreView.dataArray = muArray;
+            });
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD showError:[NSString stringWithFormat:@"没有该商品列表"]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUD];
+                });
+            });
+
+        }
+        
+    } failure:^(NSError *error) {
+        ZDY_LOG(@"-----%@",error);
+        
+    }];
+    
 }
 
 /** 添加导航条上的2个按钮 */

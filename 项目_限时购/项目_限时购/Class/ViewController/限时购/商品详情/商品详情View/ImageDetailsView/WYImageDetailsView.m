@@ -11,26 +11,29 @@
 
 @implementation WYImageDetailsView
 
-- (instancetype)initWithFrame:(CGRect)frame photoArray:(NSArray *)photoArray {
+- (void)setPhotoArray:(NSArray *)photoArray {
+    _photoArray = photoArray;
     
-    if (self = [super initWithFrame:frame]) {
+    CGFloat countArr = photoArray.count;
+    
+    CGFloat viewHeight = VIEW_HEIGHT * _scale * countArr;
+    
+    CGFloat width = self.frame.size.width;
+    
+    CGFloat height = viewHeight / countArr;
+    
+    for (NSInteger i = 0; i < countArr; i ++) {
         
-        CGFloat countArr = photoArray.count;
-        
-        CGFloat width = frame.size.width;
-        
-        CGFloat height = frame.size.height / countArr;
-        
-        for (NSInteger i = 0; i < countArr; i ++) {
-            
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:(CGRectMake(0, i * height, width, height))];
-            [imageView downloadImage:photoArray[i]];
-            [self addSubview:imageView];
-        }
-        
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:(CGRectMake(0, i * height, width, height))];
+        [imageView downloadImage:photoArray[i]];
+        [self addSubview:imageView];
     }
-    return self;
+    
+    if (_viewHeight) {
+        _viewHeight(viewHeight);
+    }
 }
+
 
 /*
 // Only override drawRect: if you perform custom drawing.
