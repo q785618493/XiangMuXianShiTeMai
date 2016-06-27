@@ -11,6 +11,7 @@
 #import "WYNotLoginView.h"
 #import "WYLoginNoGoodsView.h"
 #import "WYLoginHaveGoodsView.h"
+#import "WYSettlementView.h"
 
 #import "WYShoppingCarModel.h"
 
@@ -24,6 +25,9 @@
 
 /** 用户以登录,购物车有商品提醒视图 */
 @property (strong, nonatomic) WYLoginHaveGoodsView *haveGoodsView;
+
+/** 底部结算视图 */
+@property (strong, nonatomic) WYSettlementView *bottomView;
 
 /** 保存购物车商品数据 */
 @property (strong, nonatomic) NSMutableArray *shoppingMuArray;
@@ -49,9 +53,16 @@
 
 - (WYLoginHaveGoodsView *)haveGoodsView {
     if (!_haveGoodsView) {
-        _haveGoodsView = [[WYLoginHaveGoodsView alloc] initWithFrame:(CGRectMake(0, 64, VIEW_WIDTH, VIEW_HEIGHT - 49 - 64)) style:(UITableViewStylePlain)];
+        _haveGoodsView = [[WYLoginHaveGoodsView alloc] initWithFrame:(CGRectMake(0, 64, VIEW_WIDTH, VIEW_HEIGHT - 49 - 64 - 56)) style:(UITableViewStylePlain)];
     }
     return _haveGoodsView;
+}
+
+- (WYSettlementView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [[WYSettlementView alloc] init];
+    }
+    return _bottomView;
 }
 
 
@@ -59,9 +70,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     /** 判断当前用户是否登录 */
     [self judgeCurrentUserIsLogin];
-    
 }
 
 /** 判断当前用户是否登录 */
@@ -76,6 +92,8 @@
         NSInteger goodsNumber = [dictUser[@"result"] integerValue];
         
         if (0 == goodsNumber) {
+            [self.notLoginView removeFromSuperview];
+            [self.haveGoodsView removeFromSuperview];
             [self.view addSubview:self.noGoodsView];
             [_noGoodsView makeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.equalTo(weakSelf.view.centerX);
@@ -89,20 +107,31 @@
             
         }
         else {
-            
+            [self.notLoginView removeFromSuperview];
+            [self.noGoodsView removeFromSuperview];
+            [self.view addSubview:self.bottomView];
             [self.view addSubview:self.haveGoodsView];
             
-            [self httpGetShoppingCarListRequestMemberId:dictUser[@"MemberId"]];
+            [_bottomView makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.equalTo(weakSelf.view.bottom).offset(-49);
+                make.top.equalTo(weakSelf.haveGoodsView.bottom);
+                make.left.right.equalTo(weakSelf.view);
+            }];
             
+            [self httpGetShoppingCarListRequestMemberId:dictUser[@"MemberId"]];
         }
     }
     else {
+        [self.noGoodsView removeFromSuperview];
+        [self.haveGoodsView removeFromSuperview];
         [self.view addSubview:self.notLoginView];
         [_notLoginView makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(weakSelf.view.centerX);
             make.centerY.equalTo(weakSelf.view.centerY);
             make.size.equalTo(CGSizeMake(154, 44));
         }];
+        
+        
     }
 }
 
@@ -114,19 +143,25 @@
         
         NSArray *array = (NSArray *)JSON;
         
-        NSString *dataJson = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:nil] encoding:NSUTF8StringEncoding];
-        
-        NSLog(@"JSON === %@",dataJson);
-        
         if (array) {
             
             NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
+            CGFloat thePrice = 0;
+            CGFloat price;
+            NSInteger number;
+            
             for (NSDictionary *dict in array) {
                 WYShoppingCarModel *model = [[WYShoppingCarModel alloc] initWithDictionary:dict];
                 [muArray addObject:model];
+                
+                price = [model.price floatValue];
+                number = [model.goodsCount integerValue];
+                thePrice += number * price * 1.0;
             }
             
             weakSelf.shoppingMuArray = muArray;
+            weakSelf.bottomView.moneyText = [NSString stringWithFormat:@"%.2f",thePrice];
+            weakSelf.haveGoodsView.goodsMuArray = weakSelf.shoppingMuArray;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf.haveGoodsView reloadData];

@@ -143,6 +143,7 @@ static NSString *keyHeader = @"imageUser";
             if (removeData) {
                 /** 删除用户信息 */
                 [XSG_USER_DEFAULTS removeObjectForKey:userInfo];
+                [XSG_USER_DEFAULTS removeObjectForKey:LOGIN_USER];
                 /** 删除登录状态 */
                 [XSG_USER_DEFAULTS removeObjectForKey:status];
                 weakSelf.meTableView.infoArray = [self returnModelArray];
@@ -167,7 +168,7 @@ static NSString *keyHeader = @"imageUser";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    /** 判断用户是否登录 */
     [self judgeUserIsLogin];
 }
 

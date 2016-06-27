@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040160821D2164F4006228CA /* WYSettlementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040160811D2164F4006228CA /* WYSettlementView.m */; };
 		0424CE411D1AADAD00E162BB /* WYDetailsClassfyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0424CE401D1AADAD00E162BB /* WYDetailsClassfyViewController.m */; };
 		0424CE451D1AAE3B00E162BB /* WYQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0424CE441D1AAE3B00E162BB /* WYQueryModel.m */; };
 		04488F771D20D51B00ED6DAB /* WYHomeGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04488F761D20D51B00ED6DAB /* WYHomeGuideView.m */; };
@@ -132,6 +133,8 @@
 
 /* Begin PBXFileReference section */
 		022494CBC7266594F2C2EFD9 /* Pods-项目_限时购Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-项目_限时购Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-项目_限时购Tests/Pods-项目_限时购Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		040160801D2164F4006228CA /* WYSettlementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYSettlementView.h; sourceTree = "<group>"; };
+		040160811D2164F4006228CA /* WYSettlementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYSettlementView.m; sourceTree = "<group>"; };
 		0424CE3F1D1AADAD00E162BB /* WYDetailsClassfyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYDetailsClassfyViewController.h; sourceTree = "<group>"; };
 		0424CE401D1AADAD00E162BB /* WYDetailsClassfyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYDetailsClassfyViewController.m; sourceTree = "<group>"; };
 		0424CE431D1AAE3B00E162BB /* WYQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYQueryModel.h; sourceTree = "<group>"; };
@@ -359,6 +362,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0401607F1D216431006228CA /* SettlementView */ = {
+			isa = PBXGroup;
+			children = (
+				040160801D2164F4006228CA /* WYSettlementView.h */,
+				040160811D2164F4006228CA /* WYSettlementView.m */,
+			);
+			path = SettlementView;
+			sourceTree = "<group>";
+		};
 		0424CE421D1AAE3B00E162BB /* QueryModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1019,6 +1031,7 @@
 				044B2D971D210E3700988617 /* NotLoginView */,
 				044B2D961D210E3700988617 /* LoginNoGoodsView */,
 				044B2D951D210E3700988617 /* LoginHaveGoodsView */,
+				0401607F1D216431006228CA /* SettlementView */,
 			);
 			path = "购物车View";
 			sourceTree = "<group>";
@@ -1540,6 +1553,7 @@
 				047A3AF61D1784C800A85947 /* SDWebImageManager.m in Sources */,
 				0424CE451D1AAE3B00E162BB /* WYQueryModel.m in Sources */,
 				047F09561D125367004E7EE7 /* WYCustomButton.m in Sources */,
+				040160821D2164F4006228CA /* WYSettlementView.m in Sources */,
 				04A7DB441D13E3A70039F50D /* WYMeHeaderView.m in Sources */,
 				0496C8F71D11065900E3809F /* WYMeViewController.m in Sources */,
 				0471235D1D142C3200D42B74 /* MBProgressHUD.m in Sources */,

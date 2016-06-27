@@ -80,14 +80,14 @@
     
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.top).offset(23);
-        make.left.equalTo(weakSelf.checkTheBtn.right).offset(9);
+        make.left.equalTo(weakSelf.showImage.right).offset(9);
         make.size.equalTo(CGSizeMake(width - 111, 20));
     }];
     
     [_bgImageView makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(weakSelf.bottom).offset(-23);
         make.right.equalTo(weakSelf.right).offset(-15);
-        make.size.equalTo(CGSizeMake(83, 50));
+        make.size.equalTo(CGSizeMake(83, 25));
     }];
     
     [_reduceBtn makeConstraints:^(MASConstraintMaker *make) {
@@ -104,26 +104,33 @@
 
     
     [_goodsNumberLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(weakSelf.bgImageView.bottom);
+        make.top.bottom.equalTo(weakSelf.bgImageView);
         make.left.equalTo(weakSelf.reduceBtn.right);
         make.right.equalTo(weakSelf.addBtn.left);
     }];
     
     
     [_priceLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf);
+        make.bottom.equalTo(weakSelf.bottom).offset(-23);
         make.left.equalTo(weakSelf.showImage.right).offset(9);
         make.right.equalTo(weakSelf.bgImageView.left).offset(-9);
         make.height.equalTo(20);
     }];
     
-    
+    [self.reduceBtn setBackgroundColor:[UIColor redColor]];
+    [self.reduceBtn setAlpha:0.6];
+    [self.addBtn setBackgroundColor:[UIColor redColor]];
+    [self.addBtn setAlpha:0.6];
 }
 
 /** 赋值 */
 - (void)setModel:(WYShoppingCarModel *)model {
     _model = model;
     
+    [_showImage downloadImage:model.imgView];
+    [_titleLabel setText:model.goodsTitle];
+    [_priceLabel setText:model.price];
+    [_goodsNumberLabel setText:model.goodsCount];
     
 }
 
@@ -173,7 +180,7 @@
 - (UIImageView *)bgImageView {
     if (!_bgImageView) {
         _bgImageView= [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"购物车界面商品加减按钮"]]];
-        [_bgImageView setBackgroundColor:[UIColor grayColor]];
+        [_bgImageView setBackgroundColor:[UIColor whiteColor]];
         [_bgImageView setUserInteractionEnabled:YES];
     }
     return _bgImageView;
@@ -183,6 +190,7 @@
     if (!_goodsNumberLabel) {
         _goodsNumberLabel = [[UILabel alloc] init];
         [_goodsNumberLabel setBackgroundColor:[UIColor whiteColor]];
+        [_goodsNumberLabel setTextColor:[UIColor blackColor]];
         [_goodsNumberLabel setTextAlignment:(NSTextAlignmentCenter)];
         [_goodsNumberLabel setFont:[UIFont systemFontOfSize:12]];
     }
@@ -211,16 +219,21 @@
     
     NSInteger btnTag = targetBtn.tag - BTN_TAG;
     
+    NSInteger number = [self.goodsNumberLabel.text integerValue];
+    
     if (0 == btnTag) {
-        NSInteger number = [self.goodsNumberLabel.text integerValue];
+        
+        if (0 == number) {
+            return;
+        }
         number --;
         [self.goodsNumberLabel setText:[NSString stringWithFormat:@"%ld",number]];
     }
     else {
-        NSInteger number = [self.goodsNumberLabel.text integerValue];
         number ++;
         [self.goodsNumberLabel setText:[NSString stringWithFormat:@"%ld",number]];
     }
+    
 }
 
 /*
