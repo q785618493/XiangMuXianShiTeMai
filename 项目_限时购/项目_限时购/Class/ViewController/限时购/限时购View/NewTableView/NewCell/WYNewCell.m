@@ -83,28 +83,28 @@
     }];
     
     [_countriesImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.commodityImage.top).offset(5);
+        make.top.equalTo(weakSelf.commodityImage.top).offset(2);
         make.left.equalTo(weakSelf.commodityImage.left).offset(5);
         make.size.mas_equalTo(CGSizeMake(25, 25));
     }];
     
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weakSelf.mas_top).offset(25);
-        make.left.mas_equalTo(weakSelf.commodityImage.mas_right).offset(5);
+        make.left.mas_equalTo(weakSelf.commodityImage.mas_right).offset(2);
         make.right.mas_equalTo(weakSelf.mas_right).offset(-5);
         make.height.mas_equalTo(20);
     }];
     
     [_infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weakSelf.titleLabel.mas_bottom);
-        make.left.mas_equalTo(weakSelf.commodityImage.mas_right).offset(5);
+        make.left.mas_equalTo(weakSelf.commodityImage.mas_right).offset(2);
         make.right.mas_equalTo(weakSelf.mas_right).offset(-5);
         make.height.mas_equalTo(60);
     }];
     
     [_ciscountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weakSelf.infoLabel.mas_bottom).offset(18);
-        make.left.mas_equalTo(weakSelf.commodityImage.mas_right).offset(5);
+        make.left.mas_equalTo(weakSelf.commodityImage.mas_right).offset(2);
         make.size.mas_equalTo(CGSizeMake(68, 19));
     }];
     
@@ -121,10 +121,10 @@
     }];
     
     [_shoppingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakSelf.infoLabel.mas_bottom).offset(17);
-        make.left.mas_equalTo(weakSelf.priceLabel.mas_right).offset(5);
+        make.centerY.mas_equalTo(weakSelf.priceLabel.mas_centerY);
+        make.right.mas_equalTo(weakSelf.mas_right).offset(-8);
         make.size.mas_equalTo(CGSizeMake(36, 36));
-    }]; 
+    }];
 }
 
 /** 新品团购每一行数据 重写 set方法赋值 */
@@ -189,7 +189,7 @@
         _ciscountLabel = [[UILabel alloc] init];
         [_ciscountLabel setTextColor:RGB(255, 76, 0)];
         [_ciscountLabel setTextAlignment:(NSTextAlignmentCenter)];
-        [_ciscountLabel setFont:[UIFont systemFontOfSize:16]];
+        [_ciscountLabel setFont:[UIFont systemFontOfSize:15]];
     }
     return _ciscountLabel;
 }

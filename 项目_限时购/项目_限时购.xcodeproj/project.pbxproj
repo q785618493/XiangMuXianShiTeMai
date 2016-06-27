@@ -963,10 +963,10 @@
 			children = (
 				0496C8EC1D11060400E3809F /* WYFlashSaleViewController.h */,
 				047F092B1D124E68004E7EE7 /* WYFlashSaleViewController.m */,
+				0496C8C51D10F0FD00E3809F /* 限时购View */,
+				0496C8C41D10F0FD00E3809F /* 限时购Model */,
 				0496C8BE1D10F0FD00E3809F /* 商品详情 */,
 				0496C8C11D10F0FD00E3809F /* 搜索 */,
-				0496C8C41D10F0FD00E3809F /* 限时购Model */,
-				0496C8C51D10F0FD00E3809F /* 限时购View */,
 			);
 			path = "限时购";
 			sourceTree = "<group>";

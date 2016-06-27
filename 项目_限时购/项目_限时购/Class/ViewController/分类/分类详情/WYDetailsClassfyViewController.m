@@ -8,6 +8,8 @@
 
 #import "WYDetailsClassfyViewController.h"
 #import "WYDetailsCollectionView.h"
+#import "WYProductViewController.h"
+
 #import "WYQueryModel.h"
 
 #define BTN_RANK_TAG 22000
@@ -88,7 +90,7 @@
     if (_start) {
         switch (_judgeRequest) {
             case 1: {
-                [self httpPostBrandListOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                [self httpGetBrandListOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
             }
                 break;
             case 2: {
@@ -96,20 +98,18 @@
             }
                 break;
             case 3: {
-                [self httpPostSaleBrandOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                [self httpGetSaleBrandOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
             }
                 break;
             case 4: {
                 [self httpGetGoodsDetailsOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
             }
-                break;
-                
             default:
                 break;
         }
     }
     else {
-        [MBProgressHUD showError:[NSString stringWithFormat:@"该商品已下架"]];
+        [MBProgressHUD showError:[NSString stringWithFormat:@"该类型商品已下架"]];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUD];
         });
@@ -183,7 +183,7 @@
             
             switch (_judgeRequest) {
                 case 1: {
-                    [self httpPostBrandListOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                    [self httpGetBrandListOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
                 }
                     break;
                 case 2: {
@@ -191,7 +191,7 @@
                 }
                     break;
                 case 3: {
-                    [self httpPostSaleBrandOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                    [self httpGetSaleBrandOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
                 }
                     break;
                 case 4: {
@@ -208,7 +208,7 @@
             
             switch (_judgeRequest) {
                 case 1: {
-                    [self httpPostBrandListOrderName:[NSString stringWithFormat:@"price"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                    [self httpGetBrandListOrderName:[NSString stringWithFormat:@"price"] OrderType:[NSString stringWithFormat:@"DESC"]];
                 }
                     break;
                 case 2: {
@@ -216,7 +216,7 @@
                 }
                     break;
                 case 3: {
-                    [self httpPostSaleBrandOrderName:[NSString stringWithFormat:@"price"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                    [self httpGetSaleBrandOrderName:[NSString stringWithFormat:@"price"] OrderType:[NSString stringWithFormat:@"DESC"]];
                 }
                     break;
                 case 4: {
@@ -233,7 +233,7 @@
             
             switch (_judgeRequest) {
                 case 1: {
-                    [self httpPostBrandListOrderName:[NSString stringWithFormat:@"score"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                    [self httpGetBrandListOrderName:[NSString stringWithFormat:@"score"] OrderType:[NSString stringWithFormat:@"DESC"]];
                 }
                     break;
                 case 2: {
@@ -241,7 +241,7 @@
                 }
                     break;
                 case 3: {
-                    [self httpPostSaleBrandOrderName:[NSString stringWithFormat:@"score"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                    [self httpGetSaleBrandOrderName:[NSString stringWithFormat:@"score"] OrderType:[NSString stringWithFormat:@"DESC"]];
                 }
                     break;
                 case 4: {
@@ -258,7 +258,7 @@
             
             switch (_judgeRequest) {
                 case 1: {
-                    [self httpPostBrandListOrderName:[NSString stringWithFormat:@"time"] OrderType:[NSString stringWithFormat:@"ASC"]];
+                    [self httpGetBrandListOrderName:[NSString stringWithFormat:@"time"] OrderType:[NSString stringWithFormat:@"ASC"]];
                 }
                     break;
                 case 2: {
@@ -266,7 +266,7 @@
                 }
                     break;
                 case 3: {
-                    [self httpPostSaleBrandOrderName:[NSString stringWithFormat:@"time"] OrderType:[NSString stringWithFormat:@"ASC"]];
+                    [self httpGetSaleBrandOrderName:[NSString stringWithFormat:@"time"] OrderType:[NSString stringWithFormat:@"ASC"]];
                 }
                     break;
                 case 4: {
@@ -294,6 +294,15 @@
     [_detailsCollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(104, 0, 0, 0));
     }];
+    
+    weakSelf.detailsCollView.collRow = ^(NSIndexPath *indexPath) {
+        
+        WYQueryModel *model = weakSelf.dataArray[indexPath.row];
+        WYProductViewController *productVC = [[WYProductViewController alloc] init];
+        productVC.goodsID = model.GoodsId;
+        productVC.countryImageUrl = model.CountryImg;
+        [weakSelf.navigationController pushViewController:productVC animated:YES];
+    };
 }
 
 /**
@@ -302,11 +311,11 @@
  *  @param OrderName 商品的排序方式   NSString
  *  @param OrderType 顺序还是倒序     NSString
  */
-- (void)httpPostBrandListOrderName:(NSString *)OrderName OrderType:(NSString *)OrderType {
+- (void)httpGetBrandListOrderName:(NSString *)OrderName OrderType:(NSString *)OrderType {
     
     WS(weakSelf);
     NSDictionary *requestDic = [NSDictionary dictionaryWithObjectsAndKeys:self.typeID,@"ShopId",OrderName,@"OrderName",OrderType,@"OrderType", nil];
-    [self POSTHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appShop/appShopGoodsList.do"] progressDic:requestDic success:^(id JSON) {
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appShop/appShopGoodsList.do"] progressDic:requestDic success:^(id JSON) {
         
         NSArray *array = (NSArray *)JSON;
         
@@ -400,7 +409,7 @@
  *  @param OrderName 商品的排序方式  NSString
  *  @param OrderType 顺序还是倒序    NSString
  */
-- (void)httpPostSaleBrandOrderName:(NSString *)OrderName OrderType:(NSString *)OrderType {
+- (void)httpGetSaleBrandOrderName:(NSString *)OrderName OrderType:(NSString *)OrderType {
     
     NSDictionary *requestDic = @{@"GrouponId":_typeID,
                                  @"OrderName":OrderName,
