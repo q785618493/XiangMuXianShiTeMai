@@ -15,6 +15,7 @@
 - (void)setDataArray:(NSArray *)dataArray {
     _dataArray = dataArray;
     
+    [self setBackgroundColor:[UIColor whiteColor]];
     for (NSInteger i = 0; i < dataArray.count; i ++) {
         
         WYScoreModel *model = dataArray[i];

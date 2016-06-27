@@ -76,11 +76,10 @@
         [bottomView addSubview:countryLabel];
         self.countryLabel = countryLabel;
         
-        UIButton *lookBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        [lookBtn setFrame:(CGRectMake(CGRectGetMaxX(countryLabel.frame), 0, width - CGRectGetMaxX(countryLabel.frame) - 5, 80))];
-        [lookBtn setImage:[UIImage imageNamed:@"查看商品"] forState:(UIControlStateNormal)];
-        [lookBtn setImage:[UIImage imageNamed:@"查看商品"] forState:(UIControlStateHighlighted)];
-        [bottomView addSubview:lookBtn];
+        UIImageView *lookImage = [[UIImageView alloc] initWithFrame:(CGRectMake(CGRectGetMaxX(countryLabel.frame), 0, width - CGRectGetMaxX(countryLabel.frame) - 5, 80))];
+        [lookImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"查看商品"]]];
+        [lookImage setUserInteractionEnabled:YES];
+        [bottomView addSubview:lookImage];
         
         UIButton *actionBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [actionBtn setFrame:(CGRectMake(0, 0, width, 80))];

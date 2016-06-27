@@ -70,8 +70,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    /** 添加排序的4个按钮 */
     [self topAddFourBtnView];
+    
+    /** 添加控件 和 约束 */
     [self controlAddMasonry];
+    
+    /** 判断网络请求的数据类型 */
     [self judgeDataRequest];
     
     
@@ -95,13 +100,19 @@
             }
                 break;
             case 4: {
-                [self httpPostBrandListOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+                [self httpGetGoodsDetailsOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
             }
                 break;
                 
             default:
                 break;
         }
+    }
+    else {
+        [MBProgressHUD showError:[NSString stringWithFormat:@"该商品已下架"]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
+        });
     }
 }
 
@@ -184,7 +195,7 @@
                 }
                     break;
                 case 4: {
-                    
+                    [self httpGetGoodsDetailsOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
                 }
                 default:
                     break;
@@ -209,7 +220,7 @@
                 }
                     break;
                 case 4: {
-                    
+                    [self httpGetGoodsDetailsOrderName:[NSString stringWithFormat:@"price"] OrderType:[NSString stringWithFormat:@"DESC"]];
                 }
                 default:
                     break;
@@ -234,7 +245,7 @@
                 }
                     break;
                 case 4: {
-                    
+                    [self httpGetGoodsDetailsOrderName:[NSString stringWithFormat:@"score"] OrderType:[NSString stringWithFormat:@"DESC"]];
                 }
                 default:
                     break;
@@ -259,7 +270,7 @@
                 }
                     break;
                 case 4: {
-                    
+                    [self httpGetGoodsDetailsOrderName:[NSString stringWithFormat:@"time"] OrderType:[NSString stringWithFormat:@"ASC"]];
                 }
                 default:
                     break;
@@ -431,7 +442,7 @@
 }
 
 /**
- *  商品详情:
+ *  商品详情:查看同品牌商品
  *
  *  @param OrderName 商品的排序方式  NSString
  *  @param OrderType 顺序还是倒序    NSString
@@ -440,13 +451,13 @@
     
     WS(weakSelf);
     
-    NSDictionary *requestDic = @{};
+    NSDictionary *requestDic = @{@"ShopId":_typeID,
+                                 @"OrderName":OrderName,
+                                 @"OrderType":OrderType};
     
-    [self GETHttpUrlString:[NSString stringWithFormat:@""] progressDic:requestDic success:^(id JSON) {
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appShop/appShopGoodsList.do"] progressDic:requestDic success:^(id JSON) {
         
         NSArray *array = (NSArray *)JSON;
-        
-        ZDY_LOG(@"===%@",[[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:nil] encoding:NSUTF8StringEncoding])
         
         if (array.count > 0) {
             NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];

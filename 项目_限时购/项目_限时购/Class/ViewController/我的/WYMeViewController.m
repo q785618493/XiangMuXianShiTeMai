@@ -15,11 +15,6 @@
 #import "WYMeHeaderView.h"
 #import "WYMeModel.h"
 
-/** 保存用户登录成功后的数据路径 */
-#define INFO_PATH [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"infoArray.data"]
-/** 偏好设置保存用户信息 */
-#define XSG_USER_DEFAULTS [NSUserDefaults standardUserDefaults]
-
 /** 保存用户头像的路径 */
 #define USER_HEADER_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"headerImage"]
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0424CE411D1AADAD00E162BB /* WYDetailsClassfyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0424CE401D1AADAD00E162BB /* WYDetailsClassfyViewController.m */; };
 		0424CE451D1AAE3B00E162BB /* WYQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0424CE441D1AAE3B00E162BB /* WYQueryModel.m */; };
+		04488F771D20D51B00ED6DAB /* WYHomeGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04488F761D20D51B00ED6DAB /* WYHomeGuideView.m */; };
 		046E07381D127B3A00645E96 /* WYHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E07371D127B3A00645E96 /* WYHttpRequest.m */; };
 		046E074A1D12882000645E96 /* WYTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E07461D12882000645E96 /* WYTextFieldView.m */; };
 		046E074B1D12882000645E96 /* WYThirdPartyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E07491D12882000645E96 /* WYThirdPartyView.m */; };
@@ -130,6 +131,8 @@
 		0424CE401D1AADAD00E162BB /* WYDetailsClassfyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYDetailsClassfyViewController.m; sourceTree = "<group>"; };
 		0424CE431D1AAE3B00E162BB /* WYQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYQueryModel.h; sourceTree = "<group>"; };
 		0424CE441D1AAE3B00E162BB /* WYQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYQueryModel.m; sourceTree = "<group>"; };
+		04488F751D20D51B00ED6DAB /* WYHomeGuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYHomeGuideView.h; sourceTree = "<group>"; };
+		04488F761D20D51B00ED6DAB /* WYHomeGuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYHomeGuideView.m; sourceTree = "<group>"; };
 		046E07361D127B3A00645E96 /* WYHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYHttpRequest.h; sourceTree = "<group>"; };
 		046E07371D127B3A00645E96 /* WYHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYHttpRequest.m; sourceTree = "<group>"; };
 		046E07451D12882000645E96 /* WYTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYTextFieldView.h; sourceTree = "<group>"; };
@@ -348,6 +351,15 @@
 				0424CE441D1AAE3B00E162BB /* WYQueryModel.m */,
 			);
 			path = QueryModel;
+			sourceTree = "<group>";
+		};
+		04488F741D20D48200ED6DAB /* GuideView */ = {
+			isa = PBXGroup;
+			children = (
+				04488F751D20D51B00ED6DAB /* WYHomeGuideView.h */,
+				04488F761D20D51B00ED6DAB /* WYHomeGuideView.m */,
+			);
+			path = GuideView;
 			sourceTree = "<group>";
 		};
 		046E07441D12882000645E96 /* TextFieldView */ = {
@@ -986,9 +998,9 @@
 			isa = PBXGroup;
 			children = (
 				047260A11D1D5A53004C8B0A /* CenterView */,
-				047260A41D1D5A53004C8B0A /* GoodsScoreView */,
-				047260A71D1D5A53004C8B0A /* ImageDetailsView */,
 				047260AA1D1D5A53004C8B0A /* ProductTableView */,
+				047260A71D1D5A53004C8B0A /* ImageDetailsView */,
+				047260A41D1D5A53004C8B0A /* GoodsScoreView */,
 			);
 			path = "商品详情View";
 			sourceTree = "<group>";
@@ -1030,6 +1042,7 @@
 		0496C8C51D10F0FD00E3809F /* 限时购View */ = {
 			isa = PBXGroup;
 			children = (
+				04488F741D20D48200ED6DAB /* GuideView */,
 				047F08EB1D12425F004E7EE7 /* BrandTableView */,
 				047F08ED1D12425F004E7EE7 /* NewTableView */,
 				047F08EF1D12425F004E7EE7 /* TwoBtnView */,
@@ -1495,6 +1508,7 @@
 				047A3AF11D1784C800A85947 /* SDImageCache.m in Sources */,
 				047A3AF21D1784C800A85947 /* SDWebImageCompat.m in Sources */,
 				048400381D1576750096AB05 /* WYFaceCollection.m in Sources */,
+				04488F771D20D51B00ED6DAB /* WYHomeGuideView.m in Sources */,
 				047A3AF71D1784C800A85947 /* SDWebImagePrefetcher.m in Sources */,
 				047A3AFA1D1784C800A85947 /* UIImage+MultiFormat.m in Sources */,
 				047A3AF31D1784C800A85947 /* SDWebImageDecoder.m in Sources */,

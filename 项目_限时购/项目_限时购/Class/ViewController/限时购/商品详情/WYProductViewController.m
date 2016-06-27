@@ -7,6 +7,7 @@
 //
 
 #import "WYProductViewController.h"
+#import "WYDetailsClassfyViewController.h"
 
 #import "TopRollView.h"
 #import "WYCenterView.h"
@@ -44,6 +45,9 @@
 
 /** 添加轮播视图上的购买人数按钮 */
 @property (strong, nonatomic) UIButton *buyBtn;
+
+/** 商品详情价格、评分的数据 model */
+@property (strong, nonatomic) WYAllDetailsModel *allModel;
 
 @end
 
@@ -84,7 +88,7 @@
 
 - (WYCenterView *)thePriceView {
     if (!_thePriceView) {
-        _thePriceView = [[WYCenterView alloc] initWithFrame:(CGRectMake(0, CGRectGetMaxY(self.adView.frame), WIDTH, 251))];
+        _thePriceView = [[WYCenterView alloc] initWithFrame:(CGRectMake(0, CGRectGetMaxY(self.adView.frame) + 10, WIDTH, 251))];
         _thePriceView.countryUrl = _countryImageUrl;
     }
     return _thePriceView;
@@ -126,7 +130,8 @@
     [self httpGetAllGoodsDetailsRequest];
     /** 商品详情列表网络请求 */
     [self httpGetGoodsDetailsRequest];
-    
+    /** 商品评分部分网络请求 */
+    [self httpGetGoodsScoreRequest];
 }
 
 /** 添加控件 和 约束 */
@@ -197,10 +202,25 @@
         make.width.equalTo(width);
     }];
     
+    weakSelf.thePriceView.btnAction = ^() {
+        WYDetailsClassfyViewController *classDetailsVC = [[WYDetailsClassfyViewController alloc] init];
+        classDetailsVC.title = weakSelf.allModel.brandCNName;
+        classDetailsVC.typeID = weakSelf.allModel.shopId;
+        classDetailsVC.judgeRequest = 4;
+        classDetailsVC.start = YES;
+        [weakSelf.navigationController pushViewController:classDetailsVC animated:YES];
+    };
+    
     weakSelf.imageDetailsView.viewHeight = ^(CGFloat viewHeight) {
         CGRect imageRect = weakSelf.imageDetailsView.frame;
         imageRect.size.height = viewHeight;
         weakSelf.imageDetailsView.frame = imageRect;
+        
+        CGRect scoreRect = weakSelf.goodsScoreView.frame;
+        scoreRect.origin.y = CGRectGetMaxY(imageRect);
+        weakSelf.goodsScoreView.frame = scoreRect;
+        
+        [weakSelf.bgScrollView setContentSize:(CGSizeMake(WIDTH, CGRectGetMaxY(scoreRect) + 10))];
     };
 }
 
@@ -300,10 +320,10 @@
         
         if (infoDict) {
             
-            WYAllDetailsModel *model = [[WYAllDetailsModel alloc] initWithDictionary:infoDict];
+            weakSelf.allModel = [[WYAllDetailsModel alloc] initWithDictionary:infoDict];
             dispatch_async(dispatch_get_main_queue(), ^{
-                weakSelf.thePriceView.model = model;
-                [weakSelf.buyBtn setTitle:model.buyCount forState:(UIControlStateNormal)];
+                weakSelf.thePriceView.model = weakSelf.allModel;
+                [weakSelf.buyBtn setTitle:weakSelf.allModel.buyCount forState:(UIControlStateNormal)];
             });
             
         }
@@ -415,7 +435,6 @@
 - (void)barItemRelay {
     [WYTheThirdParty sinaWeiBoCurrentVC:self];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -11,6 +11,7 @@
 #import "WYProductViewController.h"
 #import "WYDetailsClassfyViewController.h"
 
+#import "WYHomeGuideView.h"
 #import "TopRollView.h"
 #import "WYTwoBtnView.h"
 #import "WYGoodsTableView.h"
@@ -26,6 +27,9 @@
 static NSString *versionKey = @"CFBundleShortVersionString";
 
 @interface WYFlashSaleViewController () <UIScrollViewDelegate>
+
+/** 用户第一次启动app的引导视图 */
+@property (strong, nonatomic) WYHomeGuideView *guideView;
 
 /** 底层的 scrollView */
 @property (strong, nonatomic) UIScrollView *rollScrollView;
@@ -59,6 +63,13 @@ static NSString *versionKey = @"CFBundleShortVersionString";
 @implementation WYFlashSaleViewController
 
 /** 重写 get方法懒加载控件 */
+- (WYHomeGuideView *)guideView {
+    if (!_guideView) {
+        _guideView = [[WYHomeGuideView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    }
+    return _guideView;
+}
+
 - (UIScrollView *)rollScrollView {
     if (!_rollScrollView) {
         _rollScrollView = [[UIScrollView alloc] init];
@@ -165,6 +176,7 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    /** 顶部轮播视图的 比例高度 */
     _scale = 232 / 667.0 * HEIGHT;
     /** 添加控件和约束 */
     [self controlScrollViewMasonry];
@@ -172,11 +184,34 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     /** 添加导航右上角的搜索按钮 */
     [self rightNavAddBtnItem];
     
-    [self httpGetAdvertisingRequest];
+    /** 判断用户是否第一次使用 app */
+    [self userFirstMakeApp];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    [self httpGetNewGoodsRequest];
+    //从沙盒取出存储的上次软件版本号（上次使用的记录）
+    NSString *lastVersion = [XSG_USER_DEFAULTS objectForKey:versionKey];
     
-    [self httpGetBrandRequest];
+    //获取当前使用软件的版本号
+    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[versionKey];
+    
+    if ([lastVersion isEqualToString:currentVersion]) {
+        
+        /** 显示导航 */
+        [self.navigationController.navigationBar setHidden:NO];
+        
+        /** 显示标签栏 */
+        [self.tabBarController.tabBar setHidden:NO];
+        
+    } else {
+        
+        /** 隐藏导航 */
+        [self.navigationController.navigationBar setHidden:YES];
+        /** 隐藏标签栏 */
+        [self.tabBarController.tabBar setHidden:YES];
+    }
 }
 
 /** 添加控件和约束 */
@@ -245,6 +280,68 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     WYSearchViewController *searchVC = [[WYSearchViewController alloc] init];
     [self.navigationController pushViewController:searchVC animated:YES];
     
+}
+
+/** 判断用户是否第一次使用 app */
+- (void)userFirstMakeApp {
+    
+    //从沙盒取出存储的上次软件版本号（上次使用的记录）
+    NSString *lastVersion = [XSG_USER_DEFAULTS objectForKey:versionKey];
+    
+    //获取当前使用软件的版本号
+    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[versionKey];
+    
+    if ([lastVersion isEqualToString:currentVersion]) {
+        [self requestNetworkData];
+    }
+    else {
+        /** 添加引导页视图 */
+        [self addGuideScrollView];
+    }
+}
+
+/** 添加引导页视图 */
+- (void)addGuideScrollView {
+    [self.view addSubview:self.guideView];
+    NSArray *imageArray = [NSArray arrayWithObjects:@"微商引导页1",@"微商引导页2",@"微商引导页3", nil];
+    self.guideView.imageArray = imageArray;
+    
+    WS(weakSelf);
+    /** 立即体验回调的点击事件 */
+    weakSelf.guideView.leamAction = ^() {
+        
+        /** 移除引导视图 */
+        [weakSelf.guideView removeFromSuperview];
+        
+        /** 记录当前的版本号     */
+        //从沙盒取出存储的上次软件版本号（上次使用的记录）
+        //获取当前使用软件的版本号
+        NSString *currKey = [NSBundle mainBundle].infoDictionary[versionKey];
+        //存储本次使用软件的版本
+        [XSG_USER_DEFAULTS setObject:currKey forKey:versionKey];
+        //马上进行存储，不写随机存储，可能无效
+        [XSG_USER_DEFAULTS synchronize];
+        
+        /** 显示导航 */
+        [weakSelf.navigationController.navigationBar setHidden:NO];
+        /** 显示标签栏 */
+        [weakSelf.tabBarController.tabBar setHidden:NO];
+        
+        /** 请求网络数据 */
+        [weakSelf requestNetworkData];
+    };
+}
+
+/** 请求网络数据 */
+- (void)requestNetworkData {
+    /** 顶部广告轮播视图的网络请求 */
+    [self httpGetAdvertisingRequest];
+    
+    /** 新品团购的网络请求 */
+    [self httpGetNewGoodsRequest];
+    
+    /** 品牌团购的网络请求 */
+    [self httpGetBrandRequest];
 }
 
 /** 顶部广告轮播视图的网络请求 */

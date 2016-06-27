@@ -95,6 +95,12 @@
 /** 获得 Window 窗口 */
 #define APP_WINDOW  [UIApplication sharedApplication].keyWindow
 
+/** 保存用户登录成功后的数据路径 */
+#define INFO_PATH [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"infoArray.data"]
+
+/** 偏好设置保存用户信息 */
+#define XSG_USER_DEFAULTS [NSUserDefaults standardUserDefaults]
+
 //#import "Masonry.h"
 //
 ///**   * SDWebImage 给 按钮后台加载图片的头文件   */
