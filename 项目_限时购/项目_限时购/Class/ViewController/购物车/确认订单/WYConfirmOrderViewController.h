@@ -13,4 +13,7 @@
 /** 接收数据 */
 @property (strong, nonatomic) NSMutableArray *dataArray;
 
+/** 接收商品总价格 */
+@property (assign, nonatomic) CGFloat goodsPrice;
+
 @end

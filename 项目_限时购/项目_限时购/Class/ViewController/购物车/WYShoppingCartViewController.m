@@ -84,7 +84,6 @@
     // Do any additional setup after loading the view.
     
     
-    
 }
 
 
@@ -159,6 +158,7 @@
             weakSelf.bottomView.blockPayment = ^() {
                 WYConfirmOrderViewController *confirmVC = [[WYConfirmOrderViewController alloc] init];
                 confirmVC.dataArray = weakSelf.shoppingMuArray;
+                confirmVC.goodsPrice = weakSelf.thePrice;
                 confirmVC.title = [NSString stringWithFormat:@"确认订单"];
                 [weakSelf.navigationController pushViewController:confirmVC animated:YES];
             };

@@ -8,11 +8,15 @@
 
 #import "WYConfirmOrderViewController.h"
 #import "WYConfirmOrderTableView.h"
+#import "WYBottomPaymentView.h"
 
 @interface WYConfirmOrderViewController ()
 
 /** 展示商品信息的 TableView */
 @property (strong, nonatomic) WYConfirmOrderTableView *goodsTableView;
+
+/** 底部视图 */
+@property (strong, nonatomic) WYBottomPaymentView *bottomView;
 
 @end
 
@@ -27,12 +31,44 @@
     return _goodsTableView;
 }
 
+- (WYBottomPaymentView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [[WYBottomPaymentView alloc] init];
+    }
+    return _bottomView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self.view addSubview:self.goodsTableView];
+    /** 添加控件和约束 */
+    [self controlAddMasonry];
     
+}
+
+/** 添加控件和约束 */
+- (void)controlAddMasonry {
+    
+    [self.view addSubview:self.goodsTableView];
+    [self.view addSubview:self.bottomView];
+    self.bottomView.price = self.goodsPrice;
+    
+    WS(weakSelf);
+    [_goodsTableView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(64, 0, 45, 0));
+    }];
+    
+    [_bottomView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.goodsTableView.bottom);
+        make.left.right.equalTo(weakSelf.view);
+        make.bottom.equalTo(weakSelf.view.bottom);
+    }];
+    
+    weakSelf.bottomView.blockPayment = ^() {
+        
+        ZDY_LOG(@"   -------------------   ");
+    };
 }
 
 - (void)didReceiveMemoryWarning {

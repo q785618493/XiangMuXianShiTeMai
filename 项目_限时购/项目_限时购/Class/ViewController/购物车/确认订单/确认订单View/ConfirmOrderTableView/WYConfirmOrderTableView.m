@@ -19,7 +19,6 @@
     if (self = [super initWithFrame:frame style:style]) {
         [self setDelegate:self];
         [self setDataSource:self];
-        [self setBounces:NO];
         [self setShowsHorizontalScrollIndicator:NO];
         [self setShowsVerticalScrollIndicator:NO];
         [self setTableFooterView:[[UIView alloc] init]];
