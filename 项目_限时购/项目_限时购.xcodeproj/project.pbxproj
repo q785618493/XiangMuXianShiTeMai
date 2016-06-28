@@ -10,6 +10,8 @@
 		040160821D2164F4006228CA /* WYSettlementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040160811D2164F4006228CA /* WYSettlementView.m */; };
 		0424CE411D1AADAD00E162BB /* WYDetailsClassfyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0424CE401D1AADAD00E162BB /* WYDetailsClassfyViewController.m */; };
 		0424CE451D1AAE3B00E162BB /* WYQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0424CE441D1AAE3B00E162BB /* WYQueryModel.m */; };
+		04257C6E1D2299250072E4A2 /* WYConfirmOrderTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04257C6D1D2299250072E4A2 /* WYConfirmOrderTableView.m */; };
+		04257C711D22993D0072E4A2 /* WYConfirmOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04257C701D22993D0072E4A2 /* WYConfirmOrderCell.m */; };
 		04488F771D20D51B00ED6DAB /* WYHomeGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04488F761D20D51B00ED6DAB /* WYHomeGuideView.m */; };
 		044B2D9A1D210E7500988617 /* WYNotLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B2D991D210E7500988617 /* WYNotLoginView.m */; };
 		044B2DA61D21124100988617 /* WYLoginNoGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B2DA51D21124100988617 /* WYLoginNoGoodsView.m */; };
@@ -140,6 +142,10 @@
 		0424CE401D1AADAD00E162BB /* WYDetailsClassfyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYDetailsClassfyViewController.m; sourceTree = "<group>"; };
 		0424CE431D1AAE3B00E162BB /* WYQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYQueryModel.h; sourceTree = "<group>"; };
 		0424CE441D1AAE3B00E162BB /* WYQueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYQueryModel.m; sourceTree = "<group>"; };
+		04257C6C1D2299250072E4A2 /* WYConfirmOrderTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYConfirmOrderTableView.h; sourceTree = "<group>"; };
+		04257C6D1D2299250072E4A2 /* WYConfirmOrderTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYConfirmOrderTableView.m; sourceTree = "<group>"; };
+		04257C6F1D22993D0072E4A2 /* WYConfirmOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYConfirmOrderCell.h; sourceTree = "<group>"; };
+		04257C701D22993D0072E4A2 /* WYConfirmOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYConfirmOrderCell.m; sourceTree = "<group>"; };
 		04488F751D20D51B00ED6DAB /* WYHomeGuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYHomeGuideView.h; sourceTree = "<group>"; };
 		04488F761D20D51B00ED6DAB /* WYHomeGuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYHomeGuideView.m; sourceTree = "<group>"; };
 		044B2D981D210E7500988617 /* WYNotLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYNotLoginView.h; sourceTree = "<group>"; };
@@ -740,6 +746,8 @@
 		047FB2E21D226A1A00E4F4E5 /* ConfirmOrderTableView */ = {
 			isa = PBXGroup;
 			children = (
+				04257C6C1D2299250072E4A2 /* WYConfirmOrderTableView.h */,
+				04257C6D1D2299250072E4A2 /* WYConfirmOrderTableView.m */,
 				047FB2E31D226A1A00E4F4E5 /* ConfirmOrderCell */,
 			);
 			path = ConfirmOrderTableView;
@@ -748,6 +756,8 @@
 		047FB2E31D226A1A00E4F4E5 /* ConfirmOrderCell */ = {
 			isa = PBXGroup;
 			children = (
+				04257C6F1D22993D0072E4A2 /* WYConfirmOrderCell.h */,
+				04257C701D22993D0072E4A2 /* WYConfirmOrderCell.m */,
 			);
 			path = ConfirmOrderCell;
 			sourceTree = "<group>";
@@ -1590,6 +1600,7 @@
 				047F08F21D1242A2004E7EE7 /* WYBaseView.m in Sources */,
 				047A3B041D17F2D100A85947 /* WYSearchViewController.m in Sources */,
 				0471235B1D142C3200D42B74 /* MBProgressHUD+XMG.m in Sources */,
+				04257C6E1D2299250072E4A2 /* WYConfirmOrderTableView.m in Sources */,
 				044B2DA61D21124100988617 /* WYLoginNoGoodsView.m in Sources */,
 				046E87C91D15457D00D48AB0 /* WYGoodsTableView.m in Sources */,
 				0496C8CD1D11012400E3809F /* WYTabBarController.m in Sources */,
@@ -1623,6 +1634,7 @@
 				046E87D01D154C7400D48AB0 /* WYSaleModel.m in Sources */,
 				0496C8F11D11062300E3809F /* WYClassifyViewController.m in Sources */,
 				047A3B011D17F2B700A85947 /* WYProductViewController.m in Sources */,
+				04257C711D22993D0072E4A2 /* WYConfirmOrderCell.m in Sources */,
 				047260B01D1D5A53004C8B0A /* WYProductTableView.m in Sources */,
 				047A3AFC1D1784C800A85947 /* UIImageView+HighlightedWebCache.m in Sources */,
 				0484003E1D1576A20096AB05 /* WYFaceCell.m in Sources */,

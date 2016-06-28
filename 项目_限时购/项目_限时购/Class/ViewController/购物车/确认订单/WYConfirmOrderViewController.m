@@ -7,18 +7,31 @@
 //
 
 #import "WYConfirmOrderViewController.h"
+#import "WYConfirmOrderTableView.h"
 
 @interface WYConfirmOrderViewController ()
+
+/** 展示商品信息的 TableView */
+@property (strong, nonatomic) WYConfirmOrderTableView *goodsTableView;
 
 @end
 
 @implementation WYConfirmOrderViewController
 
+/** 懒加载 */
+- (WYConfirmOrderTableView *)goodsTableView {
+    if (!_goodsTableView) {
+        _goodsTableView = [[WYConfirmOrderTableView alloc] initWithFrame:(CGRectMake(0, 64, VIEW_WIDTH, VIEW_HEIGHT - 64 - 45)) style:(UITableViewStylePlain)];
+        _goodsTableView.goodsArray = self.dataArray;
+    }
+    return _goodsTableView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
+    [self.view addSubview:self.goodsTableView];
     
 }
 

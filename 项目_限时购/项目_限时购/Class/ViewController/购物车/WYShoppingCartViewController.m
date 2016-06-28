@@ -87,10 +87,17 @@
     
 }
 
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     /** 判断当前用户是否登录 */
     [self judgeCurrentUserIsLogin];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    
 }
 
 /** 判断当前用户是否登录 */
@@ -129,13 +136,15 @@
             weakSelf.haveGoodsView.cellRow = ^(NSInteger cellRow) {
                 
                 WYShoppingCarModel *model = weakSelf.shoppingMuArray[cellRow];
+                
+                [weakSelf httpGetModifyTheRequestUpdateCartMsg:[NSString stringWithFormat:@"%@,%@",model.uUID,model.goodsCount]];
             };
             
             weakSelf.haveGoodsView.blockPrice = ^(NSString *goodsID, CGFloat price, BOOL stasus) {
                 weakSelf.thePrice += price;
                 
                 if (stasus) {
-                    ZDY_LOG(@"=============");
+                    
                 }
                 
             };
@@ -149,6 +158,7 @@
             
             weakSelf.bottomView.blockPayment = ^() {
                 WYConfirmOrderViewController *confirmVC = [[WYConfirmOrderViewController alloc] init];
+                confirmVC.dataArray = weakSelf.shoppingMuArray;
                 confirmVC.title = [NSString stringWithFormat:@"确认订单"];
                 [weakSelf.navigationController pushViewController:confirmVC animated:YES];
             };
@@ -213,7 +223,7 @@
             }];
             
             [weakSelf.shoppingMuArray addObjectsFromArray:muArray];
-            weakSelf.haveGoodsView.goodsMuArray = weakSelf.shoppingMuArray;
+            weakSelf.haveGoodsView.goodsMuArray = muArray;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf.haveGoodsView reloadData];
@@ -233,12 +243,14 @@
 /** 修改购物车记录 */
 - (void)httpGetModifyTheRequestUpdateCartMsg:(NSString *)updateCartMsg {
     
-    WS(weakSelf);
+//    WS(weakSelf);
     
     NSDictionary *requestDic = @{@"updateCartMsg":updateCartMsg};
     [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appShopCart/appUpdateCart.do"] progressDic:requestDic success:^(id JSON) {
         
         NSDictionary *dataDic = (NSDictionary *)JSON;
+        
+        ZDY_LOG(@"    %@",dataDic);
         
         if ([dataDic[@"result"] isEqualToString:[NSString stringWithFormat:@"success"]]) {
             

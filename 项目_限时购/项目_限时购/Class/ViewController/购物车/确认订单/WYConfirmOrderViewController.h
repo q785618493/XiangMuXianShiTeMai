@@ -10,4 +10,7 @@
 
 @interface WYConfirmOrderViewController : WYBaseViewController
 
+/** 接收数据 */
+@property (strong, nonatomic) NSMutableArray *dataArray;
+
 @end
