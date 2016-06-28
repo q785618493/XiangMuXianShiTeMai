@@ -69,7 +69,6 @@
     [self.searchBar resignFirstResponder];
     WYDetailsClassfyViewController *detailsVC = [[WYDetailsClassfyViewController alloc] init];
     detailsVC.judgeRequest = 2;
-    detailsVC.start = YES;
     detailsVC.title = searchBar.text;
     [self.navigationController pushViewController:detailsVC animated:YES];
 }

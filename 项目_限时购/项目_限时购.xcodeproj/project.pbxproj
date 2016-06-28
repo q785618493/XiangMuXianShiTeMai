@@ -82,6 +82,7 @@
 		047F094D1D125367004E7EE7 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F09351D125367004E7EE7 /* NSString+Helper.m */; };
 		047F094E1D125367004E7EE7 /* TopRollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F09371D125367004E7EE7 /* TopRollView.m */; };
 		047F09561D125367004E7EE7 /* WYCustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F09471D125367004E7EE7 /* WYCustomButton.m */; };
+		047FB2E11D2267FF00E4F4E5 /* WYConfirmOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047FB2E01D2267FF00E4F4E5 /* WYConfirmOrderViewController.m */; };
 		048042181D19367900241161 /* WYTheThirdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 048042171D19367900241161 /* WYTheThirdParty.m */; };
 		048400301D1575AE0096AB05 /* WYSortModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0484002C1D1575AE0096AB05 /* WYSortModel.m */; };
 		048400311D1575AE0096AB05 /* WYFaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0484002F1D1575AE0096AB05 /* WYFaceModel.m */; };
@@ -269,6 +270,8 @@
 		047F09371D125367004E7EE7 /* TopRollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopRollView.m; sourceTree = "<group>"; };
 		047F09461D125367004E7EE7 /* WYCustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYCustomButton.h; sourceTree = "<group>"; };
 		047F09471D125367004E7EE7 /* WYCustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYCustomButton.m; sourceTree = "<group>"; };
+		047FB2DF1D2267FF00E4F4E5 /* WYConfirmOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYConfirmOrderViewController.h; sourceTree = "<group>"; };
+		047FB2E01D2267FF00E4F4E5 /* WYConfirmOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYConfirmOrderViewController.m; sourceTree = "<group>"; };
 		048042161D19367900241161 /* WYTheThirdParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYTheThirdParty.h; sourceTree = "<group>"; };
 		048042171D19367900241161 /* WYTheThirdParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYTheThirdParty.m; sourceTree = "<group>"; };
 		0484002B1D1575AE0096AB05 /* WYSortModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYSortModel.h; sourceTree = "<group>"; };
@@ -708,6 +711,47 @@
 			path = "工具类";
 			sourceTree = "<group>";
 		};
+		047FB2DC1D22679A00E4F4E5 /* 确认订单 */ = {
+			isa = PBXGroup;
+			children = (
+				047FB2DF1D2267FF00E4F4E5 /* WYConfirmOrderViewController.h */,
+				047FB2E01D2267FF00E4F4E5 /* WYConfirmOrderViewController.m */,
+				047FB2DD1D22679A00E4F4E5 /* 确认订单Model */,
+				047FB2DE1D22679A00E4F4E5 /* 确认订单View */,
+			);
+			path = "确认订单";
+			sourceTree = "<group>";
+		};
+		047FB2DD1D22679A00E4F4E5 /* 确认订单Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "确认订单Model";
+			sourceTree = "<group>";
+		};
+		047FB2DE1D22679A00E4F4E5 /* 确认订单View */ = {
+			isa = PBXGroup;
+			children = (
+				047FB2E21D226A1A00E4F4E5 /* ConfirmOrderTableView */,
+			);
+			path = "确认订单View";
+			sourceTree = "<group>";
+		};
+		047FB2E21D226A1A00E4F4E5 /* ConfirmOrderTableView */ = {
+			isa = PBXGroup;
+			children = (
+				047FB2E31D226A1A00E4F4E5 /* ConfirmOrderCell */,
+			);
+			path = ConfirmOrderTableView;
+			sourceTree = "<group>";
+		};
+		047FB2E31D226A1A00E4F4E5 /* ConfirmOrderCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ConfirmOrderCell;
+			sourceTree = "<group>";
+		};
 		0484002A1D1575AE0096AB05 /* 分类区接口 */ = {
 			isa = PBXGroup;
 			children = (
@@ -863,7 +907,6 @@
 				0496C8F01D11062300E3809F /* WYClassifyViewController.m */,
 				0496C8A81D10F0FD00E3809F /* 分类Model */,
 				0496C8A91D10F0FD00E3809F /* 分类View */,
-				0496C8AA1D10F0FD00E3809F /* 分类搜索 */,
 				0496C8AD1D10F0FD00E3809F /* 分类详情 */,
 			);
 			path = "分类";
@@ -884,29 +927,6 @@
 				048400321D1576260096AB05 /* FaceCollectionView */,
 			);
 			path = "分类View";
-			sourceTree = "<group>";
-		};
-		0496C8AA1D10F0FD00E3809F /* 分类搜索 */ = {
-			isa = PBXGroup;
-			children = (
-				0496C8AB1D10F0FD00E3809F /* 分类搜索Model */,
-				0496C8AC1D10F0FD00E3809F /* 分类搜索View */,
-			);
-			path = "分类搜索";
-			sourceTree = "<group>";
-		};
-		0496C8AB1D10F0FD00E3809F /* 分类搜索Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "分类搜索Model";
-			sourceTree = "<group>";
-		};
-		0496C8AC1D10F0FD00E3809F /* 分类搜索View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "分类搜索View";
 			sourceTree = "<group>";
 		};
 		0496C8AD1D10F0FD00E3809F /* 分类详情 */ = {
@@ -1013,6 +1033,7 @@
 				0496C8F31D11064300E3809F /* WYShoppingCartViewController.m */,
 				0496C8BB1D10F0FD00E3809F /* 购物车Model */,
 				0496C8BC1D10F0FD00E3809F /* 购物车View */,
+				047FB2DC1D22679A00E4F4E5 /* 确认订单 */,
 			);
 			path = "购物车";
 			sourceTree = "<group>";
@@ -1587,6 +1608,7 @@
 				0496C8F41D11064300E3809F /* WYShoppingCartViewController.m in Sources */,
 				047260901D1D10DD004C8B0A /* WYDetailsCell.m in Sources */,
 				046E87B71D15447C00D48AB0 /* WYBrandTableView.m in Sources */,
+				047FB2E11D2267FF00E4F4E5 /* WYConfirmOrderViewController.m in Sources */,
 				047A3AF11D1784C800A85947 /* SDImageCache.m in Sources */,
 				047A3AF21D1784C800A85947 /* SDWebImageCompat.m in Sources */,
 				048400381D1576750096AB05 /* WYFaceCollection.m in Sources */,

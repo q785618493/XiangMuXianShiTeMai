@@ -87,32 +87,24 @@
 /** 判断网络请求的数据类型 */
 - (void)judgeDataRequest {
     
-    if (_start) {
-        switch (_judgeRequest) {
-            case 1: {
-                [self httpGetBrandListOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
-            }
-                break;
-            case 2: {
-                [self httpPostSearchRequestOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
-            }
-                break;
-            case 3: {
-                [self httpGetSaleBrandOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
-            }
-                break;
-            case 4: {
-                [self httpGetGoodsDetailsOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
-            }
-            default:
-                break;
+    switch (_judgeRequest) {
+        case 1: {
+            [self httpGetBrandListOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
         }
-    }
-    else {
-        [MBProgressHUD showError:[NSString stringWithFormat:@"该类型商品已下架"]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUD];
-        });
+            break;
+        case 2: {
+            [self httpPostSearchRequestOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+        }
+            break;
+        case 3: {
+            [self httpGetSaleBrandOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+        }
+            break;
+        case 4: {
+            [self httpGetGoodsDetailsOrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+        }
+        default:
+            break;
     }
 }
 
@@ -307,7 +299,7 @@
 }
 
 /**
- * 分类:根据品牌跳转至商品列表的 网络请求
+ * 分类:根据品牌跳转至商品列表的 网络请求 AND 商品详情:查看同品牌商品
  *
  *  @param OrderName 商品的排序方式   NSString
  *  @param OrderType 顺序还是倒序     NSString
@@ -452,7 +444,7 @@
 }
 
 /**
- *  商品详情:查看同品牌商品
+ *  分类功效专区:查看商品的网络请求
  *
  *  @param OrderName 商品的排序方式  NSString
  *  @param OrderType 顺序还是倒序    NSString
@@ -461,11 +453,11 @@
     
     WS(weakSelf);
     
-    NSDictionary *requestDic = @{@"ShopId":_typeID,
+    NSDictionary *requestDic = @{@"TypeId":_typeID,
                                  @"OrderName":OrderName,
                                  @"OrderType":OrderType};
     
-    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appShop/appShopGoodsList.do"] progressDic:requestDic success:^(id JSON) {
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/classifyApp/appTypeGoodsList.do"] progressDic:requestDic success:^(id JSON) {
         
         NSArray *array = (NSArray *)JSON;
         

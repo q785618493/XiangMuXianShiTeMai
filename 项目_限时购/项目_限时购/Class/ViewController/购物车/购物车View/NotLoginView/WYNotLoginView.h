@@ -10,4 +10,7 @@
 
 @interface WYNotLoginView : WYBaseView
 
+/** 去我的酷兜事件回调 */
+@property (copy, nonatomic) returnBlock blockLogin;
+
 @end

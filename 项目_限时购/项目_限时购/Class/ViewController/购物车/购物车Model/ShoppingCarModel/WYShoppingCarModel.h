@@ -23,6 +23,9 @@
 @property (nonatomic, strong) NSString * uUID;
 @property (nonatomic, strong) NSString * weight;
 
+/** 用于判断是否选中商品，做价格计算 */
+@property (assign, nonatomic) BOOL selected;
+
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 -(NSDictionary *)toDictionary;

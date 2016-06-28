@@ -29,6 +29,7 @@
     return self;
 }
 
+#pragma make-
 #pragma make- UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _dataArray.count;
@@ -47,12 +48,12 @@
     WYGoodsDetailsModel *model = _dataArray[indexPath.row];
     
     [cell.textLabel setText:[NSString stringWithFormat:@"%@：%@",model.title,model.value]];
-    
+    [cell.textLabel setNumberOfLines:0];
     return cell;
 }
 
+#pragma make-
 #pragma make- UITableViewDelegate
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 50;
 }

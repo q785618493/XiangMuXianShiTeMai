@@ -7,6 +7,7 @@
 //
 
 #import "WYShoppingCartViewController.h"
+#import "WYConfirmOrderViewController.h"
 
 #import "WYNotLoginView.h"
 #import "WYLoginNoGoodsView.h"
@@ -54,13 +55,22 @@
 - (WYLoginHaveGoodsView *)haveGoodsView {
     if (!_haveGoodsView) {
         _haveGoodsView = [[WYLoginHaveGoodsView alloc] initWithFrame:(CGRectMake(0, 64, VIEW_WIDTH, VIEW_HEIGHT - 49 - 64 - 56)) style:(UITableViewStylePlain)];
+        [_haveGoodsView setHidden:YES];
     }
     return _haveGoodsView;
+}
+
+- (NSMutableArray *)shoppingMuArray {
+    if (!_shoppingMuArray) {
+        _shoppingMuArray = [NSMutableArray array];
+    }
+    return _shoppingMuArray;
 }
 
 - (WYSettlementView *)bottomView {
     if (!_bottomView) {
         _bottomView = [[WYSettlementView alloc] init];
+        [_bottomView setHidden:YES];
     }
     return _bottomView;
 }
@@ -93,6 +103,7 @@
         
         if (0 == goodsNumber) {
             [self.notLoginView removeFromSuperview];
+            [self.bottomView removeFromSuperview];
             [self.haveGoodsView removeFromSuperview];
             [self.view addSubview:self.noGoodsView];
             [_noGoodsView makeConstraints:^(MASConstraintMaker *make) {
@@ -102,7 +113,7 @@
             }];
             
             weakSelf.noGoodsView.btnGoagoAction = ^() {
-                ZDY_LOG(@"==== 逛一逛 ====");
+                weakSelf.tabBarController.selectedIndex = 0;
             };
             
         }
@@ -112,26 +123,43 @@
             [self.view addSubview:self.bottomView];
             [self.view addSubview:self.haveGoodsView];
             
+            weakSelf.haveGoodsView.cellRow = ^(NSInteger cellRow) {
+                
+                WYShoppingCarModel *model = weakSelf.shoppingMuArray[cellRow];
+            };
+            
             [_bottomView makeConstraints:^(MASConstraintMaker *make) {
                 make.bottom.equalTo(weakSelf.view.bottom).offset(-49);
                 make.top.equalTo(weakSelf.haveGoodsView.bottom);
                 make.left.right.equalTo(weakSelf.view);
             }];
             
+            
+            weakSelf.bottomView.blockPayment = ^() {
+                WYConfirmOrderViewController *confirmVC = [[WYConfirmOrderViewController alloc] init];
+                confirmVC.title = [NSString stringWithFormat:@"确认订单"];
+                [weakSelf.navigationController pushViewController:confirmVC animated:YES];
+            };
+            
+            
+            
             [self httpGetShoppingCarListRequestMemberId:dictUser[@"MemberId"]];
         }
     }
     else {
         [self.noGoodsView removeFromSuperview];
+        [self.bottomView removeFromSuperview];
         [self.haveGoodsView removeFromSuperview];
         [self.view addSubview:self.notLoginView];
         [_notLoginView makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(weakSelf.view.centerX);
             make.centerY.equalTo(weakSelf.view.centerY);
-            make.size.equalTo(CGSizeMake(154, 44));
+            make.size.equalTo(CGSizeMake(154, 74));
         }];
         
-        
+        weakSelf.notLoginView.blockLogin = ^() {
+            weakSelf.tabBarController.selectedIndex = 3;
+        };
     }
 }
 
@@ -159,12 +187,20 @@
                 thePrice += number * price * 1.0;
             }
             
-            weakSelf.shoppingMuArray = muArray;
+            /** 遍历模型数据，默认商品选中 */
+            [muArray enumerateObjectsUsingBlock:^(WYShoppingCarModel  *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
+                obj.selected = YES;
+            }];
+            
+            [weakSelf.shoppingMuArray addObjectsFromArray:muArray];
             weakSelf.bottomView.moneyText = [NSString stringWithFormat:@"%.2f",thePrice];
             weakSelf.haveGoodsView.goodsMuArray = weakSelf.shoppingMuArray;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf.haveGoodsView reloadData];
+                [weakSelf.haveGoodsView setHidden:NO];
+                [weakSelf.bottomView setHidden:NO];
             });
         }
         else {
@@ -173,6 +209,32 @@
         
     } failure:^(NSError *error) {
         ZDY_LOG(@"error == %@",error);
+    }];
+}
+
+/** 修改购物车记录 */
+- (void)httpGetModifyTheRequestUpdateCartMsg:(NSString *)updateCartMsg {
+    
+    WS(weakSelf);
+    
+    NSDictionary *requestDic = @{@"updateCartMsg":updateCartMsg};
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appShopCart/appUpdateCart.do"] progressDic:requestDic success:^(id JSON) {
+        
+        NSDictionary *dataDic = (NSDictionary *)JSON;
+        
+        if ([dataDic[@"result"] isEqualToString:[NSString stringWithFormat:@"success"]]) {
+            
+            [MBProgressHUD showSuccess:[NSString stringWithFormat:@"删除成功"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUD];
+            });
+        }
+        else {
+            ZDY_LOG(@"  ------- 删除失败 -------   ");
+        }
+        
+    } failure:^(NSError *error) {
+        ZDY_LOG(@" error == %@",error.localizedDescription);
     }];
 }
 

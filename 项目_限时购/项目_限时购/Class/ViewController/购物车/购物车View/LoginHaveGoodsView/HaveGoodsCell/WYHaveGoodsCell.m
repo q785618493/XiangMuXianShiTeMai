@@ -9,12 +9,11 @@
 #import "WYHaveGoodsCell.h"
 #import "WYShoppingCarModel.h"
 
-#define BTN_TAG 30000
+#define BTN_TAG 31000
 
 @interface WYHaveGoodsCell ()
 
-/** 勾选商品按钮 */
-@property (strong, nonatomic) UIButton *checkTheBtn;
+
 
 /** 商品展示样图 */
 @property (strong, nonatomic) UIImageView *showImage;
@@ -30,13 +29,6 @@
 
 /** 展示商品数量 */
 @property (strong, nonatomic) UILabel *goodsNumberLabel;
-
-/** 添加商品数量按钮 */
-@property (strong, nonatomic) UIButton *addBtn;
-
-/** 减少商品数量按钮 */
-@property (strong, nonatomic) UIButton *reduceBtn;
-
 
 @end
 
@@ -131,7 +123,7 @@
     [_titleLabel setText:model.goodsTitle];
     [_priceLabel setText:model.price];
     [_goodsNumberLabel setText:model.goodsCount];
-    
+    [_checkTheBtn setSelected:model.selected];
 }
 
 /** 懒加载 */
@@ -141,7 +133,7 @@
         [_checkTheBtn setBackgroundColor:[UIColor whiteColor]];
         [_checkTheBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"购物车界面商品未选中"]] forState:(UIControlStateNormal)];
         [_checkTheBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"购物车界面商品选中对号按钮"]] forState:(UIControlStateSelected)];
-        [_checkTheBtn addTarget:self action:@selector(btnTouchActionCheckThe:) forControlEvents:(UIControlEventTouchUpInside)];
+//        [_checkTheBtn addTarget:self action:@selector(btnTouchActionCheckThe:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _checkTheBtn;
 }
@@ -201,7 +193,7 @@
     if (!_addBtn) {
         _addBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [_addBtn setTag:BTN_TAG + 1];
-        [_addBtn addTarget:self action:@selector(btnTouchActionTarget:) forControlEvents:(UIControlEventTouchUpInside)];
+//        [_addBtn addTarget:self action:@selector(btnTouchActionTarget:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _addBtn;
 }
@@ -210,7 +202,7 @@
     if (!_reduceBtn) {
         _reduceBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [_reduceBtn setTag:BTN_TAG + 0];
-        [_reduceBtn addTarget:self action:@selector(btnTouchActionTarget:) forControlEvents:(UIControlEventTouchUpInside)];
+//        [_reduceBtn addTarget:self action:@selector(btnTouchActionTarget:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _reduceBtn;
 }

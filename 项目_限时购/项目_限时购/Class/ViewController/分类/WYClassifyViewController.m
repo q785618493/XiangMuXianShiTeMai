@@ -72,14 +72,13 @@
         
         if (0 == collIndex.section) {
             WYSortModel *model = weakSelf.muFaceArray[collIndex.section][collIndex.row];
-            detailsVC.start = NO;
+            detailsVC.judgeRequest = 4;
             detailsVC.typeID = model.goodsType;
             detailsVC.title = model.goodsTypeName;
         }
         else {
             
             WYFaceModel *model = weakSelf.muFaceArray[collIndex.section][collIndex.row];
-            detailsVC.start = YES;
             detailsVC.typeID = model.shopId;
             detailsVC.judgeRequest = 1;
             detailsVC.title = model.commodityText;

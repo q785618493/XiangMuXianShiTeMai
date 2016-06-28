@@ -8,6 +8,9 @@
 
 #import "WYLoginHaveGoodsView.h"
 #import "WYHaveGoodsCell.h"
+#import "WYShoppingCarModel.h"
+
+#define CELL_TAG 30000
 
 @interface WYLoginHaveGoodsView () <UITableViewDataSource,UITableViewDelegate>
 
@@ -41,9 +44,31 @@
     if (!cell) {
         cell = [[WYHaveGoodsCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:IDCell];
     }
-    cell.model = self.goodsMuArray[indexPath.row];
+    
+    [cell.checkTheBtn addTarget:self action:@selector(btnTouchActionCheckThe:) forControlEvents:(UIControlEventTouchUpInside)];
+    [cell.addBtn addTarget:self action:@selector(btnTouchActionAdd:) forControlEvents:(UIControlEventTouchUpInside)];
+    [cell.reduceBtn addTarget:self action:@selector(btnTouchActionReduce:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    [cell setTag:CELL_TAG + indexPath.row];
+    WYShoppingCarModel *model = self.goodsMuArray[indexPath.row];
+    cell.model = model;
     
     return cell;
+}
+
+/** 勾选商品按钮点击事件 */
+- (void)btnTouchActionCheckThe:(UIButton *)checkThe {
+    
+}
+
+/** 增加商品点击事件 */
+- (void)btnTouchActionAdd:(UIButton *)addBtn {
+    
+}
+
+/** 减少商品点击事件 */
+- (void)btnTouchActionReduce:(UIButton *)reduce {
+    
 }
 
 #pragma make-
@@ -52,11 +77,25 @@
     return 100;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (_cellRow) {
-        _cellRow(indexPath.row);
-    }
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
 }
+
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewRowAction *rowAction = [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleDefault) title:[NSString stringWithFormat:@"删除"] handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        
+        [self.goodsMuArray removeObjectAtIndex:indexPath.row];
+        [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationLeft)];
+        [self reloadData];
+        
+        if (_cellRow) {
+            _cellRow(indexPath.row);
+        }
+    }];
+    return @[rowAction];
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

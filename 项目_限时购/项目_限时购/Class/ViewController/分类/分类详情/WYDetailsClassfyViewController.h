@@ -16,9 +16,6 @@
 /** 用于接收商品分类的 ID用作网络请求的参数 */
 @property (copy, nonatomic) NSString *typeID;
 
-/** 用来判断是否开始网络请求 */
-@property (assign, nonatomic, getter = isStart) BOOL start;
-
 /** 用于判断 网络请求详情 */
 @property (assign, nonatomic) NSInteger judgeRequest;
 

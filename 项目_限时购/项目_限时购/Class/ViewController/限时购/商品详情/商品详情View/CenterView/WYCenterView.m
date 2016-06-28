@@ -30,14 +30,16 @@
         
         CGFloat width = frame.size.width;
         
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:(CGRectMake(0, 0, width, 20))];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:(CGRectMake(0, 0, width, 40))];
         [titleLabel setBackgroundColor:[UIColor whiteColor]];
-        [titleLabel setFont:[UIFont systemFontOfSize:16]];
+        [titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
+        [titleLabel setNumberOfLines:0];
+        [titleLabel setLineBreakMode:(NSLineBreakByWordWrapping)];
         [titleLabel setTextAlignment:(NSTextAlignmentCenter)];
         [self addSubview:titleLabel];
         self.titleLabel = titleLabel;
         
-        UILabel *priceLabel = [[UILabel alloc] initWithFrame:(CGRectMake(0, 20, width, 73))];
+        UILabel *priceLabel = [[UILabel alloc] initWithFrame:(CGRectMake(0, 40, width, 73))];
         [priceLabel setBackgroundColor:[UIColor whiteColor]];
         [priceLabel setTextAlignment:(NSTextAlignmentCenter)];
         [self addSubview:priceLabel];
@@ -48,6 +50,7 @@
         [introduceLabel setTextColor:RGB(169, 169, 169)];
         [introduceLabel setTextAlignment:(NSTextAlignmentCenter)];
         [introduceLabel setFont:[UIFont systemFontOfSize:14]];
+        [introduceLabel setNumberOfLines:0];
         [self addSubview:introduceLabel];
         self.introduceLabel = introduceLabel;
         
@@ -113,7 +116,7 @@
     
     NSAttributedString *pricStr = [[NSAttributedString alloc] initWithString:model.price attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:19],NSForegroundColorAttributeName : RGB(255, 64, 12)}];
     
-    NSAttributedString *OriginalPrice = [[NSAttributedString alloc] initWithString:model.originalPrice attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14],NSForegroundColorAttributeName : RGB(169, 169, 169),NSStrikethroughStyleAttributeName:@(1)}];
+    NSAttributedString *OriginalPrice = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",model.originalPrice] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14],NSForegroundColorAttributeName : RGB(169, 169, 169),NSStrikethroughStyleAttributeName:@(1)}];
     
     NSAttributedString *Discount = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" (%@折)",model.discount] attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:14],NSForegroundColorAttributeName : [UIColor blackColor]}];
     

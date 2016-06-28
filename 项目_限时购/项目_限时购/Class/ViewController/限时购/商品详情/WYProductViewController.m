@@ -46,6 +46,9 @@
 /** 添加轮播视图上的购买人数按钮 */
 @property (strong, nonatomic) UIButton *buyBtn;
 
+/** 收藏按钮 */
+@property (weak, nonatomic) UIButton *collectBtn;
+
 /** 商品详情价格、评分的数据 model */
 @property (strong, nonatomic) WYAllDetailsModel *allModel;
 
@@ -82,13 +85,19 @@
         [_buyBtn.layer setMasksToBounds:YES];
         [_buyBtn.layer setCornerRadius:11];
         [_buyBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        [_buyBtn addTarget:self action:@selector(btnTouchActionBuy) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _buyBtn;
 }
 
+- (void)btnTouchActionBuy {
+    
+    [self.bgScrollView setContentOffset:(CGPointMake(0, CGRectGetMaxY(self.productTbaleView.frame))) animated:YES];
+}
+
 - (WYCenterView *)thePriceView {
     if (!_thePriceView) {
-        _thePriceView = [[WYCenterView alloc] initWithFrame:(CGRectMake(0, CGRectGetMaxY(self.adView.frame) + 10, WIDTH, 251))];
+        _thePriceView = [[WYCenterView alloc] initWithFrame:(CGRectMake(0, CGRectGetMaxY(self.adView.frame) + 10, WIDTH, 271))];
         _thePriceView.countryUrl = _countryImageUrl;
     }
     return _thePriceView;
@@ -121,17 +130,24 @@
     
     /** 添加控件 和 约束 */
     [self controlAddView];
+    
     /** 添加导航条上的三个按钮 */
     [self navigationAddThreeBarBtnItem];
     
     /** 商品所有图片列表网络请求 */
     [self httpGetGoodsImagesRequest];
+    
     /** 商品详情部分（包含价格，评分等）网络请求*/
     [self httpGetAllGoodsDetailsRequest];
+    
     /** 商品详情列表网络请求 */
     [self httpGetGoodsDetailsRequest];
+    
     /** 商品评分部分网络请求 */
     [self httpGetGoodsScoreRequest];
+    
+    /** 商品评论部分网络请求(空的) */
+//    [self httpGetCommentRequest];
 }
 
 /** 添加控件 和 约束 */
@@ -206,8 +222,7 @@
         WYDetailsClassfyViewController *classDetailsVC = [[WYDetailsClassfyViewController alloc] init];
         classDetailsVC.title = weakSelf.allModel.brandCNName;
         classDetailsVC.typeID = weakSelf.allModel.shopId;
-        classDetailsVC.judgeRequest = 4;
-        classDetailsVC.start = YES;
+        classDetailsVC.judgeRequest = 1;
         [weakSelf.navigationController pushViewController:classDetailsVC animated:YES];
     };
     
@@ -226,7 +241,7 @@
 
 /** 购物车按钮点击事件 */
 - (void)btnTouchActionShopping {
-    
+    [self.tabBarController setSelectedIndex:2];
 }
 
 /** 加入购物车按钮点击事件 */
@@ -321,6 +336,18 @@
         if (infoDict) {
             
             weakSelf.allModel = [[WYAllDetailsModel alloc] initWithDictionary:infoDict];
+            
+            ZDY_LOG(@"     %@ ",weakSelf.allModel.isCollected);
+            
+            BOOL collect;
+            if ([weakSelf.allModel.isCollected isEqualToString:[NSString stringWithFormat:@"YES"]]) {
+                collect = YES;
+            }
+            else {
+                collect = NO;
+            }
+            [weakSelf.collectBtn setSelected:collect];
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 weakSelf.thePriceView.model = weakSelf.allModel;
                 [weakSelf.buyBtn setTitle:weakSelf.allModel.buyCount forState:(UIControlStateNormal)];
@@ -386,7 +413,7 @@
         
         NSArray *array = (NSArray *)JSON;
         
-        if (array) {
+        if (array.count > 0) {
             NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
             
             for (NSDictionary *dict in array) {
@@ -414,10 +441,87 @@
     
 }
 
+/** 商品评论部分网络请求(空的) */
+- (void)httpGetCommentRequest {
+//    WS(weakSelf);
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appGoods/findGoodsComment.do"] progressDic:@{@"GoodsId":self.goodsID} success:^(id JSON) {
+        
+        NSArray *array = (NSArray *)JSON;
+        
+        NSString *nameJson = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:nil] encoding:NSUTF8StringEncoding];
+        
+        ZDY_LOG(@"商品评论 == %@",nameJson);
+        
+        if (array.count > 0) {
+            
+//            NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
+//            
+//            for (NSDictionary *dict in array) {
+//                
+//            }
+            
+        }
+        else {
+            ZDY_LOG(@"   请求评论失败");
+        }
+        
+    } failure:^(NSError *error) {
+        ZDY_LOG(@"error == %@",error.localizedDescription);
+    }];
+}
+
+/**
+ *  商品加入个人收藏的网络请求  (服务器错误)
+ *
+ *  @param MemberId       用户 ID
+ *  @param CollectionType 商品是选择添加收藏@“1” 还是 取消收藏@“2”
+ */
+- (void)httpGetGoodsAddUserCollectRequestMemberId:(NSString *)MemberId CollectionType:(NSInteger)CollectionType {
+    
+    NSDictionary *requestDic = @{@"MemberId":MemberId,
+                                 @"CollectionType":[NSString stringWithFormat:@"%ld",CollectionType],
+                                 @"RelatedType":@"1",
+                                 @"RelatedId":self.allModel.goodsId};
+    
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appCollection/insertIOS.do"] progressDic:requestDic success:^(id JSON) {
+        
+        NSDictionary *dataDict = (NSDictionary *)JSON;
+        
+        if ([dataDict[@"result"] isEqualToString:[NSString stringWithFormat:@"success"]]) {
+            
+            if (1 == CollectionType) {
+                [MBProgressHUD showSuccess:[NSString stringWithFormat:@"成功加入收藏夹"]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUD];
+                });
+            }
+            else {
+                [MBProgressHUD showSuccess:[NSString stringWithFormat:@"已从收藏夹移除"]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUD];
+                });
+            }
+            
+        }
+        else {
+            ZDY_LOG(@"----收藏失败----");
+        }
+        
+    } failure:^(NSError *error) {
+        ZDY_LOG(@"error == %@",error.localizedDescription);
+    }];
+}
+
 /** 添加导航条上的2个按钮 */
 - (void)navigationAddThreeBarBtnItem {
     /**     右边两个按钮     */
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageWithModeImageName:@"详情界面收藏按钮"] style:(UIBarButtonItemStylePlain) target:self action:@selector(barItemCollect)];
+    UIButton *collectBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    [collectBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"详情界面收藏按钮"]] forState:(UIControlStateNormal)];
+    [collectBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"详情界面收藏按钮sel"]] forState:(UIControlStateSelected)];
+    [collectBtn sizeToFit];
+    [collectBtn addTarget:self action:@selector(btnTouchActionCollect:) forControlEvents:(UIControlEventTouchUpInside)];
+    self.collectBtn = collectBtn;
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:collectBtn];
     
     UIBarButtonItem *_rightItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageWithModeImageName:@"详情界面转发按钮"] style:(UIBarButtonItemStylePlain) target:self action:@selector(barItemRelay)];
     
@@ -427,7 +531,27 @@
 }
 
 /** 右边收藏按钮点击事件 */
-- (void)barItemCollect {
+- (void)btnTouchActionCollect:(UIButton *)collect {
+    
+    NSDictionary *userDic = [XSG_USER_DEFAULTS objectForKey:LOGIN_USER];
+    
+    if (userDic) {
+        
+        if (collect.selected) {
+            [self httpGetGoodsAddUserCollectRequestMemberId:userDic[@"MemberId"] CollectionType:2];
+        }
+        else {
+            [self httpGetGoodsAddUserCollectRequestMemberId:userDic[@"MemberId"] CollectionType:1];
+        }
+        collect.selected = !collect.selected;
+    }
+    else {
+        [MBProgressHUD showError:[NSString stringWithFormat:@"尊敬的用户您尚未登录"]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUD];
+        });
+    }
+    
     
 }
 

@@ -258,7 +258,7 @@ static NSString *versionKey = @"CFBundleShortVersionString";
         }
         else {
             [MBProgressHUD showError:[NSString stringWithFormat:@"尊敬的用户您尚未登录"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
         }
@@ -274,7 +274,6 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     weakSelf.brandTable.brandCellRow = ^(NSInteger cellRow) {
         WYSaleModel *model = weakSelf.brandMuArray[cellRow];
         WYDetailsClassfyViewController *detailsVC = [[WYDetailsClassfyViewController alloc] init];
-        detailsVC.start = YES;
         detailsVC.title = model.shopTitle;
         detailsVC.typeID = model.activityId;
         detailsVC.judgeRequest = 3;

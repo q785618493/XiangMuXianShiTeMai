@@ -149,8 +149,7 @@ static NSString *keyHeader = @"imageUser";
                 weakSelf.meTableView.infoArray = [self returnModelArray];
                 [weakSelf.topUserView hiddenDeleteView];
                 [weakSelf.quitView removeFromSuperview];
-                [weakSelf.meTableView setTableHeaderView:weakSelf.topLoginView];
-                [weakSelf.meTableView setTableFooterView:weakSelf.lineView];
+                [weakSelf controlAddMasonryNotLogin];
                 [weakSelf.meTableView reloadData];
             }
         });
