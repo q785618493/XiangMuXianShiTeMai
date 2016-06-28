@@ -33,6 +33,9 @@
 /** 保存购物车商品数据 */
 @property (strong, nonatomic) NSMutableArray *shoppingMuArray;
 
+/** 保存订单商品总价格 */
+@property (assign, nonatomic) CGFloat thePrice;
+
 @end
 
 @implementation WYShoppingCartViewController
@@ -128,6 +131,15 @@
                 WYShoppingCarModel *model = weakSelf.shoppingMuArray[cellRow];
             };
             
+            weakSelf.haveGoodsView.blockPrice = ^(NSString *goodsID, CGFloat price, BOOL stasus) {
+                weakSelf.thePrice += price;
+                
+                if (stasus) {
+                    ZDY_LOG(@"=============");
+                }
+                
+            };
+            
             [_bottomView makeConstraints:^(MASConstraintMaker *make) {
                 make.bottom.equalTo(weakSelf.view.bottom).offset(-49);
                 make.top.equalTo(weakSelf.haveGoodsView.bottom);
@@ -163,6 +175,13 @@
     }
 }
 
+/** 修改商品价格 */
+- (void)setThePrice:(CGFloat)thePrice {
+    _thePrice = thePrice;
+    
+    self.bottomView.moneyText = [NSString stringWithFormat:@"%.2f",_thePrice];
+}
+
 /** 购物车商品列表的网络请求 */
 - (void)httpGetShoppingCarListRequestMemberId:(NSString *)MemberId {
     WS(weakSelf);
@@ -174,7 +193,7 @@
         if (array) {
             
             NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
-            CGFloat thePrice = 0;
+            weakSelf.thePrice = 0;
             CGFloat price;
             NSInteger number;
             
@@ -184,7 +203,7 @@
                 
                 price = [model.price floatValue];
                 number = [model.goodsCount integerValue];
-                thePrice += number * price * 1.0;
+                weakSelf.thePrice += number * price * 1.0;
             }
             
             /** 遍历模型数据，默认商品选中 */
@@ -194,7 +213,6 @@
             }];
             
             [weakSelf.shoppingMuArray addObjectsFromArray:muArray];
-            weakSelf.bottomView.moneyText = [NSString stringWithFormat:@"%.2f",thePrice];
             weakSelf.haveGoodsView.goodsMuArray = weakSelf.shoppingMuArray;
             
             dispatch_async(dispatch_get_main_queue(), ^{

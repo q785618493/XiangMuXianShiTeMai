@@ -121,9 +121,16 @@
     
     [_showImage downloadImage:model.imgView];
     [_titleLabel setText:model.goodsTitle];
-    [_priceLabel setText:model.price];
+    [_priceLabel setText:[NSString stringWithFormat:@"￥%@",model.price]];
     [_goodsNumberLabel setText:model.goodsCount];
     [_checkTheBtn setSelected:model.selected];
+}
+
+- (void)setCellTag:(NSInteger)cellTag {
+    _cellTag = cellTag;
+    [self.checkTheBtn setTag:cellTag + 1000];
+    [self.reduceBtn setTag:cellTag + 2000];
+    [self.addBtn setTag:cellTag + 3000];
 }
 
 /** 懒加载 */
@@ -192,7 +199,7 @@
 - (UIButton *)addBtn {
     if (!_addBtn) {
         _addBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        [_addBtn setTag:BTN_TAG + 1];
+        
 //        [_addBtn addTarget:self action:@selector(btnTouchActionTarget:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _addBtn;
@@ -201,7 +208,7 @@
 - (UIButton *)reduceBtn {
     if (!_reduceBtn) {
         _reduceBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        [_reduceBtn setTag:BTN_TAG + 0];
+        
 //        [_reduceBtn addTarget:self action:@selector(btnTouchActionTarget:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _reduceBtn;

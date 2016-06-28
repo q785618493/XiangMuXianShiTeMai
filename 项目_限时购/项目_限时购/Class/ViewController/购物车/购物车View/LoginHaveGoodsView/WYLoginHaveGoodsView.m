@@ -49,7 +49,7 @@
     [cell.addBtn addTarget:self action:@selector(btnTouchActionAdd:) forControlEvents:(UIControlEventTouchUpInside)];
     [cell.reduceBtn addTarget:self action:@selector(btnTouchActionReduce:) forControlEvents:(UIControlEventTouchUpInside)];
     
-    [cell setTag:CELL_TAG + indexPath.row];
+    cell.cellTag = CELL_TAG + indexPath.row;
     WYShoppingCarModel *model = self.goodsMuArray[indexPath.row];
     cell.model = model;
     
@@ -59,16 +59,73 @@
 /** 勾选商品按钮点击事件 */
 - (void)btnTouchActionCheckThe:(UIButton *)checkThe {
     
+    NSInteger indexRow = checkThe.tag - CELL_TAG - 1000;
+    
+    WYShoppingCarModel *model = self.goodsMuArray[indexRow];
+    
+    CGFloat goodsPrice = 0;
+    CGFloat price = [model.price floatValue];
+    NSInteger count = [model.goodsCount integerValue];
+    
+    if (checkThe.selected) {
+        
+        goodsPrice -= price * count * 1.0;
+    }
+    else {
+        goodsPrice += price * count * 1.0;
+    }
+    
+    checkThe.selected = !checkThe.selected;
+    
+    if (_blockPrice) {
+        _blockPrice(model.uUID, goodsPrice, NO);
+    }
 }
 
 /** 增加商品点击事件 */
 - (void)btnTouchActionAdd:(UIButton *)addBtn {
+    
+    NSInteger indexRow = addBtn.tag - CELL_TAG - 3000;
+    WYShoppingCarModel *model = self.goodsMuArray[indexRow];
+    
+    CGFloat goodsPrice = 0;
+    CGFloat price = [model.price floatValue];
+    NSInteger count = [model.goodsCount integerValue];
+    count ++;
+    
+    model.goodsCount = [NSString stringWithFormat:@"%ld",count];
+    
+    [self reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexRow inSection:0]] withRowAnimation:(UITableViewRowAnimationFade)];
+    
+    goodsPrice = price * count * 1.0;
+    
+    if (_blockPrice) {
+        _blockPrice(model.uUID, goodsPrice, YES);
+    }
     
 }
 
 /** 减少商品点击事件 */
 - (void)btnTouchActionReduce:(UIButton *)reduce {
     
+    NSInteger indexRow = reduce.tag - CELL_TAG - 2000;
+    
+    WYShoppingCarModel *model = self.goodsMuArray[indexRow];
+    
+    CGFloat goodsPrice = 0;
+    CGFloat price = [model.price floatValue];
+    NSInteger count = [model.goodsCount integerValue];
+    count --;
+    
+    model.goodsCount = [NSString stringWithFormat:@"%ld",count];
+    
+    [self reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexRow inSection:0]] withRowAnimation:(UITableViewRowAnimationFade)];
+    
+    goodsPrice = price * count * 1.0;
+    
+    if (_blockPrice) {
+        _blockPrice(model.uUID, goodsPrice, YES);
+    }
 }
 
 #pragma make-

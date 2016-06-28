@@ -14,6 +14,9 @@
 /** 接收模型数据 */
 @property (strong, nonatomic) WYShoppingCarModel *model;
 
+/** 接收cell的行数 */
+@property (assign, nonatomic) NSInteger cellTag;
+
 /** 勾选商品按钮 */
 @property (strong, nonatomic) UIButton *checkTheBtn;
 
