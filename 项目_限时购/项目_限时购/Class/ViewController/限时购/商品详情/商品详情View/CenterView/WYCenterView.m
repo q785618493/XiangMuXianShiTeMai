@@ -114,9 +114,9 @@
     [self.shopName setText:model.brandCNName];
     [self.imageView downloadImage:model.shopImage];
     
-    NSAttributedString *pricStr = [[NSAttributedString alloc] initWithString:model.price attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:19],NSForegroundColorAttributeName : RGB(255, 64, 12)}];
+    NSAttributedString *pricStr = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ ",model.price] attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:19],NSForegroundColorAttributeName : RGB(255, 64, 12)}];
     
-    NSAttributedString *OriginalPrice = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",model.originalPrice] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14],NSForegroundColorAttributeName : RGB(169, 169, 169),NSStrikethroughStyleAttributeName:@(1)}];
+    NSAttributedString *OriginalPrice = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",model.originalPrice] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14],NSForegroundColorAttributeName : RGB(169, 169, 169),NSStrikethroughStyleAttributeName:@(1)}];
     
     NSAttributedString *Discount = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" (%@折)",model.discount] attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:14],NSForegroundColorAttributeName : [UIColor blackColor]}];
     

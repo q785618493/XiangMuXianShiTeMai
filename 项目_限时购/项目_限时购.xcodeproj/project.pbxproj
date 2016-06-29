@@ -19,6 +19,7 @@
 		044B2DA91D2131AA00988617 /* WYLoginHaveGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B2DA81D2131AA00988617 /* WYLoginHaveGoodsView.m */; };
 		044B2DAD1D2147A200988617 /* WYHaveGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B2DAC1D2147A200988617 /* WYHaveGoodsCell.m */; };
 		044B2DB11D21492100988617 /* WYShoppingCarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B2DB01D21492100988617 /* WYShoppingCarModel.m */; };
+		0464F9401D23C1A5005D8ACA /* WYTopConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464F93F1D23C1A5005D8ACA /* WYTopConfirmView.m */; };
 		046E07381D127B3A00645E96 /* WYHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E07371D127B3A00645E96 /* WYHttpRequest.m */; };
 		046E074A1D12882000645E96 /* WYTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E07461D12882000645E96 /* WYTextFieldView.m */; };
 		046E074B1D12882000645E96 /* WYThirdPartyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E07491D12882000645E96 /* WYThirdPartyView.m */; };
@@ -161,6 +162,8 @@
 		044B2DAC1D2147A200988617 /* WYHaveGoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYHaveGoodsCell.m; sourceTree = "<group>"; };
 		044B2DAF1D21492100988617 /* WYShoppingCarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYShoppingCarModel.h; sourceTree = "<group>"; };
 		044B2DB01D21492100988617 /* WYShoppingCarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYShoppingCarModel.m; sourceTree = "<group>"; };
+		0464F93E1D23C1A5005D8ACA /* WYTopConfirmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYTopConfirmView.h; sourceTree = "<group>"; };
+		0464F93F1D23C1A5005D8ACA /* WYTopConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYTopConfirmView.m; sourceTree = "<group>"; };
 		046E07361D127B3A00645E96 /* WYHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYHttpRequest.h; sourceTree = "<group>"; };
 		046E07371D127B3A00645E96 /* WYHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYHttpRequest.m; sourceTree = "<group>"; };
 		046E07451D12882000645E96 /* WYTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYTextFieldView.h; sourceTree = "<group>"; };
@@ -454,6 +457,15 @@
 				044B2DB01D21492100988617 /* WYShoppingCarModel.m */,
 			);
 			path = ShoppingCarModel;
+			sourceTree = "<group>";
+		};
+		0464F93D1D23C17E005D8ACA /* TopConfirmView */ = {
+			isa = PBXGroup;
+			children = (
+				0464F93E1D23C1A5005D8ACA /* WYTopConfirmView.h */,
+				0464F93F1D23C1A5005D8ACA /* WYTopConfirmView.m */,
+			);
+			path = TopConfirmView;
 			sourceTree = "<group>";
 		};
 		046E07441D12882000645E96 /* TextFieldView */ = {
@@ -750,6 +762,7 @@
 		047FB2DE1D22679A00E4F4E5 /* 确认订单View */ = {
 			isa = PBXGroup;
 			children = (
+				0464F93D1D23C17E005D8ACA /* TopConfirmView */,
 				04257C721D22A8EE0072E4A2 /* BottomPayment View */,
 				047FB2E21D226A1A00E4F4E5 /* ConfirmOrderTableView */,
 			);
@@ -1639,6 +1652,7 @@
 				048400381D1576750096AB05 /* WYFaceCollection.m in Sources */,
 				04488F771D20D51B00ED6DAB /* WYHomeGuideView.m in Sources */,
 				047A3AF71D1784C800A85947 /* SDWebImagePrefetcher.m in Sources */,
+				0464F9401D23C1A5005D8ACA /* WYTopConfirmView.m in Sources */,
 				047A3AFA1D1784C800A85947 /* UIImage+MultiFormat.m in Sources */,
 				047A3AF31D1784C800A85947 /* SDWebImageDecoder.m in Sources */,
 				044B2DA91D2131AA00988617 /* WYLoginHaveGoodsView.m in Sources */,

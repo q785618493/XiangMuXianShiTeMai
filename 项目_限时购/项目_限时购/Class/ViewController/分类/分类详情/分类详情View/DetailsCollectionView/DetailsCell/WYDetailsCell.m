@@ -78,9 +78,9 @@
     [self.goodsImage downloadImage:model.ImgView];
     [self.titleLabel setText:model.Title];
     
-    NSAttributedString *priceAttribute = [[NSAttributedString alloc] initWithString:model.Price attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17],NSForegroundColorAttributeName : RGB(255, 67, 0)}];
+    NSAttributedString *priceAttribute = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ ",model.Price] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17],NSForegroundColorAttributeName : RGB(255, 67, 0)}];
     
-    NSAttributedString *domesticAttribute = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" ￥%@",model.DomesticPrice] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13],NSForegroundColorAttributeName : RGB(169, 169, 169),NSStrikethroughStyleAttributeName:@(1)}];
+    NSAttributedString *domesticAttribute = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"￥%@",model.DomesticPrice] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13],NSForegroundColorAttributeName : RGB(169, 169, 169),NSStrikethroughStyleAttributeName:@(1)}];
     
     
     NSMutableAttributedString *muAttString = [[NSMutableAttributedString alloc] init];
