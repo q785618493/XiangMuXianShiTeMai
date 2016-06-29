@@ -81,13 +81,16 @@
     
     UIButton *addBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
     [addBtn setBackgroundColor:RGB(55, 183, 236)];
+    [addBtn.layer setMasksToBounds:YES];
+    [addBtn.layer setCornerRadius:5];
+    [addBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [addBtn setTitle:[NSString stringWithFormat:@"添加新的收货地址"] forState:(UIControlStateNormal)];
     [addBtn addTarget:self action:@selector(btnTouchActionAdd) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:addBtn];
     
     [addBtn makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.siteTableView.bottom).offset(4);
-        make.bottom.equalTo(weakSelf.view).offset(-4);
+        make.top.equalTo(weakSelf.siteTableView.bottom).offset(6);
+        make.bottom.equalTo(weakSelf.view).offset(-6);
         make.right.equalTo(weakSelf.view.right).offset(-50);
         make.left.equalTo(weakSelf.view.left).offset(50);
     }];

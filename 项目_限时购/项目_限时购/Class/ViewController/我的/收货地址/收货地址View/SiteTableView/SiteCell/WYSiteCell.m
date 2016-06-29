@@ -127,6 +127,7 @@
         _deleteBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [_deleteBtn setBackgroundColor:[UIColor whiteColor]];
         [_deleteBtn setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+        [_deleteBtn setTitleColor:RGB(236, 59, 55) forState:(UIControlStateHighlighted)];
         [_deleteBtn setTitle:[NSString stringWithFormat:@"删 除"] forState:(UIControlStateNormal)];
         [_deleteBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
     }
@@ -139,6 +140,7 @@
         [_editBtn setBackgroundColor:[UIColor whiteColor]];
         [_editBtn setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
         [_editBtn setTitle:[NSString stringWithFormat:@"编 辑"] forState:(UIControlStateNormal)];
+        [_editBtn setTitleColor:RGB(55, 183, 236) forState:(UIControlStateHighlighted)];
         [_editBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
     }
     return _editBtn;
