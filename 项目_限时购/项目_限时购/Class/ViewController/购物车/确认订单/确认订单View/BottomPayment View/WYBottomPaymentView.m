@@ -36,8 +36,8 @@
     
     WS(weakSelf);
     [_paymentBtn makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.top).offset(7);
-        make.bottom.equalTo(weakSelf.bottom).offset(-7);
+        make.top.equalTo(weakSelf.top).offset(8);
+        make.bottom.equalTo(weakSelf.bottom).offset(-8);
         make.right.equalTo(weakSelf.right).offset(-15);
         make.width.equalTo(113);
     }];
@@ -78,6 +78,7 @@
         _paymentBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [_paymentBtn setBackgroundColor:RGB(55, 183, 236)];
         [_paymentBtn setTitle:[NSString stringWithFormat:@"立即支付"] forState:(UIControlStateNormal)];
+        [_paymentBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
         [_paymentBtn.layer setMasksToBounds:YES];
         [_paymentBtn.layer setCornerRadius:5];
         [_paymentBtn addTarget:self action:@selector(btnTouchActionPayment) forControlEvents:(UIControlEventTouchUpInside)];

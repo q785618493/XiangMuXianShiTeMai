@@ -10,6 +10,7 @@
 
 #import "WYLoginViewController.h"
 #import "WYRegisterViewController.h"
+#import "WYDeliveryAddressViewController.h"
 
 #import "WYMeTableView.h"
 #import "WYMeHeaderView.h"
@@ -69,6 +70,7 @@ static NSString *keyHeader = @"imageUser";
 
 /** 获得默认未登录状态的数据 */
 - (NSMutableArray *)returnModelArray {
+    
     NSArray *dataArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MeModel.plist" ofType:nil]];
     NSMutableArray *muArray = [NSMutableArray array];
     for (NSDictionary *dict in dataArray) {
@@ -109,7 +111,7 @@ static NSString *keyHeader = @"imageUser";
 
 - (UIView *)quitView {
     if (!_quitView) {
-        _quitView = [[UIView alloc] initWithFrame:(CGRectMake(0, 0, self.view.frame.size.width, 65))];
+        _quitView = [[UIView alloc] initWithFrame:(CGRectMake(0, 0, self.view.frame.size.width, 45))];
         [_quitView setBackgroundColor:RGB(245, 245, 245)];
     }
     return _quitView;
@@ -118,7 +120,11 @@ static NSString *keyHeader = @"imageUser";
 - (UIButton *)exitBtn {
     if (!_exitBtn) {
         _exitBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        [_exitBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"我的界面退出登录按钮"]] forState:(UIControlStateNormal)];
+//        [_exitBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"我的界面退出登录按钮"]] forState:(UIControlStateNormal)];
+        [_exitBtn setBackgroundColor:RGB(55, 183, 236)];
+        [_exitBtn setTitle:[NSString stringWithFormat:@"退出登录"] forState:(UIControlStateNormal)];
+        [_exitBtn.layer setMasksToBounds:YES];
+        [_exitBtn.layer setCornerRadius:5];
         [_exitBtn addTarget:self action:@selector(btnTouchActionExit) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _exitBtn;
@@ -139,8 +145,9 @@ static NSString *keyHeader = @"imageUser";
             
             //删除保存的用户数据
             BOOL removeData = [[NSFileManager defaultManager] removeItemAtPath:INFO_PATH error:nil];
+            BOOL siteRemove = [[NSFileManager defaultManager] removeItemAtPath:SITE_PATH error:nil];
             
-            if (removeData) {
+            if (removeData && siteRemove) {
                 /** 删除用户信息 */
                 [XSG_USER_DEFAULTS removeObjectForKey:userInfo];
                 [XSG_USER_DEFAULTS removeObjectForKey:LOGIN_USER];
@@ -212,14 +219,18 @@ static NSString *keyHeader = @"imageUser";
             
             [weakSelf.meTableView setTableFooterView:weakSelf.quitView];
             [weakSelf.quitView addSubview:weakSelf.exitBtn];
+            weakSelf.meTableView.meCellRow = ^(NSInteger cellRow) {
+                WYDeliveryAddressViewController *deliveryVC = [[WYDeliveryAddressViewController alloc] init];
+                [weakSelf.navigationController pushViewController:deliveryVC animated:YES];
+            };
             
             [_exitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.edges.mas_equalTo(weakSelf.quitView).with.insets(UIEdgeInsetsMake(5, 16, 5, 16));
+                make.edges.mas_equalTo(weakSelf.quitView).with.insets(UIEdgeInsetsMake(5, 50, 5, 50));
             }];
             
             weakSelf.dataMuArray = [weakSelf returnModelArray];
-            
             [weakSelf.dataMuArray addObjectsFromArray:meTableArray];
+            
             weakSelf.meTableView.infoArray = weakSelf.dataMuArray;
             [weakSelf.meTableView reloadData];
             
@@ -265,8 +276,13 @@ static NSString *keyHeader = @"imageUser";
     [self.meTableView setTableFooterView:self.quitView];
     [self.quitView addSubview:self.exitBtn];
     [_exitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(weakSelf.quitView).with.insets(UIEdgeInsetsMake(10, 16, 10, 16));
+        make.edges.mas_equalTo(weakSelf.quitView).with.insets(UIEdgeInsetsMake(5, 50, 5, 50));
     }];
+    
+    weakSelf.meTableView.meCellRow = ^(NSInteger cellRow) {
+        WYDeliveryAddressViewController *deliveryVC = [[WYDeliveryAddressViewController alloc] init];
+        [weakSelf.navigationController pushViewController:deliveryVC animated:YES];
+    };
 }
 
 /** 用户按钮点击事件,替换用户头像 */

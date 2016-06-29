@@ -20,7 +20,6 @@
         
         [self setDelegate:self];
         [self setDataSource:self];
-        [self setBounces:NO];
         [self setShowsHorizontalScrollIndicator:NO];
         [self setShowsVerticalScrollIndicator:NO];
     }

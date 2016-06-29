@@ -7,13 +7,19 @@
 //
 
 #import "WYConfirmOrderViewController.h"
+#import "WYDeliveryAddressViewController.h"
+
 #import "WYConfirmOrderTableView.h"
 #import "WYBottomPaymentView.h"
+#import "WYTopConfirmView.h"
 
 @interface WYConfirmOrderViewController ()
 
 /** 展示商品信息的 TableView */
 @property (strong, nonatomic) WYConfirmOrderTableView *goodsTableView;
+
+/** 顶部用户收货信息视图 */
+@property (strong, nonatomic) WYTopConfirmView *topConfirmView;
 
 /** 底部视图 */
 @property (strong, nonatomic) WYBottomPaymentView *bottomView;
@@ -27,8 +33,16 @@
     if (!_goodsTableView) {
         _goodsTableView = [[WYConfirmOrderTableView alloc] initWithFrame:(CGRectMake(0, 64, VIEW_WIDTH, VIEW_HEIGHT - 64 - 45)) style:(UITableViewStylePlain)];
         _goodsTableView.goodsArray = self.dataArray;
+        [_goodsTableView setTableHeaderView:self.topConfirmView];
     }
     return _goodsTableView;
+}
+
+- (WYTopConfirmView *)topConfirmView {
+    if (!_topConfirmView) {
+        _topConfirmView = [[WYTopConfirmView alloc] initWithFrame:(CGRectMake(0, 0, VIEW_WIDTH, 96))];
+    }
+    return _topConfirmView;
 }
 
 - (WYBottomPaymentView *)bottomView {
@@ -70,7 +84,22 @@
         
         ZDY_LOG(@"   -------------------   ");
     };
+    
+    UIButton *chooseBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    [chooseBtn setBackgroundColor:RGB(248, 248, 248)];
+    [chooseBtn setTitle:[NSString stringWithFormat:@"选择地址"] forState:(UIControlStateNormal)];
+    [chooseBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [chooseBtn sizeToFit];
+    [chooseBtn setTitleColor:RGB(253, 249, 246) forState:(UIControlStateNormal)];
+    [chooseBtn addTarget:self action:@selector(btnTouchActionChoose) forControlEvents:(UIControlEventTouchUpInside)];
+    UIBarButtonItem *rightBtnItem = [[UIBarButtonItem alloc] initWithCustomView:chooseBtn];
+    [self.navigationItem setRightBarButtonItem:rightBtnItem];
 }
+- (void)btnTouchActionChoose {
+    WYDeliveryAddressViewController *deliveryVC = [[WYDeliveryAddressViewController alloc] init];
+    [self.navigationController pushViewController:deliveryVC animated:YES];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

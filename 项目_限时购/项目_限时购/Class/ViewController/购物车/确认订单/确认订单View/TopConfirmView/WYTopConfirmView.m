@@ -35,10 +35,11 @@
 
 @implementation WYTopConfirmView
 
-- (instancetype)init
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
     if (self) {
+        
         [self addSubview:self.bgImageView];
         [self.bgImageView addSubview:self.seatBtn];
         [self.bgImageView addSubview:self.cargoLabel];
@@ -68,13 +69,13 @@
     [_cargoLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.bgImageView.top).offset(10);
         make.left.equalTo(weakSelf.seatBtn.right);
-        make.size.equalTo(CGSizeMake(35, 20));
+        make.size.equalTo(CGSizeMake(49, 20));
     }];
     
     [_phoneLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.bgImageView.top).offset(10);
         make.right.equalTo(weakSelf.bgImageView.right).offset(-10);
-        make.size.equalTo(CGSizeMake(112, 20));
+        make.size.equalTo(CGSizeMake(110, 20));
     }];
     
     [_nameLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -140,7 +141,7 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        [_nameLabel setBackgroundColor:RGB(253, 249, 246)];
+        [_nameLabel setBackgroundColor:[UIColor whiteColor]];
         [_nameLabel setFont:[UIFont systemFontOfSize:14]];
     }
     return _nameLabel;

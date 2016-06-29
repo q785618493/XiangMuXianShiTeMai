@@ -13,6 +13,12 @@
 		04257C6E1D2299250072E4A2 /* WYConfirmOrderTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04257C6D1D2299250072E4A2 /* WYConfirmOrderTableView.m */; };
 		04257C711D22993D0072E4A2 /* WYConfirmOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04257C701D22993D0072E4A2 /* WYConfirmOrderCell.m */; };
 		04257C751D22A9130072E4A2 /* WYBottomPaymentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04257C741D22A9130072E4A2 /* WYBottomPaymentView.m */; };
+		043ABD7B1D23DACD006CCE95 /* WYDeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043ABD7A1D23DACD006CCE95 /* WYDeliveryAddressViewController.m */; };
+		043ABD7E1D23E57B006CCE95 /* WYContactsSiteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 043ABD7D1D23E57B006CCE95 /* WYContactsSiteModel.m */; };
+		043ABD861D23E877006CCE95 /* WYSiteTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 043ABD851D23E877006CCE95 /* WYSiteTableView.m */; };
+		043ABD891D23E8AE006CCE95 /* WYSiteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043ABD881D23E8AE006CCE95 /* WYSiteCell.m */; };
+		043ABD8C1D23EA39006CCE95 /* WYNewsSiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043ABD8B1D23EA39006CCE95 /* WYNewsSiteViewController.m */; };
+		043ABD8F1D23EA6C006CCE95 /* WYModifySiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043ABD8E1D23EA6C006CCE95 /* WYModifySiteViewController.m */; };
 		04488F771D20D51B00ED6DAB /* WYHomeGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04488F761D20D51B00ED6DAB /* WYHomeGuideView.m */; };
 		044B2D9A1D210E7500988617 /* WYNotLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B2D991D210E7500988617 /* WYNotLoginView.m */; };
 		044B2DA61D21124100988617 /* WYLoginNoGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B2DA51D21124100988617 /* WYLoginNoGoodsView.m */; };
@@ -150,6 +156,18 @@
 		04257C701D22993D0072E4A2 /* WYConfirmOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYConfirmOrderCell.m; sourceTree = "<group>"; };
 		04257C731D22A9130072E4A2 /* WYBottomPaymentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYBottomPaymentView.h; sourceTree = "<group>"; };
 		04257C741D22A9130072E4A2 /* WYBottomPaymentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYBottomPaymentView.m; sourceTree = "<group>"; };
+		043ABD791D23DACD006CCE95 /* WYDeliveryAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYDeliveryAddressViewController.h; sourceTree = "<group>"; };
+		043ABD7A1D23DACD006CCE95 /* WYDeliveryAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYDeliveryAddressViewController.m; sourceTree = "<group>"; };
+		043ABD7C1D23E57B006CCE95 /* WYContactsSiteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYContactsSiteModel.h; sourceTree = "<group>"; };
+		043ABD7D1D23E57B006CCE95 /* WYContactsSiteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYContactsSiteModel.m; sourceTree = "<group>"; };
+		043ABD841D23E877006CCE95 /* WYSiteTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYSiteTableView.h; sourceTree = "<group>"; };
+		043ABD851D23E877006CCE95 /* WYSiteTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYSiteTableView.m; sourceTree = "<group>"; };
+		043ABD871D23E8AE006CCE95 /* WYSiteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYSiteCell.h; sourceTree = "<group>"; };
+		043ABD881D23E8AE006CCE95 /* WYSiteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYSiteCell.m; sourceTree = "<group>"; };
+		043ABD8A1D23EA39006CCE95 /* WYNewsSiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYNewsSiteViewController.h; sourceTree = "<group>"; };
+		043ABD8B1D23EA39006CCE95 /* WYNewsSiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYNewsSiteViewController.m; sourceTree = "<group>"; };
+		043ABD8D1D23EA6C006CCE95 /* WYModifySiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYModifySiteViewController.h; sourceTree = "<group>"; };
+		043ABD8E1D23EA6C006CCE95 /* WYModifySiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYModifySiteViewController.m; sourceTree = "<group>"; };
 		04488F751D20D51B00ED6DAB /* WYHomeGuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYHomeGuideView.h; sourceTree = "<group>"; };
 		04488F761D20D51B00ED6DAB /* WYHomeGuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYHomeGuideView.m; sourceTree = "<group>"; };
 		044B2D981D210E7500988617 /* WYNotLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYNotLoginView.h; sourceTree = "<group>"; };
@@ -402,6 +420,73 @@
 				04257C741D22A9130072E4A2 /* WYBottomPaymentView.m */,
 			);
 			path = "BottomPayment View";
+			sourceTree = "<group>";
+		};
+		043ABD741D23DA4E006CCE95 /* 收货地址 */ = {
+			isa = PBXGroup;
+			children = (
+				043ABD791D23DACD006CCE95 /* WYDeliveryAddressViewController.h */,
+				043ABD7A1D23DACD006CCE95 /* WYDeliveryAddressViewController.m */,
+				043ABD761D23DA4E006CCE95 /* 收货地址Model */,
+				043ABD771D23DA4E006CCE95 /* 收货地址View */,
+				043ABD781D23DA4E006CCE95 /* 添加新地址 */,
+				043ABD751D23DA4E006CCE95 /* 修改旧地址 */,
+			);
+			path = "收货地址";
+			sourceTree = "<group>";
+		};
+		043ABD751D23DA4E006CCE95 /* 修改旧地址 */ = {
+			isa = PBXGroup;
+			children = (
+				043ABD8D1D23EA6C006CCE95 /* WYModifySiteViewController.h */,
+				043ABD8E1D23EA6C006CCE95 /* WYModifySiteViewController.m */,
+			);
+			path = "修改旧地址";
+			sourceTree = "<group>";
+		};
+		043ABD761D23DA4E006CCE95 /* 收货地址Model */ = {
+			isa = PBXGroup;
+			children = (
+				043ABD7C1D23E57B006CCE95 /* WYContactsSiteModel.h */,
+				043ABD7D1D23E57B006CCE95 /* WYContactsSiteModel.m */,
+			);
+			path = "收货地址Model";
+			sourceTree = "<group>";
+		};
+		043ABD771D23DA4E006CCE95 /* 收货地址View */ = {
+			isa = PBXGroup;
+			children = (
+				043ABD7F1D23E7F6006CCE95 /* SiteTableView */,
+			);
+			path = "收货地址View";
+			sourceTree = "<group>";
+		};
+		043ABD781D23DA4E006CCE95 /* 添加新地址 */ = {
+			isa = PBXGroup;
+			children = (
+				043ABD8A1D23EA39006CCE95 /* WYNewsSiteViewController.h */,
+				043ABD8B1D23EA39006CCE95 /* WYNewsSiteViewController.m */,
+			);
+			path = "添加新地址";
+			sourceTree = "<group>";
+		};
+		043ABD7F1D23E7F6006CCE95 /* SiteTableView */ = {
+			isa = PBXGroup;
+			children = (
+				043ABD841D23E877006CCE95 /* WYSiteTableView.h */,
+				043ABD851D23E877006CCE95 /* WYSiteTableView.m */,
+				043ABD801D23E7F6006CCE95 /* SiteCell */,
+			);
+			path = SiteTableView;
+			sourceTree = "<group>";
+		};
+		043ABD801D23E7F6006CCE95 /* SiteCell */ = {
+			isa = PBXGroup;
+			children = (
+				043ABD871D23E8AE006CCE95 /* WYSiteCell.h */,
+				043ABD881D23E8AE006CCE95 /* WYSiteCell.m */,
+			);
+			path = SiteCell;
 			sourceTree = "<group>";
 		};
 		04488F741D20D48200ED6DAB /* GuideView */ = {
@@ -1001,6 +1086,7 @@
 				0496C8B21D10F0FD00E3809F /* 我的View */,
 				0496C8B71D10F0FD00E3809F /* 登录 */,
 				0496C8B31D10F0FD00E3809F /* 注册 */,
+				043ABD741D23DA4E006CCE95 /* 收货地址 */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -1603,6 +1689,7 @@
 			files = (
 				047A3AF91D1784C800A85947 /* UIImage+GIF.m in Sources */,
 				0496C8C81D10F0FD00E3809F /* AppDelegate.m in Sources */,
+				043ABD8C1D23EA39006CCE95 /* WYNewsSiteViewController.m in Sources */,
 				047260A01D1D576D004C8B0A /* WYGoodsDetailsModel.m in Sources */,
 				047A3AEF1D1784C800A85947 /* MKAnnotationView+WebCache.m in Sources */,
 				048400301D1575AE0096AB05 /* WYSortModel.m in Sources */,
@@ -1621,6 +1708,7 @@
 				047A3AFB1D1784C800A85947 /* UIImage+WebP.m in Sources */,
 				047F094B1D125367004E7EE7 /* JPRefreshView.m in Sources */,
 				046E07541D1289C600645E96 /* WYTestPhoneViewController.m in Sources */,
+				043ABD8F1D23EA6C006CCE95 /* WYModifySiteViewController.m in Sources */,
 				048400311D1575AE0096AB05 /* WYFaceModel.m in Sources */,
 				0496C86F1D10EE2E00E3809F /* main.m in Sources */,
 				047F08F21D1242A2004E7EE7 /* WYBaseView.m in Sources */,
@@ -1635,6 +1723,7 @@
 				044B2DAD1D2147A200988617 /* WYHaveGoodsCell.m in Sources */,
 				044B2D9A1D210E7500988617 /* WYNotLoginView.m in Sources */,
 				046E87BA1D1544AA00D48AB0 /* WYBrandCell.m in Sources */,
+				043ABD7E1D23E57B006CCE95 /* WYContactsSiteModel.m in Sources */,
 				0496C8E71D1102B900E3809F /* WYBaseCollectionCell.m in Sources */,
 				047260AE1D1D5A53004C8B0A /* WYGoodsScoreView.m in Sources */,
 				047A3B071D17F37700A85947 /* UIImage+ImageSetting.m in Sources */,
@@ -1654,6 +1743,8 @@
 				047A3AF71D1784C800A85947 /* SDWebImagePrefetcher.m in Sources */,
 				0464F9401D23C1A5005D8ACA /* WYTopConfirmView.m in Sources */,
 				047A3AFA1D1784C800A85947 /* UIImage+MultiFormat.m in Sources */,
+				043ABD861D23E877006CCE95 /* WYSiteTableView.m in Sources */,
+				043ABD891D23E8AE006CCE95 /* WYSiteCell.m in Sources */,
 				047A3AF31D1784C800A85947 /* SDWebImageDecoder.m in Sources */,
 				044B2DA91D2131AA00988617 /* WYLoginHaveGoodsView.m in Sources */,
 				04A7DB471D13E56F0039F50D /* WYMeTableView.m in Sources */,
@@ -1664,6 +1755,7 @@
 				047A3B011D17F2B700A85947 /* WYProductViewController.m in Sources */,
 				04257C711D22993D0072E4A2 /* WYConfirmOrderCell.m in Sources */,
 				047260B01D1D5A53004C8B0A /* WYProductTableView.m in Sources */,
+				043ABD7B1D23DACD006CCE95 /* WYDeliveryAddressViewController.m in Sources */,
 				047A3AFC1D1784C800A85947 /* UIImageView+HighlightedWebCache.m in Sources */,
 				0484003E1D1576A20096AB05 /* WYFaceCell.m in Sources */,
 				046E074E1D12896E00645E96 /* WYLoginViewController.m in Sources */,

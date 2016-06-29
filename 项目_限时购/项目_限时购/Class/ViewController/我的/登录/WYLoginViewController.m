@@ -190,7 +190,11 @@
     moneyModel.title = [NSString stringWithFormat:@"邀请好友,立刻赚钱"];
     moneyModel.image = [NSString stringWithFormat:@"我的界面邀请好友图标"];
     
-    NSArray *meTableArray = [NSArray arrayWithObjects:couponModel,moneyModel, nil];
+    WYMeModel *meAddressModel = [[WYMeModel alloc] init];
+    meAddressModel.title = [NSString stringWithFormat:@"我的收货地址"];
+    meAddressModel.image = [NSString stringWithFormat:@"位置"];
+    
+    NSArray *meTableArray = [NSArray arrayWithObjects:couponModel,moneyModel,meAddressModel, nil];
     
     if (_passBackMe) {
         _passBackMe(meTableArray, dataDic, YES);
