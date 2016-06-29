@@ -36,6 +36,9 @@
 /** 保存订单商品总价格 */
 @property (assign, nonatomic) CGFloat thePrice;
 
+/** 记录购物车数据信息发生变化 */
+@property (strong, nonatomic) NSMutableArray *buyCarArray;
+
 @end
 
 @implementation WYShoppingCartViewController
@@ -63,12 +66,20 @@
     return _haveGoodsView;
 }
 
-- (NSMutableArray *)shoppingMuArray {
-    if (!_shoppingMuArray) {
-        _shoppingMuArray = [NSMutableArray array];
+//- (NSMutableArray *)shoppingMuArray {
+//    if (!_shoppingMuArray) {
+//        _shoppingMuArray = [NSMutableArray array];
+//    }
+//    return _shoppingMuArray;
+//}
+
+- (NSMutableArray *)buyCarArray {
+    if (!_buyCarArray) {
+        _buyCarArray = [NSMutableArray array];
     }
-    return _shoppingMuArray;
+    return _buyCarArray;
 }
+
 
 - (WYSettlementView *)bottomView {
     if (!_bottomView) {
@@ -89,15 +100,22 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     /** 判断当前用户是否登录 */
     [self judgeCurrentUserIsLogin];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     
+    /**
+     *  数组是字符串元素的，用 #号 分隔每一个字符串，拼接成一个新的字符串
+     */
+    NSString *request = [self.buyCarArray componentsJoinedByString:@"#"];
     
+    [self httpGetModifyTheRequestUpdateCartMsg:request];
 }
+
 
 /** 判断当前用户是否登录 */
 - (void)judgeCurrentUserIsLogin {
@@ -132,20 +150,16 @@
             [self.view addSubview:self.bottomView];
             [self.view addSubview:self.haveGoodsView];
             
-            weakSelf.haveGoodsView.cellRow = ^(NSInteger cellRow) {
+            weakSelf.haveGoodsView.blockPrice = ^(NSMutableArray *muArray) {
                 
-                WYShoppingCarModel *model = weakSelf.shoppingMuArray[cellRow];
+//                [weakSelf.shoppingMuArray removeAllObjects];
+                weakSelf.shoppingMuArray = nil;
+                weakSelf.shoppingMuArray = muArray;
                 
-                [weakSelf httpGetModifyTheRequestUpdateCartMsg:[NSString stringWithFormat:@"%@,%@",model.uUID,model.goodsCount]];
-            };
-            
-            weakSelf.haveGoodsView.blockPrice = ^(NSString *goodsID, CGFloat price, BOOL stasus) {
-                weakSelf.thePrice += price;
-                
-                if (stasus) {
-                    
-                }
-                
+                weakSelf.buyCarArray = nil;
+                [weakSelf.shoppingMuArray enumerateObjectsUsingBlock:^(WYShoppingCarModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
+                    [weakSelf.buyCarArray addObject:[NSString stringWithFormat:@"%@,%@",model.uUID,model.goodsCount]];
+                }];
             };
             
             [_bottomView makeConstraints:^(MASConstraintMaker *make) {
@@ -157,13 +171,21 @@
             
             weakSelf.bottomView.blockPayment = ^() {
                 WYConfirmOrderViewController *confirmVC = [[WYConfirmOrderViewController alloc] init];
-                confirmVC.dataArray = weakSelf.shoppingMuArray;
+                
+                NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:weakSelf.shoppingMuArray.count];
+                
+                for (WYShoppingCarModel *model in weakSelf.shoppingMuArray) {
+                    
+                    if (model.selected) {
+                        [muArray addObject:model];
+                    }
+                }
+                
+                confirmVC.dataArray = muArray;
                 confirmVC.goodsPrice = weakSelf.thePrice;
                 confirmVC.title = [NSString stringWithFormat:@"确认订单"];
                 [weakSelf.navigationController pushViewController:confirmVC animated:YES];
             };
-            
-            
             
             [self httpGetShoppingCarListRequestMemberId:dictUser[@"MemberId"]];
         }
@@ -185,6 +207,29 @@
     }
 }
 
+/** 计算商品价格 */
+- (void)setShoppingMuArray:(NSMutableArray *)shoppingMuArray {
+    _shoppingMuArray = shoppingMuArray;
+    self.thePrice = 0;
+    __block CGFloat price = 0;
+    __block NSInteger number = 0;
+    __block NSInteger goodsNumber = 0;
+    
+    WS(weakSelf);
+    [self.shoppingMuArray enumerateObjectsUsingBlock:^(WYShoppingCarModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        if (model.selected) {
+            price = [model.price floatValue];
+            number = [model.goodsCount integerValue];
+            goodsNumber += number;
+            
+            weakSelf.thePrice += number * price * 1.0;
+        }
+        
+    }];
+    [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%ld",goodsNumber]];
+}
+
 /** 修改商品价格 */
 - (void)setThePrice:(CGFloat)thePrice {
     _thePrice = thePrice;
@@ -200,20 +245,13 @@
         
         NSArray *array = (NSArray *)JSON;
         
-        if (array) {
+        if (array.count > 0) {
             
             NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
-            weakSelf.thePrice = 0;
-            CGFloat price;
-            NSInteger number;
             
             for (NSDictionary *dict in array) {
                 WYShoppingCarModel *model = [[WYShoppingCarModel alloc] initWithDictionary:dict];
                 [muArray addObject:model];
-                
-                price = [model.price floatValue];
-                number = [model.goodsCount integerValue];
-                weakSelf.thePrice += number * price * 1.0;
             }
             
             /** 遍历模型数据，默认商品选中 */
@@ -222,9 +260,8 @@
                 obj.selected = YES;
             }];
             
-            [weakSelf.shoppingMuArray addObjectsFromArray:muArray];
-            weakSelf.haveGoodsView.goodsMuArray = muArray;
-            
+            weakSelf.shoppingMuArray = muArray;
+            weakSelf.haveGoodsView.goodsMuArray = weakSelf.shoppingMuArray;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf.haveGoodsView reloadData];
                 [weakSelf.haveGoodsView setHidden:NO];
@@ -246,18 +283,13 @@
 //    WS(weakSelf);
     
     NSDictionary *requestDic = @{@"updateCartMsg":updateCartMsg};
-    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appShopCart/appUpdateCart.do"] progressDic:requestDic success:^(id JSON) {
+    [self POSTHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appShopCart/appUpdateCart.do"] progressDic:requestDic success:^(id JSON) {
         
         NSDictionary *dataDic = (NSDictionary *)JSON;
         
-        ZDY_LOG(@"    %@",dataDic);
-        
         if ([dataDic[@"result"] isEqualToString:[NSString stringWithFormat:@"success"]]) {
             
-            [MBProgressHUD showSuccess:[NSString stringWithFormat:@"删除成功"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUD];
-            });
+            ZDY_LOG(@"  ------- 成功删除 -------   ");
         }
         else {
             ZDY_LOG(@"  ------- 删除失败 -------   ");

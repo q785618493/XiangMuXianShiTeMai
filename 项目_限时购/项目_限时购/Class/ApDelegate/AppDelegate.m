@@ -14,7 +14,7 @@
 #import <UMSocialSinaSSOHandler.h>
 #import <UMSocialQQHandler.h>
 
-@interface AppDelegate ()
+@interface AppDelegate () <UITabBarControllerDelegate>
 
 @end
 
@@ -38,7 +38,11 @@
     
     [self.window setBackgroundColor:[UIColor whiteColor]];
     
-    [self.window setRootViewController:[[WYTabBarController alloc] init]];
+    WYTabBarController *tabBarVC = [[WYTabBarController alloc] init];
+    
+    tabBarVC.delegate = self;
+    
+    [self.window setRootViewController:tabBarVC];
     
     [self.window makeKeyAndVisible];
     
@@ -54,6 +58,13 @@
         //调用其他SDK，例如支付宝SDK等
     }
     return result;
+}
+
+#pragma make-
+#pragma make- UITabBarControllerDelegate
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    
+    viewController.tabBarItem.badgeValue = nil;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

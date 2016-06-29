@@ -516,7 +516,6 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     } failure:^(NSError *error) {
         ZDY_LOG(@"error == %@",error);
     }];
-    
 }
 
 - (void)didReceiveMemoryWarning {

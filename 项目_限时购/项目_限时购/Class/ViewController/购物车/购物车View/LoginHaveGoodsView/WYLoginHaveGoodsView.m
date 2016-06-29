@@ -59,6 +59,9 @@
 /** 勾选商品按钮点击事件 */
 - (void)btnTouchActionCheckThe:(UIButton *)checkThe {
     
+    /** 获取控件的父视图 */
+//    UIView *cell = [[[checkThe superview] superview] superview];
+    
     NSInteger indexRow = checkThe.tag - CELL_TAG - 1000;
     
     WYShoppingCarModel *model = self.goodsMuArray[indexRow];
@@ -74,12 +77,13 @@
     else {
         goodsPrice += price * (count * 1.0);
     }
-    
-    checkThe.selected = !checkThe.selected;
+    model.selected = !checkThe.selected;
+//    checkThe.selected = !checkThe.selected;
     
     if (_blockPrice) {
-        _blockPrice(model.uUID, goodsPrice, NO);
+        _blockPrice(self.goodsMuArray);
     }
+    [self reloadData];
 }
 
 /** 增加商品点击事件 */
@@ -95,11 +99,11 @@
     
     goodsPrice = price * 1.0;
     
-    if (_blockPrice) {
-        _blockPrice(model.uUID, goodsPrice, YES);
-    }
-    
     model.goodsCount = [NSString stringWithFormat:@"%ld",count];
+    
+    if (_blockPrice) {
+        _blockPrice(self.goodsMuArray);
+    }
     
     [self reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexRow inSection:0]] withRowAnimation:(UITableViewRowAnimationFade)];
 
@@ -118,23 +122,24 @@
     count --;
     goodsPrice -= price * 1.0;
     
+    model.goodsCount = [NSString stringWithFormat:@"%ld",count];
+    
     if (_blockPrice) {
-        _blockPrice(model.uUID, goodsPrice, YES);
+        _blockPrice(self.goodsMuArray);
     }
     
     if (count == 0) {
-        
-        if (_cellRow) {
-            _cellRow(indexRow);
-        }
+
         [self.goodsMuArray removeObjectAtIndex:indexRow];
-        model.goodsCount = [NSString stringWithFormat:@"%ld",count];
         [self deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexRow inSection:0]] withRowAnimation:(UITableViewRowAnimationLeft)];
+        
+        if (_blockPrice) {
+            _blockPrice(self.goodsMuArray);
+        }
+        
         [self reloadData];
         return;
     }
-    
-    model.goodsCount = [NSString stringWithFormat:@"%ld",count];
     
     [self reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexRow inSection:0]] withRowAnimation:(UITableViewRowAnimationFade)];
     
@@ -153,25 +158,24 @@
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    WS(weakSelf);
+    
     UITableViewRowAction *rowAction = [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleDefault) title:[NSString stringWithFormat:@"删除"] handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         
-        WYShoppingCarModel *model = self.goodsMuArray[indexPath.row];
+        WYShoppingCarModel *model = weakSelf.goodsMuArray[indexPath.row];
         CGFloat goodsPrice = 0;
         CGFloat price = [model.price floatValue];
         NSInteger count = [model.goodsCount integerValue];
         goodsPrice -= price * (count * 1.0);
         
+        [weakSelf.goodsMuArray removeObjectAtIndex:indexPath.row];
+        
         if (_blockPrice) {
-            _blockPrice(model.uUID, goodsPrice, YES);
+            _blockPrice(weakSelf.goodsMuArray);
         }
         
-        if (_cellRow) {
-            _cellRow(indexPath.row);
-        }
-        
-        [self.goodsMuArray removeObjectAtIndex:indexPath.row];
-        [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationLeft)];
-        [self reloadData];
+        [weakSelf deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationLeft)];
+        [weakSelf reloadData];
         
         
     }];

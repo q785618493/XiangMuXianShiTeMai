@@ -9,15 +9,12 @@
 #import "WYBaesTableView.h"
 
 /** 购物车修改商品 回调的block */
-typedef void(^GoodsPriceBlock)(NSString *goodsID, CGFloat price, BOOL isStatus);
+typedef void(^GoodsPriceBlock)(NSMutableArray *muArray);
 
 @interface WYLoginHaveGoodsView : WYBaesTableView
 
 /** 接收购物车数据 */
 @property (strong, nonatomic) NSMutableArray *goodsMuArray;
-
-/** 选中cell回调的block */
-@property (copy, nonatomic) TableCellBlock cellRow;
 
 /** 购物车修改商品 回调的block */
 @property (copy, nonatomic) GoodsPriceBlock blockPrice;

@@ -1054,8 +1054,8 @@
 			children = (
 				0496C8F21D11064300E3809F /* WYShoppingCartViewController.h */,
 				0496C8F31D11064300E3809F /* WYShoppingCartViewController.m */,
-				0496C8BB1D10F0FD00E3809F /* 购物车Model */,
 				0496C8BC1D10F0FD00E3809F /* 购物车View */,
+				0496C8BB1D10F0FD00E3809F /* 购物车Model */,
 				047FB2DC1D22679A00E4F4E5 /* 确认订单 */,
 			);
 			path = "购物车";
