@@ -39,7 +39,7 @@
         _siteTableView.blockCellRow = ^(NSInteger cellRow) {
             WYModifySiteViewController *modifyVC = [[WYModifySiteViewController alloc] init];
             
-            [weakSelf presentViewController:modifyVC animated:YES completion:nil];
+            [weakSelf.navigationController pushViewController:modifyVC animated:YES];
         };
     }
     return _siteTableView;
