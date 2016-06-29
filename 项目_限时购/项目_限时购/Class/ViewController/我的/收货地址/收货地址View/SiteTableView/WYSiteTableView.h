@@ -15,7 +15,10 @@ typedef void(^ReturnDataBlock)(NSMutableArray *muarray);
 /** 接收数据 */
 @property (strong, nonatomic) NSMutableArray *dataMuArray;
 
-/**  */
+/** 回调选中默认收货地址 */
+@property (copy, nonatomic) ReturnDataBlock blockMuArray;
 
+/** 回调选中编辑按钮 */
+@property (copy, nonatomic) TableCellBlock blockCellRow;
 
 @end

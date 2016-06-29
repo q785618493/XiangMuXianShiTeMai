@@ -120,7 +120,6 @@ static NSString *keyHeader = @"imageUser";
 - (UIButton *)exitBtn {
     if (!_exitBtn) {
         _exitBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-//        [_exitBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"我的界面退出登录按钮"]] forState:(UIControlStateNormal)];
         [_exitBtn setBackgroundColor:RGB(55, 183, 236)];
         [_exitBtn setTitle:[NSString stringWithFormat:@"退出登录"] forState:(UIControlStateNormal)];
         [_exitBtn.layer setMasksToBounds:YES];

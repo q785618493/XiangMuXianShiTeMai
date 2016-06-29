@@ -7,6 +7,7 @@
 //
 
 #import "WYModifySiteViewController.h"
+#import "WYContactsSiteModel.h"
 
 @interface WYModifySiteViewController ()
 
@@ -17,6 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.title = [NSString stringWithFormat:@"修改收货地址"];
+    
 }
 
 - (void)didReceiveMemoryWarning {

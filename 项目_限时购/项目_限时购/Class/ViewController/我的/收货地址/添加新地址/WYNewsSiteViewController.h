@@ -7,7 +7,12 @@
 //
 
 #import "WYBaseViewController.h"
+@class WYContactsSiteModel;
+
+typedef void(^BackNewsModelBlock)(WYContactsSiteModel *model);
 
 @interface WYNewsSiteViewController : WYBaseViewController
+
+@property (copy, nonatomic) BackNewsModelBlock blockBack;
 
 @end

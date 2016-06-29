@@ -7,7 +7,16 @@
 //
 
 #import "WYBaseViewController.h"
+@class WYContactsSiteModel;
+
+typedef void(^ReturnModifyNewsBlock)(WYContactsSiteModel *model);
 
 @interface WYModifySiteViewController : WYBaseViewController
+
+/** 接收要修改的数据 */
+@property (strong, nonatomic) WYContactsSiteModel *model;
+
+/** 返回修改后的数据 */
+@property (copy, nonatomic) ReturnModifyNewsBlock blockModify;
 
 @end

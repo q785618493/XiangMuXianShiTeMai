@@ -33,6 +33,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setBackgroundColor:[UIColor whiteColor]];
+        [self setSelectionStyle:(UITableViewCellSelectionStyleNone)];
         [self addSubview:self.wireLabel];
         [self addSubview:self.nameLabel];
         [self addSubview:self.phoneLabel];
@@ -51,7 +52,7 @@
     [_wireLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(weakSelf);
         make.bottom.equalTo(weakSelf);
-        make.height.equalTo(5);
+        make.height.equalTo(10);
     }];
     
     [_phoneLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -126,7 +127,7 @@
         _deleteBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [_deleteBtn setBackgroundColor:[UIColor whiteColor]];
         [_deleteBtn setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-        [_deleteBtn setTitle:[NSString stringWithFormat:@"编辑"] forState:(UIControlStateNormal)];
+        [_deleteBtn setTitle:[NSString stringWithFormat:@"删 除"] forState:(UIControlStateNormal)];
         [_deleteBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
     }
     return _deleteBtn;
@@ -137,7 +138,7 @@
         _editBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [_editBtn setBackgroundColor:[UIColor whiteColor]];
         [_editBtn setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-        [_editBtn setTitle:[NSString stringWithFormat:@"编辑"] forState:(UIControlStateNormal)];
+        [_editBtn setTitle:[NSString stringWithFormat:@"编 辑"] forState:(UIControlStateNormal)];
         [_editBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
     }
     return _editBtn;
@@ -155,6 +156,7 @@
         [_selectedBtn setTitle:[NSString stringWithFormat:@"设为默认"] forState:(UIControlStateNormal)];
         [_selectedBtn setTitle:[NSString stringWithFormat:@"默认地址"] forState:(UIControlStateSelected)];
         [_selectedBtn setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+        [_selectedBtn setTitleColor:RGB(55, 183, 236) forState:(UIControlStateSelected)];
     }
     return _selectedBtn;
 }

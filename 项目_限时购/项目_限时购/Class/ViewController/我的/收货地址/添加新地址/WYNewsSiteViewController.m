@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.title = [NSString stringWithFormat:@"添加收货地址"];
 }
 
 - (void)didReceiveMemoryWarning {
