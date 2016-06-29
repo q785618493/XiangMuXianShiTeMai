@@ -140,14 +140,8 @@
         [_checkTheBtn setBackgroundColor:[UIColor whiteColor]];
         [_checkTheBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"购物车界面商品未选中"]] forState:(UIControlStateNormal)];
         [_checkTheBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"购物车界面商品选中对号按钮"]] forState:(UIControlStateSelected)];
-//        [_checkTheBtn addTarget:self action:@selector(btnTouchActionCheckThe:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _checkTheBtn;
-}
-
-- (void)btnTouchActionCheckThe:(UIButton *)checkThe {
-    
-    checkThe.selected = !checkThe.selected;
 }
 
 - (UIImageView *)showImage {
@@ -199,8 +193,6 @@
 - (UIButton *)addBtn {
     if (!_addBtn) {
         _addBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        
-//        [_addBtn addTarget:self action:@selector(btnTouchActionTarget:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _addBtn;
 }
@@ -208,32 +200,10 @@
 - (UIButton *)reduceBtn {
     if (!_reduceBtn) {
         _reduceBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        
-//        [_reduceBtn addTarget:self action:@selector(btnTouchActionTarget:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _reduceBtn;
 }
 
-- (void)btnTouchActionTarget:(UIButton *)targetBtn {
-    
-    NSInteger btnTag = targetBtn.tag - BTN_TAG;
-    
-    NSInteger number = [self.goodsNumberLabel.text integerValue];
-    
-    if (0 == btnTag) {
-        
-        if (0 == number) {
-            return;
-        }
-        number --;
-        [self.goodsNumberLabel setText:[NSString stringWithFormat:@"%ld",number]];
-    }
-    else {
-        number ++;
-        [self.goodsNumberLabel setText:[NSString stringWithFormat:@"%ld",number]];
-    }
-    
-}
 
 /*
 // Only override drawRect: if you perform custom drawing.

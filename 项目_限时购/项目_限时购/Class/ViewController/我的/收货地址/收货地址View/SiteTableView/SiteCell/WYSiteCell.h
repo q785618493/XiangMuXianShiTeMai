@@ -14,6 +14,9 @@
 /** 接收数据 */
 @property (strong, nonatomic) WYContactsSiteModel *model;
 
+/** 接收 cell Tag */
+@property (assign, nonatomic) NSInteger cellTag;
+
 /** 默认选中按钮 */
 @property (strong, nonatomic) UIButton *selectedBtn;
 
