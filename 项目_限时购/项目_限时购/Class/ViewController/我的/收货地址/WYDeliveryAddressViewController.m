@@ -61,7 +61,7 @@
     // Do any additional setup after loading the view.
     
     self.title = [NSString  stringWithFormat:@"收货地址"];
-    
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
     [self controlAddMasonry];
 }
@@ -76,7 +76,7 @@
     [self.siteTableView reloadData];
     
     [_siteTableView makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(64, 0, 44, 0));
+        make.edges.equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(64, 0, 55, 0));
     }];
     
     UIButton *addBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
@@ -89,8 +89,8 @@
     [self.view addSubview:addBtn];
     
     [addBtn makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.siteTableView.bottom).offset(6);
-        make.bottom.equalTo(weakSelf.view).offset(-6);
+        make.top.equalTo(weakSelf.siteTableView.bottom).offset(10);
+        make.bottom.equalTo(weakSelf.view).offset(-10);
         make.right.equalTo(weakSelf.view.right).offset(-50);
         make.left.equalTo(weakSelf.view.left).offset(50);
     }];

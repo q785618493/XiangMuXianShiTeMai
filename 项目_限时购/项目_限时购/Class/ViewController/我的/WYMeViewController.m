@@ -144,12 +144,12 @@ static NSString *keyHeader = @"imageUser";
             
             //删除保存的用户数据
             BOOL removeData = [[NSFileManager defaultManager] removeItemAtPath:INFO_PATH error:nil];
-            BOOL siteRemove = [[NSFileManager defaultManager] removeItemAtPath:SITE_PATH error:nil];
             
-            if (removeData && siteRemove) {
+            if (removeData) {
                 /** 删除用户信息 */
                 [XSG_USER_DEFAULTS removeObjectForKey:userInfo];
                 [XSG_USER_DEFAULTS removeObjectForKey:LOGIN_USER];
+                BOOL siteRemove = [[NSFileManager defaultManager] removeItemAtPath:SITE_PATH error:nil];
                 /** 删除登录状态 */
                 [XSG_USER_DEFAULTS removeObjectForKey:status];
                 weakSelf.meTableView.infoArray = [self returnModelArray];
@@ -279,8 +279,12 @@ static NSString *keyHeader = @"imageUser";
     }];
     
     weakSelf.meTableView.meCellRow = ^(NSInteger cellRow) {
-        WYDeliveryAddressViewController *deliveryVC = [[WYDeliveryAddressViewController alloc] init];
-        [weakSelf.navigationController pushViewController:deliveryVC animated:YES];
+        
+        if (6 == cellRow) {
+            WYDeliveryAddressViewController *deliveryVC = [[WYDeliveryAddressViewController alloc] init];
+            [weakSelf.navigationController pushViewController:deliveryVC animated:YES];
+        }
+        
     };
 }
 

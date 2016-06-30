@@ -8,6 +8,8 @@
 
 #import "WYBaseViewController.h"
 
+#import "SVProgressHUD.h"
+
 /** 判断当前网络状态的枚举选项 */
 typedef NS_ENUM(NSInteger, CurrentNetworkStatus) {
     
@@ -86,17 +88,22 @@ typedef NS_ENUM(NSInteger, CurrentNetworkStatus) {
              progressDic:(NSDictionary *)progressDic
                  success:(SuccessBlock)success
                  failure:(ErrorBlock)failure {
+    WS(weakSelf);
     
+    [SVProgressHUD show];
     [WYHttpRequest GETHttpRequestPathUrl:urlString bodyDic:progressDic successBlock:^(id JSON) {
         if (success) {
             success(JSON);
         }
+        [SVProgressHUD dismiss];
         
     } errorBlock:^(NSError *error) {
         
         if (failure) {
             failure(error);
         }
+        [SVProgressHUD dismiss];
+        [weakSelf showTostView:[NSString stringWithFormat:@"请检查网络连接状态"]];
     }];
     
 //    /** 判断当前网络状态:如果没网就提示用户,有网请求数据 */
@@ -145,20 +152,28 @@ typedef NS_ENUM(NSInteger, CurrentNetworkStatus) {
               progressDic:(NSDictionary *)progressDic
                   success:(SuccessBlock)success
                   failure:(ErrorBlock)failure {
+    WS(weakSelf);
+    [SVProgressHUD show];
     
     [WYHttpRequest POSTHttpRequestPatUrl:urlString bodyDic:progressDic successBlock:^(id JSON) {
         if (success) {
             success(JSON);
             
         }
-        
+        [SVProgressHUD dismiss];
     } errorBlock:^(NSError *error) {
         
         if (failure) {
             failure(error);
         }
+        [SVProgressHUD dismiss];
+        [weakSelf showTostView:[NSString stringWithFormat:@"请检查网络连接状态"]];
     }];
     
+}
+
+- (void)showTostView:(NSString *)tostString {
+    [self.view makeToast:tostString duration:1.5 position:[NSString stringWithFormat:@"center"]];
 }
 
 - (void)didReceiveMemoryWarning {

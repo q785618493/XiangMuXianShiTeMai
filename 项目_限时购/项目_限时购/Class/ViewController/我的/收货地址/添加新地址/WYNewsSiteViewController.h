@@ -13,6 +13,7 @@ typedef void(^BackNewsModelBlock)(WYContactsSiteModel *model);
 
 @interface WYNewsSiteViewController : WYBaseViewController
 
+/** 回调保存新收货地址的 block */
 @property (copy, nonatomic) BackNewsModelBlock blockBack;
 
 @end

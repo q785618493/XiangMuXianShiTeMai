@@ -7,6 +7,7 @@
 //
 
 #import "WYTopConfirmView.h"
+#import "WYContactsSiteModel.h"
 
 @interface WYTopConfirmView ()
 
@@ -99,12 +100,11 @@
     }];
 }
 
-- (void)setUserDic:(NSDictionary *)userDic {
-    _userDic = userDic;
+- (void)setModel:(WYContactsSiteModel *)model {
     
-    [_nameLabel setText:userDic[@"name"]];
-    [_phoneLabel setText:userDic[@"phone"]];
-    [_addressLabel setText:userDic[@"address"]];
+    [_nameLabel setText:model.userName];
+    [_phoneLabel setText:model.phoneNumber];
+    [_addressLabel setText:model.siteInfo];
 }
 
 /** 懒加载 */
@@ -141,7 +141,7 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        [_nameLabel setBackgroundColor:[UIColor whiteColor]];
+        [_nameLabel setBackgroundColor:RGB(253, 249, 246)];
         [_nameLabel setFont:[UIFont systemFontOfSize:14]];
     }
     return _nameLabel;

@@ -8,10 +8,12 @@
 
 #import "WYBaseView.h"
 
+@class WYContactsSiteModel;
+
 @interface WYTopConfirmView : WYBaseView
 
 /** 接收数据 */
-@property (strong, nonatomic) NSDictionary *userDic;
+@property (strong, nonatomic) WYContactsSiteModel *model;
 
 /** 定位按钮回调的 block */
 @property (copy, nonatomic) returnBlock blockLocate;

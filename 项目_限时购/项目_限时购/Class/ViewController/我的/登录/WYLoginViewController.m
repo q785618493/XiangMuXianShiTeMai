@@ -86,7 +86,7 @@
                 [MBProgressHUD hideHUD];
             });
         }
-        else if ([userPhone checkTel] && codePhone.length > 5 && userPhone.length == 11) {
+        else if ([userPhone checkTel] && codePhone.length > 5) {
             
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:userPhone,@"LoginName",codePhone,@"Lpassword", nil];
             [weakSelf loginHttpPostRequestDic:dic];

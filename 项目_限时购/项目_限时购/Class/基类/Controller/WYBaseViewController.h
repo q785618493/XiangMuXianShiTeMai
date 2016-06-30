@@ -14,6 +14,7 @@
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
 #import "UIImage+ImageSetting.h"
+#import "UIView+Toast.h"
 
 #import "UIImageView+WY_SDWedImage.h"
 #import "NSString+Helper.h"
@@ -64,8 +65,12 @@ typedef void(^NetworkStatusBlock)();
                  success:(SuccessBlock)success
                  failure:(ErrorBlock)failure;
 
-
-
+/**
+ *  在中心位置弹出提示信息
+ *
+ *  @param tostString 提示用户的信息
+ */
+- (void)showTostView:(NSString *)tostString;
 
 
 

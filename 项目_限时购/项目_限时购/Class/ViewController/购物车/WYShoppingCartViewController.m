@@ -108,12 +108,17 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    /**
-     *  数组是字符串元素的，用 #号 分隔每一个字符串，拼接成一个新的字符串
-     */
-    NSString *request = [self.buyCarArray componentsJoinedByString:@"#"];
+    /** 获取登录本地保存的用户数据 */
+    NSDictionary *dictUser = [XSG_USER_DEFAULTS objectForKey:LOGIN_USER];
     
-    [self httpGetModifyTheRequestUpdateCartMsg:request];
+    if (dictUser) {
+        /**
+         *  数组是字符串元素的，用 #号 分隔每一个字符串，拼接成一个新的字符串
+         */
+        NSString *request = [self.buyCarArray componentsJoinedByString:@"#"];
+        
+        [self httpGetModifyTheRequestUpdateCartMsg:request];
+    }
 }
 
 

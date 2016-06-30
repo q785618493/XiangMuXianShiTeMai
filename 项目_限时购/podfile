@@ -11,6 +11,7 @@ pod 'UMengSocialCOM', '~> 5.2.1'
     inherit! :search_paths
 pod 'SDWebImage'
     # Pods for testing
+pod 
   end
 pod 'AFNetworking'
   target '项目_限时购UITests' do

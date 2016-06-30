@@ -110,6 +110,7 @@
 - (UIButton *)registerBtn {
     if (!_registerBtn) {
         _registerBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+        [_registerBtn setBackgroundColor:RGB(245, 245, 245)];
         [_registerBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
         [_registerBtn addTarget:self action:@selector(btnTouchActionRegister) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -126,6 +127,7 @@
 - (UIButton *)loginBtn {
     if (!_loginBtn) {
         _loginBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+        [_loginBtn setBackgroundColor:[UIColor whiteColor]];
         [_loginBtn addTarget:self action:@selector(btnTouchActionLogin) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _loginBtn;
@@ -141,6 +143,7 @@
 - (UITextField *)codeField {
     if (!_codeField) {
         _codeField = [[UITextField alloc] init];
+        [_codeField setBackgroundColor:[UIColor whiteColor]];
         [_codeField setDelegate:self];
         [_codeField setBorderStyle:(UITextBorderStyleNone)];
         [_codeField setPlaceholder:[NSString stringWithFormat:@"请输入密码"]];
@@ -162,6 +165,7 @@
 - (UITextField *)userField {
     if (!_userField) {
         _userField = [[UITextField alloc] init];
+        [_userField setBackgroundColor:[UIColor whiteColor]];
         [_userField setDelegate:self];
         [_userField setBorderStyle:(UITextBorderStyleNone)];
         [_userField setKeyboardType:(UIKeyboardTypePhonePad)];
