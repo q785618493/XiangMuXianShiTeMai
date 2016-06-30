@@ -46,7 +46,7 @@
 
 - (WYTopConfirmView *)topConfirmView {
     if (!_topConfirmView) {
-        _topConfirmView = [[WYTopConfirmView alloc] initWithFrame:(CGRectMake(0, 0, VIEW_WIDTH, 96))];
+        _topConfirmView = [[WYTopConfirmView alloc] initWithFrame:(CGRectMake(0, 0, VIEW_WIDTH, 136))];
     }
     return _topConfirmView;
 }
@@ -88,7 +88,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    NSMutableArray *siteMuArray = [NSKeyedUnarchiver unarchiveObjectWithData:SITE_PATH];
+    NSMutableArray *siteMuArray = [NSKeyedUnarchiver unarchiveObjectWithFile:SITE_PATH];
     
     if (siteMuArray.count > 0) {
         

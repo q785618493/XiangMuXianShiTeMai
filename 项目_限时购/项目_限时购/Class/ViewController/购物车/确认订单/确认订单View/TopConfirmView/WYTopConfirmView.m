@@ -87,14 +87,14 @@
     }];
     
     [_profileLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf.bgImageView.bottom).offset(-30);
+        make.bottom.equalTo(weakSelf.bgImageView.bottom).offset(-70);
         make.left.equalTo(weakSelf.seatBtn.right);
         make.size.equalTo(CGSizeMake(61, 20));
     }];
     
     [_addressLabel makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(weakSelf.bgImageView.bottom).offset(-10);
-        make.height.equalTo(40);
+        make.height.equalTo(80);
         make.left.equalTo(weakSelf.profileLabel.right);
         make.right.equalTo(weakSelf.bgImageView.right).offset(-10);
     }];

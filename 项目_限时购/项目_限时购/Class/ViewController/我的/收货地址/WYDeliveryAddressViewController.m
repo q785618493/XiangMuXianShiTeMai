@@ -29,16 +29,31 @@
 - (WYSiteTableView *)siteTableView {
     if (!_siteTableView) {
         _siteTableView = [[WYSiteTableView alloc] initWithFrame:(CGRectMake(0, 64, 0, 0)) style:(UITableViewStylePlain)];
+        
         WS(weakSelf);
         _siteTableView.blockMuArray = ^(NSMutableArray *muArray) {
             weakSelf.muSiteArray = nil;
             weakSelf.muSiteArray = muArray;
+            [NSKeyedArchiver archiveRootObject:weakSelf.muSiteArray toFile:SITE_PATH];
             
         };
         
         _siteTableView.blockCellRow = ^(NSInteger cellRow) {
-            WYModifySiteViewController *modifyVC = [[WYModifySiteViewController alloc] init];
             
+            WYModifySiteViewController *modifyVC = [[WYModifySiteViewController alloc] init];
+            modifyVC.model = weakSelf.muSiteArray[cellRow];
+            modifyVC.cellRow = cellRow;
+            
+            modifyVC.blockModify = ^(WYContactsSiteModel *model, NSInteger cellRow) {
+                
+                WYContactsSiteModel *newsModel = weakSelf.muSiteArray[cellRow];
+                newsModel.userName = model.userName;
+                newsModel.phoneNumber = model.phoneNumber;
+                newsModel.siteInfo = model.siteInfo;
+                [NSKeyedArchiver archiveRootObject:weakSelf.muSiteArray toFile:SITE_PATH];
+                [weakSelf.siteTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cellRow inSection:0]] withRowAnimation:(UITableViewRowAnimationRight)];
+                
+            };
             [weakSelf.navigationController pushViewController:modifyVC animated:YES];
         };
     }
@@ -48,7 +63,7 @@
 - (NSMutableArray *)muSiteArray {
     if (!_muSiteArray) {
         
-        _muSiteArray = [NSKeyedUnarchiver unarchiveObjectWithData:SITE_PATH];
+        _muSiteArray = [NSKeyedUnarchiver unarchiveObjectWithFile:SITE_PATH];
         if (!_muSiteArray) {
             _muSiteArray = [NSMutableArray array];
         }
@@ -71,9 +86,7 @@
     
     WS(weakSelf);
     [self.view addSubview:self.siteTableView];
-    self.muSiteArray = [self returnMuModelArray];
     self.siteTableView.dataMuArray = self.muSiteArray;
-    [self.siteTableView reloadData];
     
     [_siteTableView makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(64, 0, 55, 0));
@@ -99,32 +112,17 @@
 - (void)btnTouchActionAdd {
     
     WYNewsSiteViewController *newsVC = [[WYNewsSiteViewController alloc] init];
-    
-    
+    WS(weakSelf);
+    newsVC.blockBack = ^(WYContactsSiteModel *model) {
+        
+        [weakSelf.muSiteArray addObject:model];
+        [weakSelf.siteTableView reloadData];
+        [NSKeyedArchiver archiveRootObject:weakSelf.muSiteArray toFile:SITE_PATH];
+    };
     
     [self.navigationController pushViewController:newsVC animated:YES];
 }
 
-- (NSMutableArray *)returnMuModelArray {
-    
-    
-    
-    NSMutableArray *muArray = [NSMutableArray array];
-    
-    for (NSInteger i = 0; i < 9; i ++) {
-        
-        WYContactsSiteModel *model = [[WYContactsSiteModel alloc] init];
-        model.userName = [NSString stringWithFormat:@"闫海鱼--%.2ld",i];
-        model.phoneNumber = [NSString stringWithFormat:@"13838384378--%ld",i];
-        model.siteInfo = [NSString stringWithFormat:@"案发瓦工商人太多人身体好讨厌复分析和杂体验和爱人会摄入会死人感染---%.2ld",i];
-        if (0 == i) {
-            model.selected = YES;
-        }
-        [muArray addObject:model];
-    }
-    
-    return muArray;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

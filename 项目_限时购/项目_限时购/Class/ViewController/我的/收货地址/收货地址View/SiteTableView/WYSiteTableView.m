@@ -99,7 +99,7 @@
 #pragma make-
 #pragma make- UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 151;
+    return 191;
 }
 
 

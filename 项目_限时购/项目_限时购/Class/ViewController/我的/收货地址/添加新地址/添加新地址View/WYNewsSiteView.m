@@ -48,7 +48,6 @@
 {
     self = [super init];
     if (self) {
-        
         [self addSubview:self.nameLabel];
         [self addSubview:self.userText];
         [self addSubview:self.phoneLabel];
@@ -62,58 +61,61 @@
     return self;
 }
 
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     WS(weakSelf);
-    
     [_nameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.top);
-        make.left.equalTo(weakSelf.left).offset(10);
-        make.size.equalTo(CGSizeMake(63, 40));
+        make.left.equalTo(weakSelf.left);
+        make.size.equalTo(CGSizeMake(73, 40));
     }];
     
     [_userText makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.top);
         make.left.equalTo(weakSelf.nameLabel.right);
-        make.right.equalTo(weakSelf.right).offset(-10);
+        make.right.equalTo(weakSelf.right);
         make.height.equalTo(40);
     }];
     
     [_phoneLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.nameLabel.bottom).offset(1);
-        make.left.equalTo(weakSelf.left).offset(10);
-        make.size.equalTo(CGSizeMake(63, 40));
+        make.left.equalTo(weakSelf.left);
+        make.size.equalTo(CGSizeMake(73, 40));
     }];
     
     [_numberPhoneText makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.phoneLabel.centerY);
         make.height.equalTo(40);
         make.left.equalTo(weakSelf.phoneLabel.right);
-        make.right.equalTo(weakSelf.right).offset(-10);
+        make.right.equalTo(weakSelf.right);
     }];
     
     [_siteLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.phoneLabel.bottom).offset(1);
         make.centerX.equalTo(weakSelf.phoneLabel.centerX);
-        make.size.equalTo(CGSizeMake(63, 40));
+        make.size.equalTo(CGSizeMake(73, 40));
     }];
     
     [_addressTextView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.numberPhoneText.bottom).offset(1);
         make.height.equalTo(40);
         make.left.equalTo(weakSelf.siteLabel.right);
-        make.right.equalTo(weakSelf.right).offset(-10);
+        make.right.equalTo(weakSelf.right);
     }];
     
     [_bottomView makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(weakSelf.bottom);
         make.height.equalTo(45);
-        make.left.right.equalTo(weakSelf);
+        make.left.equalTo(weakSelf.left);
+        make.right.equalTo(weakSelf.right);
     }];
     
     [_saveBtn makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(weakSelf.bottomView).with.insets(UIEdgeInsetsMake(5, 50, 5, 50));
     }];
+    
+    [self.userText becomeFirstResponder];
 }
 
 - (void)setModel:(WYContactsSiteModel *)model {
@@ -121,6 +123,7 @@
     [_userText setText:model.userName];
     [_numberPhoneText setText:model.phoneNumber];
     [_addressTextView setText:model.siteInfo];
+    [self.alertLabel removeFromSuperview];
 }
 
 /** 懒加载 */
@@ -130,6 +133,7 @@
         [_nameLabel setBackgroundColor:[UIColor whiteColor]];
         [_nameLabel setFont:[UIFont systemFontOfSize:14]];
         [_nameLabel setText:[NSString stringWithFormat:@"收货人:"]];
+        [_nameLabel setTextAlignment:(NSTextAlignmentCenter)];
     }
     return _nameLabel;
 }
@@ -153,6 +157,7 @@
         [_phoneLabel setBackgroundColor:[UIColor whiteColor]];
         [_phoneLabel setFont:[UIFont systemFontOfSize:14]];
         [_phoneLabel setText:[NSString stringWithFormat:@"联系方式:"]];
+        [_phoneLabel setTextAlignment:(NSTextAlignmentCenter)];
     }
     return _phoneLabel;
 }
@@ -172,11 +177,12 @@
 }
 
 - (UILabel *)siteLabel {
-    if (_siteLabel) {
+    if (!_siteLabel) {
         _siteLabel = [[UILabel alloc] init];
         [_siteLabel setBackgroundColor:[UIColor whiteColor]];
         [_siteLabel setFont:[UIFont systemFontOfSize:14]];
         [_siteLabel setText:[NSString stringWithFormat:@"收货地址:"]];
+        [_siteLabel setTextAlignment:(NSTextAlignmentCenter)];
     }
     return _siteLabel;
 }
@@ -186,16 +192,17 @@
         _addressTextView = [[UITextView alloc] init];
         [_addressTextView setBackgroundColor:[UIColor whiteColor]];
         [_addressTextView setDelegate:self];
-        [_addressTextView setScrollEnabled:NO];
+        [_addressTextView setScrollEnabled:YES];
         [_addressTextView setAutoresizingMask:(UIViewAutoresizingFlexibleHeight)];
         [_addressTextView setFont:[UIFont systemFontOfSize:14]];
+        
     }
     return _addressTextView;
 }
 
 - (UILabel *)alertLabel {
     if (!_alertLabel) {
-        _alertLabel = [[UILabel alloc] initWithFrame:(CGRectMake(0, 0, 144, 16))];
+        _alertLabel = [[UILabel alloc] initWithFrame:(CGRectMake(0, 10, 144, 20))];
         [_alertLabel setBackgroundColor:[UIColor whiteColor]];
         [_alertLabel setTextColor:[UIColor grayColor]];
         [_alertLabel setFont:[UIFont systemFontOfSize:14]];
@@ -220,6 +227,7 @@
         [_saveBtn.layer setCornerRadius:5];
         [_saveBtn setBackgroundColor:RGB(55, 183, 236)];
         [_saveBtn setTitle:[NSString stringWithFormat:@"保 存"] forState:(UIControlStateNormal)];
+        [_saveBtn addTarget:self action:@selector(btnTouchActionSave) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _saveBtn;
 }
@@ -238,7 +246,7 @@
         [self makeToast:[NSString stringWithFormat:@"收货地址不能为空"] duration:2 position:[NSString stringWithFormat:@"center"]];
         
     }
-    else if (self.numberPhoneText.text.length >! 6) {
+    else if (self.numberPhoneText.text.length < 6) {
         [self makeToast:[NSString stringWithFormat:@"联系方式错误"] duration:2 position:[NSString stringWithFormat:@"center"]];
     }
     else {
@@ -246,17 +254,11 @@
         model.userName = self.userText.text;
         model.phoneNumber = self.numberPhoneText.text;
         model.siteInfo = self.addressTextView.text;
-        
+        [self endEditing:YES];
         if (_blockUserSite) {
             _blockUserSite(model);
         }
     }
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
-    
-    [self endEditing:YES];
 }
 
 #pragma make-
@@ -282,6 +284,10 @@
         return NO;
     }
     return YES;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    [self.alertLabel removeFromSuperview];
 }
 
 /*

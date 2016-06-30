@@ -70,7 +70,7 @@
     
     [_siteLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.nameLabel.bottom).offset(10);
-        make.height.equalTo(40);
+        make.height.equalTo(80);
         make.left.equalTo(weakSelf.left).offset(10);
         make.right.equalTo(weakSelf.right).offset(-10);
     }];

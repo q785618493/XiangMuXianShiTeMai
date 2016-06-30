@@ -9,12 +9,15 @@
 #import "WYBaseViewController.h"
 @class WYContactsSiteModel;
 
-typedef void(^ReturnModifyNewsBlock)(WYContactsSiteModel *model);
+typedef void(^ReturnModifyNewsBlock)(WYContactsSiteModel *model, NSInteger cellRow);
 
 @interface WYModifySiteViewController : WYBaseViewController
 
 /** 接收要修改的数据 */
 @property (strong, nonatomic) WYContactsSiteModel *model;
+
+/** 接收元素下标 */
+@property (assign, nonatomic) NSInteger cellRow;
 
 /** 返回修改后的数据 */
 @property (copy, nonatomic) ReturnModifyNewsBlock blockModify;
