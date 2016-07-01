@@ -254,15 +254,21 @@
         [self httpGetGoodsAddSgoppingCarRequestMemberId:userDic[@"MemberId"] GoodsId:self.goodsID];
     }
     else {
-        [MBProgressHUD showError:[NSString stringWithFormat:@"尊敬的用户您尚未登录"]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUD];
-        });
+        [self showTostView:[NSString stringWithFormat:@"尊敬的用户您尚未登录"]];
     }
 }
 
 /** 立即购买按钮点击事件 */
 - (void)btnTouchActionBuyNow {
+    /** 获取登录保存的本地数据 */
+    NSDictionary *userDic = [XSG_USER_DEFAULTS objectForKey:LOGIN_USER];
+    
+    if (userDic) {
+        [self httpGetRequestImmediatelyBuyGoodsMemberId:userDic[@"MemberId"] GoodsId:self.goodsID];
+    }
+    else {
+        [self showTostView:[NSString stringWithFormat:@"尊敬的用户您尚未登录"]];
+    }
     
 }
 
@@ -524,8 +530,14 @@
     }];
 }
 
-/** 商品加入购物车的网络请求 */
+/**
+ *  商品加入购物车的网络请求
+ *
+ *  @param MemberId 用户的 ID
+ *  @param GoodsId  商品的标识 ID
+ */
 - (void)httpGetGoodsAddSgoppingCarRequestMemberId:(NSString *)MemberId GoodsId:(NSString *)GoodsId {
+    
     WS(weakSelf);
     
     NSDictionary *requestDic = @{@"MemberId":MemberId,
@@ -558,6 +570,38 @@
         }
         else {
             ZDY_LOG(@"----- 加入购物车失败 -----");
+        }
+        
+    } failure:^(NSError *error) {
+        ZDY_LOG(@"error == %@",error);
+    }];
+}
+
+/**
+ *  立即购买:添加到购物车，并跳转到购物车界面确认订单
+ *
+ *  @param MemberId 用户的 ID
+ *  @param GoodsId  商品的标识 ID
+ */
+- (void)httpGetRequestImmediatelyBuyGoodsMemberId:(NSString *)MemberId GoodsId:(NSString *)GoodsId {
+    WS(weakSelf);
+    
+    NSDictionary *requestDic = @{@"MemberId":MemberId,
+                                 @"GoodsId":GoodsId};
+    
+    [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appShopCart/insert.do"] progressDic:requestDic success:^(id JSON) {
+        NSDictionary *statusDic = (NSDictionary *)JSON;
+        
+        NSString *dataJson = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:nil] encoding:NSUTF8StringEncoding];
+        ZDY_LOG(@"====%@",dataJson);
+        
+        if ([statusDic[@"result"] isEqualToString:[NSString stringWithFormat:@"success"]]) {
+            
+            weakSelf.tabBarController.selectedIndex = 2;
+            
+        }
+        else {
+            ZDY_LOG(@"----- 立即购买跳转购物车失败 -----");
         }
         
     } failure:^(NSError *error) {

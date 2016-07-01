@@ -8,12 +8,14 @@
 
 #import "AppDelegate.h"
 
+#import "UIView+Toast.h"
 #import "WYTabBarController.h"
 
 #import <AlipaySDK/AlipaySDK.h>
 #import <UMSocial.h>
 #import <UMSocialSinaSSOHandler.h>
 #import <UMSocialQQHandler.h>
+#import <AFNetworking.h>
 
 @interface AppDelegate () <UITabBarControllerDelegate>
 
@@ -46,9 +48,44 @@
     [self.window setRootViewController:tabBarVC];
     
     [self.window makeKeyAndVisible];
-    
+    [self currentNetworkStatus];
     
     return YES;
+}
+
+/** 当前网络状态 */
+- (void)currentNetworkStatus {
+    
+    /** 获取当前网络状态 */
+    AFNetworkReachabilityManager *judgeNetWork = [AFNetworkReachabilityManager sharedManager];
+    [judgeNetWork setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        /**  判断当前网络状态*/
+        switch (status) {
+            case AFNetworkReachabilityStatusNotReachable: {
+                [self.window makeToast:[NSString stringWithFormat:@"当前网络异常,请您检查网络"] duration:3 position:[NSString stringWithFormat:@"center"]];
+            }
+                
+                break;
+            case AFNetworkReachabilityStatusUnknown: {
+                [self.window makeToast:[NSString stringWithFormat:@"当前无网络连接,请去设置网络"] duration:3 position:[NSString stringWithFormat:@"center"]];
+                
+            }
+                break;
+            case AFNetworkReachabilityStatusReachableViaWiFi: {
+                [self.window makeToast:[NSString stringWithFormat:@"当前使用的是WiFi网络"] duration:3 position:[NSString stringWithFormat:@"center"]];
+            }
+                break;
+            case AFNetworkReachabilityStatusReachableViaWWAN: {
+                [self.window makeToast:[NSString stringWithFormat:@"当前使用的是移动网络"] duration:3 position:[NSString stringWithFormat:@"center"]];
+            }
+                
+            default:
+                break;
+        }
+        
+    }];
+    /** 开启检查 */
+    [judgeNetWork startMonitoring];
 }
 
 /** 自定义友盟分享的回调*/

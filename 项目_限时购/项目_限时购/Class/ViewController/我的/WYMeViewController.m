@@ -11,6 +11,7 @@
 #import "WYLoginViewController.h"
 #import "WYRegisterViewController.h"
 #import "WYDeliveryAddressViewController.h"
+#import "WYMeCollectViewController.h"
 
 #import "WYMeTableView.h"
 #import "WYMeHeaderView.h"
@@ -48,6 +49,7 @@ static NSString *keyHeader = @"imageUser";
 
 /** TabelView 分割线视图 */
 @property (strong, nonatomic) UIView *lineView;
+
 
 @end
 
@@ -280,9 +282,48 @@ static NSString *keyHeader = @"imageUser";
     
     weakSelf.meTableView.meCellRow = ^(NSInteger cellRow) {
         
-        if (6 == cellRow) {
-            WYDeliveryAddressViewController *deliveryVC = [[WYDeliveryAddressViewController alloc] init];
-            [weakSelf.navigationController pushViewController:deliveryVC animated:YES];
+        switch (cellRow) {
+            case 0: {
+                WYMeCollectViewController *collectVC = [[WYMeCollectViewController alloc] init];
+                NSDictionary *userDic = [XSG_USER_DEFAULTS objectForKey:LOGIN_USER];
+                collectVC.userID = userDic[@"MemberId"];
+                [weakSelf.navigationController pushViewController:collectVC animated:YES];
+            }
+                
+                break;
+            case 1: {
+                
+            }
+                
+                break;
+            case 2: {
+                
+            }
+                
+                break;
+            case 3: {
+                
+            }
+                
+                break;
+            case 4: {
+                
+            }
+                
+                break;
+            case 5: {
+                
+            }
+                
+                break;
+                
+            case 6: {
+                WYDeliveryAddressViewController *deliveryVC = [[WYDeliveryAddressViewController alloc] init];
+                [weakSelf.navigationController pushViewController:deliveryVC animated:YES];
+            }
+                
+            default:
+                break;
         }
         
     };

@@ -16,7 +16,9 @@
 
 #import "WYShoppingCarModel.h"
 
-@interface WYShoppingCartViewController ()
+
+
+@interface WYShoppingCartViewController () 
 
 /** 用户未登录状态提醒视图 */
 @property (strong, nonatomic) WYNotLoginView *notLoginView;
@@ -61,17 +63,10 @@
 - (WYLoginHaveGoodsView *)haveGoodsView {
     if (!_haveGoodsView) {
         _haveGoodsView = [[WYLoginHaveGoodsView alloc] initWithFrame:(CGRectMake(0, 64, VIEW_WIDTH, VIEW_HEIGHT - 49 - 64 - 56)) style:(UITableViewStylePlain)];
-        [_haveGoodsView setHidden:YES];
+        
     }
     return _haveGoodsView;
 }
-
-//- (NSMutableArray *)shoppingMuArray {
-//    if (!_shoppingMuArray) {
-//        _shoppingMuArray = [NSMutableArray array];
-//    }
-//    return _shoppingMuArray;
-//}
 
 - (NSMutableArray *)buyCarArray {
     if (!_buyCarArray) {
@@ -84,7 +79,7 @@
 - (WYSettlementView *)bottomView {
     if (!_bottomView) {
         _bottomView = [[WYSettlementView alloc] init];
-        [_bottomView setHidden:YES];
+        
     }
     return _bottomView;
 }
@@ -131,71 +126,66 @@
     
     if (dictUser) {
         
-        NSInteger goodsNumber = [dictUser[@"result"] integerValue];
+        [self.notLoginView removeFromSuperview];
         
-        if (0 == goodsNumber) {
-            [self.notLoginView removeFromSuperview];
-            [self.bottomView removeFromSuperview];
-            [self.haveGoodsView removeFromSuperview];
-            [self.view addSubview:self.noGoodsView];
-            [_noGoodsView makeConstraints:^(MASConstraintMaker *make) {
-                make.centerX.equalTo(weakSelf.view.centerX);
-                make.centerY.equalTo(weakSelf.view.centerY);
-                make.size.equalTo(CGSizeMake(VIEW_WIDTH, 334));
+        [self.view addSubview:self.bottomView];
+        [self.bottomView setHidden:YES];
+        [self.view addSubview:self.haveGoodsView];
+        [self.haveGoodsView setHidden:YES];
+        
+        weakSelf.haveGoodsView.blockPrice = ^(NSMutableArray *muArray) {
+            weakSelf.shoppingMuArray = nil;
+            weakSelf.shoppingMuArray = muArray;
+            
+            weakSelf.buyCarArray = nil;
+            [weakSelf.shoppingMuArray enumerateObjectsUsingBlock:^(WYShoppingCarModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
+                [weakSelf.buyCarArray addObject:[NSString stringWithFormat:@"%@,%@",model.uUID,model.goodsCount]];
             }];
+        };
+        
+        [_bottomView makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(weakSelf.view.bottom).offset(-49);
+            make.top.equalTo(weakSelf.haveGoodsView.bottom);
+            make.left.right.equalTo(weakSelf.view);
+        }];
+        
+        
+        weakSelf.bottomView.blockPayment = ^() {
+            WYConfirmOrderViewController *confirmVC = [[WYConfirmOrderViewController alloc] init];
             
-            weakSelf.noGoodsView.btnGoagoAction = ^() {
-                weakSelf.tabBarController.selectedIndex = 0;
-            };
+            NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:weakSelf.shoppingMuArray.count];
             
-        }
-        else {
-            [self.notLoginView removeFromSuperview];
-            [self.noGoodsView removeFromSuperview];
-            [self.view addSubview:self.bottomView];
-            [self.view addSubview:self.haveGoodsView];
-            
-            weakSelf.haveGoodsView.blockPrice = ^(NSMutableArray *muArray) {
+            for (WYShoppingCarModel *model in weakSelf.shoppingMuArray) {
                 
-//                [weakSelf.shoppingMuArray removeAllObjects];
-                weakSelf.shoppingMuArray = nil;
-                weakSelf.shoppingMuArray = muArray;
-                
-                weakSelf.buyCarArray = nil;
-                [weakSelf.shoppingMuArray enumerateObjectsUsingBlock:^(WYShoppingCarModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
-                    [weakSelf.buyCarArray addObject:[NSString stringWithFormat:@"%@,%@",model.uUID,model.goodsCount]];
-                }];
-            };
-            
-            [_bottomView makeConstraints:^(MASConstraintMaker *make) {
-                make.bottom.equalTo(weakSelf.view.bottom).offset(-49);
-                make.top.equalTo(weakSelf.haveGoodsView.bottom);
-                make.left.right.equalTo(weakSelf.view);
-            }];
-            
-            
-            weakSelf.bottomView.blockPayment = ^() {
-                WYConfirmOrderViewController *confirmVC = [[WYConfirmOrderViewController alloc] init];
-                
-                NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:weakSelf.shoppingMuArray.count];
-                
-                for (WYShoppingCarModel *model in weakSelf.shoppingMuArray) {
-                    
-                    if (model.selected) {
-                        [muArray addObject:model];
-                    }
+                if (model.selected) {
+                    [muArray addObject:model];
                 }
-                
-                confirmVC.dataArray = muArray;
-                confirmVC.goodsPrice = weakSelf.thePrice;
-                confirmVC.title = [NSString stringWithFormat:@"确认订单"];
-                [weakSelf.navigationController pushViewController:confirmVC animated:YES];
-            };
+            }
             
-            [self httpGetShoppingCarListRequestMemberId:dictUser[@"MemberId"]];
-        }
+            confirmVC.dataArray = muArray;
+            confirmVC.goodsPrice = weakSelf.thePrice;
+            confirmVC.title = [NSString stringWithFormat:@"确认订单"];
+            [weakSelf.navigationController pushViewController:confirmVC animated:YES];
+        };
+        
+        [self httpGetShoppingCarListRequestMemberId:dictUser[@"MemberId"]];
+        
+        
+        [self.view addSubview:self.noGoodsView];
+        [self.noGoodsView setHidden:YES];
+        [_noGoodsView makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(weakSelf.view.centerX);
+            make.centerY.equalTo(weakSelf.view.centerY);
+            make.size.equalTo(CGSizeMake(VIEW_WIDTH, 334));
+        }];
+        
+        weakSelf.noGoodsView.btnGoagoAction = ^() {
+            weakSelf.tabBarController.selectedIndex = 0;
+        };
+        
     }
     else {
+        
         [self.noGoodsView removeFromSuperview];
         [self.bottomView removeFromSuperview];
         [self.haveGoodsView removeFromSuperview];
@@ -232,7 +222,11 @@
         }
         
     }];
-    [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%ld",goodsNumber]];
+    
+    if (goodsNumber != 0) {
+        [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%ld",goodsNumber]];
+    }
+    
 }
 
 /** 修改商品价格 */
@@ -265,20 +259,28 @@
                 obj.selected = YES;
             }];
             
-            weakSelf.shoppingMuArray = muArray;
-            weakSelf.haveGoodsView.goodsMuArray = weakSelf.shoppingMuArray;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.haveGoodsView reloadData];
-                [weakSelf.haveGoodsView setHidden:NO];
-                [weakSelf.bottomView setHidden:NO];
-            });
+            if (muArray.count > 0) {
+                [weakSelf.noGoodsView removeFromSuperview];
+                weakSelf.shoppingMuArray = muArray;
+                weakSelf.haveGoodsView.goodsMuArray = weakSelf.shoppingMuArray;
+                [weakSelf.noGoodsView removeFromSuperview];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.haveGoodsView reloadData];
+                    [weakSelf.haveGoodsView setHidden:NO];
+                    [weakSelf.bottomView setHidden:NO];
+                });
+            }
+            
         }
         else {
             ZDY_LOG(@"   购物车商品列表请求失败");
+            [weakSelf.noGoodsView setHidden:NO];
+            [weakSelf.haveGoodsView removeFromSuperview];
+            [weakSelf.bottomView removeFromSuperview];
         }
         
     } failure:^(NSError *error) {
-        ZDY_LOG(@"error == %@",error);
+        ZDY_LOG(@"error == %@",error.localizedDescription);
     }];
 }
 
@@ -294,10 +296,10 @@
         
         if ([dataDic[@"result"] isEqualToString:[NSString stringWithFormat:@"success"]]) {
             
-            ZDY_LOG(@"  ------- 成功删除 -------   ");
+            ZDY_LOG(@"  ------- 修改商品成功 -------   ");
         }
         else {
-            ZDY_LOG(@"  ------- 删除失败 -------   ");
+            ZDY_LOG(@"  ------- 商品修改失败 -------   ");
         }
         
     } failure:^(NSError *error) {

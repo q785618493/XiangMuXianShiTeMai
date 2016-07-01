@@ -128,7 +128,7 @@
         _blockPrice(self.goodsMuArray);
     }
     
-    if (count == 0) {
+    if (count == -1) {
 
         [self.goodsMuArray removeObjectAtIndex:indexRow];
         [self deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexRow inSection:0]] withRowAnimation:(UITableViewRowAnimationLeft)];

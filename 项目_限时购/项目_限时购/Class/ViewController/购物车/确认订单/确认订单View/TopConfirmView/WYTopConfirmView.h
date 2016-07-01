@@ -10,6 +10,9 @@
 
 @class WYContactsSiteModel;
 
+/** 返回当前地址信息的 block */
+typedef void(^ReturnSiteInfoBlock)(WYContactsSiteModel *currentModel);
+
 @interface WYTopConfirmView : WYBaseView
 
 /** 接收数据 */
@@ -17,5 +20,8 @@
 
 /** 定位按钮回调的 block */
 @property (copy, nonatomic) returnBlock blockLocate;
+
+/** 返回当前地址信息的 block */
+@property (copy, nonatomic) ReturnSiteInfoBlock blockSiteInfo;
 
 @end

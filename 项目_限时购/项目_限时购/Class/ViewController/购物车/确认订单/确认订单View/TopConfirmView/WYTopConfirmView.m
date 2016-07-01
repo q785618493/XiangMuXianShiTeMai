@@ -9,6 +9,8 @@
 #import "WYTopConfirmView.h"
 #import "WYContactsSiteModel.h"
 
+#import "NSString+Helper.h"
+
 @interface WYTopConfirmView ()
 
 /** 背景图 */
@@ -61,8 +63,8 @@
     }];
     
     [_seatBtn makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.bgImageView.top).offset(14);
-        make.bottom.equalTo(weakSelf.bgImageView.bottom).offset(-14);
+        make.top.equalTo(weakSelf.bgImageView.top).offset(24);
+        make.bottom.equalTo(weakSelf.bgImageView.bottom).offset(-24);
         make.left.equalTo(weakSelf.bgImageView.left).offset(10);
         make.width.equalTo(48);
     }];
@@ -93,18 +95,38 @@
     }];
     
     [_addressLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf.bgImageView.bottom).offset(-10);
-        make.height.equalTo(80);
+        make.top.equalTo(weakSelf.profileLabel.top);
         make.left.equalTo(weakSelf.profileLabel.right);
         make.right.equalTo(weakSelf.bgImageView.right).offset(-10);
     }];
+    
+    WYContactsSiteModel *model = [[WYContactsSiteModel alloc] init];
+    model.userName = _nameLabel.text;
+    model.phoneNumber = _phoneLabel.text;
+    model.siteInfo = _addressLabel.text;
+    
+    if (_blockSiteInfo) {
+        _blockSiteInfo(model);
+    }
 }
 
 - (void)setModel:(WYContactsSiteModel *)model {
-    
+    _model = model;
     [_nameLabel setText:model.userName];
     [_phoneLabel setText:model.phoneNumber];
     [_addressLabel setText:model.siteInfo];
+    
+    CGFloat widthAddress = self.frame.size.width - 129;
+    
+    CGFloat heightAddress = [NSString autoHeightWithString:model.siteInfo Width:widthAddress Font:[UIFont systemFontOfSize:15]];
+    
+    [_addressLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(heightAddress);
+    }];
+    
+    if (_blockSiteInfo) {
+        _blockSiteInfo(model);
+    }
 }
 
 /** 懒加载 */
@@ -113,6 +135,8 @@
         _addressLabel = [[UILabel alloc] init];
         [_addressLabel setBackgroundColor:RGB(253, 249, 246)];
         [_addressLabel setFont:[UIFont systemFontOfSize:14]];
+        [_addressLabel setLineBreakMode:(NSLineBreakByWordWrapping)];
+        [_addressLabel setTextAlignment:(NSTextAlignmentLeft)];
         [_addressLabel setNumberOfLines:0];
     }
     return _addressLabel;
