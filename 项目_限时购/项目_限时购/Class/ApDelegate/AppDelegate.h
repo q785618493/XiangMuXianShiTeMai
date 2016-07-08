@@ -10,7 +10,11 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
+/** 窗口 */
 @property (strong, nonatomic) UIWindow *window;
+
+/** 保存第三方APP跳转过来的URL */
+@property (copy, nonatomic) NSString *threeString;
 
 
 @end

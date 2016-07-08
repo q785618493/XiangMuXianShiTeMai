@@ -66,10 +66,11 @@
             _siteInfoModel = model;
         };
         
+        WS(weakSelf);
         _topConfirmView.blockLocate = ^() {
             AddressBook *addressBook = [AddressBook shareAddressBook];
-            addressBook.delegate = self;
-            [addressBook addressBookGetPhoneNumberWithViewController:self];
+            addressBook.delegate = weakSelf;
+            [addressBook addressBookGetPhoneNumberWithViewController:weakSelf];
         };
     }
     return _topConfirmView;

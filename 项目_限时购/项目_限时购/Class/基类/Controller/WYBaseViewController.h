@@ -72,7 +72,8 @@ typedef void(^NetworkStatusBlock)();
  */
 - (void)showTostView:(NSString *)tostString;
 
-
+/** 导航添加左上角的返回其它App的按钮 */
+- (void)leftNavigationTabBarItem;
 
 
 @end

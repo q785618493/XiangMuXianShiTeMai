@@ -23,7 +23,7 @@
     [self controlAddMasonry];
     
     ZDY_LOG(@"   --------- %@",_userID);
-    [self httpGetRequestCollectShopsMemberId:_userID OrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
+//    [self httpGetRequestCollectShopsMemberId:_userID OrderName:[NSString stringWithFormat:@"host"] OrderType:[NSString stringWithFormat:@"DESC"]];
 }
 
 /** 添加控件和约束 */

@@ -10,6 +10,8 @@
 
 #import "SVProgressHUD.h"
 
+#import "AppDelegate.h"
+
 /** 判断当前网络状态的枚举选项 */
 typedef NS_ENUM(NSInteger, CurrentNetworkStatus) {
     
@@ -43,7 +45,43 @@ typedef NS_ENUM(NSInteger, CurrentNetworkStatus) {
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:RGB(245, 245, 245)];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
+    
+}
 
+/** 导航添加左上角的返回其它App的按钮 */
+- (void)leftNavigationTabBarItem {
+    
+    UIButton *returnAppBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    [returnAppBtn setTitle:[NSString stringWithFormat:@"返回"] forState:(UIControlStateNormal)];
+    [returnAppBtn setTitleColor:RGB(53, 56, 239) forState:(UIControlStateNormal)];
+    [returnAppBtn setTitleColor:RGB(239, 56, 53) forState:(UIControlStateHighlighted)];
+    [returnAppBtn sizeToFit];
+    [returnAppBtn addTarget:self action:@selector(btnTouchActionReturnApp) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:returnAppBtn];
+    
+    [self.navigationItem setLeftBarButtonItem:leftItem];
+}
+
+/** 返回App的点击事件 */
+- (void)btnTouchActionReturnApp {
+    
+    AppDelegate *appWindow = [UIApplication sharedApplication].delegate;
+    
+    /** 用 ? 号截取字符串 */
+    NSString *schemeString = [[appWindow.threeString componentsSeparatedByString:@"?"] lastObject];
+    
+    /** 拼接 :// */
+    NSString *urlString = [schemeString stringByAppendingString:@"://"];
+    
+    NSURL *urlApp = [NSURL URLWithString:urlString];
+    
+    if ([[UIApplication sharedApplication] openURL:urlApp]) {
+        [[UIApplication sharedApplication] openURL:urlApp];
+    }
+    else {
+        ZDY_LOG(@"    返回App失败");
+    }
 }
 
 /** 实现 GET */

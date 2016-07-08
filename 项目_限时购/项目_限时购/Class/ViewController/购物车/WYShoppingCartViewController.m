@@ -89,7 +89,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
+//    [self leftNavigationTabBarItem];
 }
 
 
@@ -115,7 +115,6 @@
         [self httpGetModifyTheRequestUpdateCartMsg:request];
     }
 }
-
 
 /** 判断当前用户是否登录 */
 - (void)judgeCurrentUserIsLogin {
@@ -306,6 +305,7 @@
         ZDY_LOG(@" error == %@",error.localizedDescription);
     }];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

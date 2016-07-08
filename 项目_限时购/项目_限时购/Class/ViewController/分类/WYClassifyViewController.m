@@ -52,8 +52,11 @@
     /** 添加UI控件 和 约束 */
     [self controlAddMasonry];
     
+//    [self leftNavigationTabBarItem];
+    
    /** 用NSBlockOperation 将网络请求按自定义顺序返回 (失败)*/
     [self blockTaskOperationRequestData];
+    
     
 }
 

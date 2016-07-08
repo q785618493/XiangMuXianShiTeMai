@@ -116,6 +116,21 @@
             openURL:(NSURL *)url
             options:(NSDictionary<NSString*, id> *)options
 {
+    /** 将URL转换成字符串 */
+    NSString *urlString = url.absoluteString;
+    
+    self.threeString = urlString;
+    
+    /** 获取根视图控制器 */
+    WYTabBarController *rootVC = (WYTabBarController *)self.window.rootViewController;
+    
+    if ([urlString containsString:@"111"]) {
+        rootVC.selectedIndex = 1;
+    }
+    else if ([urlString containsString:@"333"]) {
+        rootVC.selectedIndex = 3;
+    }
+    
     if ([url.host isEqualToString:@"safepay"]) {
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
@@ -125,12 +140,12 @@
     return YES;
 }
 
-#pragma make-
-#pragma make- UITabBarControllerDelegate
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-    
-    viewController.tabBarItem.badgeValue = nil;
-}
+/** 被弃用了的 (其它软件跳转到这里的监听方法)  */
+//- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+//    return YES;
+//}
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -152,6 +167,13 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma make-
+#pragma make- UITabBarControllerDelegate
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    
+    viewController.tabBarItem.badgeValue = nil;
 }
 
 @end

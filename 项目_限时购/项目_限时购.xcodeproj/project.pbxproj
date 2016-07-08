@@ -1112,8 +1112,8 @@
 		0482FC8F1D24A9CC00ECB277 /* 添加新地址View */ = {
 			isa = PBXGroup;
 			children = (
-				0482FC911D24A9FE00ECB277 /* WYNewsSiteView.m */,
 				0482FC901D24A9FE00ECB277 /* WYNewsSiteView.h */,
+				0482FC911D24A9FE00ECB277 /* WYNewsSiteView.m */,
 			);
 			path = "添加新地址View";
 			sourceTree = "<group>";

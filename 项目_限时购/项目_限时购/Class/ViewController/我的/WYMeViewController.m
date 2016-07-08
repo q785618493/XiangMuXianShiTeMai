@@ -86,6 +86,63 @@ static NSString *keyHeader = @"imageUser";
     if (!_meTableView) {
         _meTableView = [[WYMeTableView alloc] initWithFrame:(CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64 - 49)) style:(UITableViewStylePlain)];
         _meTableView.infoArray = self.dataMuArray;
+        WS(weakSelf);
+        _meTableView.meCellRow = ^(NSInteger cellRow) {
+            
+            switch (cellRow) {
+                case 0: {
+                    
+                    NSDictionary *userDic = [XSG_USER_DEFAULTS objectForKey:LOGIN_USER];
+                    if (userDic) {
+//                        WYMeCollectViewController *collectVC = [[WYMeCollectViewController alloc] init];
+//                        
+//                        collectVC.userID = userDic[@"MemberId"];
+//                        [weakSelf.navigationController pushViewController:collectVC animated:YES];
+                    }
+                    else {
+                        [weakSelf showTostView:[NSString stringWithFormat:@"用户尚未登录"]];
+                        return ;
+                    }
+                    
+                }
+                    
+                    break;
+                case 1: {
+                    
+                }
+                    
+                    break;
+                case 2: {
+                    
+                }
+                    
+                    break;
+                case 3: {
+                    
+                }
+                    
+                    break;
+                case 4: {
+                    
+                }
+                    
+                    break;
+                case 5: {
+                    
+                }
+                    
+                    break;
+                    
+                case 6: {
+                    WYDeliveryAddressViewController *deliveryVC = [[WYDeliveryAddressViewController alloc] init];
+                    [weakSelf.navigationController pushViewController:deliveryVC animated:YES];
+                }
+                    
+                default:
+                    break;
+            }
+            
+        };
     }
     return _meTableView;
 }
@@ -175,8 +232,11 @@ static NSString *keyHeader = @"imageUser";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     /** 判断用户是否登录 */
     [self judgeUserIsLogin];
+    
+//    [self leftNavigationTabBarItem];
 }
 
 /** 判断用户是否登录 */
@@ -280,53 +340,6 @@ static NSString *keyHeader = @"imageUser";
         make.edges.mas_equalTo(weakSelf.quitView).with.insets(UIEdgeInsetsMake(5, 50, 5, 50));
     }];
     
-    weakSelf.meTableView.meCellRow = ^(NSInteger cellRow) {
-        
-        switch (cellRow) {
-            case 0: {
-                WYMeCollectViewController *collectVC = [[WYMeCollectViewController alloc] init];
-                NSDictionary *userDic = [XSG_USER_DEFAULTS objectForKey:LOGIN_USER];
-                collectVC.userID = userDic[@"MemberId"];
-                [weakSelf.navigationController pushViewController:collectVC animated:YES];
-            }
-                
-                break;
-            case 1: {
-                
-            }
-                
-                break;
-            case 2: {
-                
-            }
-                
-                break;
-            case 3: {
-                
-            }
-                
-                break;
-            case 4: {
-                
-            }
-                
-                break;
-            case 5: {
-                
-            }
-                
-                break;
-                
-            case 6: {
-                WYDeliveryAddressViewController *deliveryVC = [[WYDeliveryAddressViewController alloc] init];
-                [weakSelf.navigationController pushViewController:deliveryVC animated:YES];
-            }
-                
-            default:
-                break;
-        }
-        
-    };
 }
 
 /** 用户按钮点击事件,替换用户头像 */

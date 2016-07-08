@@ -186,6 +186,8 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     
     /** 判断用户是否第一次使用 app */
     [self userFirstMakeApp];
+    
+//    [self leftNavigationTabBarItem];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
