@@ -85,13 +85,13 @@
     
     [_loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weakSelf.backgroundView.mas_bottom).offset(16);
-        make.left.mas_equalTo(weakSelf.mas_left).offset(16);
-        make.size.mas_equalTo(CGSizeMake(width - 32, 35));
+        make.left.mas_equalTo(weakSelf.mas_left).offset(30);
+        make.size.mas_equalTo(CGSizeMake(width - 60, 35));
     }];
     
     [_registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(weakSelf.mas_bottom);
-        make.right.mas_equalTo(weakSelf.mas_right).offset(-16);
+        make.right.mas_equalTo(weakSelf.mas_right).offset(-30);
         make.size.mas_equalTo(CGSizeMake(60, 20));
     }];
     
@@ -103,7 +103,7 @@
     
     [self.registerBtn setTitle:dataDic[@"btnTitle"] forState:(UIControlStateNormal)];
     [self.registerBtn setTitleColor:dataDic[@"btnColor"] forState:(UIControlStateNormal)];
-    [self.loginBtn setImage:[UIImage imageNamed:dataDic[@"image"]] forState:(UIControlStateNormal)];
+    [self.loginBtn setBackgroundImage:[UIImage imageNamed:dataDic[@"image"]] forState:(UIControlStateNormal)];
 }
 
 /** 重写 get方法懒加载控件 */

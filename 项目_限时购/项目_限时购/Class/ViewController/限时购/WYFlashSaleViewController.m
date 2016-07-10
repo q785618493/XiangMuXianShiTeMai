@@ -321,6 +321,7 @@ static NSString *versionKey = @"CFBundleShortVersionString";
 /** 添加引导页视图 */
 - (void)addGuideScrollView {
     [self.view addSubview:self.guideView];
+    
     NSArray *imageArray = [NSArray arrayWithObjects:@"微商引导页1",@"微商引导页2",@"微商引导页3", nil];
     self.guideView.imageArray = imageArray;
     
