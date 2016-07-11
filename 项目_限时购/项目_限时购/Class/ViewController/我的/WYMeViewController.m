@@ -228,24 +228,21 @@ static NSString *keyHeader = @"imageUser";
                 
                 break;
             case 1: {
-                
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"sms://15373266032"]]];
             }
                 
                 break;
             case 2: {
-                
+                [MBProgressHUD showMessage:[NSString stringWithFormat:@"我们正在努力优化"]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUD];
+                });
             }
                 
                 break;
             case 3: {
-                
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://6010545"]]];
             }
-                
-                break;
-            case 4: {
-                
-            }
-                
             default:
                 break;
         }
@@ -305,27 +302,30 @@ static NSString *keyHeader = @"imageUser";
                         
                         break;
                     case 1: {
-                        
+                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"sms://15373266032"]]];
                     }
                         
                         break;
                     case 2: {
-                        
+                        [MBProgressHUD showMessage:[NSString stringWithFormat:@"我们正在努力优化"]];
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            [MBProgressHUD hideHUD];
+                        });
                     }
                         
                         break;
                     case 3: {
-                        
+                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://6010545"]]];
                     }
                         
                         break;
                     case 4: {
-                        
+                        [weakSelf showTostView:[NSString stringWithFormat:@"没有商品优惠券"]];
                     }
                         
                         break;
                     case 5: {
-                        [WYTheThirdParty sinaWeiBoCurrentVC:self];
+                        [WYTheThirdParty sinaWeiBoCurrentVC:weakSelf];
                     }
                         
                         break;
@@ -390,27 +390,30 @@ static NSString *keyHeader = @"imageUser";
                 
                 break;
             case 1: {
-                
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"sms://15373266032"]]];
             }
                 
                 break;
             case 2: {
-                
+                [MBProgressHUD showMessage:[NSString stringWithFormat:@"我们正在努力优化"]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUD];
+                });
             }
                 
                 break;
             case 3: {
-                
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://6010545"]]];
             }
                 
                 break;
             case 4: {
-                
+                [weakSelf showTostView:[NSString stringWithFormat:@"没有商品优惠券"]];
             }
                 
                 break;
             case 5: {
-                [WYTheThirdParty sinaWeiBoCurrentVC:self];
+                [WYTheThirdParty sinaWeiBoCurrentVC:weakSelf];
             }
                 
                 break;

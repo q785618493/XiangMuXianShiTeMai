@@ -80,12 +80,14 @@
 - (UIButton *)buyBtn {
     if (!_buyBtn) {
         _buyBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        [_buyBtn setFrame:(CGRectMake(WIDTH - 85, 320 - 50, 92, 22))];
+        [_buyBtn setFrame:(CGRectMake(WIDTH - 98, 320 - 50, 109, 22))];
         [_buyBtn setBackgroundColor:RGB(255, 75, 34)];
         [_buyBtn.layer setMasksToBounds:YES];
         [_buyBtn.layer setCornerRadius:11];
         [_buyBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
         [_buyBtn addTarget:self action:@selector(btnTouchActionBuy) forControlEvents:(UIControlEventTouchUpInside)];
+        [_buyBtn setContentHorizontalAlignment:(UIControlContentHorizontalAlignmentLeft)];
+        [_buyBtn setContentEdgeInsets:(UIEdgeInsetsMake(0, 8, 0, 0))];
     }
     return _buyBtn;
 }
@@ -346,8 +348,6 @@
             
             weakSelf.allModel = [[WYAllDetailsModel alloc] initWithDictionary:infoDict];
             
-            ZDY_LOG(@"     %@ ",weakSelf.allModel.isCollected);
-            
             BOOL collect;
             if ([weakSelf.allModel.isCollected isEqualToString:[NSString stringWithFormat:@"YES"]]) {
                 collect = YES;
@@ -359,7 +359,17 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 weakSelf.thePriceView.model = weakSelf.allModel;
-                [weakSelf.buyBtn setTitle:weakSelf.allModel.buyCount forState:(UIControlStateNormal)];
+                
+                if (weakSelf.allModel.buyCount.floatValue >= 10000) {
+                    
+                    CGFloat buyCount = weakSelf.allModel.buyCount.floatValue / 10000;
+                    
+                    [weakSelf.buyBtn setTitle:[NSString stringWithFormat:@"%.2f万人购买",buyCount] forState:(UIControlStateNormal)];
+                }
+                else {
+                    [weakSelf.buyBtn setTitle:weakSelf.allModel.buyCount forState:(UIControlStateNormal)];
+                }
+                
             });
             
         }

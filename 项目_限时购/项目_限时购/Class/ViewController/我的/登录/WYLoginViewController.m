@@ -133,7 +133,7 @@
                 break;
             case 2: {
                 
-                [WYTheThirdParty sinaWeiBoCurrentVC:self];
+                [WYTheThirdParty sinaWeiBoCurrentVC:weakSelf];
             }
                 
             default:

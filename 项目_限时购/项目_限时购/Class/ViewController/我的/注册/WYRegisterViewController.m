@@ -38,7 +38,7 @@
     if (!_threeLoginView) {
         _threeLoginView = [[WYThirdPartyView alloc] init];
         _threeLoginView.thirdPartyBlock = ^(NSInteger btnTag) {
-            
+            WS(weakSelf);
             switch (btnTag) {
                 case 0: {
                     [WYTheThirdParty QQLoginCurrentVC:self successLogin:^(NSDictionary *dict) {
@@ -63,7 +63,7 @@
                     break;
                 case 2: {
                     
-                    [WYTheThirdParty sinaWeiBoCurrentVC:self];
+                    [WYTheThirdParty sinaWeiBoCurrentVC:weakSelf];
                 }
                     
                 default:
