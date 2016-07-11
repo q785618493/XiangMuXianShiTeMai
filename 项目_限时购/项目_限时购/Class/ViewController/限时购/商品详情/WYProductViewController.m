@@ -243,34 +243,56 @@
 
 /** 购物车按钮点击事件 */
 - (void)btnTouchActionShopping {
-    [self.tabBarController setSelectedIndex:2];
+    
+    if (_status) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        [self.tabBarController setSelectedIndex:2];
+    }
 }
 
 /** 加入购物车按钮点击事件 */
 - (void)btnTouchActionAddCart {
     
-    /** 获取登录保存的本地数据 */
-    NSDictionary *userDic = [XSG_USER_DEFAULTS objectForKey:LOGIN_USER];
-    if (userDic) {
-        
-        [self httpGetGoodsAddSgoppingCarRequestMemberId:userDic[@"MemberId"] GoodsId:self.goodsID];
+    if (_status) {
+        [self showTostView:[NSString stringWithFormat:@"该商品已加入购物车"]];
+        return;
     }
     else {
-        [self showTostView:[NSString stringWithFormat:@"尊敬的用户您尚未登录"]];
+        /** 获取登录保存的本地数据 */
+        NSDictionary *userDic = [XSG_USER_DEFAULTS objectForKey:LOGIN_USER];
+        if (userDic) {
+            
+            [self httpGetGoodsAddSgoppingCarRequestMemberId:userDic[@"MemberId"] GoodsId:self.goodsID];
+        }
+        else {
+            [self showTostView:[NSString stringWithFormat:@"尊敬的用户您尚未登录"]];
+        }
     }
+    
+    
 }
 
 /** 立即购买按钮点击事件 */
 - (void)btnTouchActionBuyNow {
-    /** 获取登录保存的本地数据 */
-    NSDictionary *userDic = [XSG_USER_DEFAULTS objectForKey:LOGIN_USER];
     
-    if (userDic) {
-        [self httpGetRequestImmediatelyBuyGoodsMemberId:userDic[@"MemberId"] GoodsId:self.goodsID];
+    if (_status) {
+        [self showTostView:[NSString stringWithFormat:@"该商品已加入购物车"]];
+        return;
     }
     else {
-        [self showTostView:[NSString stringWithFormat:@"尊敬的用户您尚未登录"]];
+        /** 获取登录保存的本地数据 */
+        NSDictionary *userDic = [XSG_USER_DEFAULTS objectForKey:LOGIN_USER];
+        
+        if (userDic) {
+            [self httpGetRequestImmediatelyBuyGoodsMemberId:userDic[@"MemberId"] GoodsId:self.goodsID];
+        }
+        else {
+            [self showTostView:[NSString stringWithFormat:@"尊敬的用户您尚未登录"]];
+        }
     }
+    
     
 }
 

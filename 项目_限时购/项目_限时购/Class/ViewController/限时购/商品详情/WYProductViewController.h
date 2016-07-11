@@ -16,4 +16,6 @@
 /** 国旗图片的网络路径 */
 @property (copy, nonatomic) NSString *countryImageUrl;
 
+@property (assign, nonatomic) BOOL status;
+
 @end

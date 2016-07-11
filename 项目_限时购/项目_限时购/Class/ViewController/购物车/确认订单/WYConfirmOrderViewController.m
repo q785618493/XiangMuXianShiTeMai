@@ -8,6 +8,7 @@
 
 #import "WYConfirmOrderViewController.h"
 #import "WYDeliveryAddressViewController.h"
+#import "WYProductViewController.h"
 
 #import "WYConfirmOrderTableView.h"
 #import "WYBottomPaymentView.h"
@@ -17,6 +18,7 @@
 #import "DataSigner.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WYContactsSiteModel.h"
+#import "WYShoppingCarModel.h"
 
 #import "AddressBook.h"
 
@@ -54,6 +56,17 @@
         _goodsTableView = [[WYConfirmOrderTableView alloc] initWithFrame:(CGRectMake(0, 64, VIEW_WIDTH, VIEW_HEIGHT - 64 - 45)) style:(UITableViewStylePlain)];
         _goodsTableView.goodsArray = self.dataArray;
         [_goodsTableView setTableHeaderView:self.topConfirmView];
+        
+        WS(weakSelf);
+        _goodsTableView.blockCellRow = ^(NSInteger cellRow) {
+            WYProductViewController *productVC = [[WYProductViewController alloc] init];
+            WYShoppingCarModel *model = weakSelf.dataArray[cellRow];
+            productVC.status = YES;
+            productVC.goodsID = model.goodsId;
+            productVC.countryImageUrl = model.country;
+            
+            [weakSelf.navigationController pushViewController:productVC animated:YES];
+         };
     }
     return _goodsTableView;
 }
@@ -72,6 +85,7 @@
             addressBook.delegate = weakSelf;
             [addressBook addressBookGetPhoneNumberWithViewController:weakSelf];
         };
+        
     }
     return _topConfirmView;
 }

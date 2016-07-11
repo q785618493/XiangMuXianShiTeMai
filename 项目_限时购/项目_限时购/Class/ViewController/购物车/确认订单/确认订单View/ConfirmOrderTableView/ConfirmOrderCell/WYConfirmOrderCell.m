@@ -39,9 +39,6 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     WS(weakSelf);
-    
-    CGFloat width = self.frame.size.width;
-    
     [_goodsImage makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.top).offset(10);
         make.bottom.equalTo(weakSelf.bottom).offset(-10);

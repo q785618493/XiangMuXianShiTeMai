@@ -19,4 +19,7 @@ typedef void(^GoodsPriceBlock)(NSMutableArray *muArray);
 /** 购物车修改商品 回调的block */
 @property (copy, nonatomic) GoodsPriceBlock blockPrice;
 
+/** 回调选中商品，去详情页面 */
+@property (copy, nonatomic) TableCellBlock cellRow;
+
 @end

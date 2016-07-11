@@ -13,4 +13,6 @@
 /** 接收商品数据 */
 @property (strong, nonatomic) NSArray *goodsArray;
 
+@property (copy, nonatomic) TableCellBlock blockCellRow;
+
 @end

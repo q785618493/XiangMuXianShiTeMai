@@ -8,6 +8,7 @@
 
 #import "WYShoppingCartViewController.h"
 #import "WYConfirmOrderViewController.h"
+#import "WYProductViewController.h"
 
 #import "WYNotLoginView.h"
 #import "WYLoginNoGoodsView.h"
@@ -63,7 +64,15 @@
 - (WYLoginHaveGoodsView *)haveGoodsView {
     if (!_haveGoodsView) {
         _haveGoodsView = [[WYLoginHaveGoodsView alloc] initWithFrame:(CGRectMake(0, 64, VIEW_WIDTH, VIEW_HEIGHT - 49 - 64 - 56)) style:(UITableViewStylePlain)];
-        
+        WS(weakSelf);
+        _haveGoodsView.cellRow = ^(NSInteger cellRow) {
+            WYProductViewController *productVC  = [[WYProductViewController alloc]init];
+            WYShoppingCarModel *model = weakSelf.shoppingMuArray[cellRow];
+            productVC.goodsID = model.goodsId;
+            productVC.countryImageUrl = model.country;
+            productVC.status = YES;
+            [weakSelf.navigationController pushViewController:productVC animated:YES];
+        };
     }
     return _haveGoodsView;
 }

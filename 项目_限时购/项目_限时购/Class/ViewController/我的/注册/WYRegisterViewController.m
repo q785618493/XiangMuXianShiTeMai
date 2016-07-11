@@ -38,6 +38,7 @@
     if (!_threeLoginView) {
         _threeLoginView = [[WYThirdPartyView alloc] init];
         _threeLoginView.thirdPartyBlock = ^(NSInteger btnTag) {
+            
             WS(weakSelf);
             switch (btnTag) {
                 case 0: {

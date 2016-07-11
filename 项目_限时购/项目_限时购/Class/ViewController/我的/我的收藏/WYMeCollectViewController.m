@@ -28,7 +28,7 @@
 
 /** 添加控件和约束 */
 - (void)controlAddMasonry {
-    WS(weakSelf);
+    
 }
 
 /**
@@ -39,8 +39,6 @@
  *  @param OrderType 排序类型
  */
 - (void)httpGetRequestCollectShopsMemberId:(NSString *)MemberId OrderName:(NSString *)OrderName OrderType:(NSString *)OrderType {
-    
-    WS(weakSelf);
     
     NSDictionary *requestDic = @{@"MemberId":MemberId,
                                  @"OrderName":OrderName,
@@ -55,7 +53,7 @@
         ZDY_LOG(@"  ====%@",nameJson);
         
         if (array.count > 0) {
-            NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
+//            NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
         }
         else {
             ZDY_LOG(@" ===== 收藏列表请求数据失败 ===== ");
