@@ -172,6 +172,8 @@
 		04AC7E991D26A1AA0043A89F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AC7E981D26A1AA0043A89F /* AddressBook.framework */; };
 		04AC7E9B1D26A1B50043A89F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AC7E9A1D26A1B50043A89F /* AddressBookUI.framework */; };
 		04AC7E9F1D26A68E0043A89F /* AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AC7E9E1D26A68E0043A89F /* AddressBook.m */; };
+		04CEB89A1D33483100D872E0 /* WYADRollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CEB8991D33483100D872E0 /* WYADRollViewController.m */; };
+		04CEB89E1D33540700D872E0 /* UIDevice--Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CEB89D1D33540700D872E0 /* UIDevice--Hardware.m */; };
 		0D25594A835B70607687C567 /* libPods-项目_限时购.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF25CB955D4AE0ACF623025A /* libPods-项目_限时购.a */; };
 		228AE8C2BB4304902C619573 /* libPods-项目_限时购Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85477694D3785356C2CC7CBD /* libPods-项目_限时购Tests.a */; };
 		3DE383FEBBD637B4F88F8500 /* libPods-项目_限时购UITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 619F05BCE42CE15052956E05 /* libPods-项目_限时购UITests.a */; };
@@ -573,6 +575,10 @@
 		04AC7E9A1D26A1B50043A89F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		04AC7E9D1D26A68E0043A89F /* AddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBook.h; sourceTree = "<group>"; };
 		04AC7E9E1D26A68E0043A89F /* AddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBook.m; sourceTree = "<group>"; };
+		04CEB8981D33483100D872E0 /* WYADRollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYADRollViewController.h; sourceTree = "<group>"; };
+		04CEB8991D33483100D872E0 /* WYADRollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYADRollViewController.m; sourceTree = "<group>"; };
+		04CEB89C1D33540700D872E0 /* UIDevice--Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice--Hardware.h"; sourceTree = "<group>"; };
+		04CEB89D1D33540700D872E0 /* UIDevice--Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice--Hardware.m"; sourceTree = "<group>"; };
 		23A66AE6F6CDF11227D3077C /* Pods-项目_限时购.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-项目_限时购.release.xcconfig"; path = "Pods/Target Support Files/Pods-项目_限时购/Pods-项目_限时购.release.xcconfig"; sourceTree = "<group>"; };
 		334080227F654E006CBB71FE /* Pods-项目_限时购.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-项目_限时购.debug.xcconfig"; path = "Pods/Target Support Files/Pods-项目_限时购/Pods-项目_限时购.debug.xcconfig"; sourceTree = "<group>"; };
 		619F05BCE42CE15052956E05 /* libPods-项目_限时购UITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-项目_限时购UITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1627,6 +1633,7 @@
 				047F092B1D124E68004E7EE7 /* WYFlashSaleViewController.m */,
 				0496C8C51D10F0FD00E3809F /* 限时购View */,
 				0496C8C41D10F0FD00E3809F /* 限时购Model */,
+				04CEB8971D3347E300D872E0 /* 广告轮播跳转 */,
 				0496C8BE1D10F0FD00E3809F /* 商品详情 */,
 				0496C8C11D10F0FD00E3809F /* 搜索 */,
 			);
@@ -1861,6 +1868,25 @@
 				04AC7E9E1D26A68E0043A89F /* AddressBook.m */,
 			);
 			path = "获取通讯录";
+			sourceTree = "<group>";
+		};
+		04CEB8971D3347E300D872E0 /* 广告轮播跳转 */ = {
+			isa = PBXGroup;
+			children = (
+				04CEB8981D33483100D872E0 /* WYADRollViewController.h */,
+				04CEB8991D33483100D872E0 /* WYADRollViewController.m */,
+				04CEB89B1D33540700D872E0 /* 硬件信息 */,
+			);
+			path = "广告轮播跳转";
+			sourceTree = "<group>";
+		};
+		04CEB89B1D33540700D872E0 /* 硬件信息 */ = {
+			isa = PBXGroup;
+			children = (
+				04CEB89C1D33540700D872E0 /* UIDevice--Hardware.h */,
+				04CEB89D1D33540700D872E0 /* UIDevice--Hardware.m */,
+			);
+			path = "硬件信息";
 			sourceTree = "<group>";
 		};
 		21E138D222E3BBC03DE7A683 /* Pods */ = {
@@ -2245,6 +2271,7 @@
 				047FB2E11D2267FF00E4F4E5 /* WYConfirmOrderViewController.m in Sources */,
 				047A3AF11D1784C800A85947 /* SDImageCache.m in Sources */,
 				047A3AF21D1784C800A85947 /* SDWebImageCompat.m in Sources */,
+				04CEB89A1D33483100D872E0 /* WYADRollViewController.m in Sources */,
 				048400381D1576750096AB05 /* WYFaceCollection.m in Sources */,
 				0482FCD01D24BB9100ECB277 /* TADotView.m in Sources */,
 				04488F771D20D51B00ED6DAB /* WYHomeGuideView.m in Sources */,
@@ -2260,6 +2287,7 @@
 				043ABD891D23E8AE006CCE95 /* WYSiteCell.m in Sources */,
 				047A3AF31D1784C800A85947 /* SDWebImageDecoder.m in Sources */,
 				0482FD641D24C64500ECB277 /* UIView+Toast.m in Sources */,
+				04CEB89E1D33540700D872E0 /* UIDevice--Hardware.m in Sources */,
 				044B2DA91D2131AA00988617 /* WYLoginHaveGoodsView.m in Sources */,
 				04A7DB471D13E56F0039F50D /* WYMeTableView.m in Sources */,
 				044B2DB11D21492100988617 /* WYShoppingCarModel.m in Sources */,

@@ -113,19 +113,22 @@
             case 0: {
                 [WYTheThirdParty QQLoginCurrentVC:self successLogin:^(NSDictionary *dict) {
                 
-                    NSLog(@" QQUserInfo === %@",dict);
+                    ZDY_LOG(@" QQUserInfo === %@",dict);
                     
                 } errorLogin:^{
                     
                     [MBProgressHUD showError:[NSString stringWithFormat:@"登录失败"]];
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         [MBProgressHUD hideHUD];
                     });
                 }];
             }
                 break;
             case 1: {
-                
+                [MBProgressHUD showMessage:[NSString stringWithFormat:@"微信登录请等待"]];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUD];
+                });
             }
                 break;
             case 2: {

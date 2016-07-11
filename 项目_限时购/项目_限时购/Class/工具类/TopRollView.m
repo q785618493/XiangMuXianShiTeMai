@@ -7,7 +7,6 @@
 //
 
 #import "TopRollView.h"
-#import "UIButton+WebCache.h"
 #import "WYCustomButton.h"
 
 #define WIDTH  self.frame.size.width
@@ -18,9 +17,9 @@
 @interface TopRollView ()<UIScrollViewDelegate>
 
 ///滚动视图 UIScrollView
-@property (strong, nonatomic) UIScrollView *rollScroll;
+@property (weak, nonatomic) UIScrollView *rollScroll;
 ///计时器用于控制图片自动滚动
-@property (strong, nonatomic) NSTimer *timer;
+@property (weak, nonatomic) NSTimer *timer;
 
 ///当前图片的索引
 @property (assign, nonatomic) NSInteger index;
@@ -61,16 +60,8 @@
         WYCustomButton *forBtn = [WYCustomButton buttonWithType:(UIButtonTypeCustom)];
         forBtn.tag = BTN_TAG + i;
         [forBtn setFrame:CGRectMake(i * WIDTH, 0, WIDTH, HEIGHT)];
-        //            [forBtn setImage:[UIImage imageNamed:self.sevenArray[i]] forState:(UIControlStateNormal)];
-//        [forBtn sd_setImageWithURL:[NSURL URLWithString:self.sevenArray[i]] forState:(UIControlStateNormal)];
+//        [forBtn setImage:[UIImage imageNamed:self.sevenArray[i]] forState:(UIControlStateNormal)];
         [forBtn sd_setBtnImageUrlString:self.sevenArray[i] forState:(UIControlStateNormal)];
-        
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.sevenArray[i]]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [forBtn setImage:[UIImage imageWithData:data] forState:(UIControlStateNormal)];
-            });
-        });
         [forBtn addTarget:self action:@selector(btnTouchActionFor:) forControlEvents:(UIControlEventTouchUpInside)];
         [self.rollScroll addSubview:forBtn];
     }
@@ -101,10 +92,9 @@
     
     
     /** 创建一个计时器，执行自动轮播视图的功能*/
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
-    ///开启计时器
-    //        [self.timer setFireDate:[NSDate distantPast]];
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
     
+    self.timer = timer;
     /** 修改 self.timer 控件的优先级 和 用户事件的优先级一样(创建几次 写几次)*/
     //获取当前的消息循环对象
     NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
@@ -121,47 +111,18 @@
     if (self = [super initWithFrame:frame]) {
         [self setBackgroundColor:[UIColor whiteColor]];
         /** 创建 UIScrollView*/
-        self.rollScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT)];
+        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT)];
+        self.rollScroll = scrollView;
         [self.rollScroll setDelegate:self];
         [self.rollScroll setUserInteractionEnabled:YES];
         [self.rollScroll setBackgroundColor:[UIColor whiteColor]];
         [self addSubview:self.rollScroll];
-        
-//        /** 记录数组的元素个数,方便后面使用*/
-//        self.countArray = arrayImages.count;
-//        
-//        /**
-//         *  在传进来的图片数组前后分别加入一张图片,最前面加原先的最后一张图，最后面加
-//         *  原先的第一张图
-//         */
-//        self.sevenArray = [NSMutableArray arrayWithArray:arrayImages];
-//        
-//        //最前面加原先的最后一张图
-//        [self.sevenArray insertObject:[arrayImages firstObject] atIndex:arrayImages.count];
-//        
-//        //最后面加原先的第一张图
-//        [self.sevenArray insertObject:[arrayImages lastObject] atIndex:0];
-//        
-//        /** 循环创建轮播视图上的按钮*/
-//        for (NSInteger i = 0; i < self.sevenArray.count; i ++) {
-//            
-//            UIButton *forBtn = [WYCustomButton buttonWithType:(UIButtonTypeCustom)];
-//            forBtn.tag = BTN_TAG + i;
-//            [forBtn setFrame:CGRectMake(i * WIDTH, 0, WIDTH, HEIGHT)];
-////            [forBtn setImage:[UIImage imageNamed:self.sevenArray[i]] forState:(UIControlStateNormal)];
-//            [forBtn sd_setImageWithURL:[NSURL URLWithString:self.sevenArray[i]] forState:(UIControlStateNormal)];
-//            [forBtn addTarget:self action:@selector(btnTouchActionFor:) forControlEvents:(UIControlEventTouchUpInside)];
-//            [self.rollScroll addSubview:forBtn];
-//        }
         
         /** UIScrollView 的设置*/
         //边缘反弹关闭
         [self.rollScroll setBounces:NO];
         //起点为 (0,0)
         [self.rollScroll setContentOffset:CGPointMake(WIDTH, 0)];
-//        // UIScrollView 上的内容大小
-//        [self.rollScroll setContentSize:CGSizeMake(WIDTH * self.sevenArray.count, HEIGHT)];
-        
         //开启分页效果
         [self.rollScroll setPagingEnabled:YES];
         //关闭水平滚动条
@@ -169,40 +130,6 @@
         //关闭垂直滚动条
         [self.rollScroll setShowsVerticalScrollIndicator:NO];
         
-//        /** 创建 UIScrollView 的圆点页码 UIPageControl */
-//        UIPageControl *page = [[UIPageControl alloc] initWithFrame:CGRectMake(0, HEIGHT - 25, WIDTH, 25)];
-//        
-//        [page setUserInteractionEnabled:NO];
-//        
-//        ///设置 UIPageControl Tag 值 以方便查找
-//        [page setTag:100];
-//        
-//        //设置圆点个数
-////        [page setNumberOfPages:arrayImages.count];
-//        
-//        //设置圆点的默认颜色
-//        [page setPageIndicatorTintColor:[UIColor blackColor]];
-//        
-//        //设置圆点当前亮起的颜色
-//        [page setCurrentPageIndicatorTintColor:[UIColor redColor]];
-//        
-//        [self addSubview:page];
-//        self.pageControl = page;
-        
-//        /** 创建一个计时器，执行自动轮播视图的功能*/
-//        self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
-//        ///开启计时器
-////        [self.timer setFireDate:[NSDate distantPast]];
-//        
-//        /** 修改 self.timer 控件的优先级 和 用户事件的优先级一样(创建几次 写几次)*/
-//        //获取当前的消息循环对象
-//        NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-//        
-//        //改变 self.timer 对象的优先级
-//        [runLoop addTimer:self.timer forMode:NSRunLoopCommonModes];
-//        
-//        /** 给图片所以初始化为 1 */
-//        self.index = 1;
         
     }
     return self;

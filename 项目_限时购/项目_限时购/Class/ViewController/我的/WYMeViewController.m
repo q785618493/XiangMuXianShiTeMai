@@ -86,63 +86,6 @@ static NSString *keyHeader = @"imageUser";
     if (!_meTableView) {
         _meTableView = [[WYMeTableView alloc] initWithFrame:(CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64 - 49)) style:(UITableViewStylePlain)];
         _meTableView.infoArray = self.dataMuArray;
-        WS(weakSelf);
-        _meTableView.meCellRow = ^(NSInteger cellRow) {
-            
-            switch (cellRow) {
-                case 0: {
-                    
-                    NSDictionary *userDic = [XSG_USER_DEFAULTS objectForKey:LOGIN_USER];
-                    if (userDic) {
-//                        WYMeCollectViewController *collectVC = [[WYMeCollectViewController alloc] init];
-//                        
-//                        collectVC.userID = userDic[@"MemberId"];
-//                        [weakSelf.navigationController pushViewController:collectVC animated:YES];
-                    }
-                    else {
-                        [weakSelf showTostView:[NSString stringWithFormat:@"用户尚未登录"]];
-                        return ;
-                    }
-                    
-                }
-                    
-                    break;
-                case 1: {
-                    
-                }
-                    
-                    break;
-                case 2: {
-                    
-                }
-                    
-                    break;
-                case 3: {
-                    
-                }
-                    
-                    break;
-                case 4: {
-                    
-                }
-                    
-                    break;
-                case 5: {
-                    
-                }
-                    
-                    break;
-                    
-                case 6: {
-                    WYDeliveryAddressViewController *deliveryVC = [[WYDeliveryAddressViewController alloc] init];
-                    [weakSelf.navigationController pushViewController:deliveryVC animated:YES];
-                }
-                    
-                default:
-                    break;
-            }
-            
-        };
     }
     return _meTableView;
 }
@@ -264,6 +207,51 @@ static NSString *keyHeader = @"imageUser";
         make.edges.mas_equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(64, 0, 49, 0));
     }];
     
+    _meTableView.meCellRow = ^(NSInteger cellRow) {
+        
+        switch (cellRow) {
+            case 0: {
+                
+                NSDictionary *userDic = [XSG_USER_DEFAULTS objectForKey:LOGIN_USER];
+                if (userDic) {
+                    WYMeCollectViewController *collectVC = [[WYMeCollectViewController alloc] init];
+                    
+                    collectVC.userID = userDic[@"MemberId"];
+                    [weakSelf.navigationController pushViewController:collectVC animated:YES];
+                }
+                else {
+                    [weakSelf showTostView:[NSString stringWithFormat:@"用户尚未登录"]];
+                    return ;
+                }
+                
+            }
+                
+                break;
+            case 1: {
+                
+            }
+                
+                break;
+            case 2: {
+                
+            }
+                
+                break;
+            case 3: {
+                
+            }
+                
+                break;
+            case 4: {
+                
+            }
+                
+            default:
+                break;
+        }
+        
+    };
+    
     weakSelf.topLoginView.blockLogin = ^() {
         WYLoginViewController *loginVC = [[WYLoginViewController alloc] init];
         loginVC.title = [NSString stringWithFormat:@"登 录"];
@@ -295,6 +283,64 @@ static NSString *keyHeader = @"imageUser";
             weakSelf.meTableView.infoArray = weakSelf.dataMuArray;
             [weakSelf.meTableView reloadData];
             
+            
+            _meTableView.meCellRow = ^(NSInteger cellRow) {
+                
+                switch (cellRow) {
+                    case 0: {
+                        
+                        NSDictionary *userDic = [XSG_USER_DEFAULTS objectForKey:LOGIN_USER];
+                        if (userDic) {
+                            WYMeCollectViewController *collectVC = [[WYMeCollectViewController alloc] init];
+                            
+                            collectVC.userID = userDic[@"MemberId"];
+                            [weakSelf.navigationController pushViewController:collectVC animated:YES];
+                        }
+                        else {
+                            [weakSelf showTostView:[NSString stringWithFormat:@"用户尚未登录"]];
+                            return ;
+                        }
+                        
+                    }
+                        
+                        break;
+                    case 1: {
+                        
+                    }
+                        
+                        break;
+                    case 2: {
+                        
+                    }
+                        
+                        break;
+                    case 3: {
+                        
+                    }
+                        
+                        break;
+                    case 4: {
+                        
+                    }
+                        
+                        break;
+                    case 5: {
+                        [WYTheThirdParty sinaWeiBoCurrentVC:self];
+                    }
+                        
+                        break;
+                        
+                    case 6: {
+                        WYDeliveryAddressViewController *deliveryVC = [[WYDeliveryAddressViewController alloc] init];
+                        [weakSelf.navigationController pushViewController:deliveryVC animated:YES];
+                    }
+                        
+                    default:
+                        break;
+                }
+                
+            };
+            
             //偏好设置存储
             [XSG_USER_DEFAULTS setObject:userDic forKey:userInfo];
             [XSG_USER_DEFAULTS setBool:isStatus forKey:status];
@@ -322,6 +368,63 @@ static NSString *keyHeader = @"imageUser";
     [_meTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(weakSelf.view).with.insets(UIEdgeInsetsMake(64, 0, 49, 0));
     }];
+    
+    _meTableView.meCellRow = ^(NSInteger cellRow) {
+        
+        switch (cellRow) {
+            case 0: {
+                
+                NSDictionary *userDic = [XSG_USER_DEFAULTS objectForKey:LOGIN_USER];
+                if (userDic) {
+                    WYMeCollectViewController *collectVC = [[WYMeCollectViewController alloc] init];
+                    
+                    collectVC.userID = userDic[@"MemberId"];
+                    [weakSelf.navigationController pushViewController:collectVC animated:YES];
+                }
+                else {
+                    [weakSelf showTostView:[NSString stringWithFormat:@"用户尚未登录"]];
+                    return ;
+                }
+                
+            }
+                
+                break;
+            case 1: {
+                
+            }
+                
+                break;
+            case 2: {
+                
+            }
+                
+                break;
+            case 3: {
+                
+            }
+                
+                break;
+            case 4: {
+                
+            }
+                
+                break;
+            case 5: {
+                [WYTheThirdParty sinaWeiBoCurrentVC:self];
+            }
+                
+                break;
+                
+            case 6: {
+                WYDeliveryAddressViewController *deliveryVC = [[WYDeliveryAddressViewController alloc] init];
+                [weakSelf.navigationController pushViewController:deliveryVC animated:YES];
+            }
+                
+            default:
+                break;
+        }
+        
+    };
     
     self.topUserView.meDic = dict;
     [self replaceUserHeaderImage];

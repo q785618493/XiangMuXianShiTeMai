@@ -46,7 +46,7 @@
 
 - (UILabel *)wireLabel {
     if (!_wireLabel) {
-        _wireLabel = [[UILabel alloc] init];
+        _wireLabel = [[UILabel alloc] initWithFrame:(CGRectMake(0, 102, _wire_Width, 1))];
         [_wireLabel setBackgroundColor:RGB(0, 180, 239)];
     }
     return _wireLabel;
@@ -122,11 +122,6 @@
     }];
     
     [self.view insertSubview:self.wireLabel aboveSubview:self.fourBtnView];
-    [_wireLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.fourBtnView.bottom).offset(-1);
-        make.left.equalTo(weakSelf.view);
-        make.size.equalTo(CGSizeMake(_wire_Width, 1));
-    }];
     
     NSArray *titleArray = [[NSArray alloc] initWithObjects:@"热门",@"价格",@"好评",@"新品", nil];
     
@@ -157,7 +152,7 @@
     
     rankBtn.selected = YES;
     NSInteger rankTag = rankBtn.tag - BTN_RANK_TAG;
-    
+    WS(weakSelf);
     [UIView animateWithDuration:0.3 animations:^{
         CGRect wireFrame = _wireLabel.frame;
         wireFrame.origin.x = rankTag * _wire_Width;
@@ -330,12 +325,7 @@
             
         }
         else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD showError:[NSString stringWithFormat:@"请求数据失败"]];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUD];
-                });
-            });
+            [weakSelf showTostView:[NSString stringWithFormat:@"请求数据失败"]];
             
         }
         
@@ -380,14 +370,7 @@
             });
         }
         else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD showError:[NSString stringWithFormat:@"没有此类商品,请重新搜索"]];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUD];
-                    [weakSelf.navigationController popViewControllerAnimated:YES];
-                    
-                });
-            });
+            [weakSelf showTostView:[NSString stringWithFormat:@"没有此类商品,请重新搜索"]];
         }
         
     } failure:^(NSError *error) {
@@ -428,12 +411,7 @@
             });
         }
         else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD showError:[NSString stringWithFormat:@"没有商品信息"]];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUD];
-                });
-            });
+            [weakSelf showTostView:[NSString stringWithFormat:@"没有商品信息"]];
             
         }
         

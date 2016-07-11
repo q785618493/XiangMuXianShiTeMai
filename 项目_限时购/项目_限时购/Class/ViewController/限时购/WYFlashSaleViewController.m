@@ -10,6 +10,7 @@
 #import "WYSearchViewController.h"
 #import "WYProductViewController.h"
 #import "WYDetailsClassfyViewController.h"
+#import "WYADRollViewController.h"
 
 #import "WYHomeGuideView.h"
 #import "TopRollView.h"
@@ -140,6 +141,7 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     if (!_adView) {
         _adView = [[TopRollView alloc] initWithFrame:(CGRectMake(0, 0, WIDTH, _scale))];
         [_adView setBackgroundColor:RGB(245, 245, 245)];
+        
     }
     return _adView;
 }
@@ -281,6 +283,12 @@ static NSString *versionKey = @"CFBundleShortVersionString";
         detailsVC.judgeRequest = 3;
         [weakSelf.navigationController pushViewController:detailsVC animated:YES];
     };
+    
+    weakSelf.adView.btnTag = ^(NSInteger rollBtnTag) {
+        WYADRollViewController *adRollVC = [[WYADRollViewController alloc] init];
+        adRollVC.dataID = rollBtnTag;
+        [weakSelf.navigationController pushViewController:adRollVC animated:YES];
+    };
 }
 
 /** 添加导航右上角的搜索按钮 */
@@ -381,12 +389,7 @@ static NSString *versionKey = @"CFBundleShortVersionString";
             weakSelf.adView.arrayImages = muArray;
             
         }
-        else {
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"加载数据失败,请您检查网络"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUD];
-            });
-        }
+
     } failure:^(NSError *error) {
         
         ZDY_LOG(@"失败==%@",error);
@@ -417,18 +420,9 @@ static NSString *versionKey = @"CFBundleShortVersionString";
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf.goodsTable reloadData];
                 [weakSelf.rollScrollView setHidden:NO];
-                [MBProgressHUD hideHUD];
             });
         
         }
-        else {
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"加载数据失败,请您检查网络"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUD];
-            });
-        }
-        
-        
     } failure:^(NSError *error) {
         
         ZDY_LOG(@"失败==%@",error.localizedDescription);
@@ -462,21 +456,9 @@ static NSString *versionKey = @"CFBundleShortVersionString";
             });
             
         }
-        else {
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"加载数据失败,请您检查网络"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUD];
-            });
-        }
-        
-        
     } failure:^(NSError *error) {
         
         ZDY_LOG(@"失败==%@",error.localizedDescription);
-        [MBProgressHUD showMessage:[NSString stringWithFormat:@"请您检查网络"]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUD];
-        });
     }];
 }
 
@@ -513,7 +495,7 @@ static NSString *versionKey = @"CFBundleShortVersionString";
             
         }
         else {
-            ZDY_LOG(@"----- 加入购物车失败 -----");
+            [weakSelf showTostView:[NSString stringWithFormat:@"加入购物车失败"]];
         }
         
     } failure:^(NSError *error) {

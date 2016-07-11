@@ -56,8 +56,6 @@
         
         if (array.count > 0) {
             NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
-            
-            
         }
         else {
             ZDY_LOG(@" ===== 收藏列表请求数据失败 ===== ");

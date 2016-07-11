@@ -231,7 +231,7 @@
         } else {
             
             [MBProgressHUD showMessage:[NSString stringWithFormat:@"无法获得验证码"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
         }
@@ -254,13 +254,13 @@
         if ([[NSString stringWithFormat:@"success"] isEqual:dataDic[@"result"]]) {
             
             [MBProgressHUD showSuccess:[NSString stringWithFormat:@"注册成功,快去登录"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
         }
         else {
-            [MBProgressHUD showMessage:[NSString stringWithFormat:@"验证码错误"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD showError:[NSString stringWithFormat:@"验证码错误"]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
         }

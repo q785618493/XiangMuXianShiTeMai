@@ -328,15 +328,6 @@
                 weakSelf.imageDetailsView.photoArray = detailsImageArray;
             });
         }
-        else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD showError:[NSString stringWithFormat:@"没有该商品图片"]];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUD];
-                });
-            });
-        }
-        
     } failure:^(NSError *error) {
         
         ZDY_LOG(@"====%@",error);
@@ -372,14 +363,6 @@
             });
             
         }
-        else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD showError:[NSString stringWithFormat:@"没有该商品详情"]];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUD];
-                });
-            });
-        }
         
     } failure:^(NSError *error) {
         ZDY_LOG(@"+++++%@",error);
@@ -407,15 +390,6 @@
                 [weakSelf.productTbaleView reloadData];
             });
         }
-        else {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD showError:[NSString stringWithFormat:@"没有该商品列表"]];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUD];
-                });
-            });
-        }
         
     } failure:^(NSError *error) {
         ZDY_LOG(@"======%@",error);
@@ -441,15 +415,6 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 weakSelf.goodsScoreView.dataArray = muArray;
             });
-        }
-        else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD showError:[NSString stringWithFormat:@"没有该商品列表"]];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUD];
-                });
-            });
-
         }
         
     } failure:^(NSError *error) {
@@ -496,6 +461,8 @@
  */
 - (void)httpGetGoodsAddUserCollectRequestMemberId:(NSString *)MemberId CollectionType:(NSInteger)CollectionType {
     
+    WS(weakSelf);
+    
     NSDictionary *requestDic = @{@"MemberId":MemberId,
                                  @"CollectionType":[NSString stringWithFormat:@"%ld",CollectionType],
                                  @"RelatedType":@"1",
@@ -508,21 +475,15 @@
         if ([dataDict[@"result"] isEqualToString:[NSString stringWithFormat:@"success"]]) {
             
             if (1 == CollectionType) {
-                [MBProgressHUD showSuccess:[NSString stringWithFormat:@"成功加入收藏夹"]];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUD];
-                });
+                [weakSelf showTostView:[NSString stringWithFormat:@"成功加入收藏夹"]];
             }
             else {
-                [MBProgressHUD showSuccess:[NSString stringWithFormat:@"已从收藏夹移除"]];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUD];
-                });
+                [weakSelf showTostView:[NSString stringWithFormat:@"已从收藏夹移除"]];
             }
             
         }
         else {
-            ZDY_LOG(@"----收藏失败----");
+            [weakSelf showTostView:[NSString stringWithFormat:@"收藏失败"]];
         }
         
     } failure:^(NSError *error) {
@@ -546,9 +507,6 @@
     [self GETHttpUrlString:[NSString stringWithFormat:@"http://123.57.141.249:8080/beautalk/appShopCart/insert.do"] progressDic:requestDic success:^(id JSON) {
         NSDictionary *statusDic = (NSDictionary *)JSON;
         
-        NSString *dataJson = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:nil] encoding:NSUTF8StringEncoding];
-        ZDY_LOG(@"====%@",dataJson);
-        
         if ([statusDic[@"result"] isEqualToString:[NSString stringWithFormat:@"success"]]) {
             
             UIAlertController *alertC = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"已将商品添加到购物车"] message:[NSString stringWithFormat:@"点击去付款到购物车结算，点击再逛逛查看其它商品"] preferredStyle:(UIAlertControllerStyleAlert)];
@@ -569,7 +527,7 @@
             
         }
         else {
-            ZDY_LOG(@"----- 加入购物车失败 -----");
+            [weakSelf showTostView:[NSString stringWithFormat:@"加入购物车失败"]];
         }
         
     } failure:^(NSError *error) {
@@ -601,7 +559,7 @@
             
         }
         else {
-            ZDY_LOG(@"----- 立即购买跳转购物车失败 -----");
+            [weakSelf showTostView:[NSString stringWithFormat:@"立即购买跳转购物车失败"]];
         }
         
     } failure:^(NSError *error) {

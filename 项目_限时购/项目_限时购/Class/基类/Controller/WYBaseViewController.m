@@ -134,7 +134,7 @@ typedef NS_ENUM(NSInteger, CurrentNetworkStatus) {
 }
 
 - (void)showTostView:(NSString *)tostString {
-    [self.view makeToast:tostString duration:1.5 position:[NSString stringWithFormat:@"center"]];
+    [self.view makeToast:tostString duration:2 position:[NSString stringWithFormat:@"center"]];
 }
 
 - (void)didReceiveMemoryWarning {

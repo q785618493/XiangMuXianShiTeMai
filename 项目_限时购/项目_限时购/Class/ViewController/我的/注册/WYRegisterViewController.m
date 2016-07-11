@@ -29,7 +29,7 @@
 - (WYTextFieldView *)textFieldView {
     if (!_textFieldView) {
         _textFieldView = [[WYTextFieldView alloc] init];
-        _textFieldView.dataDic = [NSDictionary dictionaryWithObjectsAndKeys:@"立即登录",@"btnTitle",RGB(0, 147, 225),@"btnColor",@"注册界面下一步按钮",@"image", nil];
+        _textFieldView.dataDic = [NSDictionary dictionaryWithObjectsAndKeys:@"酷兜协议",@"btnTitle",RGB(0, 147, 225),@"btnColor",@"注册界面下一步按钮",@"image", nil];
     }
     return _textFieldView;
 }
@@ -37,6 +37,39 @@
 - (WYThirdPartyView *)threeLoginView {
     if (!_threeLoginView) {
         _threeLoginView = [[WYThirdPartyView alloc] init];
+        _threeLoginView.thirdPartyBlock = ^(NSInteger btnTag) {
+            
+            switch (btnTag) {
+                case 0: {
+                    [WYTheThirdParty QQLoginCurrentVC:self successLogin:^(NSDictionary *dict) {
+                        
+                        ZDY_LOG(@" QQUserInfo === %@",dict);
+                        
+                    } errorLogin:^{
+                        
+                        [MBProgressHUD showError:[NSString stringWithFormat:@"登录失败"]];
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            [MBProgressHUD hideHUD];
+                        });
+                    }];
+                }
+                    break;
+                case 1: {
+                    [MBProgressHUD showMessage:[NSString stringWithFormat:@"微信登录请等待"]];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [MBProgressHUD hideHUD];
+                    });
+                }
+                    break;
+                case 2: {
+                    
+                    [WYTheThirdParty sinaWeiBoCurrentVC:self];
+                }
+                    
+                default:
+                    break;
+            }
+        };
     }
     return _threeLoginView;
 }
@@ -117,7 +150,7 @@
     
     weakSelf.textFieldView.registerBlock = ^() {
     
-        [weakSelf.navigationController popViewControllerAnimated:YES];
+        [weakSelf showTostView:[NSString stringWithFormat:@"请遵守相关法律法规"]];
     };
     
     [_threeLoginView mas_makeConstraints:^(MASConstraintMaker *make) {
