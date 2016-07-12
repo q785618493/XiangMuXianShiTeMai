@@ -117,8 +117,9 @@
     [_addressLabel setText:model.siteInfo];
     
     CGFloat widthAddress = self.frame.size.width - 129;
-    
     CGFloat heightAddress = [NSString autoHeightWithString:model.siteInfo Width:widthAddress Font:[UIFont systemFontOfSize:15]];
+    
+    heightAddress = heightAddress < 81 ? heightAddress : 81;
     
     [_addressLabel makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(heightAddress);
@@ -135,8 +136,7 @@
         _addressLabel = [[UILabel alloc] init];
         [_addressLabel setBackgroundColor:RGB(253, 249, 246)];
         [_addressLabel setFont:[UIFont systemFontOfSize:14]];
-        [_addressLabel setLineBreakMode:(NSLineBreakByWordWrapping)];
-        [_addressLabel setTextAlignment:(NSTextAlignmentLeft)];
+//        [_addressLabel setTextAlignment:(NSTextAlignmentCenter)];
         [_addressLabel setNumberOfLines:0];
     }
     return _addressLabel;

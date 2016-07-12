@@ -112,6 +112,8 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+    [self.tabBarItem setBadgeValue:nil];
+    
     /** 获取登录本地保存的用户数据 */
     NSDictionary *dictUser = [XSG_USER_DEFAULTS objectForKey:LOGIN_USER];
     

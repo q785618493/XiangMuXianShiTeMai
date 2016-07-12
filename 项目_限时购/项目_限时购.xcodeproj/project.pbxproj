@@ -19,6 +19,7 @@
 		043ABD891D23E8AE006CCE95 /* WYSiteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043ABD881D23E8AE006CCE95 /* WYSiteCell.m */; };
 		043ABD8C1D23EA39006CCE95 /* WYNewsSiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043ABD8B1D23EA39006CCE95 /* WYNewsSiteViewController.m */; };
 		043ABD8F1D23EA6C006CCE95 /* WYModifySiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043ABD8E1D23EA6C006CCE95 /* WYModifySiteViewController.m */; };
+		0442CD111D3499A800ACFB2A /* WYCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0442CD101D3499A800ACFB2A /* WYCommentViewController.m */; };
 		04488F771D20D51B00ED6DAB /* WYHomeGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04488F761D20D51B00ED6DAB /* WYHomeGuideView.m */; };
 		044B2D9A1D210E7500988617 /* WYNotLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B2D991D210E7500988617 /* WYNotLoginView.m */; };
 		044B2DA61D21124100988617 /* WYLoginNoGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B2DA51D21124100988617 /* WYLoginNoGoodsView.m */; };
@@ -222,6 +223,8 @@
 		043ABD8B1D23EA39006CCE95 /* WYNewsSiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYNewsSiteViewController.m; sourceTree = "<group>"; };
 		043ABD8D1D23EA6C006CCE95 /* WYModifySiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYModifySiteViewController.h; sourceTree = "<group>"; };
 		043ABD8E1D23EA6C006CCE95 /* WYModifySiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYModifySiteViewController.m; sourceTree = "<group>"; };
+		0442CD0F1D3499A800ACFB2A /* WYCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYCommentViewController.h; sourceTree = "<group>"; };
+		0442CD101D3499A800ACFB2A /* WYCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYCommentViewController.m; sourceTree = "<group>"; };
 		04488F751D20D51B00ED6DAB /* WYHomeGuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYHomeGuideView.h; sourceTree = "<group>"; };
 		04488F761D20D51B00ED6DAB /* WYHomeGuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYHomeGuideView.m; sourceTree = "<group>"; };
 		044B2D981D210E7500988617 /* WYNotLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYNotLoginView.h; sourceTree = "<group>"; };
@@ -726,6 +729,15 @@
 				043ABD881D23E8AE006CCE95 /* WYSiteCell.m */,
 			);
 			path = SiteCell;
+			sourceTree = "<group>";
+		};
+		0442CD0E1D3498AE00ACFB2A /* 意见反馈 */ = {
+			isa = PBXGroup;
+			children = (
+				0442CD0F1D3499A800ACFB2A /* WYCommentViewController.h */,
+				0442CD101D3499A800ACFB2A /* WYCommentViewController.m */,
+			);
+			path = "意见反馈";
 			sourceTree = "<group>";
 		};
 		04488F741D20D48200ED6DAB /* GuideView */ = {
@@ -1533,6 +1545,7 @@
 				0496C8B71D10F0FD00E3809F /* 登录 */,
 				0496C8B31D10F0FD00E3809F /* 注册 */,
 				04AC7E921D26842F0043A89F /* 我的收藏 */,
+				0442CD0E1D3498AE00ACFB2A /* 意见反馈 */,
 				043ABD741D23DA4E006CCE95 /* 收货地址 */,
 			);
 			path = "我的";
@@ -2307,6 +2320,7 @@
 				046E87D11D154C7400D48AB0 /* WYNewsModel.m in Sources */,
 				046E07511D12898700645E96 /* WYRegisterViewController.m in Sources */,
 				04AC7E971D2684D70043A89F /* WYMeCollectViewController.m in Sources */,
+				0442CD111D3499A800ACFB2A /* WYCommentViewController.m in Sources */,
 				047F094A1D125367004E7EE7 /* GCDCountdownTime.m in Sources */,
 				046E074A1D12882000645E96 /* WYTextFieldView.m in Sources */,
 				047F094C1D125367004E7EE7 /* MTool.mm in Sources */,

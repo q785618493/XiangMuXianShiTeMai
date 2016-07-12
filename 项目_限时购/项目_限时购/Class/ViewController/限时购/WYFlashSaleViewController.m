@@ -243,7 +243,6 @@ static NSString *versionKey = @"CFBundleShortVersionString";
     weakSelf.goodsTable.goodsCellRow = ^(NSInteger cellRow) {
         
         WYProductViewController *productVC = [[WYProductViewController alloc] init];
-        productVC.title = [NSString stringWithFormat:@"商品详情"];
         
         WYNewsModel *model = weakSelf.newsMuArray[cellRow];
         productVC.goodsID = model.goodsId;

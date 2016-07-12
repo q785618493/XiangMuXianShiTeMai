@@ -130,6 +130,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.title = [NSString stringWithFormat:@"商品详情"];
+    
     /** 添加控件 和 约束 */
     [self controlAddView];
     
@@ -242,7 +244,7 @@
 }
 
 /** 购物车按钮点击事件 */
-- (void)btnTouchActionShopping {
+- (void)btnTouchActionShopping { 
     
     if (_status) {
         [self.navigationController popViewControllerAnimated:YES];

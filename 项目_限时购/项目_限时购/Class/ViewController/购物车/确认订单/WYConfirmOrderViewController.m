@@ -79,12 +79,12 @@
             _siteInfoModel = model;
         };
         
-        WS(weakSelf);
-        _topConfirmView.blockLocate = ^() {
-            AddressBook *addressBook = [AddressBook shareAddressBook];
-            addressBook.delegate = weakSelf;
-            [addressBook addressBookGetPhoneNumberWithViewController:weakSelf];
-        };
+//        WS(weakSelf);
+//        _topConfirmView.blockLocate = ^() {
+//            AddressBook *addressBook = [AddressBook shareAddressBook];
+//            addressBook.delegate = weakSelf;
+//            [addressBook addressBookGetPhoneNumberWithViewController:weakSelf];
+//        };
         
     }
     return _topConfirmView;

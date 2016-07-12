@@ -170,7 +170,7 @@
         else {
             
             [MBProgressHUD showError:[NSString stringWithFormat:@"登录失败,检查账号密码是否正确"]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUD];
             });
         }
@@ -197,7 +197,8 @@
     meAddressModel.title = [NSString stringWithFormat:@"我的收货地址"];
     meAddressModel.image = [NSString stringWithFormat:@"位置"];
     
-    NSArray *meTableArray = [NSArray arrayWithObjects:couponModel,moneyModel,meAddressModel, nil];
+//    NSArray *meTableArray = [NSArray arrayWithObjects:couponModel,moneyModel,meAddressModel, nil];
+    NSArray *meTableArray = [NSArray arrayWithObjects:couponModel,moneyModel, nil];
     
     if (_passBackMe) {
         _passBackMe(meTableArray, dataDic, YES);

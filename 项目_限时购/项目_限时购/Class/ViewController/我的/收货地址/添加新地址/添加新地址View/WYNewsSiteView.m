@@ -132,7 +132,7 @@
         _nameLabel = [[UILabel alloc] init];
         [_nameLabel setBackgroundColor:[UIColor whiteColor]];
         [_nameLabel setFont:[UIFont systemFontOfSize:14]];
-        [_nameLabel setText:[NSString stringWithFormat:@"收货人:"]];
+        [_nameLabel setText:[NSString stringWithFormat:@"收货人名:"]];
         [_nameLabel setTextAlignment:(NSTextAlignmentCenter)];
     }
     return _nameLabel;
@@ -144,7 +144,7 @@
         [_userText setBackgroundColor:[UIColor whiteColor]];
         [_userText setDelegate:self];
         [_userText setBorderStyle:(UITextBorderStyleNone)];
-        [_userText setPlaceholder:[NSString stringWithFormat:@"请输入收货人姓名"]];
+        [_userText setPlaceholder:[NSString stringWithFormat:@"   请输入收货人姓名"]];
         [_userText setClearButtonMode:(UITextFieldViewModeWhileEditing)];
         [_userText setFont:[UIFont systemFontOfSize:14]];
     }
@@ -169,7 +169,7 @@
         [_numberPhoneText setDelegate:self];
         [_numberPhoneText setBorderStyle:(UITextBorderStyleNone)];
         [_numberPhoneText setKeyboardType:(UIKeyboardTypePhonePad)];
-        [_numberPhoneText setPlaceholder:[NSString stringWithFormat:@"请输入联系方式"]];
+        [_numberPhoneText setPlaceholder:[NSString stringWithFormat:@"   输入联系方式电话"]];
         [_numberPhoneText setClearButtonMode:(UITextFieldViewModeWhileEditing)];
         [_numberPhoneText setFont:[UIFont systemFontOfSize:14]];
     }
@@ -202,9 +202,9 @@
 
 - (UILabel *)alertLabel {
     if (!_alertLabel) {
-        _alertLabel = [[UILabel alloc] initWithFrame:(CGRectMake(0, 10, 144, 20))];
+        _alertLabel = [[UILabel alloc] initWithFrame:(CGRectMake(10, 10, 144, 20))];
         [_alertLabel setBackgroundColor:[UIColor whiteColor]];
-        [_alertLabel setTextColor:[UIColor grayColor]];
+        [_alertLabel setTextColor:RGB(200, 200, 206)];
         [_alertLabel setFont:[UIFont systemFontOfSize:14]];
         [_alertLabel setText:[NSString stringWithFormat:@"请输入收货的详细地址"]];
     }
@@ -286,8 +286,20 @@
     return YES;
 }
 
+- (void)textViewDidChange:(UITextView *)textView {
+    
+    if (textView.text.length == 0) {
+        [_alertLabel setText:[NSString stringWithFormat:@"请输入收货的详细地址"]];
+        [_alertLabel setHidden:NO];
+    }
+    else {
+        [_alertLabel setText:nil];
+        [_alertLabel setHidden:YES];
+    }
+}
+
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    [self.alertLabel removeFromSuperview];
+//    [self.alertLabel removeFromSuperview];
 }
 
 /*

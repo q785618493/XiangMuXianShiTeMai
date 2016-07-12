@@ -20,18 +20,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = [NSString stringWithFormat:@"广告赞助"];
+    self.title = [NSString stringWithFormat:@"商品详情"];
     
-    ZDY_LOG(@"   %ld   ",_dataID);
+    [self showTostView:[NSString stringWithFormat:@"暂无该商品详情"]];
     
-    /** 获取手机硬件信息 */
-    // 1.手机型号
-    ZDY_LOG(@"手机型号:%@",[[UIDevice currentDevice] platformString])
+//    ZDY_LOG(@"   %ld   ",_dataID);
+//    
+//    /** 获取手机硬件信息 */
+//    // 1.手机型号
+//    ZDY_LOG(@"手机型号:%@",[[UIDevice currentDevice] platformString])
+//    
+//    // 2.存储空间
+//    ZDY_LOG(@"存储空间:%@ / %@", [[UIDevice currentDevice] freeDiskSpace], [[UIDevice currentDevice] totalDiskSpace]);
     
-    // 2.存储空间
-    ZDY_LOG(@"存储空间:%@ / %@", [[UIDevice currentDevice] freeDiskSpace], [[UIDevice currentDevice] totalDiskSpace]);
     
-    [self controlAddMasonry];
+    
+//    [self controlAddMasonry];
 }
 
 
