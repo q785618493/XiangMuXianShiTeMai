@@ -21,7 +21,7 @@
 /** 懒加载 */
 - (UISearchBar *)searchBar {
     if (!_searchBar) {
-        _searchBar = [[UISearchBar alloc] initWithFrame:(CGRectMake(0, 0, 220, 31))];
+        _searchBar = [[UISearchBar alloc] initWithFrame:(CGRectMake(0, 0, VIEW_WIDTH - 100, 31))];
         [_searchBar setDelegate:self];
         [_searchBar setSearchBarStyle:(UISearchBarStyleDefault)];
         [_searchBar setKeyboardType:(UIKeyboardTypeDefault)];

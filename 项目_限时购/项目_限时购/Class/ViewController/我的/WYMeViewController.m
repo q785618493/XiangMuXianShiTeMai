@@ -12,6 +12,7 @@
 #import "WYRegisterViewController.h"
 #import "WYDeliveryAddressViewController.h"
 #import "WYMeCollectViewController.h"
+#import "WYCommentViewController.h"
 
 #import "WYMeTableView.h"
 #import "WYMeHeaderView.h"
@@ -228,7 +229,10 @@ static NSString *keyHeader = @"imageUser";
                 
                 break;
             case 1: {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"sms://15373266032"]]];
+                WYCommentViewController *commentVC = [[WYCommentViewController alloc] init];
+                [weakSelf.navigationController pushViewController:commentVC animated:YES];
+                /** 发送短信 */
+//                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"sms://15373266032"]]];
             }
                 
                 break;
@@ -241,6 +245,7 @@ static NSString *keyHeader = @"imageUser";
                 
                 break;
             case 3: {
+                /** 拨打电话 */
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://6010545"]]];
             }
             default:
@@ -302,7 +307,10 @@ static NSString *keyHeader = @"imageUser";
                         
                         break;
                     case 1: {
-                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"sms://15373266032"]]];
+                        WYCommentViewController *commentVC = [[WYCommentViewController alloc] init];
+                        [weakSelf.navigationController pushViewController:commentVC animated:YES];
+//                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"sms://15373266032"]]];
+                        
                     }
                         
                         break;
@@ -390,7 +398,9 @@ static NSString *keyHeader = @"imageUser";
                 
                 break;
             case 1: {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"sms://15373266032"]]];
+                WYCommentViewController *commentVC = [[WYCommentViewController alloc] init];
+                [weakSelf.navigationController pushViewController:commentVC animated:YES];
+//                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"sms://15373266032"]]];
             }
                 
                 break;

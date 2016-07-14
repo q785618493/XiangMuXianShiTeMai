@@ -33,10 +33,13 @@
 - (UILabel *)alertLabel {
     if (!_alertLabel) {
         _alertLabel = [[UILabel alloc] init];
-        [_alertLabel setText:[NSString stringWithFormat:@""]];
         [_alertLabel setBackgroundColor:[UIColor whiteColor]];
         [_alertLabel setTextColor:RGB(200, 200, 206)];
+        [_alertLabel setNumberOfLines:0];
         [_alertLabel setFont:[UIFont systemFontOfSize:14]];
+        [_alertLabel setText:[NSString stringWithFormat:@"亲爱的用户:感谢您的每一次的反馈，这是我们成长过程中收到的最宝贵的礼物"]];
+        CGFloat height = [NSString autoHeightWithString:[NSString stringWithFormat:@"亲爱的用户:感谢您的每一次的反馈，这是我们成长过程中收到的最宝贵的礼物"] Width:VIEW_WIDTH - 56 Font:[UIFont systemFontOfSize:15]];
+        [_alertLabel setFrame:(CGRectMake(8, 8, VIEW_WIDTH - 56, height))];
     }
     return _alertLabel;
 }
@@ -64,10 +67,10 @@
     if (!_contactText) {
         _contactText = [[UITextField alloc] init];
         [_contactText setBackgroundColor:[UIColor whiteColor]];
-        [_contactText setBorderStyle:(UITextBorderStyleNone)];
-        [_contactText setDelegate:self];
+        [_contactText setBorderStyle:(UITextBorderStyleRoundedRect)];
         [_contactText.layer setMasksToBounds:YES];
         [_contactText.layer setCornerRadius:5];
+        [_contactText setDelegate:self];
         [_contactText setPlaceholder:[NSString stringWithFormat:@"联系方式(电话或者QQ等)"]];
         [_contactText setFont:[UIFont systemFontOfSize:19]];
     }
@@ -104,7 +107,12 @@
         [self showTostView:[NSString stringWithFormat:@"反馈意见不能为空"]];
     }
     else {
+        [self.view endEditing:YES];
         [self showTostView:[NSString stringWithFormat:@"我们会尽快解决您遇到的问题"]];
+        WS(weakSelf);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        });
     }
     
 }
@@ -124,11 +132,17 @@
     [self.contactText becomeFirstResponder];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+}
+
 - (void)controlAddViewMasonry {
     
     [self.view addSubview:self.bgView];
     [self.bgView addSubview:self.contactText];
     [self.bgView addSubview:self.commentTextView];
+    [self.commentTextView addSubview:self.alertLabel];
     [self.bgView addSubview:self.submitBtn];
     
     WS(weakSelf)
@@ -142,20 +156,22 @@
     [_commentTextView makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.bgView.left).offset(20);
         make.right.equalTo(weakSelf.bgView.right).offset(-20);
-        make.top.equalTo(weakSelf.contactText.top).offset(10);
-        make.height.equalTo(VIEW_WIDTH - 40);
+        make.top.equalTo(weakSelf.contactText.bottom).offset(10);
+        make.height.equalTo(VIEW_WIDTH - 100);
     }];
     
     [_submitBtn makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.bgView.left).offset(60);
         make.right.equalTo(weakSelf.bgView.right).offset(-60);
-        make.top.equalTo(weakSelf.commentTextView.top).offset(10);
+        make.top.equalTo(weakSelf.commentTextView.bottom).offset(10);
         make.height.equalTo(35);
     }];
 }
 
-#pragma make-
-#pragma make- UITextFieldDelegate
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    [self.view endEditing:YES];
+}
 
 #pragma make-
 #pragma make- UITextViewDelegate
@@ -172,12 +188,26 @@
 
 //开始编辑
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    
+    WS(weakSelf);
+    [UIView animateWithDuration:0.3 animations:^{
+        [weakSelf.navigationController.navigationBar setHidden:YES];
+        CGRect rect = weakSelf.view.bounds;
+        rect.origin.y = 100;
+        [weakSelf.view setBounds:rect];
+    }];
 }
 
 //结束编辑
 - (void)textViewDidEndEditing:(UITextView *)textView {
     
+    
+    WS(weakSelf);
+    [UIView animateWithDuration:0.3 animations:^{
+        [weakSelf.navigationController.navigationBar setHidden:NO];
+        CGRect rect = weakSelf.view.bounds;
+        rect.origin.y = 0;
+        [weakSelf.view setBounds:rect];
+    }];
 }
 
 //内容将要发生改变编辑
@@ -189,11 +219,17 @@
 //内容发生改变编辑
 - (void)textViewDidChange:(UITextView *)textView {
     
+    if ([textView.text isEmptyString]) {
+        [self.alertLabel setHidden:NO];
+    }
+    else {
+        [self.alertLabel setHidden:YES];
+    }
 }
 
 //焦点发生改变
 - (void)textViewDidChangeSelection:(UITextView *)textView {
-    
+
 }
 
 /*
@@ -267,6 +303,15 @@
 //    }
 //    return YES;
 //}
+
+#pragma make-
+#pragma make- UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [self.commentTextView becomeFirstResponder];
+    
+    return YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

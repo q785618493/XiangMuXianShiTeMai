@@ -10,9 +10,10 @@
 
 @interface UIImage (ImageSetting)
 
-/** 
- 返回一个原始样式的图片
- */
+/**  返回一个原始样式的图片 */
 + (instancetype)imageWithModeImageName:(NSString*)imageName;
+
+/** 改变导航栏背景图的透明度 */
++ (UIImage *)imageWithColor:(UIColor *)color;
 
 @end

@@ -289,11 +289,9 @@
 - (void)textViewDidChange:(UITextView *)textView {
     
     if (textView.text.length == 0) {
-        [_alertLabel setText:[NSString stringWithFormat:@"请输入收货的详细地址"]];
         [_alertLabel setHidden:NO];
     }
     else {
-        [_alertLabel setText:nil];
         [_alertLabel setHidden:YES];
     }
 }
